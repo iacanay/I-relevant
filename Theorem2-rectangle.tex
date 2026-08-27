@@ -1,0 +1,494 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[margin=1in]{geometry}
+\usepackage[skip=0.8em]{parskip}
+\usepackage{enumitem}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\begin{document}
+
+\begin{center}
+{\Large Theorem 2: Ordered rectangular admissibility in the restricted bivariate normal problem}
+
+\vspace{0.5em}
+{\large Simple case: $k=2$, $\Sigma=I_2$}
+\end{center}
+
+\section*{1. Setup}
+
+Let
+\[
+X=(X_1,X_2)\sim N_2(\mu,I_2),
+\qquad
+\mu=(\mu_1,\mu_2)\in\Lambda:=\{\mu:\mu_2\le \mu_1\}.
+\]
+The null and alternative are
+\[
+\Lambda_0:=\{\mu\in\Lambda:\mu_1\le 0\},
+\qquad
+\Lambda_1:=\{\mu\in\Lambda:\mu_1>0\}.
+\]
+Since $\mu_2\le \mu_1$, the null condition $\mu_1\le0$ implies $\mu_2\le0$.
+
+Fix $\alpha\in(0,1)$ and write
+\[
+\gamma:=1-\alpha.
+\]
+Let $\Phi$ and $\varphi$ denote the standard normal distribution and density functions.  Throughout, use the convention
+\[
+\Phi(\infty)=1.
+\]
+For cutoffs $c=(c_1,c_2)\in(\mathbb R\cup\{\infty\})^2$, define the rectangular acceptance region
+\[
+A_c:=\{x\in\mathbb R^2:x_1\le c_1,\ x_2\le c_2\},
+\]
+and the associated nonrandomized test
+\[
+\phi_c(x):=I\{x\notin A_c\}
+=I\{x_1>c_1\text{ or }x_2>c_2\}.
+\]
+The case $c_2=\infty$ is allowed; it gives the short test based only on $X_1$.  The case $c_1=c_2=\infty$ is the zero test; it is allowed as a level-$\alpha$ competitor, although it can never dominate an exact-size rectangle.
+
+The ordered rectangular class is the class of such tests satisfying
+\[
+c_1\le c_2.
+\]
+This is exactly the rectangle version of the order-respecting priority condition: coordinate 1 receives a weakly lower rejection cutoff than coordinate 2.
+
+For $\mu\in\Lambda$, the acceptance probability is
+\begin{equation}\label{eq:miss-probability}
+M_c(\mu):=
+P_\mu(X\in A_c)
+=
+\Phi(c_1-\mu_1)\Phi(c_2-\mu_2),
+\end{equation}
+and the power is
+\[
+\beta_c(\mu):=
+E_\mu[\phi_c(X)]
+=1-M_c(\mu).
+\]
+For every $\mu\in\Lambda_0$, we have $\mu_1\le0$ and $\mu_2\le0$, hence
+\[
+M_c(\mu)
+=\Phi(c_1-\mu_1)\Phi(c_2-\mu_2)
+\ge
+\Phi(c_1)\Phi(c_2).
+\]
+Therefore
+\[
+\sup_{\mu\in\Lambda_0}E_\mu[\phi_c(X)]
+=1-\Phi(c_1)\Phi(c_2),
+\]
+with the supremum attained at the least favorable null point $\mu=0$.
+Consequently, $\phi_c$ has level at most $\alpha$ if and only if
+\begin{equation}\label{eq:level-constraint}
+\Phi(c_1)\Phi(c_2)\ge \gamma,
+\end{equation}
+and has exact size $\alpha$ if and only if equality holds.
+
+Define
+\[
+\mathcal R^{\mathrm{ord}}_{\le\alpha}
+:=
+\{\phi_c:c_1\le c_2,\ \Phi(c_1)\Phi(c_2)\ge \gamma\},
+\]
+and
+\[
+\mathcal R^{\mathrm{ord}}_{\alpha}
+:=
+\{\phi_c:c_1\le c_2,\ \Phi(c_1)\Phi(c_2)= \gamma\}.
+\]
+Admissibility below is relative to $\mathcal R^{\mathrm{ord}}_{\le\alpha}$: an exact-size ordered rectangle $\phi_c\in\mathcal R^{\mathrm{ord}}_{\alpha}$ is admissible if there is no $\phi_d\in\mathcal R^{\mathrm{ord}}_{\le\alpha}$ such that
+\[
+\beta_d(\mu)\ge \beta_c(\mu)
+\quad\text{for all }\mu\in\Lambda_1,
+\]
+with strict inequality for at least one $\mu\in\Lambda_1$.
+
+\section*{2. Two elementary lemmas}
+
+The proof uses two simple facts about the exact-size frontier for ordered rectangles.
+
+\begin{lemma}[Monotonicity of the ordered exact-size frontier]\label{lem:frontier-sum}
+Fix $0<\gamma<1$.  For
+\[
+x\in\left(\Phi^{-1}(\gamma),\Phi^{-1}(\sqrt{\gamma})\right],
+\]
+define
+\[
+g_\gamma(x):=\Phi^{-1}\!\left(\frac{\gamma}{\Phi(x)}\right).
+\]
+Then $x\le g_\gamma(x)$ and the function
+\[
+S_\gamma(x):=x+g_\gamma(x)
+\]
+is nonincreasing on its domain and strictly decreasing except at the diagonal endpoint $x=g_\gamma(x)=\Phi^{-1}(\sqrt{\gamma})$.
+In particular, if
+\[
+u<c\le g_\gamma(c)
+\]
+and
+\[
+v\ge g_\gamma(u),
+\]
+then
+\begin{equation}\label{eq:sum-increase}
+u+v>c+g_\gamma(c).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+First note that $x\le \Phi^{-1}(\sqrt{\gamma})$ implies
+\[
+\Phi(x)\le\sqrt{\gamma}
+\quad\Longrightarrow\quad
+\frac{\gamma}{\Phi(x)}\ge\sqrt{\gamma}\ge\Phi(x),
+\]
+so $x\le g_\gamma(x)$.
+
+Differentiate the identity
+\[
+\Phi(x)\Phi(g_\gamma(x))=\gamma.
+\]
+This gives
+\[
+g_\gamma'(x)
+=-\frac{\varphi(x)\Phi(g_\gamma(x))}{\Phi(x)\varphi(g_\gamma(x))}
+=-\frac{m(x)}{m(g_\gamma(x))},
+\]
+where
+\[
+m(z):=\frac{\varphi(z)}{\Phi(z)}
+\]
+is the left inverse Mills ratio.  The function $m$ is strictly decreasing on $\mathbb R$; for example, \(m'(z)=-m(z)\{z+m(z)\}<0\), using the standard inequality \(m(z)>-z\) when \(z<0\).  Hence, since $x\le g_\gamma(x)$,
+\[
+\frac{m(x)}{m(g_\gamma(x))}\ge1,
+\]
+with strict inequality whenever $x<g_\gamma(x)$. Therefore
+\[
+S_\gamma'(x)=1+g_\gamma'(x)
+=1-\frac{m(x)}{m(g_\gamma(x))}
+\le0,
+\]
+with strict inequality away from the diagonal endpoint. This proves the claimed monotonicity. The final assertion follows because $u<c$ implies
+\[
+u+g_\gamma(u)>c+g_\gamma(c),
+\]
+and $v\ge g_\gamma(u)$.
+\end{proof}
+
+\begin{lemma}[Diagonal lower-tail comparison]\label{lem:tail-ratio}
+Let $a,b,u,v\in\mathbb R$ be fixed. If
+\[
+u+v>a+b,
+\]
+then
+\begin{equation}\label{eq:tail-ratio}
+\frac{\Phi(u-t)\Phi(v-t)}{\Phi(a-t)\Phi(b-t)}\longrightarrow\infty
+\qquad\text{as }t\to\infty.
+\end{equation}
+Also, for fixed finite $a,b,u$,
+\begin{equation}\label{eq:tail-ratio-infty}
+\frac{\Phi(u-t)}{\Phi(a-t)\Phi(b-t)}\longrightarrow\infty
+\qquad\text{as }t\to\infty.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+For fixed $z\in\mathbb R$, Mills' expansion gives
+\[
+\Phi(z-t)
+\sim
+\frac{\varphi(t-z)}{t-z}
+\qquad\text{as }t\to\infty.
+\]
+Thus
+\[
+\log\frac{\Phi(u-t)\Phi(v-t)}{\Phi(a-t)\Phi(b-t)}
+=
+-\frac12\{(t-u)^2+(t-v)^2-(t-a)^2-(t-b)^2\}+O(\log t).
+\]
+The leading term is
+\[
+t\{(u+v)-(a+b)\}+O(1),
+\]
+which diverges to $+\infty$ when $u+v>a+b$. This proves \eqref{eq:tail-ratio}. The same expansion gives
+\[
+\log\frac{\Phi(u-t)}{\Phi(a-t)\Phi(b-t)}
+=
+\frac12t^2-t(a+b-u)+O(\log t),
+\]
+which diverges to $+\infty$, proving \eqref{eq:tail-ratio-infty}.
+\end{proof}
+
+\section*{3. Ordered rectangular admissibility}
+
+\begin{theorem}[Exact-size ordered rectangles are admissible among ordered rectangles]\label{thm:ordered-rectangle-admissibility}
+Let $X\sim N_2(\mu,I_2)$ with
+\[
+\Lambda=\{\mu:\mu_2\le\mu_1\},
+\qquad
+\Lambda_1=\{\mu\in\Lambda:\mu_1>0\}.
+\]
+Fix $\alpha\in(0,1)$ and let $\phi_c\in\mathcal R^{\mathrm{ord}}_{\alpha}$, so
+\[
+c_1\le c_2,
+\qquad
+\Phi(c_1)\Phi(c_2)=1-\alpha.
+\]
+Then $\phi_c$ is admissible relative to $\mathcal R^{\mathrm{ord}}_{\le\alpha}$.
+Equivalently, if $\phi_d\in\mathcal R^{\mathrm{ord}}_{\le\alpha}$ satisfies
+\[
+E_\mu[\phi_d(X)]\ge E_\mu[\phi_c(X)]
+\qquad\text{for every }\mu\in\Lambda_1,
+\]
+then $\phi_d=\phi_c$ up to $P_\mu$-null sets for every $\mu$.
+\end{theorem}
+
+\begin{proof}
+Write $d=(d_1,d_2)$ for the cutoffs of a competing ordered rectangle. Since $\phi_d\in\mathcal R^{\mathrm{ord}}_{\le\alpha}$,
+\begin{equation}\label{eq:d-level}
+d_1\le d_2,
+\qquad
+\Phi(d_1)\Phi(d_2)\ge \gamma.
+\end{equation}
+Power domination is equivalent to weakly smaller miss probability on $\Lambda_1$:
+\begin{equation}\label{eq:miss-domination}
+M_d(\mu)
+\le
+M_c(\mu)
+\qquad\text{for every }\mu\in\Lambda_1.
+\end{equation}
+Using \eqref{eq:miss-probability}, this is
+\begin{equation}\label{eq:product-domination}
+\Phi(d_1-\mu_1)\Phi(d_2-\mu_2)
+\le
+\Phi(c_1-\mu_1)\Phi(c_2-\mu_2)
+\qquad(\mu_2\le\mu_1,\ \mu_1>0).
+\end{equation}
+
+\emph{Step 1: dominance in the interior of the cone forces $d_1\le c_1$.}
+Fix $s>0$ and set $\mu=(s,r)$ with $r\le s$. Let $r\to-\infty$ in \eqref{eq:product-domination}. Since
+\[
+\Phi(d_2-r)\to1,
+\qquad
+\Phi(c_2-r)\to1,
+\]
+we obtain
+\[
+\Phi(d_1-s)\le\Phi(c_1-s).
+\]
+Since $\Phi$ is strictly increasing,
+\begin{equation}\label{eq:first-cutoff-order}
+d_1\le c_1.
+\end{equation}
+This is the key use of the restricted alternative: by sending the lower-priority mean $\mu_2$ to $-\infty$, the problem exposes the first-coordinate cutoff.
+
+\emph{Step 2: if $d_1=c_1$, then $d_2=c_2$.}
+Suppose $d_1=c_1$. The level constraint \eqref{eq:d-level} and exact size of $c$ imply
+\[
+\Phi(c_1)\Phi(d_2)
+\ge
+\Phi(c_1)\Phi(c_2),
+\]
+so $d_2\ge c_2$. If $d_2>c_2$, then for any $t>0$ with $\mu=(t,t)\in\Lambda_1$,
+\[
+M_d(t,t)
+=\Phi(c_1-t)\Phi(d_2-t)
+>
+\Phi(c_1-t)\Phi(c_2-t)
+=M_c(t,t),
+\]
+contradicting \eqref{eq:miss-domination}. Hence $d_2=c_2$.
+
+It remains to rule out $d_1<c_1$.
+
+\emph{Step 3: the short-test endpoint.}
+If $c_2=\infty$, then exact size gives
+\[
+\Phi(c_1)=\gamma.
+\]
+Combining \eqref{eq:first-cutoff-order} with the level constraint for $d$ gives
+\[
+\Phi(c_1)
+=\gamma
+\le
+\Phi(d_1)\Phi(d_2)
+\le
+\Phi(d_1)
+\le
+\Phi(c_1).
+\]
+Thus $d_1=c_1$ and $\Phi(d_2)=1$, so $d_2=\infty$. Therefore $d=c$ in the short-test endpoint case.
+
+\emph{Step 4: finite $c_2$ and $d_1<c_1$ lead to a diagonal-power contradiction.}
+Now suppose $c_2<\infty$ and, toward a contradiction, $d_1<c_1$.
+Because $c$ is exact-size and ordered,
+\[
+c_2=g_\gamma(c_1),
+\]
+where $g_\gamma$ is the function from Lemma \ref{lem:frontier-sum}. The level constraint for $d$ implies
+\[
+\Phi(d_2)
+\ge
+\frac{\gamma}{\Phi(d_1)}.
+\]
+If $d_2<\infty$, then necessarily $\Phi(d_1)>\gamma$, so $d_1>\Phi^{-1}(\gamma)$ and $g_\gamma(d_1)$ is finite. The preceding display says
+\[
+d_2\ge g_\gamma(d_1).
+\]
+By Lemma \ref{lem:frontier-sum},
+\begin{equation}\label{eq:d-sum-larger}
+d_1+d_2>c_1+c_2.
+\end{equation}
+Applying Lemma \ref{lem:tail-ratio} with $(u,v)=(d_1,d_2)$ and $(a,b)=(c_1,c_2)$ gives
+\[
+\frac{M_d(t,t)}{M_c(t,t)}
+=
+\frac{\Phi(d_1-t)\Phi(d_2-t)}{\Phi(c_1-t)\Phi(c_2-t)}
+\longrightarrow\infty
+\qquad\text{as }t\to\infty.
+\]
+Therefore, for all sufficiently large $t>0$,
+\[
+M_d(t,t)>M_c(t,t),
+\]
+contradicting \eqref{eq:miss-domination} at the alternative point $\mu=(t,t)\in\Lambda_1$.
+
+If instead $d_2=\infty$, then
+\[
+M_d(t,t)=\Phi(d_1-t),
+\qquad
+M_c(t,t)=\Phi(c_1-t)\Phi(c_2-t),
+\]
+and the second conclusion of Lemma \ref{lem:tail-ratio} gives
+\[
+\frac{M_d(t,t)}{M_c(t,t)}\to\infty.
+\]
+Again $M_d(t,t)>M_c(t,t)$ for large $t$, contradicting domination.
+
+Thus $d_1<c_1$ is impossible. Combining this with \eqref{eq:first-cutoff-order} gives $d_1=c_1$, and Step 2 then gives $d_2=c_2$.
+
+Therefore any ordered rectangular level-$\alpha$ competitor that weakly dominates $\phi_c$ on $\Lambda_1$ must coincide with $\phi_c$. In particular, no such competitor can dominate strictly at any point. This proves admissibility relative to $\mathcal R^{\mathrm{ord}}_{\le\alpha}$.
+\end{proof}
+
+\section*{4. What parts of the proof are special to $k=2$ and $\Sigma=I_2$?}
+
+The theorem above is deliberately modest: it proves admissibility only inside the ordered rectangular subclass, and only for the bivariate independent normal experiment. The proof identifies several places that will need special attention in the extension.
+
+\begin{enumerate}[label=\textbf{(E\arabic*)},leftmargin=2.4em]
+\item \textbf{Product form of the rectangular probability.}
+The identity
+\[
+M_c(\mu)=\Phi(c_1-\mu_1)\Phi(c_2-\mu_2)
+\]
+uses $\Sigma=I_2$. For general $\Sigma$, rectangular probabilities are bivariate normal probabilities rather than products. The least favorable null point $\mu=0$ should still follow for coordinatewise monotone tests from the coupling $X=\mu+Z$, but the exact-size condition will become
+\[
+P_0(X_1\le c_1,X_2\le c_2)=1-\alpha,
+\]
+not $\Phi(c_1)\Phi(c_2)=1-\alpha$.
+
+\item \textbf{The one-dimensional exact-size frontier.}
+In the present proof, ordered exact-size rectangles are parameterized by one cutoff:
+\[
+c_2=g_\gamma(c_1),
+\qquad
+\Phi(c_1)\Phi(c_2)=\gamma,
+\qquad
+c_1\le c_2.
+\]
+For $k>2$, the exact-size frontier is $(k-1)$-dimensional:
+\[
+\prod_{j=1}^k \Phi(c_j)=\gamma
+\quad\text{in the independent case},
+\]
+with order restrictions $c_1\le c_2\le\cdots\le c_k$. The simple derivative argument for $c_1+c_2$ will have to be replaced by a higher-dimensional monotonicity or majorization argument.
+
+\item \textbf{The compensation argument.}
+The key bivariate fact is that lowering the first cutoff while preserving size and order forces enough increase in the second cutoff that
+\[
+d_1+d_2>c_1+c_2.
+\]
+This is what makes the proposed dominator lose on the diagonal $\mu=(t,t)$ for large $t$. For $k>2$, an analogous statement would compare sums of cutoffs, or more generally the leading exponent in a multivariate lower-tail approximation. Proving the right compensation inequality is likely the central technical step for the ordered rectangular extension.
+
+\item \textbf{Diagonal large-signal asymptotics.}
+The proof uses $\mu=(t,t)$ and the one-dimensional Mills expansion
+\[
+\Phi(c_j-t)\sim \frac{\varphi(t-c_j)}{t-c_j}.
+\]
+For $k>2$ and independent coordinates, the same idea should use $\mu=t(1,\ldots,1)$ and products of Mills expansions. For general $\Sigma$, the correct replacement is a multivariate Gaussian lower-tail asymptotic over rectangles. The leading exponent will depend on $\Sigma^{-1}$ and on the active constraints, so the comparison will not generally reduce to ordinary sums of cutoffs.
+
+\item \textbf{Isolation of the first coordinate.}
+Step 1 sends $\mu_2\to-\infty$ with $\mu_1=s>0$ fixed. This isolates the first-coordinate cutoff and forces $d_1\le c_1$. For $k>2$, one should similarly send lower-priority means to $-\infty$ to isolate prefixes of the ordered threshold vector. With non-identity $\Sigma$, the marginal distribution of the remaining coordinates is still centered at their corresponding means, but dependence means one must justify the limiting rectangular probability carefully, likely by dominated convergence using the representation $X=\mu+Z$.
+
+\item \textbf{Endpoint cases with infinite cutoffs.}
+The short test appears as the endpoint $(c_1,c_2)=(\Phi^{-1}(1-\alpha),\infty)$. In higher dimensions, there will be more endpoint faces where some lower-priority coordinates are ignored. These cases should be separated before applying interior frontier arguments.
+
+\item \textbf{Order condition versus covariance geometry.}
+For $\Sigma=I_2$, the priority order is directly about the observed coordinates and the feasible mean cone $\{\mu_2\le\mu_1\}$. For general $\Sigma$, LR-style support directions live in natural-parameter coordinates and mean directions are obtained through the map $a\mapsto\Sigma a$. Even though the present rectangular proof does not invoke LR directly, any extension to general convex acceptance regions or to covariance-adjusted rectangles will need to track this distinction.
+
+\item \textbf{The proof is not yet a proof for the full monotone/order-respecting convex class.}
+Rectangularity is used at every major step: the miss probability factors, cutoffs parameterize the test, and domination can be converted into inequalities between cutoff vectors. Extending from rectangles to general closed convex lower sets will require a different geometric argument, presumably using the support-sorting idea: an $X_2$-heavy support direction should be replaceable by a sorted feasible direction.
+\end{enumerate}
+
+\section*{5. Why the order-priority condition is needed}
+
+The ordered condition $c_1\le c_2$ is not cosmetic. Without it, the rectangular class contains tests that spend rejection probability on the lower-priority coordinate.
+
+Let
+\[
+q_\alpha:=\Phi^{-1}(1-\alpha)=\Phi^{-1}(\gamma).
+\]
+Consider the $X_2$-only rectangle
+\[
+\phi_2(x):=I\{x_2>q_\alpha\},
+\qquad
+A_2=\{x_1\le\infty,\ x_2\le q_\alpha\}.
+\]
+This is a closed, convex, coordinatewise monotone rectangular test with exact size $\alpha$, because
+\[
+P_0(X_2>q_\alpha)=\alpha.
+\]
+But it violates the ordered priority condition: its cutoffs are
+\[
+(c_1,c_2)=(\infty,q_\alpha),
+\]
+so $c_1\le c_2$ fails.
+
+Now compare it with the short, coordinate-1 test
+\[
+\phi_s(x):=I\{x_1>q_\alpha\},
+\qquad
+A_s=\{x_1\le q_\alpha,\ x_2\le\infty\}.
+\]
+For every $\mu\in\Lambda_1$,
+\[
+E_\mu[\phi_2(X)]
+=1-\Phi(q_\alpha-\mu_2),
+\qquad
+E_\mu[\phi_s(X)]
+=1-\Phi(q_\alpha-\mu_1).
+\]
+Because $\mu_2\le\mu_1$ and the map $m\mapsto 1-\Phi(q_\alpha-m)$ is increasing,
+\[
+E_\mu[\phi_2(X)]
+\le
+E_\mu[\phi_s(X)]
+\qquad\text{for every }\mu\in\Lambda_1,
+\]
+with strict inequality whenever $\mu_2<\mu_1$. Thus the $X_2$-only rectangle is dominated by the short test on the restricted alternative.
+
+Therefore, if one considered all rectangles without the order-priority condition, the analogue of Theorem \ref{thm:ordered-rectangle-admissibility} would be false. The condition $c_1\le c_2$ exactly rules out this kind of inadmissible test: it prevents the lower-priority coordinate from receiving a more aggressive rejection cutoff than the higher-priority coordinate.
+
+\end{document}

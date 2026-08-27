@@ -1,0 +1,230 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{enumitem}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+
+\title{A Lehmann--Romano Proof of Admissibility for Closed Convex Acceptance Regions}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{Why exact size at a finite null point is needed}
+
+The statement ``closed and convex acceptance region implies admissibility'' is false if one only assumes
+\[
+\sup_{\mu\le 0} E_\mu[\phi(X)]\le \alpha.
+\]
+Indeed, the zero test
+\[
+\phi(x)\equiv 0
+\]
+has acceptance region
+\[
+A_\phi=\mathbf R^k,
+\]
+which is closed and convex, and it satisfies the size constraint for every \(0<\alpha<1\). But it is not admissible: for example, the test
+\[
+\psi(x)=1\{x_1>\sqrt{\Sigma_{11}}\Phi^{-1}(1-\alpha)\}
+\]
+has level \(\alpha\) for testing \(H_0:\mu\le 0\), and has strictly positive power at alternatives with \(\mu_1>0\). Hence \(\psi\) dominates the zero test.
+
+Thus some condition excluding tests of size strictly below \(\alpha\) is necessary. The condition used below is the one in Lehmann and Romano's Corollary 6.7.1: the test has size \(\alpha\) at a finite point \(\mu_0\in\Lambda_0\). This condition is also used directly in the final step of the proof. Once the convexity argument implies that any dominating test must reject wherever \(\phi_0\) rejects, any strict enlargement of the rejection region would force rejection probability strictly above \(\alpha\) at \(\mu_0\), contradicting the level constraint.
+
+\section{A provable admissibility theorem}
+
+\begin{theorem}[Closed convex exact-size tests are \(\alpha\)-admissible]
+Let \(0<\alpha<1\). Let
+\[
+X\sim N(\mu,\Sigma),
+\]
+where \(\Sigma\) is known and positive definite and \(\mu\in\mathbf R^k\). Consider testing
+\[
+H_0:\mu\in\Lambda_0=\{\mu:\mu\le 0\}
+\quad\text{versus}\quad
+H_1:\mu\in\Lambda_1=\mathbf R^k\setminus\Lambda_0.
+\]
+Let \(\phi_0\) be a nonrandomized test with acceptance region
+\[
+A_0=\{x:\phi_0(x)=0\}.
+\]
+Assume:
+\begin{enumerate}[label=(\roman*)]
+\item \(A_0\) is closed and convex;
+\item \(\phi_0\) has level \(\alpha\):
+\[
+\sup_{\mu\in\Lambda_0} E_\mu[\phi_0(X)]\le \alpha;
+\]
+\item there exists a finite point \(\mu_0\in\Lambda_0\) such that
+\[
+E_{\mu_0}[\phi_0(X)]=\alpha.
+\]
+\end{enumerate}
+Then \(\phi_0\) is \(\alpha\)-admissible for testing \(H_0\) against \(H_1\). That is, if \(\phi\) is any level-\(\alpha\) test satisfying
+\[
+E_\mu[\phi(X)]\ge E_\mu[\phi_0(X)]
+\qquad\text{for all }\mu\in\Lambda_1,
+\]
+then
+\[
+E_\mu[\phi(X)]=E_\mu[\phi_0(X)]
+\qquad\text{for all }\mu\in\Lambda_1.
+\]
+\end{theorem}
+
+\begin{proof}
+We apply Theorem 6.7.1 and Corollary 6.7.1 of Lehmann and Romano, Section 6.7. The relevant result is the following.
+
+\begin{proposition}[Lehmann--Romano convex acceptance region result]
+Consider an exponential family with density
+\[
+p_\theta(t)=C(\theta)\exp\{\theta't\}
+\]
+with respect to a \(\sigma\)-finite measure \(\nu\), with natural parameter space \(\Omega\). Let \(\Omega_H\) and \(\Omega'\) be disjoint nonempty subsets of \(\Omega\). Let \(\phi_0\) be a nonrandomized test of \(H:\theta\in\Omega_H\), based on \(T\), with acceptance region \(A_0\subseteq\mathbf R^s\). Suppose that \(A_0\) is closed and convex and that the following ray condition holds:
+
+if
+\[
+A_0\cap\{t:a't>c\}=\varnothing,
+\]
+then there exist \(\theta^*\in\Omega\) and a sequence \(\lambda_n\to\infty\) such that
+\[
+\theta^*+\lambda_n a\in\Omega'.
+\]
+Then any competing acceptance region \(A\) satisfying
+\[
+P_\theta(T\in A)\le P_\theta(T\in A_0)
+\qquad\text{for all }\theta\in\Omega'
+\]
+is contained in \(A_0\), except for a \(\nu\)-null set. Consequently, the test with acceptance region \(A_0\) is \(d\)-admissible. If the test has size \(\alpha\) and there exists a finite point \(\theta_0\in\overline{\Omega_H}\) such that
+\[
+E_{\theta_0}[\phi_0(X)]=\alpha,
+\]
+then the test is also \(\alpha\)-admissible. The same conclusion allows randomized competing tests.
+\end{proposition}
+
+We now verify the assumptions of this result in the normal location model.
+
+Write the normal density in canonical exponential-family form. Put
+\[
+\theta=\Sigma^{-1}\mu,
+\qquad
+\mu=\Sigma\theta.
+\]
+With respect to the measure
+\[
+d\nu(x)=(2\pi)^{-k/2}|\Sigma|^{-1/2}
+\exp\left\{-\frac12 x'\Sigma^{-1}x\right\}dx,
+\]
+the density of \(X\sim N(\Sigma\theta,\Sigma)\) is
+\[
+p_\theta(x)=\exp\left\{\theta'x-\frac12\theta'\Sigma\theta\right\}.
+\]
+Thus the sufficient statistic is
+\[
+T(x)=x,
+\]
+the natural parameter space is
+\[
+\Omega=\mathbf R^k,
+\]
+and the null and alternative in natural-parameter form are
+\[
+\Omega_H=\{\theta:\Sigma\theta\le 0\},
+\qquad
+\Omega_K=\{\theta:\Sigma\theta\not\le 0\}.
+\]
+We apply the Lehmann--Romano result with \(\Omega'=\Omega_K\).
+
+It remains only to verify the ray condition. Let \(a\ne 0\) and \(c\in\mathbf R\) be such that
+\[
+A_0\cap\{x:a'x>c\}=\varnothing.
+\]
+Equivalently,
+\[
+A_0\subseteq\{x:a'x\le c\}.
+\]
+We claim that
+\[
+\Sigma a\not\le 0.
+\]
+Suppose instead that \(\Sigma a\le 0\). For \(\lambda>0\), define
+\[
+\theta_\lambda=\lambda a,
+\qquad
+\mu_\lambda=\Sigma\theta_\lambda=\lambda\Sigma a.
+\]
+Then \(\mu_\lambda\le 0\), so \(\theta_\lambda\in\Omega_H\). Under \(P_{\theta_\lambda}\),
+\[
+a'X\sim N\left(\lambda a'\Sigma a,\ a'\Sigma a\right).
+\]
+Since \(\Sigma\) is positive definite and \(a\ne 0\),
+\[
+a'\Sigma a>0.
+\]
+Therefore
+\[
+P_{\theta_\lambda}(a'X>c)\to 1
+\qquad\text{as }\lambda\to\infty.
+\]
+But \(A_0\subseteq\{x:a'x\le c\}\), so
+\[
+\{x:a'x>c\}\subseteq A_0^c.
+\]
+Because \(\phi_0\) is nonrandomized, \(\phi_0(x)=1\) on \(A_0^c\). Hence
+\[
+E_{\theta_\lambda}[\phi_0(X)]
+\ge
+P_{\theta_\lambda}(a'X>c)
+\to 1.
+\]
+This contradicts the level condition, since every \(\theta_\lambda\in\Omega_H\) and \(\alpha<1\). Thus \(\Sigma a\not\le 0\).
+
+It follows that \(\Sigma a\) has at least one strictly positive component. Therefore, for every \(\lambda>0\),
+\[
+\Sigma(\lambda a)=\lambda\Sigma a\not\le 0.
+\]
+Hence
+\[
+\lambda a\in\Omega_K
+\qquad\text{for every }\lambda>0.
+\]
+The ray condition holds with \(\theta^*=0\) and any sequence \(\lambda_n\to\infty\).
+
+By the Lehmann--Romano result, if \(\phi\) is any level-\(\alpha\) test whose power is at least as large as that of \(\phi_0\) at every alternative, then \(\phi\) must reject wherever \(\phi_0\) rejects, except possibly on a \(\nu\)-null set. Equivalently,
+\[
+\phi(x)\ge \phi_0(x)
+\qquad\text{for }\nu\text{-almost every }x.
+\]
+Since \(\nu\) has a strictly positive density with respect to Lebesgue measure, this exceptional set has probability zero under every \(N(\mu,\Sigma)\) distribution.
+
+If \(\phi>\phi_0\) on a set of positive Lebesgue measure, then, because the normal density is strictly positive everywhere,
+\[
+E_{\mu_0}[\phi(X)]>E_{\mu_0}[\phi_0(X)]=\alpha.
+\]
+This contradicts the level-\(\alpha\) constraint, because \(\mu_0\in\Lambda_0\). Therefore
+\[
+\phi=\phi_0
+\qquad\text{almost everywhere}.
+\]
+Consequently,
+\[
+E_\mu[\phi(X)]=E_\mu[\phi_0(X)]
+\qquad\text{for all }\mu\in\Lambda_1.
+\]
+This proves \(\alpha\)-admissibility.
+\end{proof}
+
+\begin{thebibliography}{9}
+
+\bibitem{LehmannRomano2005}
+Lehmann, E. L. and Romano, J. P. (2005).
+\textit{Testing Statistical Hypotheses}.
+Third edition. Springer.
+
+\end{thebibliography}
+
+\end{document}

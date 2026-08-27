@@ -1,0 +1,49 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage[margin=1in]{geometry}
+
+\newtheorem{lemma}{Lemma}
+
+\begin{document}
+
+\section*{The short test is admissible without class restrictions}
+
+\noindent\textbf{Setup} ($\Sigma=I_2$). Let $X\sim N(\mu,I_2)$ with restricted parameter space
+\[
+\Lambda=\{\mu:\mu_2\le\mu_1\},\qquad
+\Lambda_0=\{\mu\in\Lambda:\mu_1\le0\},\qquad
+\Lambda_1=\{\mu\in\Lambda:\mu_1>0\},
+\]
+testing $H_0:\mu\in\Lambda_0$ against $H_1:\mu\in\Lambda_1$ at level $\alpha\in(0,1)$. The short test is
+\[
+\varphi_s(x)=\mathbf 1\{x_1>c_s\},\qquad c_s=\Phi^{-1}(1-\alpha),\qquad
+A_s=\{x:x_1\le c_s\}.
+\]
+
+We invoke the Lehmann--Romano proposition (Theorem 6.7.1 / Corollary 6.7.1): for the canonical Gaussian family, a nonrandomized test with closed convex acceptance region $A_0$ is $d$-admissible --- and, if its size $\alpha$ is attained at a finite null point, $\alpha$-admissible, against possibly randomized competitors --- provided the \emph{ray condition} holds: whenever $A_0\subseteq\{x:a'x\le c\}$ for some $a\ne0$, there exist $\theta^*$ and $\lambda_n\to\infty$ with $\theta^*+\lambda_n a\in\Omega'$, where $\Omega'$ is the natural-parameter image of $\Lambda_1$.
+
+\begin{lemma}
+For every $\alpha\in(0,1)$, the short test $\varphi_s$ is $\alpha$-admissible for testing $H_0$ against $H_1$ among all level-$\alpha$ tests, including randomized competitors. No restriction on the competing class is required.
+\end{lemma}
+
+\begin{proof}
+Since $\Sigma=I_2$, $\theta=\mu$ and the model is the canonical exponential family $p_\theta(x)=\exp\{\theta'x-\tfrac12\|\theta\|^2\}$ relative to $N(0,I_2)$, with $T(x)=x$ and $\Omega=\mathbf R^2$; hence $\Omega'=\Lambda_1$.
+
+\emph{Closed convex, exact size.} $A_s=\{x_1\le c_s\}$ is closed and convex. Since $E_\mu[\varphi_s]=\Phi(\mu_1-c_s)$ depends only on $\mu_1$ and is nondecreasing in it, and every $\mu\in\Lambda_0$ has $\mu_1\le0$,
+\[
+\sup_{\mu\in\Lambda_0}E_\mu[\varphi_s]=\Phi(-c_s)=\alpha,
+\]
+attained at the finite null point $\mu_0=0\in\Lambda_0$.
+
+\emph{Ray condition.} Suppose $a\ne0$ and $A_s\subseteq\{x:a'x\le c\}$, i.e.\ $\sup_{x\in A_s}a'x<\infty$. The set $A_s$ contains $(c_s,x_2)$ for every $x_2\in\mathbf R$ and $(x_1,0)$ for every $x_1\le c_s$; finiteness of the supremum therefore forces $a_2=0$ and $a_1\ge0$, and with $a\ne0$ this gives $a=a_1(1,0)$, $a_1>0$. Take $\theta^*=0$ and any $\lambda_n\to\infty$. Then
+\[
+\theta^*+\lambda_n a=(\lambda_n a_1,\,0),
+\]
+whose first coordinate $\lambda_n a_1>0$ satisfies $0\le\lambda_n a_1$, so the point lies in $\Lambda_1=\Omega'$. The ray condition holds.
+
+By the Lehmann--Romano proposition, $\varphi_s$ is $d$-admissible against randomized competitors; since its size $\alpha$ is attained at $\mu_0=0$, it is $\alpha$-admissible. The argument uses no restriction on the competing tests.
+\end{proof}
+
+\noindent\emph{Remark (why the long test is different).} For $\varphi_\ell(x)=\mathbf 1\{\max(x_1,x_2)>c_\ell\}$ with $A_\ell=\{x_1\le c_\ell,\,x_2\le c_\ell\}$, the face $x_2=c_\ell$ yields the support direction $a=(0,1)$ with $A_\ell\subseteq\{x_2\le c_\ell\}$. For this $a$ no anchor $\theta^*$ admits a sequence $\lambda_n\to\infty$ with $\theta^*+\lambda_n(0,1)\in\Lambda_1$: the second coordinate $\theta^*_2+\lambda_n\to\infty$ while the first stays fixed, so $\mu_2\le\mu_1$ eventually fails. The ray condition is violated and the proposition is silent --- consistent with the fact (shown by counterexample) that $\varphi_\ell$ is not admissible without a class restriction. Equivalently, under $\Sigma=I_2$ a support direction $a$ is reachable in $\Lambda_1$ iff $a_2\le a_1$; the short test's only support direction $(1,0)$ satisfies this, the long test's direction $(0,1)$ does not.
+
+\end{document}

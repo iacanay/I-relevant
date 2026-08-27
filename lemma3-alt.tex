@@ -1,0 +1,108 @@
+\documentclass[10pt]{article}
+
+\usepackage[margin=0.8in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+\newtheorem{lemma}{Lemma}
+
+\begin{document}
+
+\begin{center}
+    {\large\bfseries Alternative proof of Lemma 3}
+\end{center}
+
+\medskip
+
+Recall that
+\[
+T_1(x)=x_1+x_2,
+\qquad
+\Pi=\operatorname{cone}\{(1,0),(1,-1)\},
+\qquad
+\widehat A=\operatorname{cl}(A-\Pi),
+\]
+and define
+\[
+\mathcal F=\{a\in\mathbf R^2:0\le a_2\le a_1\}.
+\]
+
+\setcounter{lemma}{2}
+\begin{lemma}[Calibration of the competitor]
+Suppose that $A\subseteq\mathbf R^2$ is closed, convex, and coordinatewise lower,
+$P_0(A)=1-\alpha$, and $A$ has a finite-support direction $a$ satisfying
+$a_2>a_1$. Then there exists a finite number $b$ such that
+\[
+P_0\bigl(\widehat A\cap\{x:T_1(x)\le b\}\bigr)=1-\alpha.
+\]
+For any such $b$, define
+\[
+A'=\widehat A\cap\{x:T_1(x)\le b\}.
+\]
+Then $A'$ is closed, convex, and coordinatewise lower, satisfies
+$P_0(A')=1-\alpha$, and every nonzero finite-support direction of $A'$ lies in
+$\mathcal F$. Consequently, the test $\phi_{A'}(x)=I\{x\notin A'\}$ has level
+$\alpha$, attained at $\mu=0$.
+\end{lemma}
+
+\begin{proof}
+By Lemma 2,
+\[
+P_0(\widehat A)>P_0(A)=1-\alpha.
+\]
+The map
+\[
+t\longmapsto P_0\bigl(\widehat A\cap\{x:T_1(x)\le t\}\bigr)
+\]
+is continuous because $P_0\{T_1(X)=t\}=0$ for every $t$. It converges to
+zero as $t\to-\infty$ and to $P_0(\widehat A)$ as $t\to\infty$. Hence there
+exists a finite $b$ for which the displayed probability equals $1-\alpha$.
+
+The set $A'$ is closed, convex, and coordinatewise lower because it is the
+intersection of two sets with these properties. Its null probability equals
+$1-\alpha$ by construction.
+
+It remains to characterize its finite-support directions. We first show that
+$A'$ is $\Pi$-lower. Let $x\in A'$ and $p\in\Pi$. Lemma 2 implies that
+$x-p\in\widehat A$. Moreover, $T_1(p)=p_1+p_2\ge0$ for every $p\in\Pi$, and
+therefore
+\[
+T_1(x-p)=T_1(x)-T_1(p)\le T_1(x)\le b.
+\]
+Thus $x-p\in A'$.
+
+Now let $a\ne0$ satisfy $h_{A'}(a)<\infty$, and fix $x\in A'$. Since $A'$ is
+coordinatewise lower, $x-te_j\in A'$ for every $t\ge0$ and $j=1,2$. If
+$a_j<0$, then
+\[
+a'(x-te_j)=a'x-ta_j\longrightarrow+\infty,
+\]
+contradicting $h_{A'}(a)<\infty$. Hence $a_1\ge0$ and $a_2\ge0$.
+
+Because $(1,-1)\in\Pi$ and $A'$ is $\Pi$-lower,
+\[
+x-t(1,-1)\in A'
+\qquad\text{for every }t\ge0.
+\]
+If $a_2>a_1$, then
+\[
+a'\{x-t(1,-1)\}=a'x+t(a_2-a_1)\longrightarrow+\infty,
+\]
+again contradicting finite support. Therefore $a_2\le a_1$. We have shown
+that every nonzero $a$ with $h_{A'}(a)<\infty$ satisfies
+\[
+0\le a_2\le a_1,
+\]
+so $a\in\mathcal F$.
+
+Finally, the complement of $A'$ is coordinatewise upper. For every
+$\mu\in\Lambda_0$, we have $\mu\le0$. Coupling $X=\mu+Z$ with
+$Z\sim N_2(0,I_2)$ gives
+\[
+P_\mu(X\notin A')\le P_0(Z\notin A')=\alpha.
+\]
+Equality holds at the finite null point $\mu=0$, which proves the last claim.
+\end{proof}
+
+\end{document}

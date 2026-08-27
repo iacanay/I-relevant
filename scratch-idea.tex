@@ -1,0 +1,452 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{enumitem}
+
+\title{Scratch Idea: Class-Restricted Admissibility for the Ordered Bivariate Normal Problem}
+\author{}
+\date{June 2026}
+
+\begin{document}
+
+\maketitle
+
+\section*{Purpose of this note}
+
+This is a scratch research note. The goal is to formalize a first candidate version of a restricted-class admissibility theorem for the case
+\[
+X=(X_1,X_2) \sim N_2(\mu,I_2),
+\]
+where
+\[
+\Lambda=\{\mu\in\mathbb R^2:\mu_2\le \mu_1\}.
+\]
+The eventual motivation is to show that the short and long tests do not dominate each other. Rather than prove only that pairwise comparison, the aim is to identify a natural class of tests containing both procedures such that every test in the class with a closed and convex acceptance region is admissible relative to the class.
+
+This note focuses only on the case \(k=2\) and \(\Sigma=I_2\). Extensions to general covariance matrices or higher dimensions should come later.
+
+\section*{1. Model and hypotheses}
+
+Let
+\[
+X=(X_1,X_2)\sim N_2(\mu,I_2),
+\qquad
+\mu=(\mu_1,\mu_2)\in\Lambda,
+\]
+where
+\[
+\Lambda=\{\mu\in\mathbb R^2:\mu_2\le \mu_1\}.
+\]
+The null and alternative are
+\[
+\Lambda_0=\{\mu\in\Lambda:\mu_1\le 0,\mu_2\le 0\},
+\qquad
+\Lambda_1=\Lambda\setminus\Lambda_0.
+\]
+Because \(\mu_2\le \mu_1\), the null can be written more simply as
+\[
+\Lambda_0=\{\mu\in\Lambda:\mu_1\le 0\},
+\]
+and the alternative is
+\[
+\Lambda_1=\{\mu\in\Lambda:\mu_1>0\}.
+\]
+Indeed, if \(\mu_1\le 0\), then \(\mu_2\le \mu_1\le 0\), so \(\mu\in\Lambda_0\). Thus, under the ordering restriction, the alternative is driven by \(\mu_1>0\), although \(\mu_2\) can still be positive when \(0<\mu_2\le\mu_1\).
+
+A nonrandomized test is a measurable function
+\[
+\varphi:\mathbb R^2\to\{0,1\}.
+\]
+The rejection and acceptance regions are
+\[
+R_\varphi=\{x:\varphi(x)=1\},
+\qquad
+A_\varphi=\{x:\varphi(x)=0\}.
+\]
+The finite-sample level constraint is
+\[
+\sup_{\mu\in\Lambda_0}E_\mu[\varphi(X)]\le \alpha.
+\]
+
+\section*{2. Candidate restricted class}
+
+The class should encode the idea that coordinate 1 is at least as relevant as coordinate 2 under the parameter restriction \(\mu_2\le\mu_1\). It should include both the short and long tests, but exclude tests that privilege coordinate 2 over coordinate 1.
+
+Define \(\mathcal C_{\le \alpha}\) to be the class of nonrandomized tests \(\varphi\) satisfying the following three conditions.
+
+\begin{enumerate}[label=(\roman*)]
+\item Level condition:
+\[
+\sup_{\mu\in\Lambda_0}E_\mu[\varphi(X)]\le\alpha.
+\]
+
+\item Coordinatewise monotonicity:
+\[
+x\le y\text{ coordinatewise}
+\quad\Longrightarrow\quad
+\varphi(x)\le\varphi(y).
+\]
+Equivalently, if \(x\in R_\varphi\) and \(y\ge x\) coordinatewise, then \(y\in R_\varphi\). In terms of the acceptance region, this says that \(A_\varphi\) is coordinatewise lower:
+\[
+x\in A_\varphi,
+\quad
+y\le x\text{ coordinatewise}
+\quad\Longrightarrow\quad
+y\in A_\varphi.
+\]
+
+\item Order-respecting priority of coordinate 1:
+\[
+x_1\ge x_2
+\quad\Longrightarrow\quad
+\varphi(x_1,x_2)\ge \varphi(x_2,x_1).
+\]
+For nonrandomized tests, this can also be written as the rejection-region condition
+\[
+x_1\ge x_2,
+\quad
+(x_2,x_1)\in R_\varphi
+\quad\Longrightarrow\quad
+(x_1,x_2)\in R_\varphi.
+\]
+Equivalently, in acceptance-region form,
+\[
+x_1\ge x_2,
+\quad
+(x_1,x_2)\in A_\varphi
+\quad\Longrightarrow\quad
+(x_2,x_1)\in A_\varphi.
+\]
+
+This says that if we accept when the larger observed value is placed in coordinate 1, then we should also accept after moving that larger observed value to coordinate 2, the less prioritized coordinate.
+\end{enumerate}
+
+Define the exact-size subclass
+\[
+\mathcal C_\alpha=
+\left\{\varphi\in\mathcal C_{\le \alpha}:
+\sup_{\mu\in\Lambda_0}E_\mu[\varphi(X)]=\alpha
+\right\}.
+\]
+The exact-size restriction is important. Without it, the zero test has acceptance region \(\mathbb R^2\), which is closed and convex, but is plainly dominated.
+
+\section*{3. Least favorable null inside the class}
+
+For tests satisfying coordinatewise monotonicity, the least favorable null is \(\mu=(0,0)\). Let \(Z\sim N_2(0,I_2)\). If \(\mu\le\nu\) coordinatewise, then
+\[
+\mu+Z\le \nu+Z
+\]
+coordinatewise almost surely. Therefore coordinatewise monotonicity gives
+\[
+\varphi(\mu+Z)\le \varphi(\nu+Z)
+\]
+almost surely, hence
+\[
+E_\mu[\varphi(X)]\le E_\nu[\varphi(X)].
+\]
+Every \(\mu\in\Lambda_0\) satisfies \(\mu\le (0,0)\) coordinatewise. Therefore
+\[
+\sup_{\mu\in\Lambda_0}E_\mu[\varphi(X)]
+=
+E_{(0,0)}[\varphi(X)].
+\]
+Thus, for \(\varphi\in\mathcal C_{\le\alpha}\), the level condition is equivalent to
+\[
+E_{(0,0)}[\varphi(X)]\le\alpha.
+\]
+For \(\varphi\in\mathcal C_\alpha\), exact size is simply
+\[
+E_{(0,0)}[\varphi(X)]=\alpha.
+\]
+
+\section*{4. Short and long tests belong to the class}
+
+The short test is
+\[
+\varphi_s(x)=1\{x_1>c_s\},
+\qquad
+c_s=\Phi^{-1}(1-\alpha).
+\]
+Its acceptance region is
+\[
+A_s=\{x:x_1\le c_s\},
+\]
+which is closed and convex. The rejection region is coordinatewise increasing. Also, if \(x_1\ge x_2\), then
+\[
+1\{x_1>c_s\}\ge 1\{x_2>c_s\},
+\]
+so the order-respecting condition holds.
+
+The long test is
+\[
+\varphi_l(x)=1\{\max(x_1,x_2)>c_l\},
+\]
+where \(c_l\) satisfies
+\[
+P_0(\max(X_1,X_2)>c_l)=\alpha.
+\]
+Since \(X_1\) and \(X_2\) are independent standard normals under \(\mu=(0,0)\),
+\[
+P_0(\max(X_1,X_2)\le c_l)=\Phi(c_l)^2.
+\]
+Therefore
+\[
+1-\Phi(c_l)^2=\alpha,
+\qquad
+c_l=\Phi^{-1}(\sqrt{1-\alpha}).
+\]
+Its acceptance region is
+\[
+A_l=\{x:x_1\le c_l,
+\ x_2\le c_l\},
+\]
+which is also closed and convex. The long test is coordinatewise monotone and symmetric, so the order-respecting condition holds with equality:
+\[
+\varphi_l(x_1,x_2)=\varphi_l(x_2,x_1).
+\]
+Thus
+\[
+\varphi_s,\varphi_l\in\mathcal C_\alpha,
+\]
+and both have closed convex acceptance regions.
+
+\section*{5. Candidate theorem}
+
+The first theorem to try proving is the following.
+
+\medskip
+\noindent
+\textbf{Candidate Theorem.}
+Let \(X\sim N_2(\mu,I_2)\), with \(\mu\in\Lambda=\{\mu\in\mathbb R^2:\mu_2\le\mu_1\}\). Let \(\varphi\in\mathcal C_\alpha\). If \(A_\varphi\) is closed and convex, then \(\varphi\) is admissible relative to \(\mathcal C_{\le\alpha}\).
+
+\medskip
+Here admissibility relative to \(\mathcal C_{\le\alpha}\) means that there is no \(\widetilde\varphi\in\mathcal C_{\le\alpha}\) such that
+\[
+E_\mu[\widetilde\varphi(X)]
+\ge
+E_\mu[\varphi(X)]
+\quad\text{for all }\mu\in\Lambda_1,
+\]
+with strict inequality for at least one \(\mu\in\Lambda_1\).
+
+This should still be treated as a candidate theorem, not as an established result. The key challenge is to adapt a convex-acceptance-region admissibility argument while respecting the restricted class.
+
+\section*{6. Consequence for the short and long tests}
+
+If the candidate theorem is true, then the short and long tests do not dominate each other.
+
+Indeed, both \(\varphi_s\) and \(\varphi_l\) lie in \(\mathcal C_\alpha\), and both have closed convex acceptance regions. Therefore the theorem would imply that both are admissible relative to \(\mathcal C_{\le\alpha}\).
+
+If \(\varphi_l\) dominated \(\varphi_s\), then \(\varphi_s\) would be dominated by another test in \(\mathcal C_{\le\alpha}\), namely \(\varphi_l\), contradicting relative admissibility of \(\varphi_s\). Similarly, if \(\varphi_s\) dominated \(\varphi_l\), then \(\varphi_l\) would be dominated by another test in \(\mathcal C_{\le\alpha}\), contradicting relative admissibility of \(\varphi_l\).
+
+Thus class admissibility would be enough for the desired mutual non-domination conclusion.
+
+\section*{7. Why this class excludes the bad examples}
+
+The earlier counterexample used the test
+\[
+\varphi_\Delta(x)=1\{x_2-x_1>c\}.
+\]
+This test rejects when coordinate 2 is large relative to coordinate 1. That is not order-respecting. For example, take \(x_1>x_2\). Then \(\varphi_\Delta(x_1,x_2)=0\), while for suitable values one can have \(\varphi_\Delta(x_2,x_1)=1\). This violates
+\[
+x_1\ge x_2
+\quad\Longrightarrow\quad
+\varphi(x_1,x_2)\ge\varphi(x_2,x_1).
+\]
+
+The \(X_2\)-only test
+\[
+\varphi_2(x)=1\{x_2>c\}
+\]
+also fails the order-respecting condition. If \(x_1\ge x_2\), then it can happen that \(x_2\le c<x_1\), in which case
+\[
+\varphi_2(x_1,x_2)=0,
+\qquad
+\varphi_2(x_2,x_1)=1.
+\]
+Thus the class excludes tests that privilege the less prioritized coordinate over the more prioritized coordinate.
+
+\section*{8. Support-sorting lemma}
+
+The following lemma is a useful structural fact for acceptance regions in the proposed class.
+
+\medskip
+\noindent
+\textbf{Support-sorting Lemma.}
+Let \(A\subseteq\mathbb R^2\) be a nonempty acceptance region satisfying:
+\[
+x\in A,
+\quad
+y\le x\text{ coordinatewise}
+\quad\Longrightarrow\quad
+y\in A,
+\]
+and
+\[
+x_1\ge x_2,
+\quad
+(x_1,x_2)\in A
+\quad\Longrightarrow\quad
+(x_2,x_1)\in A.
+\]
+For \(a=(a_1,a_2)\), define
+\[
+h_A(a)=\sup_{x\in A}a'x.
+\]
+Let
+\[
+a^\downarrow=(\max\{a_1,a_2\},\min\{a_1,a_2\}).
+\]
+If \(h_A(a)<\infty\), then
+\[
+h_A(a^\downarrow)<\infty.
+\]
+Moreover, if \(a_2>a_1\), then
+\[
+h_A(a^\downarrow)\le h_A(a).
+\]
+
+\medskip
+\noindent
+\textbf{Proof.}
+First, since \(A\) is nonempty and coordinatewise lower, \(h_A(a)<\infty\) implies \(a_1\ge0\) and \(a_2\ge0\). If, for example, \(a_1<0\), take any \(x\in A\). Then \(x-te_1\in A\) for every \(t>0\), and
+\[
+a'(x-te_1)=a'x-ta_1\to\infty
+\]
+as \(t\to\infty\), contradicting \(h_A(a)<\infty\). The same argument applies to \(a_2\).
+
+If \(a_1\ge a_2\), then \(a^\downarrow=a\), and there is nothing to prove. Suppose instead that \(a_2>a_1\). Let
+\[
+b=a^\downarrow=(a_2,a_1).
+\]
+Take any \(x=(x_1,x_2)\in A\).
+
+If \(x_1<x_2\), then
+\[
+b'x-a'x
+=
+(a_2-a_1)(x_1-x_2)<0,
+\]
+so
+\[
+b'x\le a'x\le h_A(a).
+\]
+
+If \(x_1\ge x_2\), then the order-respecting acceptance condition implies
+\[
+(x_2,x_1)\in A.
+\]
+Therefore
+\[
+b'x=a_2x_1+a_1x_2=a_1x_2+a_2x_1=a'(x_2,x_1)\le h_A(a).
+\]
+In both cases,
+\[
+b'x\le h_A(a).
+\]
+Taking the supremum over \(x\in A\) gives
+\[
+h_A(b)\le h_A(a)<\infty.
+\]
+This proves the claim.
+
+\section*{9. Why the support-sorting lemma matters}
+
+The original feasible-normal idea was too strong. A condition requiring every support or bounding direction of \(A_\varphi\) to satisfy
+\[
+a_1\ge a_2
+\]
+would exclude the long test, because the long test has acceptance region
+\[
+A_l=\{x:x_1\le c_l,
+\ x_2\le c_l\},
+\]
+and hence has bounding directions \((1,0)\) and \((0,1)\). The direction \((0,1)\) is not feasible under \(a_1\ge a_2\).
+
+The support-sorting lemma gives a way around this. If an acceptance region in the class is bounded in a direction that puts more weight on coordinate 2 than coordinate 1, then the sorted direction, which puts at least as much weight on coordinate 1 as on coordinate 2, is also a bounding direction. Thus the class does not forbid \(X_2\) from contributing to rejection. Instead, it prevents \(X_2\) from being privileged over \(X_1\).
+
+For the parameter cone
+\[
+\Lambda=\{\mu:\mu_2\le\mu_1\},
+\]
+the feasible recession directions are
+\[
+\{d:d_2\le d_1\}.
+\]
+In the identity covariance case, sorted directions \(a^\downarrow\) satisfy
+\[
+a^\downarrow_1\ge a^\downarrow_2,
+\]
+and therefore align with feasible directions of the parameter cone.
+
+This is the main reason the proposed class is promising: it replaces a too-strong universal feasible-normal condition with a weaker structural property that still recovers feasible directions when needed.
+
+\section*{10. Possible narrower subclass: rectangles}
+
+If the full class theorem is too hard initially, a narrower tractable subclass is the class of rectangular acceptance regions
+\[
+A_{a,b}=\{x:x_1\le a,
+\ x_2\le b\},
+\qquad
+a\le b,
+\]
+with exact size
+\[
+\Phi(a)\Phi(b)=1-\alpha.
+\]
+The condition \(a\le b\) says that coordinate 1 has a weakly lower rejection threshold than coordinate 2, so coordinate 1 is treated as at least as important. This class contains:
+\[
+A_s=\{x:x_1\le c_s\}
+\]
+as the limiting case \(b=\infty\), and
+\[
+A_l=\{x:x_1\le c_l,
+\ x_2\le c_l\}
+\]
+as the symmetric case \(a=b=c_l\).
+
+This subclass may be a useful intermediate target. One could first try to prove that no exact-size rectangle with \(a\le b\) dominates another exact-size rectangle with \(a\le b\), or at least that the short and long endpoints do not dominate each other. Then one can identify which ingredients generalize to arbitrary closed convex acceptance regions in \(\mathcal C_\alpha\).
+
+\section*{11. Current assessment}
+
+This is a coherent theorem path, but not yet a proof. The proposed restricted class is attractive because:
+\begin{enumerate}[label=(\roman*)]
+\item it contains the short test;
+\item it contains the long test;
+\item it excludes the earlier counterexample based on \(X_2-X_1\);
+\item it excludes an \(X_2\)-only test;
+\item it is not based on a too-strong feasible-normal restriction that would exclude the long test;
+\item it gives a useful support-sorting lemma that converts \(X_2\)-heavy directions into priority-respecting directions.
+\end{enumerate}
+
+The next mathematical task is to determine whether the support-sorting lemma is enough to adapt a closed-convex-acceptance-region admissibility proof within \(\mathcal C_{\le\alpha}\). If that is too ambitious, the rectangular subclass should be treated as the first formal target.
+
+\section*{12. My Conjectured Theorem}
+
+\medskip
+\noindent
+\boxed{%
+\begin{minipage}{0.88\textwidth}
+\textbf{Candidate Theorem.}
+Let \(X\sim N_2(\mu,I_2)\), with
+\[
+\Lambda=\{\mu\in\mathbb R^2:\mu_2\le \mu_1\}.
+\]
+Let \(\varphi\in\mathcal C_\alpha\). Then \(\varphi\) is admissible relative to \(\mathcal C_{\le\alpha}\) if and only if its acceptance region \(A_\varphi\) is closed and convex, up to Lebesgue-null modifications.
+\end{minipage}%
+}
+
+\medskip
+\noindent
+\boxed{
+\begin{minipage}{0.88\textwidth}
+\textbf{Key Sufficiency Lemma.}
+Let \(\varphi\in\mathcal C_\alpha\) have closed convex acceptance region \(A_\varphi\). Let \(\widetilde\varphi\in\mathcal C_{\le\alpha}\), and define \(B,D\) as above. If \(P_0(B)=P_0(D)\) and \(B\cup D\) has positive Lebesgue measure, then there exists some \(\mu\in\Lambda_1\) such that
+\[
+P_\mu(B)<P_\mu(D).
+\]
+\end{minipage}
+}
+
+\end{document}

@@ -1,0 +1,31 @@
+# macOS
+.DS_Store
+
+# LaTeX build artifacts
+*.aux
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.synctex(busy)
+*.bbl
+*.blg
+*.nav
+*.snm
+*.vrb
+*.bcf
+*.run.xml
+*.idx
+*.ilg
+*.ind
+*.dvi
+
+# Dropbox
+*conflicted copy*
+
+# Local scratch
+tmp/

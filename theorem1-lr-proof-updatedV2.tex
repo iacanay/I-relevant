@@ -1,0 +1,183 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{enumitem}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+
+\title{A Lehmann--Romano Proof of Admissibility for Closed Convex Acceptance Regions\\Updated V2}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{Lehmann--Romano supported formulation}
+
+Lehmann and Romano's Section 6.7 gives a sufficiency result.  In the formulation used below, a closed convex acceptance region, together with the ray condition in Theorem 6.7.1, implies $d$-admissibility.  If, in addition, the test has size exactly $\alpha$ at a finite point in the closure of the null parameter space, then Corollary 6.7.1 gives $\alpha$-admissibility.
+
+Thus the conclusion is
+\[
+A_0\text{ closed and convex}\quad\Longrightarrow\quad d\text{-admissibility},
+\]
+and, with exact size attained at a finite null point,
+\[
+A_0\text{ closed and convex}\quad\Longrightarrow\quad \alpha\text{-admissibility}.
+\]
+
+The geometric containment conclusion in Theorem 6.7.1 is stated for ordinary acceptance regions, hence for nonrandomized competitors.  The admissibility conclusion below is obtained by invoking the Lehmann--Romano corollary directly.  This is important because Lehmann and Romano note that Theorem 6.7.1 and Corollary 6.7.1 extend to randomized competitors, while the maintained test $\phi_0$ itself must be nonrandomized.
+
+\section{The theorem and proof}
+
+\begin{theorem}[Closed convex acceptance regions imply admissibility]
+Let $0<\alpha<1$. Let
+\[
+X\sim N(\mu,\Sigma),
+\]
+where $\Sigma$ is known and positive definite and $\mu\in\mathbf R^k$. Consider testing
+\[
+H_0:\mu\in\Lambda_0=\{\mu:\mu\le 0\}
+\quad\text{versus}\quad
+H_1:\mu\in\Lambda_1=\mathbf R^k\setminus\Lambda_0.
+\]
+Let $\phi_0$ be a nonrandomized test with acceptance region
+\[
+A_0=\{x:\phi_0(x)=0\}.
+\]
+Assume:
+\begin{enumerate}[label=(\roman*)]
+\item $A_0$ is closed and convex;
+\item $\phi_0$ has level $\alpha$:
+\[
+\sup_{\mu\in\Lambda_0} E_\mu[\phi_0(X)]\le \alpha.
+\]
+\end{enumerate}
+Then $\phi_0$ is $d$-admissible for testing $H_0$ against $H_1$. If, in addition, there exists a finite point $\mu_0\in\Lambda_0$ such that
+\[
+E_{\mu_0}[\phi_0(X)]=\alpha,
+\]
+then $\phi_0$ is $\alpha$-admissible.  Both admissibility conclusions are with respect to possibly randomized competitors.
+\end{theorem}
+
+\begin{proof}
+We use the following consequence of Theorem 6.7.1 and Corollary 6.7.1 of Lehmann and Romano.
+
+\begin{proposition}[Lehmann--Romano]
+Consider an exponential family with density
+\[
+p_\theta(t)=C(\theta)\exp\{\theta't\}
+\]
+with respect to a $\sigma$-finite measure $\nu$, with natural parameter space $\Omega$. Let $\Omega_H$ and $\Omega'$ be disjoint nonempty subsets of $\Omega$. Let $\phi_0$ be a nonrandomized test of $H:\theta\in\Omega_H$, based on $T$, with acceptance region $A_0\subseteq\mathbf R^s$. Suppose $A_0$ is closed and convex and that the following ray condition holds: whenever
+\[
+A_0\cap\{t:a't>c\}=\varnothing,
+\]
+there exist $\theta^*\in\Omega$ and $\lambda_n\to\infty$ such that
+\[
+\theta^*+\lambda_n a\in\Omega'.
+\]
+Then the test with acceptance region $A_0$ is $d$-admissible. If the test has size $\alpha$ and there exists a finite point $\theta_0\in\overline{\Omega_H}$ such that
+\[
+E_{\theta_0}[\phi_0(X)]=\alpha,
+\]
+then the test is also $\alpha$-admissible. These admissibility conclusions allow randomized competing tests.
+\end{proposition}
+
+We now verify the assumptions of this result. Write the normal density in canonical exponential-family form. Put
+\[
+\theta=\Sigma^{-1}\mu,
+\qquad
+\mu=\Sigma\theta.
+\]
+With respect to the measure
+\[
+d\nu(x)=(2\pi)^{-k/2}|\Sigma|^{-1/2}
+\exp\left\{-\frac12 x'\Sigma^{-1}x\right\}dx,
+\]
+the density of $X\sim N(\Sigma\theta,\Sigma)$ is
+\[
+p_\theta(x)=\exp\left\{\theta'x-\frac12\theta'\Sigma\theta\right\}.
+\]
+Thus $T(x)=x$, $\Omega=\mathbf R^k$, and
+\[
+\Omega_H=\{\theta:\Sigma\theta\le 0\},
+\qquad
+\Omega_K=\{\theta:\Sigma\theta\not\le 0\}.
+\]
+We apply the Lehmann--Romano result with $\Omega'=\Omega_K$.
+
+It remains to verify the ray condition. Let $a\in\mathbf R^k$ and $c\in\mathbf R$ satisfy
+\[
+A_0\cap\{x:a'x>c\}=\varnothing.
+\]
+If $a=0$, choose any $\theta^*\in\Omega_K$ and the condition is immediate.  Hence suppose $a\ne 0$. Equivalently, $A_0\subseteq\{x:a'x\le c\}$. We claim that
+\[
+\Sigma a\not\le 0.
+\]
+Suppose instead that $\Sigma a\le 0$. For $\lambda>0$, define
+\[
+\theta_\lambda=\lambda a,
+\qquad
+\mu_\lambda=\Sigma\theta_\lambda=\lambda\Sigma a.
+\]
+Then $\mu_\lambda\le 0$, so $\theta_\lambda\in\Omega_H$. Under $P_{\theta_\lambda}$,
+\[
+a'X\sim N\left(\lambda a'\Sigma a,\ a'\Sigma a\right).
+\]
+Since $\Sigma$ is positive definite and $a\ne 0$, $a'\Sigma a>0$. Hence
+\[
+P_{\theta_\lambda}(a'X>c)\to 1.
+\]
+Because $A_0\subseteq\{x:a'x\le c\}$, we have $\{x:a'x>c\}\subseteq A_0^c$. Since $\phi_0$ is nonrandomized,
+\[
+E_{\theta_\lambda}[\phi_0(X)]
+\ge P_{\theta_\lambda}(a'X>c)
+\to 1.
+\]
+This contradicts the level condition because every $\theta_\lambda\in\Omega_H$ and $\alpha<1$. Therefore $\Sigma a\not\le 0$.
+
+It follows that $\lambda\Sigma a\not\le 0$ for every $\lambda>0$. Hence
+\[
+\lambda a\in\Omega_K
+\qquad\text{for every }\lambda>0.
+\]
+The ray condition holds with $\theta^*=0$ and any sequence $\lambda_n\to\infty$.
+
+The Lehmann--Romano proposition therefore gives $d$-admissibility of $\phi_0$ against possibly randomized competitors.
+
+Finally suppose there exists finite $\mu_0\in\Lambda_0$ such that $E_{\mu_0}[\phi_0(X)]=\alpha$. Let $\theta_0=\Sigma^{-1}\mu_0$. Then $\theta_0\in\Omega_H\subseteq\overline{\Omega_H}$ and
+\[
+E_{\theta_0}[\phi_0(X)]=\alpha.
+\]
+The second part of the Lehmann--Romano corollary gives $\alpha$-admissibility, again against possibly randomized competitors.
+\end{proof}
+
+\section{Why exact size is needed for $\alpha$-admissibility}
+
+The statement ``closed and convex acceptance region implies $\alpha$-admissibility'' is false if one only assumes
+\[
+\sup_{\mu\le 0}E_\mu[\phi(X)]\le \alpha.
+\]
+For example, the zero test $\phi(x)\equiv 0$ has acceptance region $\mathbf R^k$, which is closed and convex, and it satisfies the size constraint for every $0<\alpha<1$. But it is not $\alpha$-admissible. The test
+\[
+\psi(x)=1\left\{x_1>\sqrt{\Sigma_{11}}\Phi^{-1}(1-\alpha)\right\}
+\]
+has level $\alpha$ for $H_0:\mu\le 0$ and has strictly positive power at alternatives with $\mu_1>0$, while the zero test has zero power everywhere.
+
+This example does not contradict $d$-admissibility. A $d$-dominating test would also have to satisfy
+\[
+E_\mu[\psi(X)]\le E_\mu[\phi(X)]=0
+\qquad\text{for all }\mu\in\Lambda_0,
+\]
+which forces no increase in rejection probability on the null. Thus exact size is needed for the $\alpha$-admissibility conclusion, not for the $d$-admissibility conclusion.
+
+\begin{thebibliography}{9}
+
+\bibitem{LehmannRomano2005}
+Lehmann, E. L. and Romano, J. P. (2005).
+\textit{Testing Statistical Hypotheses}.
+Third edition. Springer.
+
+\end{thebibliography}
+
+\end{document}

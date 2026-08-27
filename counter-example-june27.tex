@@ -1,0 +1,241 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{enumitem}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+
+\newtheorem{proposition}{Proposition}
+\newtheorem{remark}{Remark}
+
+\title{Counterexample to the Restricted-Space Convexity Claim}
+\author{}
+\date{June 27 draft}
+
+\begin{document}
+\maketitle
+
+\section{Purpose}
+
+This note records the Step 2 assessment of Theorem 2 in the current notes.  The conclusion is that the proposed theorem is false as stated.  In particular, on the restricted parameter space
+\[
+  \Lambda = \{\mu=(\mu_1,\mu_2)\in\mathbb{R}^2 : \mu_2\le \mu_1\},
+\]
+closed convexity of the acceptance region is not sufficient for admissibility under the finite-sample size constraint.
+
+The counterexample below is completely internal to the normal location experiment.  It does not invoke any external admissibility theorem.
+
+\section{Restricted normal experiment}
+
+Take the simplest covariance matrix,
+\[
+  \Sigma = I_2,
+\]
+and let
+\[
+  X=(X_1,X_2)'\sim N(\mu,I_2),
+  \qquad \mu\in \Lambda.
+\]
+The null and alternative are
+\[
+  \Lambda_0 = \{\mu\in\Lambda: \mu_1\le 0,\ \mu_2\le 0\},
+  \qquad
+  \Lambda_1 = \Lambda\setminus\Lambda_0.
+\]
+Because \(\mu_2\le \mu_1\) on \(\Lambda\), the alternative has the simple form
+\[
+  \Lambda_1 = \{\mu\in\mathbb{R}^2: \mu_2\le \mu_1,\ \mu_1>0\}.
+\]
+Indeed, if \(\mu_1\le 0\), then \(\mu_2\le \mu_1\le 0\), so \(\mu\in\Lambda_0\).
+
+A test \(\varphi\) has level \(\alpha\in(0,1)\) if
+\[
+  \sup_{\mu\in\Lambda_0} E_\mu[\varphi(X)]\le \alpha.
+\]
+Under the usual \(\alpha\)-admissibility ordering, a level-\(\alpha\) test \(\varphi\) is inadmissible if there exists another level-\(\alpha\) test \(\tilde\varphi\) such that
+\[
+  E_\mu[\tilde\varphi(X)]\ge E_\mu[\varphi(X)]
+  \quad\text{for all }\mu\in\Lambda_1,
+\]
+with strict inequality for at least one alternative.
+
+\section{A closed convex acceptance region that is inadmissible}
+
+Let \(\Phi\) denote the standard normal distribution function, and define
+\[
+  q_\alpha = \Phi^{-1}(1-\alpha).
+\]
+Consider the nonrandomized test
+\[
+  \varphi_\Delta(x)
+  = \mathbf{1}\{x_2-x_1>\sqrt{2}\,q_\alpha\}.
+\]
+The acceptance region is the halfspace
+\[
+  A_\Delta
+  = \{x\in\mathbb{R}^2:x_2-x_1\le \sqrt{2}\,q_\alpha\}.
+\]
+Thus \(A_\Delta\) is closed and convex.
+
+We now verify the size.  Under \(\mu\),
+\[
+  X_2-X_1 \sim N(\mu_2-
+  \mu_1,2).
+\]
+For every \(\mu\in\Lambda\), and hence for every \(\mu\in\Lambda_0\),
+\[
+  \mu_2-\mu_1\le 0.
+\]
+Therefore,
+\begin{align*}
+  E_\mu[\varphi_\Delta(X)]
+  &= P_\mu\{X_2-X_1>\sqrt{2}\,q_\alpha\} \\
+  &\le P\{N(0,2)>\sqrt{2}\,q_\alpha\} \\
+  &= \alpha.
+\end{align*}
+Equality is attained, for example, at any null parameter on the diagonal \(\mu_1=\mu_2\le 0\).  Hence \(\varphi_\Delta\) is a level-\(\alpha\) test.
+
+Now compare \(\varphi_\Delta\) with the short test
+\[
+  \varphi_s(x)=\mathbf{1}\{x_1>q_\alpha\}.
+\]
+This test has level \(\alpha\), since under the null \(\mu_1\le 0\), and the supremum of
+\[
+  P_\mu\{X_1>q_\alpha\}
+\]
+over \(\Lambda_0\) is attained when \(\mu_1=0\).
+
+For every restricted alternative \(\mu\in\Lambda_1\), we have \(\mu_1>0\).  Thus
+\begin{align*}
+  E_\mu[\varphi_s(X)]
+  &= P_\mu\{X_1>q_\alpha\} \\
+  &= 1-\Phi(q_\alpha-\mu_1) \\
+  &> 1-\Phi(q_\alpha) \\
+  &= \alpha.
+\end{align*}
+On the other hand, for every \(\mu\in\Lambda\), including every alternative,
+\[
+  E_\mu[\varphi_\Delta(X)]\le \alpha,
+\]
+because \(\mu_2-
+\mu_1\le 0\) throughout the restricted space.  Consequently,
+\[
+  E_\mu[\varphi_s(X)] > E_\mu[\varphi_\Delta(X)]
+  \qquad\text{for every }\mu\in\Lambda_1.
+\]
+Therefore \(\varphi_s\) strictly dominates \(\varphi_\Delta\) on the restricted alternative while satisfying the same size constraint.
+
+\begin{proposition}
+The test \(\varphi_\Delta(x)=\mathbf{1}\{x_2-x_1>\sqrt{2}\,q_\alpha\}\) has a closed convex acceptance region and satisfies the level-\(\alpha\) size constraint, but it is not \(\alpha\)-admissible on the restricted parameter space \(\Lambda=\{\mu_2\le \mu_1\}\).
+\end{proposition}
+
+\begin{proof}
+The acceptance region is the closed halfspace \(A_\Delta=\{x:x_2-x_1\le \sqrt{2}\,q_\alpha\}\).  The size calculation above gives
+\[
+  \sup_{\mu\in\Lambda_0}E_\mu[\varphi_\Delta(X)]=\alpha.
+\]
+The short test \(\varphi_s(x)=\mathbf{1}\{x_1>q_\alpha\}\) also has level \(\alpha\).  For every \(\mu\in\Lambda_1\), \(\mu_1>0\), and hence
+\[
+  E_\mu[\varphi_s(X)]>\alpha\ge E_\mu[\varphi_\Delta(X)].
+\]
+Thus \(\varphi_s\) strictly dominates \(\varphi_\Delta\) on \(\Lambda_1\).  This proves inadmissibility.
+\end{proof}
+
+Theorem 2, as currently stated, would classify \(\varphi_\Delta\) as admissible because its acceptance region is closed and convex.  The proposition therefore refutes the sufficiency direction of Theorem 2.
+
+\section{Interpretation}
+
+The problem is that the rejection direction
+\[
+  x_2-x_1
+\]
+is not a useful direction under the restricted parameter space.  Under \(\Lambda\),
+\[
+  E_\mu[X_2-X_1]=\mu_2-
+\mu_1\le 0
+\]
+for every feasible \(\mu\).  Thus the statistic \(X_2-X_1\) is never shifted in the positive direction by any feasible parameter value.  The test \(\varphi_\Delta\) rejects in a direction in which the restricted model provides no favorable alternatives.
+
+By contrast, every restricted alternative satisfies \(\mu_1>0\).  The one-sided short test based only on \(X_1\) is aligned with the only direction that is guaranteed to move under the alternative.  This is why \(\varphi_s\) strictly dominates \(\varphi_\Delta\) throughout \(\Lambda_1\).
+
+\section{Diagnosis of the proposed Lemma 2 argument}
+
+The supporting/rejection normal for the counterexample is
+\[
+  a=(-1,1),
+\]
+since rejection occurs when
+\[
+  a'x=x_2-x_1>\sqrt{2}\,q_\alpha.
+\]
+A ray \(\mu^*+\lambda a\) remains in the cone \(\Lambda=\{\mu_2\le \mu_1\}\) only if the direction is compatible with the cone, namely if
+\[
+  a_2\le a_1.
+\]
+But for \(a=(-1,1)\),
+\[
+  a_2=1>-1=a_1.
+\]
+So this direction immediately points outside the cone.  This is precisely the type of direction excluded by Lemma 2.
+
+Therefore Lemma 2 does not prove sufficiency for all closed convex acceptance regions.  It verifies the desired feasible-ray condition only for directions already assumed to be compatible with the restricted parameter space.  But closed convex acceptance regions can have incompatible supporting normals, and those incompatible normals can produce inadmissible tests, as \(\varphi_\Delta\) shows.
+
+A plausible corrected theorem would need an additional condition excluding such bad directions.  Closed convexity alone is too weak.  The extra condition would have to link exposed supporting directions of the acceptance region to feasible directions in the restricted parameter space.  With a general covariance matrix \(\Sigma\), this compatibility would also have to be expressed through the covariance transformation that connects likelihood-ratio directions to mean-parameter directions.
+
+\section{Why restriction can create domination}
+
+The counterexample also shows why the informal claim
+\[
+  \text{``restricting the parameter space cannot create a dominating test''}
+\]
+is false.  A test may be undominated on the full space because it has high power in directions that are later removed by the restriction.  Once those alternatives are removed, another test may dominate it on the remaining alternatives.
+
+Here, the test \(\varphi_\Delta\) rejects for large \(X_2-X_1\).  On the full space \(\mathbb{R}^2\), there are alternatives with \(\mu_2>\mu_1\), under which this statistic is shifted upward.  But the restricted parameter space \(\Lambda=\{\mu_2\le \mu_1\}\) removes exactly those alternatives.  After the restriction, \(X_2-X_1\) is no longer a favorable alternative direction, and the short test based on \(X_1\) dominates.
+
+\section{Additional issues in the current necessity proof for Theorem 1}
+
+The counterexample above already invalidates Theorem 2 as stated, but there are also two separate issues with the written necessity proof for Theorem 1 that should be cleaned up before trying to port it.
+
+\subsection{Null-set issue}
+
+The proof says that if \(A_\varphi\) is nonconvex, then
+\[
+  D=\operatorname{conv}(A_\varphi)\setminus A_\varphi
+\]
+has positive Lebesgue measure.  This is not true in general.  A set can be nonconvex while differing from its convex hull only on a null set.  For example,
+\[
+  A=\mathbb{R}^2\setminus\{0\}
+\]
+is not convex, but \(\operatorname{conv}(A)=\mathbb{R}^2\), and the difference set is just \(\{0\}\), which has Lebesgue measure zero.
+
+Since the normal experiment is absolutely continuous, modifications on Lebesgue-null sets do not change any power function.  Thus any exact statement that admissibility implies closedness and convexity must either be formulated modulo null sets or must impose additional regularity on the acceptance regions.
+
+\subsection{Separation issue}
+
+The proof also uses a separation step of the form
+\[
+  A_\varphi\subseteq \{x:v'x\le t^*\},
+  \qquad
+  \operatorname{conv}(A_\varphi)\cap\{x:v'x>t^*\}\ne\varnothing.
+\]
+But if \(A_\varphi\) is contained in the closed halfspace \(\{x:v'x\le t^*\}\), then its convex hull is contained in that same halfspace.  Hence the displayed separation cannot hold as stated.
+
+This does not mean that a necessity result is impossible.  It means the current separation argument needs to be reformulated.  In particular, one cannot separate a nonconvex set from its own convex hull in this way.
+
+\section{Bottom line}
+
+The Step 2 conclusion is:
+\[
+  \boxed{\text{Theorem 2 is false as stated.}}
+\]
+The failure is in the sufficiency direction.  A closed convex acceptance region can reject in a direction that is incompatible with the restricted parameter space.  The test
+\[
+  \varphi_\Delta(x)=\mathbf{1}\{x_2-x_1>\sqrt{2}\,q_\alpha\}
+\]
+is the simplest example: its acceptance region is a closed convex halfspace, but it is strictly dominated on \(\Lambda_1\) by the short test
+\[
+  \varphi_s(x)=\mathbf{1}\{x_1>q_\alpha\}.
+\]
+Therefore, a correct restricted-space admissibility theorem cannot use closed convexity alone.  It needs an additional compatibility condition relating the geometry of the acceptance region to the feasible alternative directions of the restricted parameter space.
+
+\end{document}

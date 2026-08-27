@@ -1,0 +1,457 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb, amsthm, bm}
+\usepackage{geometry}
+\newtheorem{proposition}{Proposition}
+\newtheorem{theorem}{theorem}
+\geometry{margin=1in}
+
+\begin{document}
+
+\section*{Basic Setup: Admissibility in the Normal Experiment}
+
+Let $X \in \mathbf{R}^k$ denote a random vector distributed according to a multivariate normal distribution with mean $\mu$ and known, invertible covariance matrix $\Sigma$, that is,
+\[
+X \sim N(\mu, \Sigma), \quad \mu \in \Lambda \equiv \mathbf{R}^k, \; \Sigma > 0.
+\]
+
+We are interested in testing the composite null hypothesis
+\begin{equation} \label{eq:null}
+H_0 : \mu \in \Lambda_0 \quad \text{versus} \quad H_1 : \mu \in \Lambda_1 = \Lambda \setminus \Lambda_0,
+\end{equation}
+where
+\[
+\Lambda_0 = \{ \mu \in \Lambda : \mu \le 0 \}, \qquad \Lambda_1 = \{ \mu \in \Lambda : \mu_j > 0 \text{ for some } j \}.
+\]
+
+A test is a measurable function $\phi : \mathbf{R}^k \to [0,1]$, where $\phi(x)$ denotes the probability of rejecting $H_0$ given observation $x$.  The test $\phi$ satisfies the finite-sample size constraint
+\begin{equation} \label{eq:size}
+\sup_{\mu \in \Lambda_0} E_\mu[\phi(X)] \leq \alpha,
+\end{equation}
+for some pre-specified level $\alpha \in (0,1)$.
+
+Because the sample mean $\bar X$ is a sufficient statistic for $\mu$ when the data are i.i.d. normal, we may, without loss of generality, set $n=1$ and work directly with the single observation $X$.
+
+It is well known that there is no uniformly most powerful (UMP) test for \eqref{eq:null}.  Instead, one can study admissibility of tests satisfying \eqref{eq:size}.  Following Romano and Shaikh (2015), a test $\phi$ satisfying \eqref{eq:size} is:
+\begin{itemize}
+    \item \emph{$\alpha$-admissible} if for any other test $\tilde \phi$ satisfying \eqref{eq:size},
+    \[
+    E_\mu[\tilde \phi] \ge E_\mu[\phi] \text{ for all } \mu \in \Lambda_1
+    \quad \Rightarrow \quad
+    E_\mu[\tilde \phi] = E_\mu[\phi] \text{ for all } \mu \in \Lambda_1;
+    \]
+    \item \emph{$d$-admissible} if for any other test $\tilde \phi$ satisfying \eqref{eq:size},
+    \[
+    E_\mu[\tilde \phi] \ge E_\mu[\phi] \text{ for all } \mu \in \Lambda_1, \quad
+    E_\mu[\tilde \phi] \le E_\mu[\phi] \text{ for all } \mu \in \Lambda_0
+    \quad \Rightarrow \quad
+    E_\mu[\tilde \phi] = E_\mu[\phi] \text{ for all } \mu \in \Lambda.
+    \]
+\end{itemize}
+
+Romano and Shaikh (2015) show that any test $\phi$ satisfying \eqref{eq:size} whose acceptance region is a closed, convex subset of $\mathbf{R}^k$ containing $\Lambda_0$ is $d$-admissible.  If, in addition, the supremum in \eqref{eq:size} is attained and the inequality holds with equality, then $\phi$ is also $\alpha$-admissible.
+
+\bigskip
+\section*{Toward a Proof of Admissibility: chat GPT suggestion}
+
+We outline the key steps in developing an admissibility argument for tests in this Gaussian setting, focusing on the case $k=2$ and unrestricted $\Lambda = \mathbf{R}^2$.
+
+\paragraph{Step 1. Represent the test by its acceptance region.} Each test $\phi$ can be equivalently represented by its acceptance region
+\[
+A_\phi = \{ x \in \mathbf{R}^2 : \phi(x) = 0 \}~,
+\]
+so that the rejection region is $A_\phi^c = \{ x : \phi(x) = 1 \}$.  The power function of the test is
+\begin{equation} \label{eq:power}
+E_\mu[\phi(X)] = \int_{\mathbf{R}^2} \phi(x) f(x;\mu) \, dx = \int_{A_\phi^c} f(x;\mu) \, dx,
+\end{equation}
+where $f(x;\mu)$ denotes the bivariate normal density
+\begin{equation} \label{eq:normaldensity}
+f(x;\mu) = (2\pi)^{-1} |\Sigma|^{-1/2} \exp\left[-\tfrac{1}{2}(x-\mu)'\Sigma^{-1}(x-\mu)\right].
+\end{equation}
+
+\paragraph{Step 2. Define the risk or comparison functional.} For two tests $\phi$ and $\tilde \phi$, define the difference in power at mean $\mu$ as
+\begin{equation} \label{eq:deltamu}
+\Delta(\mu) = E_\mu[\tilde \phi(X)] - E_\mu[\phi(X)] = \int_{\mathbf{R}^2} (\tilde \phi(x) - \phi(x)) f(x;\mu)\, dx.
+\end{equation}
+A test $\tilde \phi$ \emph{dominates} $\phi$ if
+\[
+\Delta(\mu) \ge 0 \text{ for all } \mu \in \Lambda_1, \quad \text{and} \quad \Delta(\mu) \le 0 \text{ for all } \mu \in \Lambda_0,
+\]
+with strict inequality for some $\mu$. Admissibility of $\phi$ means that no such dominating $\tilde \phi$ exists.
+
+\paragraph{Step 3. Parameter path and log-concavity.} To understand how $E_\mu[\phi(X)]$ behaves as $\mu$ changes, consider a line segment in parameter space connecting two points $\mu_0, \mu_1 \in \mathbf{R}^2$. Fix any two mean vectors $\mu_0, \mu_1 \in \mathbf{R}^2$ and define the
+path
+\[
+\mu_t = (1-t)\mu_0 + t \mu_1, \qquad t \in [0,1].
+\]
+We are interested in how the function
+\[
+\psi(t) = E_{\mu_t}[\phi(X)] = \int_{\mathbf{R}^2} \phi(x) f(x;\mu_t)\,dx
+\]
+changes with $t$.  Since the normal density $f(x;\mu)$ belongs to a
+regular exponential family with natural parameter
+$\eta = \Sigma^{-1}\mu$, we can write
+\[
+f(x;\mu_t) = \exp\!\Big\{\,\eta_t'x - \tfrac{1}{2}\mu_t'\Sigma^{-1}\mu_t - c(x)\Big\},
+\quad \text{where } \eta_t = \Sigma^{-1}\mu_t.
+\]
+Differentiating under the integral sign gives
+\[
+\psi'(t) = \int_{\mathbf{R}^2}\phi(x)\,
+\frac{\partial}{\partial t} f(x;\mu_t)\,dx
+= \int_{\mathbf{R}^2}\phi(x)\, f(x;\mu_t)
+\big[\nabla_\mu \log f(x;\mu_t)\big]'(\mu_1-\mu_0)\,dx.
+\]
+Using $\nabla_\mu \log f(x;\mu) = \Sigma^{-1}(x-\mu)$, we obtain
+\begin{equation}\label{eq:dEdt}
+\psi'(t)
+= (\mu_1-\mu_0)'\Sigma^{-1}\,
+E_{\mu_t}\!\big[(X-\mu_t)\phi(X)\big].
+\end{equation}
+
+Equation~\eqref{eq:dEdt} shows how the expected rejection probability changes as we move the mean in the direction $\mu_1-\mu_0$.
+In particular, if $\phi$ is the indicator of a convex rejection region $R_\phi = A_\phi^c$, the sign of $\psi'(t)$ reflects whether $R_\phi$ contains points that are more likely under $\mu_1$ than under $\mu_0$. Because $f(x;\mu)$ is log-concave in $\mu$, the mapping $\mu\mapsto E_\mu[\phi(X)]$ is quasiconvex for any convex $R_\phi$. Intuitively, this means that moving $\mu$ along a line toward the rejection region can only increase power in a monotone way; there is no “wiggle room” to improve power at one $\mu$ without reducing it elsewhere while maintaining the size constraint.
+
+\paragraph{Step 4. Convexity of $A_\phi$ and non-improvability}
+
+To connect convexity to admissibility, consider two points $x_1, x_2 \in A_\phi$ and any convex combination $x_\lambda = \lambda x_1 + (1-\lambda)x_2$ for $\lambda \in (0,1)$.  If $A_\phi$ is convex, then $x_\lambda \in A_\phi$.  Suppose instead that $A_\phi$ is not convex: then there exist $x_1, x_2 \in A_\phi$ such that $x_\lambda \notin A_\phi$.  Construct a modified test $\tilde\phi$ that equals $\phi$ except that it rejects on a small neighborhood of $x_\lambda$.  Because the Gaussian likelihood is smooth and the null region $\Lambda_0$ lies on one side of the origin, this modification increases $E_\mu[\phi(X)]$ for some $\mu$ with positive components (i.e., under $H_1$) but changes it only infinitesimally under $\mu \le 0$.  Hence, the modified test $\tilde\phi$ strictly dominates $\phi$, implying that the original $\phi$ was not admissible.
+
+Conversely, when $A_\phi$ is closed and convex, any such local modification that increases power along a direction of $H_1$ necessarily enlarges the rejection region toward $\Lambda_0$, violating the size constraint in \eqref{eq:size}.  Therefore, convexity of the acceptance region precludes domination: it ensures that any attempt to raise power somewhere under $H_1$ must raise size at some point in $\Lambda_0$.  This geometric argument is the core of the admissibility result proved by Romano and Shaikh (2015).
+
+\section*{My Proof}
+Let $A_\phi = \{x \in \mathbf{R}^2 : \phi(x) = 0\}$ denote the acceptance region, and assume it is closed and convex, with
+\[
+\sup_{\mu \in \Lambda_0} E_\mu[\phi(X)] \le \alpha. \tag{2}
+\]
+
+\begin{proposition}
+If $A_\phi$ is closed and convex, then no other test $\tilde \phi$ satisfying \eqref{eq:size} can dominate $\phi$. Hence $\phi$ is $d$-admissible.
+\end{proposition}
+
+\begin{proof}
+Let $g(x) = \tilde \phi(x) - \phi(x)$ and define
+\[
+\Delta(\mu) = E_\mu[g(X)] = \int_{\mathbf{R}^2} g(x) f(x;\mu)\,dx.
+\]
+Domination requires
+\[
+\Delta(\mu) \le 0 \quad \forall \mu \in \Lambda_0, 
+\qquad
+\Delta(\mu) \ge 0 \quad \forall \mu \in \Lambda_1,
+\]
+with strict inequality for some $\mu \in \Lambda_1$.
+
+Since $f(x;\mu)$ belongs to a regular exponential family with natural parameter
+$\eta = \Sigma^{-1}\mu$, we have
+\[
+\frac{\partial}{\partial \eta} E_\mu[g(X)]
+  = \operatorname{Cov}_\mu(g(X), X).
+\]
+Hence, for any direction $v \in \mathbf{R}^2$,
+\begin{equation}\label{eq:directional}
+\frac{\partial}{\partial t}\Delta(\mu + t v)\Big|_{t=0}
+= v'\frac{\partial}{\partial \mu} E_\mu[g(X)]
+= v'\Sigma^{-1}\frac{\partial}{\partial \eta} E_\eta[g(X)]
+= v'\Sigma^{-1}\operatorname{Cov}_\mu(g(X), X).
+\end{equation}
+
+For any $\mu_1, \mu_0 \in \mathbf{R}^2$, the likelihood ratio is
+\[
+\frac{f(x;\mu_1)}{f(x;\mu_0)}
+  = \frac{\exp\!\left[-\tfrac{1}{2}(x-\mu_1)'\Sigma^{-1}(x-\mu_1)\right]}
+         {\exp\!\left[-\tfrac{1}{2}(x-\mu_0)'\Sigma^{-1}(x-\mu_0)\right]}.
+\]
+Let $\delta = \mu_1 - \mu_0$.  Then
+\[
+\frac{f(x;\mu_1)}{f(x;\mu_0)}
+  = \exp\!\big[\delta'\Sigma^{-1}(x - (\mu_1+\mu_0)/2)\big],
+\]
+which is an affine (strictly increasing) function of the scalar $\delta'\Sigma^{-1}x$.  
+Hence the Gaussian family with known $\Sigma$ has the \emph{monotone likelihood ratio (MLR)} property in each one-dimensional statistic $u'X$ for every direction $u$.
+
+Because $A_\phi$ is convex, for every boundary point $x_0 \in \partial A_\phi$
+there exists a supporting hyperplane
+\[
+H(x_0,u) = \{x : u'x = c\}, \quad 
+A_\phi \subseteq \{x : u'x \le c\}, \quad u'x_0 = c,
+\]
+for some unit vector $u$.  By the MLR property along the direction $u$,
+\[
+u'(\mu_1 - \mu_0) > 0 
+\quad \Rightarrow \quad
+P_{\mu_1}(u'X > c) \ge P_{\mu_0}(u'X > c).
+\tag{MLR}
+\label{eq:mlr}
+\]
+That is, as the mean vector $\mu$ shifts in direction $u$, 
+the probability that $X$ lies beyond the supporting hyperplane increases.
+
+Now consider any modification $g = \tilde\phi - \phi$.
+If $g \not\equiv 0$, then there exists a set $B$ of positive measure on which $g(x) > 0$,
+corresponding to an outward perturbation of the rejection region $R_\phi = A_\phi^c$
+across some supporting hyperplane $H(x_0,u)$.  
+By~\eqref{eq:mlr}, moving $\mu$ in the $+u$ direction increases 
+$E_\mu[g(X)] = P_\mu(X \in B)$.  
+Formally, for small $t > 0$,
+\[
+\frac{\partial}{\partial t}\Delta(\mu + t u)\Big|_{t=0}
+= u'\Sigma^{-1}\operatorname{Cov}_\mu(g(X),X) > 0.
+\]
+Choose $\mu_0 \in \Lambda_0$ such that $\mu_0 + t u \in \Lambda_0$ for all sufficiently small $t > 0$; this is always possible since $\Lambda_0 = \{\mu : \mu \le 0\}$ is convex and closed.  
+Then $\Delta(\mu_0) \le 0$ by domination, but the positive derivative above implies
+$\Delta(\mu_0 + t u) > 0$ for small $t$, contradicting 
+$\Delta(\mu) \le 0$ on $\Lambda_0$.  
+Therefore no such $g$ can exist, so $\Delta(\mu) \equiv 0$ for all $\mu$,
+and no test $\tilde\phi$ can dominate $\phi$.
+\end{proof}
+
+\section*{Critique of the Revised Proof}
+
+The revised proof, while correcting the fatal error regarding the convexity of the rejection region $R_\phi$, still contains two major logical gaps that prevent it from being a rigorous demonstration of admissibility.
+
+\subsection{Remaining Gaps}
+
+\begin{enumerate}
+    \item \textbf{Unsupported Connection between $g$ and Supporting Hyperplanes (Geometric Gap)}
+    
+    The proof claims that if the modification $g(x) = \tilde{\phi}(x) - \phi(x)$ is non-zero, the set $B = \{x : g(x) > 0\}$ must correspond to an "outward perturbation of the rejection region $R_\phi$ across some supporting hyperplane $H(x_0,u)$."
+    
+    \begin{itemize}
+        \item The existence of $g(x) > 0$ means $\tilde{\phi}$ rejects more often, but this set $B$ could be an arbitrarily complex, disconnected region far from the boundary $\partial A_\phi$.
+        \item More crucially, even if $B$ is local to the boundary, a general non-zero $g$ \textbf{does not guarantee} the power difference $\Delta(\mu) = E_\mu[g(X)]$ is maximized along a single direction $u$ defined by a supporting hyperplane. The argument incorrectly treats the integral of $g$ as if it were the power of the simple half-space test $\mathbf{1}_{u'X>c}$.
+    \end{itemize}
+    
+    \item \textbf{Flawed Contradiction via Directional Derivative (Calculus Gap)}
+    
+    The final contradiction step is logically unsound:
+    $$
+    \text{Domination requires } \Delta(\mu) \le 0 \quad \forall \mu \in \Lambda_0.
+    $$
+    
+    The proof chooses $\mu_0 \in \Lambda_0$ such that $\mu_0 + tu \in \Lambda_0$ for small $t>0$. It then assumes:
+    $$
+    \frac{\partial}{\partial t}\Delta(\mu_0 + t u)\Big|_{t=0} > 0 \quad \implies \quad \Delta(\mu_0 + t u) > 0 \text{ for small } t.
+    $$
+    
+    \begin{itemize}
+        \item This inference is \textbf{false} if $\Delta(\mu_0) < 0$. If $\Delta(\mu_0) = -0.1$ and the derivative is positive, $\Delta(\mu_0 + t u)$ will be slightly larger than $-0.1$ but could easily remain negative, thus \textbf{not contradicting} the domination condition $\Delta(\mu) \le 0$ on $\Lambda_0$.
+        \item A contradiction requires showing that the positive derivative must occur at a $\mu_0$ where $\Delta(\mu_0)$ is at its maximum value on $\Lambda_0$, which is $\Delta(\mu_0)=0$ (since $\phi$ is assumed to be an $\alpha$-sized test and $\tilde{\phi}$ must use the full size). This boundary analysis is missing.
+    \end{itemize}
+\end{enumerate}
+
+\section*{Formalization via Convexity and Admissibility (Sketch)}
+
+\subsection{Admissibility of Convex Acceptance Regions via Decision Theory}
+
+A rigorous proof of admissibility in this setting can be obtained using results from the general theory of statistical decision functions.  In the Gaussian location family, admissibility of tests is intimately linked to the convexity of their acceptance regions.
+
+\subsubsection*{The Equivalence Theorem}
+
+\begin{theorem}[Admissibility–Convexity Equivalence]
+Consider the normal location model $X \sim N(\mu, \Sigma)$, where $\Sigma$ is known and positive definite.
+For the problem of testing
+\[
+H_0:\ \mu \in \Lambda_0 \quad \text{versus} \quad H_1:\ \mu \in \Lambda_1,
+\]
+a non-randomized test $\phi$ satisfying the size constraint
+$\sup_{\mu\in\Lambda_0}E_\mu[\phi(X)] \le \alpha$
+is admissible if and only if its acceptance region
+$A_\phi = \{x : \phi(x)=0\}$
+is closed and convex.
+\end{theorem}
+
+\noindent
+\textit{References:}
+This equivalence is a special case of the general complete-class theorems for exponential families (see, e.g.,
+Birnbaum (1954), Anderson (1982), and Lehmann and Romano (2005, Chap.~8)).
+The proof relies on the convexity of the risk set and the fact that,
+for the normal location family, every test with a convex acceptance region is a \emph{generalized Bayes test} with respect to some prior $\pi$ supported on $\Lambda_0\cup\Lambda_1$.
+Since generalized Bayes tests are admissible, convexity of $A_\phi$ implies admissibility of $\phi$.
+
+\subsubsection*{Rigorous Non-Domination Argument}
+
+Let $\mathcal{C}$ denote the class of all tests satisfying the size constraint~\eqref{eq:size}, and
+let $\phi$ be a test with a closed, convex acceptance region $A_\phi$.
+
+\begin{enumerate}
+\item[\textbf{(i)}] \textbf{Admissibility of $\phi$:}
+By the Equivalence Theorem, $\phi$ is admissible for the testing problem $H_0$ vs.\ $H_1$.
+Admissibility implies that no other test $\tilde\phi\in\mathcal{C}$ has weakly higher power at all $\mu\in\Lambda_1$
+and strictly higher power at some $\mu\in\Lambda_1$.
+
+\item[\textbf{(ii)}] \textbf{$d$-Admissibility:}
+For $0/1$ loss, admissibility coincides with $d$-admissibility:
+a test is $d$-admissible if its risk function $R(\mu,\phi)=E_\mu[L(\phi(X),\mu)]$
+cannot be uniformly improved upon in~$\mathcal{C}$.
+Thus, admissibility of $\phi$ immediately yields $d$-admissibility.
+
+\item[\textbf{(iii)}] \textbf{Contradiction Argument:}
+Assume, for contradiction, that there exists $\tilde\phi\in\mathcal{C}$ dominating $\phi$.
+Then $\tilde\phi$ has weakly higher power on $\Lambda_1$ and weakly lower size on $\Lambda_0$,
+violating the admissibility of~$\phi$ established in~(i).
+Therefore, no such $\tilde\phi$ exists, and $\phi$ is $d$-admissible.
+\end{enumerate}
+
+\noindent
+This argument is concise yet fully rigorous because the heavy lifting is carried by
+the Admissibility–Convexity Equivalence Theorem,
+which connects the geometric property of convex acceptance regions
+to the decision-theoretic notion of admissibility.
+\end{document}
+
+\newpage 
+\section*{Irrelevant Information: A Special Case}
+
+To gain intuition, consider the bivariate case $k = 2$ and impose a restriction on the parameter space:
+\[
+\Lambda = \{ (\mu_1, \mu_2) \in \mathbf{R}^2 : \mu_2 \le \mu_1 \}.
+\]
+The null hypothesis remains
+\[
+H_0 : \mu_1 \le 0, \; \mu_2 \le 0, \qquad H_1 : \text{not both } \mu_j \le 0.
+\]
+
+We compare two simple non-randomized tests that both satisfy \eqref{eq:size} at level $\alpha$ but differ in the information they use:
+
+\begin{itemize}
+    \item \textbf{Short test:} reject $H_0$ when $\phi_{s} := I\{X_1 > c_s\}=1$ for some critical value $c_s$ chosen to satisfy
+    \[
+    P_{0}(X_1 > c_s) = \alpha.
+    \]
+
+    \item \textbf{Long test:} reject $H_0$ when $\phi_{l} :=I\{\max\{X_1, X_2\} > c_l\}=1$, with $c_l$ chosen so that
+    \[
+    P_{0}(\max\{X_1, X_2\} > c_l) = \alpha.
+    \]
+\end{itemize}
+
+The two tests differ in how they use information in $X_2$.  The long test incorporates $X_2$ symmetrically with $X_1$, whereas the short test ignores it.  When the parameter space is restricted to $\mu_2 \le \mu_1$, the relevance of $X_2$ becomes ambiguous: under many alternatives, $X_2$ may contribute little additional power beyond $X_1$.  This setting provides a simple environment to study how admissibility interacts with the inclusion of potentially irrelevant information.
+
+\end{document}
+
+
+Missing Link between A 
+ϕ
+​   
+  Convexity and MLR Property
+
+The proof correctly establishes that the Gaussian family has the Monotone Likelihood Ratio (MLR) property in the statistic v 
+′
+ X for a mean shift δ in direction v. It then concludes:
+
+Recall that R 
+ϕ
+​   
+  is convex.⇒E 
+μ 
+1
+​   
+ 
+​   
+ [ϕ(X)]≥E 
+μ 
+0
+​   
+ 
+​   
+ [ϕ(X)].(4)
+Gap: The MLR property only guarantees monotonicity of the expectation (power) E 
+μ
+​   
+ [ϕ(X)] if the test ϕ(x) is a monotone test with respect to the sufficient statistic T=v 
+′
+ X. That is, the rejection region must be a half-space defined by the statistic: R 
+ϕ
+​   
+ ={x:v 
+′
+ x≥c}.
+
+Missing Step: The proof never shows that A 
+ϕ
+​   
+  being closed and convex implies that ϕ(x) is of the form 1 
+v 
+′
+ x≥c
+​   
+ . While the UMP test for a one-sided hypothesis in this family does have a convex acceptance region (a half-space), the converse is not proven here: that an arbitrary test ϕ with a convex acceptance region must be a half-space test. Without this link, the monotonicity result (4) is unsupported.
+
+3. Unsupported Conclusion and Directional Derivative
+
+The final step attempting to reach a contradiction is weak:
+
+"Thus, if g
+
+≡0 modifies ϕ on a set of positive measure, there exists v and μ 
+0
+​   
+ ∈Λ 
+0
+​   
+ such that the directional derivative in \eqref{eq:directional} is positive at μ 
+0
+​   
+ , contradicting Δ(μ 
+0
+​   
+ )≤0."
+
+Flaw: The domination condition requires the difference in expected loss, Δ(μ)=E 
+μ
+​   
+ [ 
+ϕ
+~
+​   
+ (X)]−E 
+μ
+​   
+ [ϕ(X)], to be non-positive on Λ 
+0
+​   
+ : Δ(μ)≤0.
+
+If Δ(μ 
+0
+​   
+ )=0 for some μ 
+0
+​   
+ ∈Λ 
+0
+​   
+ , and the derivative  
+∂t
+∂
+​   
+ Δ(μ 
+0
+​   
+ +tv)∣ 
+t=0
+​   
+ >0, it only means that the function Δ(μ) is increasing as we move into the direction v.
+
+It does not necessarily lead to a contradiction of Δ(μ 
+0
+​   
+ )≤0, which is already satisfied. To establish non-domination, one must typically show that the increasing power under H 
+1
+​   
+  (where domination requires Δ(μ)≥0) must lead to a size constraint violation, Δ(μ)>0, for some μ∈Λ 
+0
+​   
+ . This rigorous connection is not made.
+
+📝 Conclusion
+The Proposition is likely true—that a test with a convex acceptance region in this multivariate normal problem is admissible—as this is a known result in multivariate hypothesis testing (often proven using minimax arguments or geometry related to convex cones).
+
+However, the provided argument fails to be a proof due to the incorrect geometric property (convexity of R 
+ϕ
+​   
+ ) and the unsupported link between A 
+ϕ
+​   
+ 's convexity and the MLR-based monotonicity property.
+
+Would you like me to find the name of the theorem that guarantees a convex acceptance region implies admissibility for this specific multivariate normal problem?

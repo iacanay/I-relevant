@@ -1,0 +1,520 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb,amsthm,bm}
+\usepackage[margin=1in]{geometry}
+\usepackage{enumitem}
+\usepackage{mathtools}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+
+\begin{document}
+
+\begin{center}
+{\LARGE Formal assessment of the proposed extension beyond rectangles}\\[4pt]
+{\large The two monotonicities, support sorting, feasible probes, and Ehrhard rigidity}
+\end{center}
+
+\section*{1. Executive conclusion}
+
+The support-sorting lemma in the proposal is correct, and the feasible-ray viewpoint is useful.  The proposed admissibility theorem, however, is false even in the maintained case $k=2$ and $\Sigma=I_2$.  More strongly, every exact-size ordered rectangle with a finite second cutoff is strictly dominated on
+\[
+\Lambda_1=\{\mu:\mu_1>0,\ \mu_2\le\mu_1\}
+\]
+by another exact-size test whose acceptance region is closed, convex, coordinatewise lower, and order-respecting.  The long test is therefore inadmissible relative to the proposed class.
+
+The dominator has acceptance region
+\[
+A_b=\{x_1\le c_1,\ x_1+x_2\le b\}.
+\]
+It keeps the coordinate-$1$ cutoff but replaces the low-priority coordinate cutoff $x_2\le c_2$ by a feasible aggregate cutoff $x_1+x_2\le b$.  This is precisely the asymmetric ``gate the $X_2$ rejection by the value of $X_1$'' improvement that the earlier project memo identified as the decisive unresolved possibility.
+
+Consequently:
+\begin{enumerate}[label=(\roman*),leftmargin=2.2em]
+\item Conjecture 1 in the proposed note is false.
+\item The proposed reach-profile rigidity conjecture is false.
+\item Ehrhard's inequality cannot close the argument in the suggested way.
+\item The ordered-rectangle theorem remains correct only because the competitor class is restricted to rectangles.
+\item A broader positive theorem can still be obtained for maintained convex sets whose finite supporting directions are all feasible, but this class excludes the long test.
+\end{enumerate}
+
+\section*{2. The exact counterexample}
+
+Let
+\[
+X\sim N_2(\mu,I_2),
+\qquad
+\Lambda=\{\mu:\mu_2\le\mu_1\},
+\qquad
+\Lambda_1=\{\mu\in\Lambda:\mu_1>0\}.
+\]
+Fix $\alpha\in(0,1)$ and write $\gamma=1-\alpha$.  Consider an exact-size ordered rectangle
+\[
+A_c=\{x_1\le c_1,\ x_2\le c_2\},
+\qquad
+c_1\le c_2<\infty,
+\qquad
+\Phi(c_1)\Phi(c_2)=\gamma.
+\]
+The associated test is
+\[
+\phi_c(x)=I\{x\notin A_c\}.
+\]
+
+\begin{theorem}[Every finite ordered rectangle is dominated in the proposed class]
+There is a unique finite number $b$ such that
+\begin{equation}\label{eq:calibration}
+P_0\{X_1\le c_1,\ X_1+X_2\le b\}=\gamma.
+\end{equation}
+It satisfies
+\begin{equation}\label{eq:b-strict}
+b<c_1+c_2.
+\end{equation}
+Define
+\[
+A_b=\{x_1\le c_1,\ x_1+x_2\le b\},
+\qquad
+\psi_b(x)=I\{x\notin A_b\}.
+\]
+Then $A_b$ is closed, convex, coordinatewise lower, and order-respecting, $\psi_b$ has exact size $\alpha$, and
+\[
+E_\mu[\psi_b(X)]>E_\mu[\phi_c(X)]
+\qquad
+\text{for every }\mu\in\Lambda_1.
+\]
+Thus $\phi_c$ is inadmissible relative to the proposed class.
+\end{theorem}
+
+\begin{proof}
+Define
+\[
+G(b)=P_0\{X_1\le c_1,\ X_1+X_2\le b\}.
+\]
+The function $G$ is continuous and strictly increasing, with
+\[
+\lim_{b\to-\infty}G(b)=0,
+\qquad
+\lim_{b\to\infty}G(b)=\Phi(c_1).
+\]
+Because $c_2<\infty$,
+\[
+\gamma=\Phi(c_1)\Phi(c_2)<\Phi(c_1),
+\]
+so there is a unique finite $b$ satisfying \eqref{eq:calibration}.
+
+At $b=c_1+c_2$ we have $A_c\subsetneq A_{c_1+c_2}$, and the set difference has positive Gaussian probability.  Indeed, points with $x_1<c_1$, $x_2>c_2$, and $x_1+x_2<c_1+c_2$ form a nonempty open set.  Therefore
+\[
+G(c_1+c_2)>P_0(A_c)=\gamma,
+\]
+and strict monotonicity of $G$ gives \eqref{eq:b-strict}.
+
+The set $A_b$ is the intersection of the two closed halfspaces
+\[
+\{x:x_1\le c_1\}
+\quad\text{and}\quad
+\{x:x_1+x_2\le b\},
+\]
+so it is closed and convex.  It is coordinatewise lower because both normal vectors $(1,0)$ and $(1,1)$ are nonnegative.  To verify the priority condition, suppose $x_1\ge x_2$ and $x\in A_b$.  Then
+\[
+x_2\le x_1\le c_1
+\quad\text{and}\quad
+x_2+x_1\le b,
+\]
+so $(x_2,x_1)\in A_b$.
+
+By construction, $P_0(A_b)=\gamma$, hence $E_0[\psi_b(X)]=\alpha$.  Since $\psi_b$ is coordinatewise nondecreasing and every $\mu\in\Lambda_0$ satisfies $\mu\le0$, a common-noise coupling gives
+\[
+E_\mu[\psi_b(X)]\le E_0[\psi_b(X)]=\alpha
+\qquad
+\text{for every }\mu\in\Lambda_0.
+\]
+Thus $\psi_b$ has exact size $\alpha$.
+
+It remains to prove domination.  Let
+\[
+B=A_c\setminus A_b
+=\{x_1\le c_1,\ x_2\le c_2,\ x_1+x_2>b\}
+\]
+be the region newly rejected by $\psi_b$, and let
+\[
+D=A_b\setminus A_c
+=\{x_1\le c_1,\ x_1+x_2\le b,\ x_2>c_2\}
+\]
+be the region on which $\psi_b$ gives up rejection relative to $\phi_c$.  Exact equality of the two null acceptance probabilities gives
+\begin{equation}\label{eq:equal-null-mass}
+P_0(B)=P_0(D)>0.
+\end{equation}
+
+For $\mu\in\Lambda_1$, the likelihood ratio with respect to $P_0$ is
+\[
+L_\mu(x)
+=
+\exp\left\{
+\mu_1x_1+\mu_2x_2-\frac12(\mu_1^2+\mu_2^2)
+\right\}.
+\]
+Rewrite its linear part as
+\begin{equation}\label{eq:dual-coordinates}
+\mu_1x_1+\mu_2x_2
+=
+\mu_1(x_1+x_2)-(\mu_1-\mu_2)x_2.
+\end{equation}
+Here $\mu_1>0$ and $\mu_1-\mu_2\ge0$.  If $x\in B$ and $y\in D$, then
+\[
+x_1+x_2>b\ge y_1+y_2
+\quad\text{and}\quad
+x_2\le c_2<y_2.
+\]
+Using \eqref{eq:dual-coordinates}, we obtain
+\[
+L_\mu(x)>L_\mu(y)
+\qquad
+\text{for every }x\in B,\ y\in D,
+\]
+apart from irrelevant boundary points.
+
+Let $m=P_0(B)=P_0(D)$.  Then
+\begin{align*}
+ m\{P_\mu(B)-P_\mu(D)\}
+ &=
+ \int_B\int_D\{L_\mu(x)-L_\mu(y)\}\,dP_0(y)\,dP_0(x)\\
+ &>0.
+\end{align*}
+Hence $P_\mu(B)>P_\mu(D)$ for every $\mu\in\Lambda_1$.  Since
+\[
+P_\mu(A_b)-P_\mu(A_c)=P_\mu(D)-P_\mu(B),
+\]
+we conclude that
+\[
+P_\mu(A_b)<P_\mu(A_c),
+\]
+or equivalently
+\[
+E_\mu[\psi_b(X)]>E_\mu[\phi_c(X)]
+\]
+for every restricted alternative.
+\end{proof}
+
+\begin{remark}[The long test]
+For the long test, $c_1=c_2=c_\ell$, where
+\[
+c_\ell=\Phi^{-1}(\sqrt{1-\alpha}).
+\]
+The dominating test is
+\[
+\psi_b(x)=I\{x_1>c_\ell\text{ or }x_1+x_2>b\},
+\]
+where $b<2c_\ell$ is calibrated by
+\[
+P_0\{X_1\le c_\ell,\ X_1+X_2\le b\}=1-\alpha.
+\]
+For $\alpha=0.05$,
+\[
+c_\ell\approx1.954508,
+\qquad
+b\approx2.560683,
+\qquad
+2c_\ell\approx3.909017.
+\]
+This competitor is itself closed, convex, monotone, and order-respecting.  Thus the failure is not caused by allowing a nonconvex or irregular competitor.
+\end{remark}
+
+\begin{remark}[The short endpoint]
+The construction requires $c_2<\infty$.  At the short endpoint $c_2=\infty$, the rectangle is $\{x_1\le c_1\}$ and there is no low-priority coordinate face to replace.  This is consistent with the unrestricted admissibility proof for the short test.
+\end{remark}
+
+\section*{3. What the counterexample says about the two monotonicities}
+
+Coordinatewise monotonicity and order-respecting priority are useful necessary screens, but they are not a complete list of power-improving rearrangements.  They exclude the sign-cancellation test and the $X_2$-only test, but they do not exclude a third mechanism:
+\[
+\textit{conditional gating of the low-priority coordinate by the high-priority coordinate.}
+\]
+The long test rejects whenever $x_2>c_\ell$, even if $x_1$ is extremely small.  The test $\psi_b$ gives up rejection in precisely that unpromising region and spends the recovered null probability on points with larger $x_1+x_2$ and smaller $x_2$.  Formula \eqref{eq:dual-coordinates} shows that this transfer raises the likelihood ratio for every $\mu\in\Lambda_1$.
+
+This also shows why the statement that the class consists of fixed points of the only two ``cost-free rearrangements'' is not correct.  The map from $A_c$ to $A_b$ is a third exact-size rearrangement that preserves both proposed monotonicities and strictly improves power throughout the restricted alternative.
+
+There is a useful dual-cone interpretation.  The closure of the alternative cone can be parameterized as
+\[
+\mu=(u,u-v),
+\qquad
+u\ge0,
+\qquad
+v\ge0.
+\]
+The likelihood ratio is increasing in the two statistics
+\[
+T_1(x)=x_1+x_2,
+\qquad
+T_2(x)=-x_2.
+\]
+Thus a null-mass-preserving transfer from lower values of $(T_1,T_2)$ to higher values improves power against every restricted alternative.  Conditions (M1)--(M2) do not impose monotonicity in this full dual-cone order.
+
+\section*{4. The support-sorting lemma is correct, but its consequence was reversed}
+
+The proposed support-sorting lemma is correct.  If $A$ is nonempty, coordinatewise lower, and order-respecting, then finite support in a direction $a$ forces $a\ge0$, and
+\[
+h_A(a^\downarrow)\le h_A(a).
+\]
+The problem is the conclusion drawn from it.  The lemma does not say that support outside the feasible wedge is determined by support inside the wedge.  It gives only a one-sided lower bound on the infeasible support:
+\[
+h_A(a)\ge h_A(a^\downarrow).
+\]
+Knowing $h_A$ on feasible directions therefore does not upper-bound $h_A$ on infeasible directions.
+
+The counterexample makes this explicit.  For the rectangle $A_c$ and the uncalibrated set
+\[
+A^+=\{x_1\le c_1,\ x_1+x_2\le c_1+c_2\},
+\]
+we have, for every
+\[
+a\in\mathcal F:=\{a:0\le a_2\le a_1\},
+\]
+\[
+h_{A_c}(a)=c_1a_1+c_2a_2
+\]
+and
+\[
+h_{A^+}(a)
+=(a_1-a_2)c_1+a_2(c_1+c_2)
+=c_1a_1+c_2a_2.
+\]
+Thus the two sets have exactly the same support function on the entire feasible wedge, but $A_c\subsetneq A^+$.  Outside the wedge they differ drastically; for example,
+\[
+h_{A_c}(0,1)=c_2,
+\qquad
+h_{A^+}(0,1)=\infty.
+\]
+Therefore the feasible support profile is not an injective description of a convex order-respecting lower set.
+
+After calibrating the diagonal cutoff from $c_1+c_2$ down to $b$, the two sets have the same Gaussian probability, while
+\begin{equation}\label{eq:support-order}
+h_{A_b}(a)
+=c_1a_1+(b-c_1)a_2
+<
+c_1a_1+c_2a_2
+=h_{A_c}(a)
+\end{equation}
+for every $a\in\mathcal F$ with $a_2>0$.  This directly refutes the proposed order-reflection claim at fixed Gaussian measure.
+
+\section*{5. What the feasible-ray argument actually proves}
+
+There is a correct support-function consequence of domination, but it is a necessary condition rather than an equivalence.
+
+\begin{lemma}[Exponential-tilt support limit]
+Let $A\subseteq\mathbf R^2$ be measurable with $P_0(A)>0$.  For $a\in\mathbf R^2$, define the essential support value
+\[
+h_A^{\mathrm{ess}}(a)
+=
+\operatorname*{ess\,sup}_{x\in A}a'x
+\]
+with respect to $P_0$.  Then, in the extended real sense,
+\[
+\lim_{t\to\infty}
+\frac{1}{t}
+\left
+\{
+\log P_{ta}(A)+\frac12t^2\lVert a\rVert^2
+\right\}
+=
+h_A^{\mathrm{ess}}(a).
+\]
+If $A$ is closed and convex with positive Gaussian probability, then
+\[
+h_A^{\mathrm{ess}}(a)=h_A(a).
+\]
+\end{lemma}
+
+\begin{proof}
+The Gaussian exponential-tilt identity gives
+\[
+P_{ta}(A)
+=
+\exp\left\{-\frac12t^2\lVert a\rVert^2\right\}
+\int_A e^{ta'x}\,dP_0(x).
+\]
+If $h=h_A^{\mathrm{ess}}(a)<\infty$, the integral is at most $e^{th}P_0(A)$.  Conversely, for every $\varepsilon>0$, the set
+\[
+A_\varepsilon=\{x\in A:a'x>h-\varepsilon\}
+\]
+has positive $P_0$ probability, so the integral is at least
+\[
+e^{t(h-\varepsilon)}P_0(A_\varepsilon).
+\]
+Divide logarithms by $t$ and let first $t\to\infty$ and then $\varepsilon\downarrow0$.  The case $h=\infty$ follows by applying the same lower bound at every finite level.  A closed convex set of positive Gaussian probability has nonempty interior, so geometric and essential support agree.
+\end{proof}
+
+If a competitor $\psi$ dominates a maintained test $\phi$, then along any feasible ray $ta\in\Lambda_1$,
+\[
+P_{ta}(A_\psi)\le P_{ta}(A_\phi).
+\]
+The lemma therefore implies
+\[
+h_{A_\psi}^{\mathrm{ess}}(a)
+\le
+h_{A_\phi}(a).
+\]
+This part of the proposed program is valid after replacing geometric support by essential support for a possibly nonclosed competitor.
+
+Three qualifications are essential:
+\begin{enumerate}[label=(\roman*),leftmargin=2.2em]
+\item The conclusion is only necessary; support ordering does not imply finite-parameter power domination.
+\item The general remainder is $o(t)$ after extracting the linear support term, not automatically $O(\log t)$ for an arbitrary convex set.
+\item If $h_A(a)=\infty$, as for the short test in the diagonal direction, the displayed finite-support expansion does not apply.
+\end{enumerate}
+
+The sentence in the proposal saying that domination is \emph{equivalent} to support ordering on $\mathcal F$ should therefore be replaced by a one-way implication.
+
+\section*{6. Why Ehrhard's inequality does not supply the missing rigidity}
+
+Ehrhard's inequality states that for Borel sets $A,B\subseteq\mathbf R^k$ and $\lambda\in[0,1]$,
+\[
+\Phi^{-1}\!\left(P_0\{\lambda A+(1-\lambda)B\}\right)
+\ge
+\lambda\Phi^{-1}(P_0(A))
++(1-\lambda)\Phi^{-1}(P_0(B)).
+\]
+This is a concavity statement for Gaussian measure under Minkowski interpolation.  It does not imply that a fixed-Gaussian-measure level set is strictly convex in a selected collection of support coordinates, and it does not say that pointwise reduction of support on a proper cone must lower Gaussian measure.
+
+The pair $(A_c,A_b)$ proves that the desired consequence is false:
+\[
+P_0(A_c)=P_0(A_b)=\gamma,
+\qquad
+h_{A_b}\le h_{A_c}\text{ on }\mathcal F,
+\qquad
+A_b\ne A_c.
+\]
+In fact, the inequality is strict in \eqref{eq:support-order} for every interior direction of $\mathcal F$.  The Gaussian probability is preserved by allowing substantially more acceptance mass in directions outside $\mathcal F$.  Ehrhard's inequality does not prevent that trade.
+
+There is also no general strictness principle of the form invoked in the proposal.  Equality in Ehrhard-type inequalities is delicate, and parallel halfspaces already generate equality cases.  Any use of Ehrhard here would need a deformation theorem tailored to the restricted support coordinates and a proof that the deformation cannot move mass into infeasible directions.  The counterexample shows that such a theorem cannot hold for the proposed class.
+
+\section*{7. An additional logical gap: the competitor is not assumed convex}
+
+The main conjecture allows any competitor in the class satisfying (M1)--(M2), but the proposed rigidity conjecture is stated for two convex acceptance regions.  Even if that rigidity conjecture were true, it would not prove the main theorem unless one first showed that an arbitrary dominating competitor can be replaced by a convex dominating competitor of the same size.
+
+Convexifying an acceptance region is not a harmless operation.  It generally enlarges the acceptance region, changes its Gaussian probability, and can reduce power.  Thus there is no automatic reduction from a nonconvex competitor to a convex one.  The explicit counterexample above is stronger than this logical objection because the competitor is already convex.
+
+\section*{8. Assessment of the claims section by section}
+
+\begin{enumerate}[label=\textbf{Section \arabic*:},leftmargin=6.5em]
+\item The class is well defined.  The equivalence between the acceptance-region and test-function versions of (M2) is correct.  Exact size is attained at $\mu=0$ for coordinatewise monotone tests.
+
+\item The two motivating counterexamples are correctly excluded, but the assertion that they exhaust the ways restriction creates domination is false.  The gated-sum construction is a third mechanism inside the class.
+
+\item The support-sorting lemma is correct.  The statement that nothing important lies outside the feasible wedge is false; the lemma controls the sorted direction from above by the unsorted one, not conversely.
+
+\item The interior probe is a useful projection argument.  The general ray probe yields a necessary essential-support inequality through exponential tilting.  It does not yield equivalence, and the claimed $O(\log t)$ expansion is not available for arbitrary convex bodies without additional regularity.
+
+\item The reach-profile rigidity conjecture is false.  The calibrated set $A_b$ has exact size, lies in the class, and has a strictly smaller feasible reach profile than the rectangle it dominates.
+
+\item The main conjecture is false.  The fallback claim that a dominator cannot exceed the maintained set outside the wedge is also false; $h_{A_b}(0,1)=\infty$ while a finite rectangle has $h_{A_c}(0,1)=c_2$.
+\end{enumerate}
+
+\section*{9. What survives and what should replace the conjecture}
+
+Three parts of the program remain useful.
+
+\paragraph{First, the ordered-rectangle theorem remains valid.}
+The new test $A_b$ is not a rectangle.  Therefore it does not contradict admissibility relative to rectangular competitors.  Instead, it shows exactly why rectangularity is load-bearing: it forbids conditional gating of the second-coordinate trigger.
+
+\paragraph{Second, feasible-normal convex sets form a genuine positive class.}
+If a maintained closed convex acceptance region has only finite supporting directions $a$ satisfying
+\[
+a_2\le a_1,
+\]
+then the Lehmann--Romano ray condition is available along every support direction.  With exact size attained at $0$, the resulting test is admissible against all level-$\alpha$ competitors.  This class contains the short test and the gated-sum dominator, but it excludes the long test and every finite rectangle because of their $(0,1)$ face.
+
+\paragraph{Third, the gain-loss representation is the right local tool.}
+The proof above uses the exact-size identity
+\[
+P_0(B)=P_0(D)
+\]
+and a strict likelihood-ratio ordering between $B$ and $D$.  This is more informative than feasible support alone.  A productive general theory should be organized around the partial order generated by the dual cone of the restricted parameter set.
+
+For the present problem, define
+\[
+x\succeq_* y
+\quad\Longleftrightarrow\quad
+x_1+x_2\ge y_1+y_2
+\quad\text{and}\quad
+x_2\le y_2.
+\]
+Then
+\[
+\mu'x\ge\mu'y
+\qquad
+\text{for every }\mu\in\overline{\Lambda_1}
+\]
+whenever $x\succeq_* y$.  Any equal-null-mass transfer from lower to higher points under $\succeq_*$ is uniformly power-improving.  Conditions (M1)--(M2) do not make a rejection region an upper set under $\succeq_*$.
+
+This suggests a sharp conceptual conclusion: a class broad enough to be closed under the natural dual-cone rearrangements will exclude the long test, because the long test itself violates the corresponding monotonicity.  To retain the long test as admissible, one must impose a design restriction such as rectangularity, coordinate separability, or another restriction that specifically forbids gating.
+
+\section*{10. The proposed extensions to $k>2$ and $\Sigma\ne I_2$}
+
+The broad theorem already fails at $k=2$ and $\Sigma=I_2$, so there is no positive theorem of the proposed form to extend.  Several geometric observations nevertheless remain relevant.
+
+\subsection*{$k>2$}
+
+For
+\[
+\Lambda=\{\mu_k\le\cdots\le\mu_1\},
+\]
+a sorting version of the support lemma should follow from closure under adjacent swaps that move larger observations toward higher-priority coordinates.  The feasible nonnegative direction cone is
+\[
+\{a:a_1\ge a_2\ge\cdots\ge a_k\ge0\}.
+\]
+It is not described only by the priority axis and the full diagonal.  It has the $k$ extreme rays
+\[
+(1,0,\ldots,0),
+\quad
+(1,1,0,\ldots,0),
+\quad\ldots,\quad
+(1,\ldots,1).
+\]
+Thus a correct probe analysis would involve prefix-sum directions.  More importantly, the two-dimensional counterexample indicates that pooled prefix-sum constraints can dominate coordinatewise cutoffs while respecting the priority order.  The additional dimensions create more, not fewer, opportunities for such gating.
+
+\subsection*{$\Sigma\ne I_2$}
+
+Whitening does not make the extension automatic.  The map $x\mapsto\Sigma^{-1/2}x$ generally does not preserve coordinatewise order, the swap operation, rectangularity, or the simple priority condition.  In natural-parameter coordinates, a ray direction $a$ corresponds to the mean direction $\Sigma a$, so feasibility must be stated as
+\[
+\Sigma a\in\operatorname{rec}(\Lambda),
+\]
+not as $a\in\operatorname{rec}(\Lambda)$.  Moreover, unless $\Sigma$ is invariant under coordinate swap, the swap transformation is not null-measure preserving.  Ehrhard's inequality is compatible with invertible affine changes of the Gaussian measure, but the structural class is not.
+
+The parts that do extend directly are more limited: coordinatewise monotonicity still makes $0$ least favorable under the null by a common-noise location coupling, and exponential tilting still identifies natural-parameter support directions.  Every order and rearrangement statement must otherwise be reformulated in covariance-adjusted coordinates.
+
+\section*{11. Recommended theorem statements after this assessment}
+
+The following division is mathematically defensible.
+
+\begin{enumerate}[label=(\roman*),leftmargin=2.2em]
+\item \textbf{Rectangular theorem.}  Exact-size ordered rectangles are admissible relative to all rectangular level-$\alpha$ competitors.  This is the theorem already proved.
+
+\item \textbf{Negative extension theorem.}  Every exact-size ordered rectangle with finite second cutoff is inadmissible relative to the broader monotone, order-respecting class, even relative to its closed convex members.  The theorem in Section 2 supplies the proof.
+
+\item \textbf{Feasible-normal positive theorem.}  A closed convex exact-size acceptance region satisfying the Lehmann--Romano ray condition for every supporting direction is admissible against all level-$\alpha$ tests.  In the identity-covariance restricted problem, this applies when all finite support directions satisfy $a_2\le a_1$.
+
+\item \textbf{Open structural problem.}  Characterize the admissible closed convex lower sets under the restricted alternative, likely through the dual-cone likelihood-ratio order rather than through the feasible support profile alone.
+\end{enumerate}
+
+The main strategic implication is that the broad class was not merely difficult to analyze; it was broad enough to contain a strict dominator of the long test.  Rectangular admissibility is therefore a genuine class-relative result, and any extension that continues to include the long test must identify and explicitly forbid the gated-sum improvement.
+
+\begin{thebibliography}{9}
+
+\bibitem{Borell2003}
+Borell, C. (2003).
+The Ehrhard inequality.
+\emph{Comptes Rendus Mathematique}, 337, 663--666.
+
+\bibitem{ShenfeldVanHandel2018}
+Shenfeld, Y. and van Handel, R. (2018).
+The equality cases of the Ehrhard--Borell inequality.
+\emph{Advances in Mathematics}, 331, 339--386.
+
+\end{thebibliography}
+
+\end{document}

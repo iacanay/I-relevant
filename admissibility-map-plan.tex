@@ -1,0 +1,121 @@
+\documentclass[10pt]{article}
+\usepackage[margin=0.72in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{array,booktabs,enumitem}
+\usepackage{xcolor}
+\usepackage[skip=0.35em]{parskip}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{conjecture}{Conjecture}
+
+\setlist[itemize]{leftmargin=1.35em,itemsep=1pt,topsep=2pt,parsep=0pt}
+\setlist[enumerate]{leftmargin=1.55em,itemsep=1pt,topsep=2pt,parsep=0pt}
+\renewcommand{\arraystretch}{1.13}
+
+\begin{document}
+
+\begin{center}
+{\large \bf Restricted admissibility: map and next steps}\\[-1pt]
+{\small Normal experiment with $X\sim N_2(\mu,I_2)$ and $\Lambda=\{\mu_2\le\mu_1\}$}
+\end{center}
+
+\section*{1. The present answer to the main question}
+
+The question is not whether using $X_2$ is intrinsically good or bad. The right distinction is
+\[
+\boxed{\text{use $X_2$ only through directions that are feasible under }\mu_2\le\mu_1.}
+\]
+For $\Sigma=I_2$, the feasible nonnegative normal wedge is
+\[
+\mathcal F=\{a\in\mathbf R^2:0\le a_2\le a_1\}=\operatorname{cone}\{(1,0),(1,1)\}.
+\]
+A closed convex acceptance region whose finite faces have normals in $\mathcal F$ is aligned with alternatives that can actually occur.  The short test qualifies because its only normal is $(1,0)$.  The gated-sum test
+\[
+A_{c,b}=\{x_1\le c,\ x_1+x_2\le b\},
+\qquad
+\phi_{c,b}(x)=I\{x_1>c\text{ or }x_1+x_2>b\},
+\]
+qualifies because its finite normals are $(1,0)$ and $(1,1)$, and it genuinely uses $X_2$.  The long test fails globally because its rectangle has the vertical face $x_2=c_\ell$, whose normal $(0,1)$ lies outside $\mathcal F$.
+
+\section*{2. What is known, what is open}
+
+\begin{center}
+\begin{tabular}{p{0.23\linewidth}p{0.19\linewidth}p{0.46\linewidth}}
+\toprule
+Object/class & Status & Lesson \\
+\midrule
+Short test $I\{X_1>c_s\}$ & Known globally admissible & Ignoring $X_2$ is defensible because the face normal $(1,0)$ is feasible. No class restriction is needed. \\
+Long test $I\{\max(X_1,X_2)>c_\ell\}$ & Known globally inadmissible & It uses $X_2$ too symmetrically. The bad feature is the $(0,1)$ face, not the mere presence of $X_2$. \\
+Exact-size ordered rectangles & Known admissible among rectangles & Rectangularity forbids conditional gating. Within this restricted design class, both short and long are admissible. \\
+Finite ordered rectangles in larger classes & Known dominated by gated sums & The rectangle's upper-right corner can be replaced by a diagonal face $x_1+x_2=b$, improving power on $\Lambda_1$ at the same null probability. \\
+Gated-sum tests $I\{X_1>c\text{ or }X_1+X_2>b\}$ & Proof-ready/global positive class & This is the concrete admissible companion to the short test that genuinely uses $X_2$. \\
+Full class ``monotone + order-respecting'' & Too broad & It contains the long test and its gated dominator, so closed convexity plus those two monotonicities cannot imply admissibility. \\
+Characterization of all admissible convex tests & Open & Natural conjecture: exact-size closed convex lower tests are globally admissible iff all finite exposed normals are feasible, up to boundary/null-set caveats. \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section*{3. Relation to Andrews--Soares}
+
+Andrews--Soares write their statistic as
+\[
+T_n(\theta)=S\{n^{1/2}m_n(\theta),\widehat\Sigma_n(\theta)\},
+\]
+where, for inequality moments, Assumption 1 requires $S$ to be nonincreasing in the inequality-moment vector, invariant to positive diagonal rescaling, nonnegative, and continuous.  Under the sign convention $z_j=-m_j/\sigma_j$, their monotonicity is exactly the usual idea that larger $z_j$ gives more evidence against the null.
+
+The gated test is not one of their named examples $S_1,S_2,S_3$.  But the statistic
+\[
+S_{\mathrm{gate},\lambda}(m,\Sigma)
+=
+\max\left\{
+\left[-\frac{m_1}{\sigma_1}\right]_+,
+\lambda\left[-\frac{m_1}{\sigma_1}-\frac{m_2}{\sigma_2}\right]_+
+\right\},
+\qquad \lambda>0,
+\]
+with $\sigma_j^2=\Sigma_{jj}$, generates the standardized gated rejection rule
+\[
+S_{\mathrm{gate},\lambda}(m,\Sigma)>\kappa
+\quad\Longleftrightarrow\quad
+z_1>\kappa\quad\text{or}\quad z_1+z_2>\kappa/\lambda.
+\]
+Thus, in the normal notation $x=z$, it is exactly $I\{x_1>\kappa\text{ or }x_1+x_2>\kappa/\lambda\}$.  For fixed $\lambda$, this statistic satisfies Assumption 1(a)--(d): it is nonincreasing in $m$, diagonal-scale invariant, nonnegative, and continuous.  The caveat is important: it generally does \emph{not} satisfy the Andrews--Soares positivity condition that the statistic is positive whenever any original inequality moment is violated.  That is intentional here, because an $X_2$-only violation is not a relevant alternative under the priority restriction.  So the gated statistic is Andrews--Soares-compatible at the Assumption 1 level, but it is not a standard AS statistic unless introduced as a new priority-aware $S$ or justified by transforming/augmenting the moment vector.
+
+\section*{4. Action plan}
+
+\begin{enumerate}
+\item Write the feasible-normal admissibility theorem cleanly using the Lehmann--Romano ray condition.  This should establish global $\alpha$-admissibility for exact-size closed convex acceptance regions whose finite supporting normals lie in $\mathcal F$.
+\item Promote the gated-sum family to the main positive example using $X_2$.  Calibrate $b=b(c,\alpha)$ by $P_0\{X_1\le c,\ X_1+X_2\le b\}=1-\alpha$ and choose one or two interpretable members for figures.
+\item Keep the rectangle theorem, but label it correctly as design-class admissibility.  Its role is to show that if the researcher insists on componentwise-threshold tests, then using $X_2$ via an ordered rectangle is defensible within that class.
+\item Decide how much Andrews--Soares structure to claim.  The safe statement is: the gated statistic satisfies Assumption 1, but may fail Assumption 3 for the unrestricted AS alternative.  If Assumption 3 is needed later, either modify the moment system or explicitly say the priority model uses a different alternative.
+\item Work out extensions only after the bivariate statement is stable.  For $k>2$, the feasible nonnegative normals should satisfy $a_1\ge a_2\ge\cdots\ge a_k\ge0$, with prefix-sum extreme rays.  For $\Sigma\ne I_2$, feasibility must be expressed through the natural-to-mean map; a natural-parameter support direction $a$ moves the mean in direction $\Sigma a$.
+\end{enumerate}
+
+\section*{5. Theorems and conjectures to put in the notes}
+
+\begin{theorem}[Short test: global admissibility]
+In the restricted experiment $X\sim N_2(\mu,I_2)$ with $\Lambda=\{\mu_2\le\mu_1\}$, the exact-size short test $\phi_s(x)=I\{x_1>\Phi^{-1}(1-\alpha)\}$ is $\alpha$-admissible against all level-$\alpha$ tests, including randomized competitors.
+\end{theorem}
+
+\begin{theorem}[Ordered rectangles: rectangular admissibility]
+Every exact-size ordered rectangle $A_c=\{x_1\le c_1,x_2\le c_2\}$ with $c_1\le c_2$ and $\Phi(c_1)\Phi(c_2)=1-\alpha$ is admissible relative to all rectangular level-$\alpha$ competitors.
+\end{theorem}
+
+\begin{theorem}[Finite rectangles are dominated outside rectangles]
+For every finite exact-size ordered rectangle $A_c=\{x_1\le c_1,x_2\le c_2\}$, $c_1\le c_2<\infty$, there is a calibrated gated-sum acceptance region $A_{c_1,b}=\{x_1\le c_1,x_1+x_2\le b\}$ with the same null probability whose test strictly dominates the rectangle on $\Lambda_1$.
+\end{theorem}
+
+\begin{theorem}[Feasible-normal convex sufficiency]
+Let $A$ be closed and convex, let $P_0(X\in A)=1-\alpha$, and suppose every finite supporting normal of $A$ lies in $\mathcal F=\{a:0\le a_2\le a_1\}$.  Then $I\{X\notin A\}$ is $\alpha$-admissible against all level-$\alpha$ tests.  In particular, every exact-size gated-sum test is globally admissible.
+\end{theorem}
+
+\begin{conjecture}[Possible characterization]
+Among exact-size closed convex lower acceptance regions, global admissibility is equivalent, up to null-set and boundary caveats, to having no finite exposed supporting normal outside $\mathcal F$.
+\end{conjecture}
+
+\begin{proposition}[Andrews--Soares Assumption 1 check]
+For fixed $\lambda>0$, $S_{\mathrm{gate},\lambda}$ defined above satisfies Andrews--Soares Assumption 1(a)--(d).  It is not one of $S_1,S_2,S_3$, and it need not satisfy their positivity condition for unrestricted moment-inequality alternatives.
+\end{proposition}
+
+\end{document}

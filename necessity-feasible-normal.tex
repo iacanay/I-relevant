@@ -1,0 +1,147 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb, amsthm, bm}
+\usepackage[margin=1in]{geometry}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+
+\newcommand{\Lam}{\Lambda}
+\newcommand{\R}{\mathbf R}
+\newcommand{\Feas}{\mathcal F}
+\newcommand{\sucL}{\succeq_\Lam}
+\DeclareMathOperator{\rec}{rec}
+\DeclareMathOperator{\cl}{cl}
+\DeclareMathOperator{\cone}{cone}
+\newcommand{\hA}{\widehat A}
+
+\begin{document}
+
+\begin{center}
+{\Large The feasible-normal condition is necessary within the monotone convex class}\\[3pt]
+{\small An exact-size convex coordinatewise-monotone test is admissible iff all its normals lie in $\Feas$.}
+\end{center}
+
+\medskip
+
+\noindent\textbf{Setup.} $X\sim N_2(\mu,I_2)$, $\Lam=\{\mu_2\le\mu_1\}$, $\Lam_0=\{\mu\in\Lam:\mu_1\le0\}$, $\Lam_1=\{\mu\in\Lam:\mu_1>0\}$. A nonrandomized test is $\phi_A=\mathbf 1\{x\notin A\}$ with acceptance region $A$; its power is $\beta_{\phi_A}(\mu)=P_\mu(X\notin A)$. Write
+\[
+T_1(x)=x_1+x_2,\qquad T_2(x)=-x_2,\qquad
+x\sucL y\iff T_1(x)\ge T_1(y)\ \text{and}\ T_2(x)\ge T_2(y).
+\]
+The positive cone of $\sucL$ is $P=\cone\{(1,0),(1,-1)\}=\{d:d_2\le0,\ d_1+d_2\ge0\}$ (so $x\sucL y\iff x-y\in P$). For $\mu\in\Lam_1$ write $\mu=(u,u-v)$ with $u>0,v\ge0$; then, relative to $P_0$,
+\[
+L_\mu(x)=\frac{dP_\mu}{dP_0}(x)=\exp\!\Big\{u\,T_1(x)+v\,T_2(x)-\tfrac12(\mu_1^2+\mu_2^2)\Big\},
+\tag{$\ast$}
+\]
+which is strictly increasing in $T_1$ (since $u>0$) and nondecreasing in $T_2$ (since $v\ge0$). A test is \emph{coordinatewise monotone} (M1) if $A$ is a lower set; equivalently every supporting normal of a convex $A$ is $\ge0$. Finally
+\[
+\Feas=\{a:0\le a_2\le a_1\}=\cone\{(1,0),(1,1)\}.
+\]
+
+We prove the converse of the feasible-normal sufficiency theorem, restricted to the M1 class.
+
+\begin{theorem}\label{thm:nec}
+Let $A\subseteq\R^2$ be closed, convex, and coordinatewise monotone, with $P_0(X\in A)=1-\alpha$. If $A$ has a supporting normal $a$ with $a_2>a_1$, then $\phi_A$ is inadmissible: there is a closed convex coordinatewise-monotone test of exact size $\alpha$ whose power exceeds that of $\phi_A$ at \emph{every} $\mu\in\Lam_1$.
+\end{theorem}
+
+\begin{corollary}\label{cor:iff}
+Within closed convex coordinatewise-monotone exact-size tests, $\phi_A$ is admissible against all level-$\alpha$ tests if and only if every supporting normal of $A$ lies in $\Feas$.
+\end{corollary}
+
+\noindent The ``if'' direction is the feasible-normal sufficiency theorem. For ``only if'': within M1, monotonicity forces $a\ge0$, so a normal outside $\Feas$ is a normal with $a_2>a_1$, and Theorem~\ref{thm:nec} applies. \hfill$\square$
+
+\medskip
+The proof builds one explicit competitor. Let
+\[
+\hA:=\cl\big(A-P\big),\qquad A':=\hA\cap\{x:T_1(x)\le b\},
+\]
+with $b$ calibrated below. We use three lemmas: $\hA$ is the smallest $\Feas$-normal set above $A$ (Lemma~\ref{lem:hull}); $A'$ is a legitimate exact-size M1 competitor (Lemma~\ref{lem:comp}); and the gain and loss regions of $A'$ against $A$ occupy disjoint, correctly ordered $x_2$-ranges (Lemma~\ref{lem:slice}), which forces domination.
+
+\begin{lemma}[the $\Feas$-normal hull]\label{lem:hull}
+$\hA$ is closed, convex, coordinatewise monotone, a $\sucL$-lower set, contains $A$, and every nonzero direction of finite support satisfies $a\in\Feas$ with $h_{\hA}(a)=h_A(a)$. If $A$ has a supporting normal $a$ with $a_2>a_1$, then $A\subsetneq\hA$ and $P_0(\hA)>P_0(A)$.
+\end{lemma}
+
+\begin{proof}
+$A-P=A+(-P)$ with $-P=\cone\{(-1,0),(-1,1)\}$, a sum of convex sets, hence convex; its closure $\hA$ is closed and convex. For the support function, $h_{\hA}(a)=h_A(a)+h_{-P}(a)$, where $h_{-P}(a)=0$ if $a\in(-P)^\ast$ and $+\infty$ otherwise, and
+\[
+(-P)^\ast=\{a:a\cdot(-1,0)\le0,\ a\cdot(-1,1)\le0\}=\{a:a_1\ge0,\ a_2\le a_1\}.
+\]
+Since $A$ is M1, $h_A(a)<\infty$ implies $a\ge0$. Hence $h_{\hA}(a)<\infty$ implies $a\in\{a\ge0\}\cap\{a_1\ge0,a_2\le a_1\}=\Feas$, and there $h_{\hA}(a)=h_A(a)$. All finite normals lying in $\Feas\subseteq\{a\ge0\}$ makes $\hA$ a lower set (M1); lying in $\{a_1\ge0,a_2\le a_1\}$ makes $\hA$ a $\sucL$-lower set. Clearly $A\subseteq\hA$ because $0\in -P$.
+
+If $A$ has a supporting normal $a$ with $a_2>a_1$ then $h_A(a)<\infty$ but $a\notin\Feas$, so the half-space $\{x:a'x\le h_A(a)\}$ that supports $A$ is \emph{not} a supporting half-space of $\hA$; thus $\hA$ extends strictly beyond $A$ across that face, a full-dimensional difference, so $A\subsetneq\hA$ and $P_0(\hA)>P_0(A)$.
+\end{proof}
+
+\begin{lemma}[the competitor]\label{lem:comp}
+Assume $P_0(A)=1-\alpha$ and $A$ has a normal $a$ with $a_2>a_1$. There is a unique $b\in\R$ with $P_0\big(\hA\cap\{T_1\le b\}\big)=1-\alpha$. The set $A'=\hA\cap\{T_1\le b\}$ is closed, convex, coordinatewise monotone, has all supporting normals in $\Feas$, and $P_0(A')=1-\alpha$. Consequently $\phi_{A'}$ has level $\alpha$, attained at $\mu=0$.
+\end{lemma}
+
+\begin{proof}
+$t\mapsto P_0(\hA\cap\{T_1\le t\})$ is continuous and strictly increasing from $0$ to $P_0(\hA)$, and by Lemma~\ref{lem:hull} $P_0(\hA)>1-\alpha$; hence a unique $b$ gives value $1-\alpha$. $A'$ is an intersection of the convex M1 $\sucL$-lower set $\hA$ with the half-space $\{T_1\le b\}$ (normal $(1,1)\in\Feas$), so it is closed, convex, M1, with normals in $\Feas$. Coordinatewise monotonicity makes $\mu=0$ least favorable on $\Lam_0$: for $\mu\le0$, coupling $X=\mu+Z$ with $Z\sim N_2(0,I_2)$ gives $\mu+Z\le Z$, hence $P_\mu(X\notin A')\le P_0(Z\notin A')=\alpha$. So the size is $\alpha$, attained at $0$.
+\end{proof}
+
+\begin{lemma}[slice separation]\label{lem:slice}
+Let $G:=A\cap\{T_1>b\}$ (the region newly rejected by $\phi_{A'}$) and $\ell:=A'\setminus A$ (newly accepted). Then $P_0(G)=P_0(\ell)>0$, and there is a level $s_+$ such that
+\[
+G\subseteq\{x_2<s_+\},\qquad \ell\subseteq\{x_2>s_+\}.
+\]
+Consequently $g\sucL \ell'$, with $T_1(g)>T_1(\ell')$ strictly, for every $g\in G$ and $\ell'\in\ell$.
+\end{lemma}
+
+\begin{proof}
+Because $P_0(A)=P_0(A')=1-\alpha$ and $A\subseteq\hA$ gives $A\setminus A'=A\cap\{T_1>b\}=G$ and $A'\setminus A=\ell$, the two symmetric differences have equal null mass: $P_0(G)=P_0(\ell)$. Since $A$ has a normal $a_2>a_1$, $\hA\supsetneq A$ and (as shown below) $\sup_{A}T_1>b$, so $G$ is full-dimensional and $P_0(G)>0$.
+
+For $s\in\R$ let $\beta(s)=\sup\{x_1:(x_1,s)\in A\}$ (with $\sup\varnothing=-\infty$). As the upper boundary of a convex set, $\beta$ is concave; set $m(s)=\beta(s)+s$, the maximal value of $T_1$ on the horizontal slice $\{x_2=s\}\cap A$. Then $m$ is concave. A direct computation from $\hA=\cl(A-P)$, $P=\cone\{(1,0),(1,-1)\}$, gives the slice of $\hA$:
+\[
+(x_1,s)\in\hA \iff x_1\le M(s)-s,\qquad M(s):=\sup_{s'\le s}m(s')
+\]
+(the running maximum of $m$); indeed $(x_1,s)=y-\alpha(1,0)-\tau(1,-1)$ with $\alpha,\tau\ge0$ forces $y_2=s-\tau\le s$ and $x_1\le (y_1+y_2)-s$, maximized at $M(s)-s$.
+
+Now read off the two slices. On $\{x_2=s\}$,
+\[
+G_s=\{x_1:(x_1,s)\in A,\ x_1+s>b\}=(\,b-s,\ \beta(s)\,],
+\]
+nonempty iff $\beta(s)>b-s$, i.e. $m(s)>b$. And, since $A'\subseteq\{T_1\le b\}$,
+\[
+\ell_s=\{x_1:(x_1,s)\in\hA\setminus A,\ x_1+s\le b\}=(\,\beta(s),\ \min(M(s)-s,\,b-s)\,],
+\]
+nonempty iff $M(s)>\beta(s)+s=m(s)$ \emph{and} $b-s>\beta(s)$, i.e. $M(s)>m(s)$ and $m(s)<b$.
+
+So a slice carries gain iff $m(s)>b$, and carries loss iff $m(s)<b$ and $M(s)>m(s)$. Because $m$ is concave with $\max m=:m^\star>b$ (else $\sup_A T_1\le b$, forcing $\hA\setminus A=\varnothing$ by the slice formula, contradicting the bad normal), the set $\{s:m(s)>b\}$ is an interval $(s_-,s_+)$ containing the peak. For $s\le s_{\mathrm{peak}}$, $m$ is nondecreasing so $M(s)=m(s)$ and there is no loss. For $s>s_+$, $m(s)<b<m^\star=M(s)$, so loss is possible. Hence
+\[
+\{s:\ G_s\ne\varnothing\}\subseteq(s_-,s_+),\qquad
+\{s:\ \ell_s\ne\varnothing\}\subseteq(s_+,\infty).
+\]
+Thus every $g\in G$ has $g_2<s_+$ and every $\ell'\in\ell$ has $\ell'_2>s_+$, giving $T_2(g)=-g_2>-\ell'_2=T_2(\ell')$. Moreover $T_1(g)>b\ge T_1(\ell')$. Therefore $g\sucL\ell'$ with strict $T_1$-inequality, for all $g\in G,\ \ell'\in\ell$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:nec}]
+By Lemma~\ref{lem:comp}, $\phi_{A'}$ is a closed convex M1 test of exact size $\alpha$, hence a legitimate level-$\alpha$ competitor. Its power minus that of $\phi_A$ at $\mu\in\Lam_1$ is, since the tests differ only on $G\cup\ell$,
+\[
+\beta_{\phi_{A'}}(\mu)-\beta_{\phi_A}(\mu)
+=P_\mu(G)-P_\mu(\ell)
+=\int_G L_\mu\,dP_0-\int_\ell L_\mu\,dP_0 .
+\]
+Let $m=P_0(G)=P_0(\ell)>0$. Multiplying by $m$ and using the product measure $P_0|_G\otimes P_0|_\ell$,
+\[
+m\big(P_\mu(G)-P_\mu(\ell)\big)
+=\int_G\!\int_\ell \big\{L_\mu(g)-L_\mu(\ell')\big\}\,dP_0(\ell')\,dP_0(g).
+\]
+By Lemma~\ref{lem:slice}, every pair has $g\sucL\ell'$ with $T_1(g)>T_1(\ell')$; by $(\ast)$ and $u>0,v\ge0$ this gives $L_\mu(g)>L_\mu(\ell')$ pointwise. The double integral is therefore strictly positive, so
+\[
+\beta_{\phi_{A'}}(\mu)>\beta_{\phi_A}(\mu)\qquad\text{for every }\mu\in\Lam_1 .
+\]
+Hence $\phi_A$ is inadmissible.
+\end{proof}
+
+\begin{remark}[what $s_+$ is]
+$s_+$ is the $x_2$-level above which the slicewise maximum $m(s)=\max_{x_1}T_1$ on $A$ has already crested below $b$. For a rectangle $A=\{x_1\le c_1,x_2\le c_2\}$ one has $\beta(s)=c_1$ for $s\le c_2$, so $m(s)=c_1+s$ is increasing up to the corner and $s_+=c_2$: the separation level is exactly the horizontal face, $G=\{x_2\le c_2,\,T_1>b\}$ and $\ell=\{x_2>c_2,\,T_1\le b\}$, and $A'=\{x_1\le c_1,\ x_1+x_2\le b\}$ is the gated test. The theorem is that construction run on a general convex M1 body, with $s_+$ playing the role of the rectangle's second cutoff.
+\end{remark}
+
+\begin{remark}[scope]
+Only the maintained test is asked to be convex; coordinatewise monotonicity (M1) is what pins the size at $\mu=0$, so that the rearrangement preserves level rather than merely preserving null mass at $0$. Dropping M1 reopens the regime of normals with $a_2<0$ (tests decreasing in $x_2$), for which $\mu=0$ need not be least favorable and the present argument does not apply.
+\end{remark}
+
+\end{document}

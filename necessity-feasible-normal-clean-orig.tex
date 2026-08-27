@@ -1,0 +1,542 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb, amsthm, bm}
+\usepackage[margin=1in]{geometry}
+\usepackage[skip=0.6em]{parskip}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+
+\begin{document}
+
+\begin{center}
+{\Large Feasible normals and admissibility\\ in the restricted bivariate normal problem}\\[3pt]
+{\small Ivan A. Canay :: June 26, 2026} 
+\end{center}
+
+
+
+\medskip
+
+\section*{Setup and statement}
+
+Let
+\[
+X\sim N_2(\mu,I_2),
+\qquad
+\Lambda=\{\mu:\mu_2\le \mu_1\}~,
+\]
+\[
+\Lambda_0=\{\mu\in\Lambda:\mu_1\le0\}~,
+\qquad
+\Lambda_1=\{\mu\in\Lambda:\mu_1>0\}~.
+\]
+A nonrandomized test is written as
+\[
+\phi_A(x)=I\{x\notin A\}~,
+\]
+where $A\subseteq\mathbf R^2$ is the acceptance region.  Throughout this note,
+$A$ is assumed to be closed, convex, and coordinatewise lower:
+\[
+x\in A,
+\quad y\le x
+\quad\Longrightarrow\quad
+ y\in A~.
+\]
+For a closed convex set $C$, write
+\[
+h_C(a):=\sup_{x\in C}a'x
+\]
+for its support function, allowing the value $+\infty$.  Define the feasible normal cone
+\[
+\mathcal F:=\{a\in\mathbf R^2:0\le a_2\le a_1\}
+=\operatorname{cone}\{(1,0),(1,1)\}~.
+\]
+The phrase ``all finite normals lie in $\mathcal F$'' means
+\begin{equation}\label{eq:finite-normal-condition}
+    a\ne0,
+    \quad h_A(a)<\infty
+    \quad\Longrightarrow\quad
+    a\in\mathcal F~.
+\end{equation}
+For a lower set, finite support already forces $a\ge0$, so failure of
+\eqref{eq:finite-normal-condition} is equivalent to the existence of some
+$a\ne0$ with
+\[
+h_A(a)<\infty~,
+\qquad
+0\le a_1<a_2~.
+\]
+
+The main result is the following characterization.
+
+\begin{theorem}[Feasible-normal characterization]\label{thm:iff}
+Let $A\subseteq\mathbf R^2$ be closed, convex, and coordinatewise lower, and suppose
+\[
+P_0(X\in A)=1-\alpha~,
+\qquad 0<\alpha<1~.
+\]
+Then the test $\phi_A=I\{X\notin A\}$ is $\alpha$-admissible, against all level-$\alpha$ tests, if and only if all finite normals of $A$ lie in $\mathcal F$, that is, if and only if \eqref{eq:finite-normal-condition} holds.
+\end{theorem}
+
+The proof has two parts.  The sufficient direction is the Lehmann--Romano ray argument.  The necessary direction is constructive: if $A$ has an $X_2$-heavy finite normal, then one can transfer null probability from an infeasible face to a feasible diagonal face and strictly increase power at every $\mu\in\Lambda_1$.
+
+\section*{1. Sufficiency}
+
+We use the following standard consequence of the Lehmann--Romano complete-class result for exponential families.
+
+\begin{proposition}[Lehmann--Romano ray criterion]\label{prop:LR}
+Consider an exponential family with natural statistic $T$ and natural parameter space $\Omega$.  Let $\Omega_H$ be the null parameter set and let $\Omega'$ be an alternative set.  Let $A_0$ be a closed convex acceptance region for a nonrandomized test.  Suppose that whenever
+\[
+A_0\subseteq\{t:a't\le c\}
+\]
+for some nonzero $a$, there exist $\theta^*\in\Omega$ and $\lambda_n\to\infty$ such that
+\[
+\theta^*+\lambda_n a\in\Omega'~.
+\]
+Then the test with acceptance region $A_0$ is $d$-admissible.  If, in addition, the test has exact size $\alpha$ attained at a finite null point, then it is $\alpha$-admissible.  These conclusions allow randomized competing tests.
+\end{proposition}
+
+\begin{lemma}[Sufficiency of feasible normals]\label{lem:sufficiency}
+If $A$ is closed, convex, coordinatewise lower, satisfies $P_0(A)=1-\alpha$, and satisfies \eqref{eq:finite-normal-condition}, then $\phi_A$ is $\alpha$-admissible against all level-$\alpha$ tests.
+\end{lemma}
+
+\begin{proof}
+Since $\Sigma=I_2$, the normal experiment is the canonical exponential family
+\[
+\frac{dP_\mu}{dP_0}(x)=\exp\{\mu'x-\tfrac12\mu'\mu\}~,
+\]
+with natural parameter $\mu$ and statistic $T(x)=x$.  The alternative set is
+\[
+\Omega'=\Lambda_1=\{\mu:\mu_1>0,\ \mu_2\le\mu_1\}~.
+\]
+
+We verify the ray condition in Proposition~\ref{prop:LR}.  Suppose
+\[
+A\subseteq\{x:a'x\le c\}
+\]
+for some nonzero $a$.  Then $h_A(a)<\infty$, so by \eqref{eq:finite-normal-condition}, $a\in\mathcal F$.  Since $a\ne0$ and $0\le a_2\le a_1$, necessarily $a_1>0$.  Hence, for every $\lambda>0$,
+\[
+\lambda a\in\Lambda_1~.
+\]
+Thus the ray condition holds with $\theta^*=0$ and any sequence $\lambda_n\to\infty$.
+
+Because $A$ is coordinatewise lower, the rejection region $A^c$ is coordinatewise upper.  For every $\mu\in\Lambda_0$, we have $\mu\le0$.  Coupling $X=\mu+Z$ with $Z\sim N_2(0,I_2)$ gives $\mu+Z\le Z$ coordinatewise, and therefore
+\[
+P_\mu(X\notin A)\le P_0(Z\notin A)=\alpha~.
+\]
+Thus the test has level $\alpha$, and exact size is attained at the finite null point $\mu=0$.  Proposition~\ref{prop:LR} gives $\alpha$-admissibility against all level-$\alpha$ tests, including randomized competitors.
+\end{proof}
+
+\section*{2. The transfer order}
+
+The necessity proof uses the order with respect to which every restricted-alternative likelihood ratio is increasing.  Define
+\[
+T_1(x):=x_1+x_2~,
+\qquad
+T_2(x):=-x_2~,
+\]
+and write
+\[
+x\succeq_\Lambda y
+\quad\Longleftrightarrow\quad
+T_1(x)\ge T_1(y)
+\quad\text{and}\quad
+T_2(x)\ge T_2(y)~.
+\]
+The positive cone of this order is
+\[
+P:=\{d:x+d\succeq_\Lambda x\}
+  =\operatorname{cone}\{(1,0),(1,-1)\}
+  =\{d:d_2\le0,\ d_1+d_2\ge0\}~.
+\]
+Intuitively, $P$ is the cone of universally power-improving moves in sample space for the restricted alternatives. That is, the direction $(1,0)$ is a power-improving move because it increases $x_1$ directly, and the direction $(1,-1)$ is a power-improving move because it moves evidence from coordinate $2$ to coordinate $1$ while keeping $x_1+x_2$ fixed.
+
+For $\mu\in\Lambda_1$, write
+\[ u:=\mu_1>0~,
+\qquad
+v:=\mu_1-\mu_2\ge0, \qquad 
+\mu=(u,u-v)~.
+\]
+
+Then, relative to $P_0$,
+\begin{equation}\label{eq:LR-density}
+L_\mu(x):=\frac{dP_\mu}{dP_0}(x)
+=
+\exp\left\{uT_1(x)+vT_2(x)-\frac12(\mu_1^2+\mu_2^2)\right\}~.
+\end{equation}
+Thus $L_\mu$ is strictly increasing in $T_1$ and weakly increasing in $T_2$.
+
+We will enlarge $A$ in the $-P$ directions and then cut back by a diagonal halfspace.  Define
+\[
+\widehat A:=\operatorname{cl}(A-P)~.
+\]
+For a rectangle, this operation replaces the bad vertical face by a diagonal face.  The next lemmas show that the same construction works for an arbitrary closed convex lower set.
+
+\begin{lemma}[The feasible-normal hull]\label{lem:hull}
+The set $\widehat A$ is closed, convex, coordinatewise lower, and $P$-lower, meaning
+\[
+x\in\widehat A~,
+\quad p\in P
+\quad\Longrightarrow\quad
+x-p\in\widehat A~.
+\]
+Moreover, every nonzero finite-support direction of $\widehat A$ lies in $\mathcal F$.  If $A$ has a finite-support direction $a$ with $a_2>a_1$, then
+\[
+A\subsetneq \widehat A
+\qquad\text{and}\qquad
+P_0(\widehat A)>P_0(A)~.
+\]
+\end{lemma}
+
+\begin{proof}
+Because $\widehat A$ is the closure of the Minkowski sum $A+(-P)$, it is closed and convex.  It contains $A$ because $0\in P$.  It is coordinatewise lower because $A$ is coordinatewise lower: if $x=y-p$ with $y\in A$ and $p\in P$, and if $z\le x$, then
+\[
+z=(y-(x-z))-p~,
+\]
+where $y-(x-z)\in A$.  Passing to the closure preserves the lower-set property.  The $P$-lower property is immediate from the definition.
+
+The support function satisfies
+\[
+h_{\widehat A}(a)=h_A(a)+h_{-P}(a)~,
+\]
+with the usual convention for extended-real sums.  Now
+\[
+h_{-P}(a)<\infty
+\quad\Longleftrightarrow\quad
+ a\cdot(-1,0)\le0\ \text{ and }\ a\cdot(-1,1)\le0
+\quad\Longleftrightarrow\quad
+ a_1\ge0\ \text{ and }\ a_2\le a_1~.
+\]
+Also, since $A$ is coordinatewise lower and nonempty, $h_A(a)<\infty$ implies $a\ge0$.  Therefore, if $h_{\widehat A}(a)<\infty$ and $a\ne0$, then
+\[
+0\le a_2\le a_1~,
+\]
+so $a\in\mathcal F$.
+
+Finally suppose that $h_A(a)<\infty$ for some $a$ with $a_2>a_1$.  Then $h_{\widehat A}(a)=+\infty$, because $a$ is not in the polar cone of $-P$.  Hence $\widehat A$ is not contained in the supporting halfspace $\{x:a'x\le h_A(a)\}$ that contains $A$, so $\widehat A\setminus A$ is nonempty.  Since $P_0(A)\in(0,1)$ and $A$ is convex, $A$ has nonempty interior.  Taking a point of $\widehat A$ outside that supporting halfspace and joining it to an interior point of $A$ gives points of $\operatorname{int}(\widehat A)\setminus A$.  Hence $\widehat A\setminus A$ contains a nonempty open set, and the Gaussian density is everywhere positive, so
+\[
+P_0(\widehat A)>P_0(A)~.
+\]
+\end{proof}
+
+\begin{lemma}[Calibration of the competitor]\label{lem:competitor}
+Assume $P_0(A)=1-\alpha$ and that $A$ has a finite-support direction $a$ with $a_2>a_1$.  Then there exists a finite number $b$ such that
+\[
+P_0\big(\widehat A\cap\{x:T_1(x)\le b\}\big)=1-\alpha~.
+\]
+For any such $b$, define
+\[
+A':=\widehat A\cap\{x:T_1(x)\le b\}~.
+\]
+Then $A'$ is closed, convex, coordinatewise lower, has exact null probability $P_0(A')=1-\alpha$, and all its finite-support directions lie in $\mathcal F$.  Consequently, $\phi_{A'}$ has level $\alpha$, attained at $\mu=0$.
+\end{lemma}
+
+\begin{proof}
+By Lemma~\ref{lem:hull}, $P_0(\widehat A)>P_0(A)=1-\alpha$.  The map
+\[
+t\mapsto P_0\big(\widehat A\cap\{T_1\le t\}\big)
+\]
+is continuous, tends to $0$ as $t\to-\infty$, and tends to $P_0(\widehat A)$ as $t\to\infty$.  Hence at least one finite $b$ gives value $1-\alpha$.
+
+The set $A'$ is an intersection of two closed convex coordinatewise lower sets, so it is closed, convex, and coordinatewise lower.  Its exact null probability is built into the choice of $b$.  To check the finite-support directions, note that
+\[
+\operatorname{rec}(A')=\operatorname{rec}(\widehat A)\cap\{d:T_1(d)\le0\}~.
+\]
+Thus the polar cone of $\operatorname{rec}(A')$ is contained in the closed convex cone generated by the finite-support directions of $\widehat A$ and the vector $(1,1)$.  Lemma~\ref{lem:hull} puts the former directions in $\mathcal F$, and $(1,1)\in\mathcal F$.  Since $\mathcal F$ is a closed convex cone, every finite-support direction of $A'$ lies in $\mathcal F$.
+
+Finally, because $A'$ is coordinatewise lower, the same coupling argument used in Lemma~\ref{lem:sufficiency} gives
+\[
+\sup_{\mu\in\Lambda_0}P_\mu(X\notin A')=P_0(X\notin A')=\alpha~.
+\]
+Thus $\phi_{A'}$ has level $\alpha$, attained at $0$.
+\end{proof}
+
+\begin{lemma}[Transfer domination criterion]\label{lem:transfer}
+Let $B$ and $D$ be Borel sets with
+\[
+P_0(B)=P_0(D)>0~.
+\]
+Suppose that, for every $g\in B$ and $d\in D$,
+\[
+T_1(g)>T_1(d)
+\qquad\text{and}\qquad
+T_2(g)\ge T_2(d)~.
+\]
+Then
+\[
+P_\mu(B)>P_\mu(D)
+\qquad\text{for every }\mu\in\Lambda_1~.
+\]
+\end{lemma}
+
+\begin{proof}
+Let $m=P_0(B)=P_0(D)$.  Using the likelihood ratio \eqref{eq:LR-density},
+\[
+m\{P_\mu(B)-P_\mu(D)\}
+=
+\int_B\int_D \{L_\mu(g)-L_\mu(d)\}\,dP_0(d)\,dP_0(g)~.
+\]
+For $\mu\in\Lambda_1$, the coefficient on $T_1$ in \eqref{eq:LR-density} is strictly positive and the coefficient on $T_2$ is nonnegative.  Therefore the displayed ordering gives
+\[
+L_\mu(g)>L_\mu(d)
+\]
+for every pair $(g,d)\in B\times D$.  The double integral is strictly positive.
+\end{proof}
+
+\section*{3. Necessity}
+
+It remains to prove that a bad finite normal generates sets $B$ and $D$ satisfying Lemma~\ref{lem:transfer}.  The proof is slicewise.
+
+For $s\in\mathbf R$, define the horizontal boundary of $A$ by
+\[
+\beta(s):=\sup\{x_1:(x_1,s)\in A\}\in[-\infty,+\infty]~.
+\]
+Since $A$ is closed, convex, and coordinatewise lower,
+\[
+A\cap\{x_2=s\}=\{(x_1,s):x_1\le \beta(s)\}~,
+\]
+with the usual interpretation when $\beta(s)=\pm\infty$.  The function $\beta$ is concave in the extended-real sense.  Set
+\[
+m(s):=\beta(s)+s~,
+\qquad
+M(s):=\sup_{r\le s}m(r)~.
+\]
+Thus $m(s)$ is the largest value of $T_1=x_1+x_2$ on the horizontal slice of $A$, and $M(s)$ is its running maximum from below.
+
+\begin{lemma}[Slice formula for $\widehat A$]\label{lem:slice-formula}
+For every $s\in\mathbf R$,
+\[
+\widehat A\cap\{x_2=s\}
+=
+\{(x_1,s):x_1\le M(s)-s\}~.
+\]
+Equivalently,
+\[
+(x_1,s)\in\widehat A
+\quad\Longleftrightarrow\quad
+x_1+s\le M(s)~.
+\]
+\end{lemma}
+
+\begin{proof}
+First suppose $(x_1,s)\in A-P$; closure will be handled at the end.  Then for some $(y_1,r)\in A$ and some $\eta,\tau\ge0$,
+\[
+(x_1,s)=(y_1,r)-\eta(1,0)-\tau(1,-1)~.
+\]
+Hence $r=s-\tau\le s$ and
+\[
+x_1+s=y_1+r-\eta\le m(r)\le M(s)~.
+\]
+Therefore every point of $A-P$ satisfies $x_1+s\le M(s)$, and the same is true after taking closures.
+
+Conversely, suppose $x_1+s<M(s)$.  Then there is $r\le s$ such that $m(r)>x_1+s$.  Choose $y_1\le\beta(r)$ with
+\[
+y_1+r>x_1+s;
+\]
+this is immediate if $\beta(r)$ is finite, and trivial if $\beta(r)=+\infty$.  Then $(y_1,r)\in A$.  Put
+\[
+\tau=s-r\ge0~,
+\qquad
+\eta=y_1+r-x_1-s>0~.
+\]
+A direct calculation gives
+\[
+(x_1,s)=(y_1,r)-\eta(1,0)-\tau(1,-1)\in A-P~.
+\]
+Thus all points with $x_1+s<M(s)$ belong to $A-P$.  Taking closures gives the stated formula with weak inequality.
+\end{proof}
+
+\begin{lemma}[Gain-loss separation]\label{lem:gain-loss}
+Let $A'$ be defined as in Lemma~\ref{lem:competitor}, and define the gain and loss sets
+\[
+G:=A\setminus A'=A\cap\{T_1>b\}~,
+\qquad
+D:=A'\setminus A~.
+\]
+Then
+\[
+P_0(G)=P_0(D)>0~.
+\]
+Moreover, for every $g\in G$ and every $d\in D$,
+\[
+T_1(g)>T_1(d)
+\qquad\text{and}\qquad
+T_2(g)\ge T_2(d)~.
+\]
+\end{lemma}
+
+\begin{proof}
+Since $A\subseteq\widehat A$ and $A'=\widehat A\cap\{T_1\le b\}$,
+\[
+A\setminus A'=A\cap\{T_1>b\}=G~.
+\]
+Also $D=A'\setminus A$.  Because $P_0(A)=P_0(A')=1-\alpha$,
+\[
+P_0(G)=P_0(D)~.
+\]
+This common mass is positive.  Indeed, if it were zero, then $A$ and $A'$ would be equal up to a Gaussian null set.  Since both are closed and convex, this would force $A=A'$.  But Lemma~\ref{lem:competitor} shows that all finite-support directions of $A'$ lie in $\mathcal F$, whereas $A$ has a finite-support direction outside $\mathcal F$, a contradiction.
+
+We now prove the ordering.  On the slice $x_2=s$, the gain set is
+\[
+G_s
+=
+\{x_1:(x_1,s)\in G\}
+=
+(b-s,\beta(s)]~.
+\]
+Thus
+\begin{equation}\label{eq:gain-slice}
+G_s\ne\varnothing
+\quad\Longleftrightarrow\quad
+m(s)>b~.
+\end{equation}
+Using Lemma~\ref{lem:slice-formula}, the loss slice is
+\[
+D_s
+=
+\{x_1:(x_1,s)\in D\}
+=
+(\beta(s),\min\{M(s),b\}-s]~.
+\]
+Consequently
+\begin{equation}\label{eq:loss-slice}
+D_s\ne\varnothing
+\quad\Longleftrightarrow\quad
+M(s)>m(s)\ \text{ and }\ m(s)<b~.
+\end{equation}
+
+Let
+\[
+s_+:=\sup\{s:m(s)>b\}~.
+\]
+The set in braces is nonempty because $P_0(G)>0$.  It is bounded above because $P_0(D)>0$ and, as shown next, no loss slice can lie strictly below $s_+$; if $s_+=+\infty$, there would be no loss slice at all.
+
+We claim that
+\[
+G_s\ne\varnothing\quad\Longrightarrow\quad s\le s_+~,
+\]
+and
+\[
+D_s\ne\varnothing\quad\Longrightarrow\quad s\ge s_+~.
+\]
+The first implication follows directly from the definition of $s_+$ and \eqref{eq:gain-slice}.  For the second, suppose toward a contradiction that $D_s\ne\varnothing$ for some $s<s_+$.  By \eqref{eq:loss-slice}, $M(s)>m(s)$, so there is $q\le s$ such that
+\[
+m(q)>m(s)~.
+\]
+Since $s<s_+$, there is $r>s$ such that
+\[
+m(r)>b>m(s)~.
+\]
+Because $q<s<r$ and $m$ is concave, concavity gives
+\[
+m(s)
+\ge
+\lambda m(q)+(1-\lambda)m(r)
+>
+m(s)
+\]
+for the appropriate $\lambda\in(0,1)$ satisfying $s=\lambda q+(1-\lambda)r$.  This contradiction proves that no loss slice can occur below $s_+$.
+
+Therefore every $g\in G$ and $d\in D$ satisfy
+\[
+g_2\le s_+\le d_2~,
+\]
+and hence
+\[
+T_2(g)=-g_2\ge -d_2=T_2(d)~.
+\]
+Also, by definition of $G$ and $A'$,
+\[
+T_1(g)>b\ge T_1(d)~.
+\]
+This proves the asserted pairwise ordering.
+\end{proof}
+
+\begin{lemma}[Necessity of feasible normals]\label{lem:necessity}
+If $A$ has a finite-support direction $a$ with $a_2>a_1$, then $\phi_A$ is inadmissible.  More precisely, the exact-size test $\phi_{A'}$ constructed above satisfies
+\[
+P_\mu(X\notin A')>P_\mu(X\notin A)
+\qquad\text{for every }\mu\in\Lambda_1~.
+\]
+\end{lemma}
+
+\begin{proof}
+By Lemma~\ref{lem:competitor}, $\phi_{A'}$ is a level-$\alpha$ test.  The difference in power is
+\[
+P_\mu(X\notin A')-P_\mu(X\notin A)
+=
+P_\mu(G)-P_\mu(D)~,
+\]
+where $G=A\setminus A'$ is newly rejected by $\phi_{A'}$ and $D=A'\setminus A$ is newly accepted by $\phi_{A'}$.  Lemma~\ref{lem:gain-loss} verifies the hypotheses of the transfer criterion, Lemma~\ref{lem:transfer}.  Hence
+\[
+P_\mu(G)>P_\mu(D)
+\qquad\text{for every }\mu\in\Lambda_1~.
+\]
+Thus $\phi_{A'}$ strictly dominates $\phi_A$ on the restricted alternative.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:iff}]
+If all finite normals of $A$ lie in $\mathcal F$, Lemma~\ref{lem:sufficiency} gives $\alpha$-admissibility against all level-$\alpha$ tests.
+
+Conversely, suppose that the finite-normal condition fails.  Since $A$ is coordinatewise lower, any finite-support direction must be nonnegative.  Hence failure of the condition means that there is some $a\ne0$ such that
+\[
+h_A(a)<\infty~,
+\qquad
+0\le a_1<a_2~.
+\]
+Lemma~\ref{lem:necessity} constructs a level-$\alpha$ test that strictly dominates $\phi_A$ at every $\mu\in\Lambda_1$.  Therefore $\phi_A$ is inadmissible.
+\end{proof}
+
+\section*{4. Interpretation and examples}
+
+The theorem says that, in the restricted problem $\mu_2\le\mu_1$, the relevant issue is not whether a test uses $X_2$.  The relevant issue is whether it uses $X_2$ through a face whose normal points in a feasible direction.  The feasible normal cone is
+\[
+\mathcal F=\operatorname{cone}\{(1,0),(1,1)\}~.
+\]
+Thus the short test qualifies because its only finite normal is $(1,0)$.  The gated-sum test
+\[
+A_{c,b}=\{x_1\le c,\ x_1+x_2\le b\}~,
+\qquad
+\phi_{c,b}(x)=I\{x_1>c\text{ or }x_1+x_2>b\}~,
+\]
+qualifies because its finite normals are $(1,0)$ and $(1,1)$, and it genuinely uses $X_2$.  By contrast, the long rectangle
+\[
+A_\ell=\{x_1\le c_\ell,
+          \ x_2\le c_\ell\}
+\]
+has the vertical normal $(0,1)\notin\mathcal F$ and is therefore inadmissible in the unrestricted class of level-$\alpha$ tests.  The construction above replaces the vertical face by a diagonal face, which is exactly the gated-sum improvement.
+
+For a finite rectangle
+\[
+A=\{x_1\le c_1,
+       \ x_2\le c_2\}~,
+\]
+the slice boundary is $\beta(s)=c_1$ for $s\le c_2$ and $\beta(s)=-\infty$ for $s>c_2$.  Hence
+\[
+m(s)=c_1+s\quad(s\le c_2)~,
+\]
+and the separation point in Lemma~\ref{lem:gain-loss} is $s_+=c_2$.  The competitor is
+\[
+A'=\{x_1\le c_1,
+       \ x_1+x_2\le b\}~,
+\]
+with $b$ chosen so that $P_0(A')=P_0(A)$.  This is the gated test.
+
+\begin{remark}[Scope of the theorem]
+The characterization is for closed convex coordinatewise lower acceptance regions in the bivariate identity-covariance experiment.  The sufficient direction is global, because it uses the Lehmann--Romano ray condition and therefore allows arbitrary randomized level-$\alpha$ competitors.  The necessary direction is also global, because the constructed dominator is itself a nonrandomized level-$\alpha$ test.  Extensions to $k>2$ should replace $\mathcal F$ by the cone generated by prefix-sum normals, and extensions to $\Sigma\ne I_2$ must express feasibility in natural-parameter directions, not by naively whitening the coordinates.
+\end{remark}
+
+\begin{thebibliography}{9}
+
+\bibitem{LehmannRomano2005}
+Lehmann, E. L. and Romano, J. P. (2005).
+\textit{Testing Statistical Hypotheses}.
+Third edition. Springer.
+
+\end{thebibliography}
+
+\end{document}

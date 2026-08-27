@@ -1,0 +1,243 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage{enumitem}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage[skip=0.6em]{parskip}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{conjecture}{Conjecture}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+
+\begin{document}
+
+\begin{center}
+{\Large Feasible normals, inadmissibility candidates, and transfers}\\[3pt]
+{\small Notes for the restricted bivariate normal experiment}
+\end{center}
+
+\section*{1. Setup and the positive theorem}
+
+Let
+\[
+X\sim N_2(\mu,I_2),
+\qquad
+\Lambda=\{\mu\in\mathbf R^2:\mu_2\le\mu_1\},
+\]
+with
+\[
+\Lambda_0=\{\mu\in\Lambda:\mu_1\le0\},
+\qquad
+\Lambda_1=\{\mu\in\Lambda:\mu_1>0\}.
+\]
+A nonrandomized test is written as
+\[
+\phi_A(x)=I\{x\notin A\},
+\]
+where $A$ is the acceptance region. For a closed convex set $A$, write
+\[
+h_A(a):=\sup_{x\in A}a'x
+\]
+for its support function. In the present model, the nonnegative feasible-normal wedge is
+\[
+\mathcal F
+:=\{a\in\mathbf R^2:0\le a_2\le a_1\}
+=\operatorname{cone}\{(1,0),(1,1)\}.
+\]
+The condition $a\in\mathcal F$ says that a finite face of $A$ points toward a mean direction that can be reached while respecting $\mu_2\le\mu_1$ and without pointing against coordinatewise monotonicity.
+
+\begin{theorem}[Feasible-normal sufficiency]\label{thm:feasible-normal-sufficiency}
+Let $A\subseteq\mathbf R^2$ be nonempty, closed, and convex. Suppose
+\[
+P_0(X\in A)=1-\alpha,
+\qquad 0<\alpha<1,
+\]
+and suppose every nonzero direction in which $A$ has finite support is feasible:
+\[
+h_A(a)<\infty,
+\quad a\ne0
+\qquad\Longrightarrow\qquad
+ a\in\mathcal F.
+\]
+Then the test $\phi_A(x)=I\{x\notin A\}$ has level $\alpha$ for testing $\Lambda_0$ against $\Lambda_1$ and is $\alpha$-admissible against all level-$\alpha$ tests, including randomized competitors.
+\end{theorem}
+
+\begin{proof}
+First, the feasible-normal condition implies that $A$ is a lower set. Indeed, let $x\in A$ and let $y\le x$ coordinatewise. If $y\notin A$, the separating hyperplane theorem gives a nonzero vector $a$ such that
+\[
+a'y>\sup_{z\in A}a'z=h_A(a).
+\]
+Hence $h_A(a)<\infty$, so $a\in\mathcal F$ and in particular $a\ge0$ coordinatewise. But then $a'y\le a'x\le h_A(a)$, a contradiction. Therefore $y\in A$.
+
+Since $A$ is a lower set, the rejection region $A^c$ is coordinatewise upper. If $\mu\in\Lambda_0$, then $\mu\le0$ coordinatewise. Coupling $X=\mu+Z$ and $Z\sim N_2(0,I_2)$ gives $\mu+Z\le Z$ coordinatewise, and therefore
+\[
+P_\mu(X\notin A)\le P_0(Z\notin A)=\alpha.
+\]
+Thus the test has level $\alpha$, with exact size attained at the finite null point $\mu=0$.
+
+It remains to verify the Lehmann--Romano ray condition. In the present normal experiment the natural parameter is $\theta=\mu$. Suppose
+\[
+A\cap\{x:a'x>c\}=\varnothing.
+\]
+If $a=0$, the condition is vacuous because one may choose any fixed point in $\Lambda_1$. If $a\ne0$, then $h_A(a)\le c<\infty$, so by assumption $a\in\mathcal F$. Hence $a_1>0$ and $0\le a_2\le a_1$. Therefore, for every $\lambda>0$,
+\[
+\lambda a\in\Lambda_1.
+\]
+The required ray is obtained by taking $\theta^*=0$ and any sequence $\lambda_n\to\infty$.
+
+The Lehmann--Romano convex-acceptance-region result then gives $d$-admissibility, and because the level is $\alpha$ and is attained at the finite null point $0$, its corollary gives $\alpha$-admissibility. The conclusion is against all level-$\alpha$ competitors, including randomized competitors.
+\end{proof}
+
+\begin{remark}[Examples covered by the theorem]
+The short test $I\{x_1>c_s\}$ is covered, since $A_s=\{x_1\le c_s\}$ has finite normal $(1,0)$. The diagonal-sum test $I\{x_1+x_2>b\}$ is covered, since its finite normal is $(1,1)$. The gated-sum family
+\[
+A_{c,b}=\{x_1\le c,\ x_1+x_2\le b\},
+\qquad
+\phi_{c,b}(x)=I\{x_1>c\text{ or }x_1+x_2>b\},
+\]
+is covered, since its finite normals lie in $\operatorname{cone}\{(1,0),(1,1)\}$.
+\end{remark}
+
+\section*{2. Tests failing the feasible-normal condition}
+
+The theorem is a sufficient condition, not an iff statement. A finite normal outside $\mathcal F$ should be treated as an inadmissibility diagnostic: it identifies a face that spends rejection probability in a direction that cannot be probed by restricted alternatives. The following tests are therefore candidates for inadmissibility; some are already known to be inadmissible.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{p{0.26\textwidth}p{0.31\textwidth}p{0.34\textwidth}}
+\toprule
+Test or family & Acceptance region in $X$-coordinates & Status and reason \\
+\midrule
+$X_2$-only test & $\{x_2\le q\}$ & Fails because the finite normal is $(0,1)\notin\mathcal F$. Known inadmissible: it is dominated by the corresponding $X_1$-only test. \\
+Difference test & $\{x_2-x_1\le q\}$ & Fails because the finite normal $(-1,1)$ points toward the deleted direction $\mu_2-\mu_1>0$. Known inadmissible in the restricted problem. \\
+Long/max test & $\{x_1\le c_\ell,\ x_2\le c_\ell\}$ & Fails because of the vertical face with normal $(0,1)$. Known inadmissible globally; dominated by a gated-sum test. \\
+Finite ordered rectangles & $\{x_1\le c_1,\ x_2\le c_2\}$, $c_1\le c_2<\infty$ & Same failure as the long test: the normal $(0,1)$ is infeasible. Known admissible only relative to rectangular competitors, not globally. \\
+AS max / ordered-largest statistic with one selected violation & $\max\{x_1^+,x_2^+\}\le r$, equivalently $x_1\le r,\ x_2\le r$ & This is the long rectangle in the two-inequality identity-covariance case. Known globally inadmissible. \\
+AS MMM statistic $S_1$ & $(x_1^+)^2+(x_2^+)^2\le r^2$ & Fails: the rounded boundary has normals proportional to $(x_1^+,x_2^+)$, including normals with $x_2>x_1$, and the face $x_2=r$, $x_1\le0$, has normal $(0,1)$. Candidate for inadmissibility. \\
+AS QLR statistic $S_2$, $\Omega=I_2$ & Same as MMM: $(x_1^+)^2+(x_2^+)^2\le r^2$ & In the simple identity-covariance, two-inequality case, QLR coincides with MMM. Candidate for inadmissibility. For $\Omega\ne I_2$, the geometry is a projected ellipsoidal distance and should be studied separately. \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Here $x_j^+=\max\{x_j,0\}$ and the sign convention is the moment-inequality convention $x_j=-m_j/\sigma_j$, so that larger $x_j$ means stronger violation of inequality $j$. For Andrews--Soares, the MMM statistic is
+\[
+S_1(m,\Sigma)=\sum_{j=1}^p [m_j/\sigma_j]_-^2
+\]
+when there are no equalities, and the QLR statistic is the distance from $m$ to the nonnegative orthant in the $\Sigma^{-1}$ norm. Thus, for $p=2$, no equalities, and $\Sigma=I_2$, both give
+\[
+S(-x,I_2)=(x_1^+)^2+(x_2^+)^2.
+\]
+The max statistic with one selected violation gives
+\[
+S(-x,I_2)=\max\{(x_1^+)^2,(x_2^+)^2\},
+\]
+and hence the long rectangular acceptance region. Andrews--Soares Assumption 1 gives coordinatewise monotonicity after this sign change, but it does not impose the feasible-normal condition.
+
+\section*{3. A formal transfer criterion}
+
+The feasible-normal theorem gives a sufficient condition for admissibility. A complementary way to prove inadmissibility is to construct a null-mass-preserving transfer of rejection probability toward points that have uniformly larger likelihood ratios under the restricted alternatives.
+
+Every $\mu\in\Lambda_1$ can be written as
+\[
+\mu=(u,u-v),
+\qquad u>0,
+\qquad v\ge0.
+\]
+Relative to $P_0$, the likelihood ratio is
+\[
+L_\mu(x)
+=\exp\left\{u(x_1+x_2)-v x_2-\frac12(\mu_1^2+\mu_2^2)\right\}.
+\]
+Thus likelihood ratios are increasing in $x_1+x_2$ and decreasing in $x_2$. Define the restricted-likelihood order by
+\[
+x\succeq_\Lambda y
+\quad\Longleftrightarrow\quad
+x_1+x_2\ge y_1+y_2
+\quad\text{and}\quad
+x_2\le y_2.
+\]
+
+\begin{proposition}[Transfer domination criterion]\label{prop:transfer}
+Let $\phi$ and $\psi$ be nonrandomized tests with rejection regions $R_\phi$ and $R_\psi$. Define the gain and loss sets
+\[
+B:=R_\psi\setminus R_\phi,
+\qquad
+D:=R_\phi\setminus R_\psi.
+\]
+Suppose
+\[
+P_0(B)=P_0(D)<\infty
+\]
+and suppose there exists a coupling $\Pi$ of the two finite measures $P_0(\cdot\cap B)$ and $P_0(\cdot\cap D)$ such that
+\[
+\Pi\{(x,y):x\succeq_\Lambda y\}=P_0(B).
+\]
+Then
+\[
+E_\mu[\psi(X)]\ge E_\mu[\phi(X)]
+\qquad\text{for every }\mu\in\Lambda_1.
+\]
+If, for some $\mu\in\Lambda_1$,
+\[
+\Pi\{(x,y):\mu'x>\mu'y\}>0,
+\]
+then the inequality is strict at that $\mu$.
+\end{proposition}
+
+\begin{proof}
+Since the two tests differ only on $B\cup D$,
+\[
+E_\mu[\psi(X)]-E_\mu[\phi(X)]
+=P_\mu(B)-P_\mu(D).
+\]
+Using $L_\mu=dP_\mu/dP_0$ and the coupling $\Pi$,
+\[
+P_\mu(B)-P_\mu(D)
+=\int \{L_\mu(x)-L_\mu(y)\}\,d\Pi(x,y).
+\]
+If $x\succeq_\Lambda y$, then
+\[
+\mu'(x-y)=u\{(x_1+x_2)-(y_1+y_2)\}+v(y_2-x_2)\ge0,
+\]
+so $L_\mu(x)\ge L_\mu(y)$. This proves weak domination. The strict statement follows from the same display when $\mu'x>\mu'y$ on a set of positive $\Pi$-measure.
+\end{proof}
+
+\begin{remark}[How the rectangle-to-gated improvement fits]
+For a finite ordered rectangle $A_c=\{x_1\le c_1,x_2\le c_2\}$, the gated replacement keeps the gate $x_1\le c_1$ and replaces the vertical face by
+\[
+A_b=\{x_1\le c_1,\ x_1+x_2\le b\},
+\qquad
+P_0(A_b)=P_0(A_c).
+\]
+The new rejection set gains points with larger $x_1+x_2$ and lower $x_2$, and gives up points with smaller $x_1+x_2$ and higher $x_2$. Thus the gain-loss transfer is ordered by $\succeq_\Lambda$, which explains the domination. This is the template to try next for the MMM and QLR candidates.
+\end{remark}
+
+\section*{4. Action plan}
+
+\begin{enumerate}[leftmargin=2.1em]
+\item Treat Theorem~\ref{thm:feasible-normal-sufficiency} as the positive result: it already gives globally admissible tests that genuinely use $X_2$, including the gated-sum and pure diagonal-sum tests.
+\item Treat failure of $\mathcal F$ as a diagnostic, not yet as a theorem. The conjectural converse is: among closed convex exact-size lower tests, global admissibility is equivalent to having all finite support directions in $\mathcal F$.
+\item For each failing candidate, try to construct $B$ and $D$ satisfying Proposition~\ref{prop:transfer}. This is already done for finite rectangles. The next natural target is the AS MMM/identity-QLR rounded set.
+\item For MMM/QLR, look first at the boundary arc where $x_2>x_1>0$ and at the vertical face $x_2=r$, $x_1\le0$. These are the pieces with infeasible normals. A plausible dominator should shave mass from those pieces and move it toward larger $x_1+x_2$ and lower $x_2$ while preserving null probability.
+\item Postpone $\Sigma\ne I_2$ until the identity case is settled. For nonidentity covariance, the LR ray direction is a natural-parameter direction and the mean direction is $\Sigma a$, so the feasible-normal condition must be transformed through $\Sigma$.
+\end{enumerate}
+
+\begin{thebibliography}{9}
+
+\bibitem{AndrewsSoares2010}
+Andrews, D. W. K. and Soares, G. (2010).
+Inference for parameters defined by moment inequalities using generalized moment selection.
+\emph{Econometrica}.
+
+\bibitem{LehmannRomano2005}
+Lehmann, E. L. and Romano, J. P. (2005).
+\emph{Testing Statistical Hypotheses}.
+Third edition. Springer.
+
+\end{thebibliography}
+
+\end{document}

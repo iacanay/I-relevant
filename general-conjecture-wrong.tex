@@ -1,0 +1,145 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb, amsthm, bm}
+\usepackage[margin=1in]{geometry}
+\usepackage{enumitem}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{conjecture}{Conjecture}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+
+\newcommand{\Lam}{\Lambda}
+\newcommand{\Cclass}{\mathcal C}
+\newcommand{\Feas}{\mathcal F}
+\newcommand{\sortdown}{{\downarrow}}
+\DeclareMathOperator{\rec}{rec}
+
+\begin{document}
+
+\begin{center}
+{\LARGE Beyond rectangles: a candidate class $\Cclass$}\\[2pt]
+{\small a positive case for the two monotonicities, and the one lemma that closes it}
+\end{center}
+
+\medskip
+
+\noindent\textbf{Setup.} As before, $X\sim N_2(\mu,I_2)$,
+\[
+\Lam=\{\mu:\mu_2\le\mu_1\},\qquad
+\Lam_0=\{\mu\in\Lam:\mu_1\le0\},\qquad
+\Lam_1=\{\mu\in\Lam:\mu_1>0\}.
+\]
+A nonrandomized test is $\phi=\mathbf 1_{A^c}$ with acceptance region $A$. Write $\sigma(x):=(x_2,x_1)$ for the swap, $a^{\sortdown}:=(\max(a_1,a_2),\min(a_1,a_2))$ for the descending sort, and $h_A(a):=\sup_{x\in A}a'x$ for the support function. Power is $\beta_\phi(\mu)=1-M_\phi(\mu)$ with miss probability $M_\phi(\mu)=P_\mu(X\in A)$.
+
+\section*{1.\quad The class}
+
+\begin{definition}[the two monotonicities]
+A test $\phi=\mathbf 1_{A^c}$ belongs to $\Cclass$ if its acceptance region satisfies:
+\begin{itemize}[leftmargin=2.2em]
+\item[\textbf{(M1)}] \emph{Coordinatewise monotonicity}: $A$ is a lower set, i.e.\ $x\le y$ and $y\in A$ imply $x\in A$. Equivalently $\phi$ is nondecreasing in each coordinate.
+\item[\textbf{(M2)}] \emph{Order-respecting priority of coordinate $1$}: if $x_1\ge x_2$ and $x\in A$, then $\sigma x\in A$. Equivalently $\phi(x_1,x_2)\ge\phi(x_2,x_1)$ whenever $x_1\ge x_2$.
+\end{itemize}
+We write $\Cclass_{\le\alpha}$ for the members of level $\le\alpha$, and $\Cclass_\alpha$ for those of exact size $\alpha$.
+\end{definition}
+
+The maintained test will, in addition, have a \emph{closed convex} acceptance region. The ordered rectangles of the previous section are exactly the rectangular members of $\Cclass$.
+
+\begin{conjecture}\label{conj:main}
+If $\phi\in\Cclass_\alpha$ has a closed convex acceptance region, then $\phi$ is admissible relative to $\Cclass_{\le\alpha}$.
+\end{conjecture}
+
+I believe this. Convexity is needed only for the maintained test; the competitor is asked only for (M1)--(M2). The rest of this note is the affirmative case: five reasons, organized so that the last one names the single lemma whose proof would finish the theorem.
+
+\section*{2.\quad Why these two conditions, and no others}
+
+The restricted problem manufactures dominators in exactly two ways, and (M1)--(M2) are calibrated one-to-one against them.
+
+\begin{itemize}[leftmargin=1.4em]
+\item \textbf{Sign-cancellation} (a test that rejects on a thin oblique band, e.g.\ $\phi_\delta=\mathbf 1\{x_2-x_1>c\}$, aiming mass at the deleted region $\mu_2>\mu_1$). This is killed by (M1): $\phi_\delta$ is not monotone, since raising $x_1$ can switch rejection off.
+\item \textbf{Priority inversion} (a monotone test that spends its budget on the low-priority coordinate, e.g.\ $\mathbf 1\{x_2>q_\alpha\}$). This is killed by (M2): it rejects when the large value sits in coordinate $2$, and is itself dominated by the coordinate-$1$ test.
+\end{itemize}
+
+The reason I expect the list to be \emph{complete} is that (M1)--(M2) are precisely the fixed points of the two power-improving rearrangements available on $\Lam_1$. On $\Lam_1$ coordinate $1$ carries the binding mean ($\mu_1\ge\mu_2$, $\mu_1>0$). Monotonizing a test (taking the lower-set hull of its acceptance region) and then sorting it toward coordinate $1$ (the swap fold of (M2)) each \emph{weakly raise} power on $\Lam_1$, because both move rejection mass toward the informative coordinate. A test is in $\Cclass$ iff it is a fixed point of both. So $\Cclass$ is not a convenience class carved to fit the answer: it is the set of tests that cannot be improved by the only two cost-free rearrangements the geometry of $\Lam_1$ allows.
+
+\section*{3.\quad Support-sorting: every infeasible face has a feasible mirror}
+
+Call a direction $a$ \emph{feasible} if a ray $\theta^*+\lambda a$ ($\lambda\to\infty$) can be kept inside $\Lam_1$; since $\rec(\Lam_1)=\{d:d_2\le d_1\}$, feasibility is $a_2\le a_1$. The Lehmann--Romano ray argument runs along feasible directions and stalls on infeasible ones ($a_2>a_1$) --- this is the only reason convexity failed to give admissibility in the restricted problem. Condition (M2) repairs exactly this.
+
+\begin{lemma}[support-sorting]\label{lem:sort}
+If $A$ is order-respecting, then $h_A(a^{\sortdown})\le h_A(a)$ for every $a\in\mathbf R^2$.
+\end{lemma}
+
+\begin{proof}
+If $a_1\ge a_2$ then $a^{\sortdown}=a$. Suppose $a_2>a_1$, so $a^{\sortdown}=\sigma a$. Fix $x\in A$.
+If $x_1\ge x_2$, then $\sigma x\in A$ by (M2), and $(\sigma a)'x=a_2x_1+a_1x_2=a'(\sigma x)\le h_A(a)$.
+If $x_1<x_2$, then $(\sigma a)'x-a'x=(a_2-a_1)(x_1-x_2)<0$, so $(\sigma a)'x<a'x\le h_A(a)$.
+Taking the supremum over $x\in A$ gives $h_A(a^{\sortdown})\le h_A(a)$.
+\end{proof}
+
+The consequence: if the maintained convex body $A$ is bounded above in any infeasible direction $a$, it is bounded above in the feasible mirror $a^{\sortdown}$ as well, with no larger reach. Since (M1) forces the supporting directions of $A$ to be nonnegative ($a\ge0$), and feasibility adds $a_2\le a_1$, the \emph{feasible supporting cone} of any test in $\Cclass$ is
+\[
+\Feas:=\{a:0\le a_2\le a_1\}
+=\operatorname{cone}\{(1,0),(1,1)\}.
+\]
+This is the clean structural picture: the directions in which we can probe the alternative are exactly the wedge between the coordinate-$1$ axis $(1,0)$ and the diagonal $(1,1)$, and Lemma~\ref{lem:sort} says nothing important about $A$ lives outside this wedge that is not already pinned inside it.
+
+\section*{4.\quad The two probes are the two edges of $\Feas$}
+
+Recall the rectangle proof used two limits: $\mu_2\to-\infty$ (interior) and $\mu=(t,t)\to\infty$ (diagonal). These are precisely the rays along the two extreme directions of $\Feas$:
+\[
+(1,0)\ \rightsquigarrow\ \text{coordinate-1 cutoff}\quad c_1(\phi):=h_\phi\big((1,0)\big),
+\qquad
+(1,1)\ \rightsquigarrow\ \text{diagonal reach}\quad s(\phi):=h_\phi\big((1,1)\big).
+\]
+Under (M1), the interior limit collapses \emph{any} member of $\Cclass$ to the univariate threshold $\mathbf 1\{x_1>c_1(\phi)\}$, so domination forces $c_1(\psi)\le c_1(\phi)$ exactly as in Step~1. The diagonal limit is governed by $s(\cdot)$: along $\mu=(t,t)$,
+\[
+\log M_\phi(t,t)=s(\phi)\,t-t^2+O(\log t),
+\]
+so domination forces $s(\psi)\le s(\phi)$.
+
+More is true, and this is the general engine. Probing along an \emph{arbitrary} $a\in\Feas$ (push $\mu$ to infinity along that ray) gives, for any dominating $\psi$,
+\begin{equation}\label{eq:reach-dom}
+h_\psi(a)\le h_\phi(a)\qquad\text{for every }a\in\Feas,
+\end{equation}
+because the acceptance probability along the ray decays at the rate set by the reach in direction $a$, and the slower-decaying (larger-reach) test would have strictly larger acceptance far out. So domination is equivalent to \emph{the competitor's support function being dominated by the maintained one's, restricted to the feasible wedge $\Feas$}. For a rectangle, $h_\phi|_\Feas$ is determined by the two edge values $(c_1,\,c_1+c_2)$ --- which is why two numbers, two probes, sufficed. For a general convex body it is the whole profile $h_\phi|_\Feas$, read off by a continuum of probes. The right object is therefore not two cutoffs but the function $h_\phi|_\Feas$.
+
+\section*{5.\quad The one lemma that closes it}
+
+Putting Sections 3--4 together: a $\Cclass_{\le\alpha}$ competitor dominates $\phi$ iff $h_\psi\le h_\phi$ on $\Feas$, and Lemma~\ref{lem:sort} says the maintained body is already controlled by its values on $\Feas$. What remains is to convert ``$h_\psi\le h_\phi$ on $\Feas$, both exact size'' into ``$A_\psi=A_\phi$.'' This is a single statement.
+
+\begin{conjecture}[reach profile is a complete, rigid invariant]\label{conj:link}
+On exact-size tests in $\Cclass$ with convex acceptance regions, the map $\phi\mapsto h_\phi|_\Feas$ is injective and order-reflecting: if $h_\psi\le h_\phi$ pointwise on $\Feas$ and both have Gaussian-null-measure exactly $\gamma$, then $h_\psi=h_\phi$ on $\Feas$, hence $A_\psi=A_\phi$.
+\end{conjecture}
+
+The reason I believe Conjecture~\ref{conj:link}, stated positively:
+
+\begin{itemize}[leftmargin=1.4em]
+\item \textbf{Exact size is a single scalar budget, and lowering reach in one feasible direction must be paid for by raising it in another.} This is exactly what the rectangle case proves in miniature: on $\Phi(c_1)\Phi(c_2)=\gamma$, lowering $c_1$ forces $c_2$ up and the diagonal reach $c_1+c_2$ \emph{strictly} up. So $h_\phi$ cannot drop on one edge of $\Feas$ without rising on the other --- two exact-size members are never comparable on $\Feas$. The general statement is the same trade-off run over the whole wedge instead of its two edges.
+
+\item \textbf{The engine is Gaussian convexity (Ehrhard), which is built for exactly this.} Write $\Gamma(A):=\Phi^{-1}\!\big(P_0(X\in A)\big)$. Ehrhard's inequality says $\Gamma$ is concave on convex sets under Minkowski combination,
+\[
+\Gamma\big(\lambda A+(1-\lambda)B\big)\ \ge\ \lambda\,\Gamma(A)+(1-\lambda)\,\Gamma(B).
+\]
+The constraint ``exact size $\gamma$'' is a level set of $\Gamma$, and the feasible reaches $h_\phi(a)$, $a\in\Feas$, are the supporting-hyperplane positions one moves when deforming $A$. Ehrhard concavity makes the level set $\{\Gamma=\Phi^{-1}(\gamma)\}$ strictly convex in the reach coordinates, which is precisely the rigidity in Conjecture~\ref{conj:link}: you cannot weakly enlarge every feasible reach at fixed Gaussian measure. The reverse-hazard/log-concavity computation that powered the rectangle proof is the one-dimensional shadow of Ehrhard.
+
+\item \textbf{Injectivity of the feasible profile is the convex-geometry analogue of completeness of a sufficient statistic.} $h_\phi|_\Feas$ is, modulo Lemma~\ref{lem:sort}, the full support function of $A_\phi$; a convex body is determined by its support function. Order-respecting guarantees the part we cannot probe (outside $\Feas$) is redundant. So ``equal feasible profile'' should mean ``equal body,'' and the only freedom left --- a uniform inward/outward shift --- is killed by the exact-size constraint.
+\end{itemize}
+
+\section*{6.\quad The conjectural theorem, and why the application makes it the right one}
+
+Assembling: Lemma~\ref{lem:sort} (proved) reduces everything to the feasible wedge; \eqref{eq:reach-dom} (a continuum of Lehmann--Romano probes) turns domination into $h_\psi\le h_\phi$ on $\Feas$; Conjecture~\ref{conj:link} (Ehrhard rigidity) turns that into $A_\psi=A_\phi$. That is Conjecture~\ref{conj:main}.
+
+\begin{remark}[naturalness]
+$\Cclass$ is not abstract. This normal-location problem is the limit experiment for moment inequalities, and the tests that arise there are coordinatewise monotone in the moment functions --- that is (M1), the Andrews--Soares monotonicity --- while (M2) records which moment binds first, i.e.\ the priority order on coordinates. A theorem about $\Cclass$ is therefore a theorem about the procedures one actually uses; the short and long tests are its two extreme members, and Conjecture~\ref{conj:main} says each is admissible among them.
+\end{remark}
+
+\begin{remark}[why I expect the extensions to go through]
+Both load-bearing facts are coordinate-free. For $k>2$ with $\Lam=\{\mu_k\le\cdots\le\mu_1\}$, (M2) becomes invariance under sorting toward the priority order, Lemma~\ref{lem:sort} becomes the same statement for the descending rearrangement of $a$, and $\Feas$ becomes the wedge between the priority axis and the full diagonal. For $\Sigma\ne I_2$, pass to $\Sigma^{-1/2}X$: the cone, the monotonicities, and the support-sorting all transform affinely, and Ehrhard is affine-invariant. The two-probe picture --- coordinate-1 cutoff and diagonal reach --- generalizes to ``probe each extreme feasible direction,'' with the number of probes equal to the number of extreme rays of the transformed feasible cone.
+\end{remark}
+
+\paragraph{One alternative worth keeping in view.} If Conjecture~\ref{conj:link} proves stubborn to establish in full, the support-function formulation \eqref{eq:reach-dom} already gives a clean unconditional half: every dominator must satisfy $h_\psi\le h_\phi$ on $\Feas$ and (by Lemma~\ref{lem:sort}) cannot exceed $\phi$ outside it either, so a dominator can differ from $\phi$ only inside the wedge between $A_\phi$ and its diagonal supporting line. That already localizes any putative dominator to a thin region near the diagonal --- the same region where the long test was vulnerable --- which is the natural place to run a direct Ehrhard estimate.
+
+\end{document}
