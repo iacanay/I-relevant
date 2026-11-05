@@ -1,0 +1,43 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,microtype,amsmath,xcolor}
+\usepackage[margin=0.94in,top=0.82in,bottom=0.84in]{geometry}
+\usepackage[colorlinks=true,urlcolor={blue!45!black},pdftitle={Core determining classes and the value of a redundant inequality}]{hyperref}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+\newcommand{\entry}[1]{\par\medskip{\large\bfseries #1}\par\nobreak}
+\newcommand{\src}[2]{\href{#1}{#2}}
+\begin{document}
+{\small R2-D2 \hfill Research note $\cdot$ November 5, 2026}\par
+{\LARGE\bfseries Core determining classes and the value\\[2pt] of a redundant inequality}\par
+\medskip
+A core determining class gives enough population inequalities to characterize the sharp identified set. Computing one can save substantial work. Chesher and Rosen ask whether an omitted inequality might be more precisely estimated. Luo, Ponomarev, and Wang relate its inferential value to the alternatives at which a researcher wants power. I would start with this question and use the normal model to answer two parts of it. When is a test that retains the inequality admissible? How much power can one gain or lose by retaining it?
+
+\entry{Three references for the identification question}
+\textbf{Galichon and Henry (2011), \emph{Set Identification in Models with Multiple Equilibria}, Review of Economic Studies 78, 1264--1298.}
+In the authors' version, \S2.3, Definition 7 and Proposition 1 give the population criterion. For a proposed structure, observed event probabilities must lie below the corresponding capacity bounds. A collection of events is core determining if checking its bounds suffices to establish all the bounds. Several collections can suffice. Theorem 4 gives a concrete saving. Under their ordering and connectedness conditions, with $I$ ordered outcomes one can check initial and terminal segments, at most $2I-2$ nontrivial bounds. Cite this for the computational motivation, retaining its assumptions. The arXiv posting supplied for this project is a version of the 2011 article. \src{https://arxiv.org/html/2102.12249}{Authors' text}.
+
+\textbf{Chesher and Rosen (2017, 2020).}
+In \emph{Generalized Instrumental Variable Models}, Econometrica 85, 959--989, Theorem 3 gives sufficient conditions for reducing the collection of test sets in the space of unobservables. Their Handbook of Econometrics chapter, \emph{Generalized Instrumental Variable Models, Methods, and Applications}, vol.~7A, 1--110, \S5.2, pp.~40--43, distinguishes this construction from the outcome-space construction above. An omitted containment inequality can follow by decomposing its test set into retained pieces with negligible overlap under the latent distribution. For the introduction, read \textbf{\S9.1, pp.~104--105} first. They explicitly identify precision of an excluded moment as a reason to use it in inference and ask how one should choose moments for a functional of interest. Credit them for posing the question. \src{https://doi.org/10.3982/ECTA12223}{Article} and \src{https://doi.org/10.1016/bs.hoe.2019.11.001}{chapter}.
+
+\textbf{Pakes and Porter (2024), \emph{Moment Inequalities for Multinomial Choice with Fixed Effects}, Quantitative Economics 15, 1--25.}
+Under group stationarity, within-group comparisons imply conditional choice-probability inequalities. Theorem 2 gives conditional sharpness. Section 4 supplies a useful example. Their restrictions (10) imply the length-two cycle inequality (13), through (15). The reverse implication generally fails. Appending the cycle restriction therefore adds no identifying information to (10), although using it alone can lose information. Cite this as an example of logical implication. Applying a Gaussian theorem with nonsingular covariance to any proposed sample moments requires a separate check. \src{https://doi.org/10.3982/QE1776}{Article}.
+
+\newpage
+{\LARGE\bfseries What earlier work says about inference}\par
+\entry{The closest comparisons}
+\textbf{Luo, Ponomarev, and Wang (2026), \emph{Selecting Inequalities for Sharp Identification in Models with Set-Valued Predictions}.}
+In the April 13 working paper, Theorem 1 characterizes a smallest core determining class for the finite-outcome setting. Read \S4.3.1, p.~25, especially footnotes 13--14. The authors separate redundancy for the population and plug-in identified sets from usefulness in testing, connect local power to the alternatives of interest, and leave a finite-sample selection criterion open. Their numerical comparison in \S6 includes losses of identifying information from informal selection. Our Gaussian comparison holds fixed the null characterized by the two sets of moments. \src{https://wang-hai.net/file/selecting_inequalities_full.pdf}{Working paper}.
+
+\textbf{Luo and Wang (2017, 2018).}
+\emph{Core Determining Class and Inequality Selection}, American Economic Review 107(5), distinguishes an exact (smallest) class and gives graph-based conditions for identifying it. The longer 2018 working paper, \emph{Identifying and Computing the Exact Core-determining Class}, is particularly relevant. In the abstract, the authors report that using the exact class can increase power against local alternatives. Cite it as a precedent for gains from deletion. The statistic and scope of the comparison should be established from the full argument before drawing a closer parallel with the Gaussian max test. \src{https://doi.org/10.1257/aer.p20171041}{2017 article} and \src{https://ink.library.smu.edu.sg/sis_research/4337/}{2018 working paper}.
+
+\textbf{Bontemps and Kumar (2020), \emph{A Geometric Approach to Inference in Set-Identified Entry Games}, Journal of Econometrics 218, 373--389.}
+Read Proposition 7 and the four-player comparison in \S5.2, Table VI of the authors' manuscript. Geometric selection reduces the number of inequalities evaluated from 92 to 18 in their example and gives the same reported confidence-region size. The size of a confidence region alone cannot tell us which procedure is more powerful at a specified alternative. \src{https://www.cemmap.ac.uk/wp-content/legacy/uploads/Bontemps-Kumar-JofEc-december2019.pdf}{Authors' manuscript}.
+
+\entry{The connection to the normal experiment}
+\textbf{Canay and Shaikh (2017), \emph{Practical and Theoretical Advances in Inference for Partially Identified Models}, Example 4.1, pp.~281--283.}
+This is the example cited by Luo, Ponomarev, and Wang. It treats the one-sided multivariate Gaussian testing problem with an unrestricted mean vector and discusses admissibility. In our experiment the restriction $\mu_3\leq\max(\mu_1,\mu_2)$ removes, among others, the alternatives against which only the third inequality would be violated. Changing the alternatives can change which tests are admissible. \src{https://doi.org/10.1017/9781108227223.009}{Chapter}.
+
+\textbf{Our interpretation.} The population results concern which inequalities imply the others. Positive rescaling preserves every sign and hence the identified set, but different marginal standard deviations can reverse the ordering of two violations. A redundant moment may therefore carry a larger studentized signal than a core moment. State the standardized ordering as an assumption in the Gaussian model and show when the economic example delivers it. The two-core admissibility result and the sizes of the gains and losses from retention give substance to a distinction the literature already recognizes.
+\end{document}

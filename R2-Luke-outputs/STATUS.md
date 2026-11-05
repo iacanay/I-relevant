@@ -1,8 +1,7 @@
 # i-relevant: shared status (Luke and R2-D2)
 
-**Next actor:** Ivan: commit the reorganization, then GO for Step 1 (independent reads) in `kickoff-2026-11-05.md`.
-R2-D2: update paths in its dossier (see `README.md`).
-**Last updated:** 2026-11-05 13:25 Chicago, by Luke.
+**Next step:** Ivan reads the agreed two-page `paper-structure.pdf`. Luke’s three conditions for sign-off are met. The Section 4 exhibits remain proposed.
+**Last updated:** 2026-11-05, by R2-D2.
 
 ## How this file works
 
@@ -41,15 +40,41 @@ in moment inequality models when some inequalities are identification-redundant.
 | # | Workstream | State | Next actor |
 |---|---|---|---|
 | 1 | Folder reorganization | implemented; README written | Ivan (git commit) |
-| 2 | Story | plan agreed (Luke, R2-D2) | Ivan GO, then both independently |
-| 3 | Literature list (papers to download and review) | plan agreed | Luke drafts, R2-D2 audits |
-| 4 | Paper structure | plan agreed | both independently, with Story |
+| 2 | Story | R2-D2 first read saved | compare after Luke’s independent assessment is saved |
+| 3 | Literature | Prior readings consolidated in `literature-review.md`, including the Gaussian benchmarks | Next open read is the design behind Luo and Wang’s (2018) local-power claim |
+| 4 | Paper structure | checked and ready | Ivan reads the agreed outline |
 
 ## Open questions for Ivan
 
 - Where is the live LaTeX source of `Addition.pdf`, and should a copy live in `paper/`?
 
 ## Log (newest first)
+
+- 2026-11-05, R2-D2. Incorporated the earlier core-class readings and the separate Romano–Shaikh–Wolf Gaussian benchmark into the running review, with source locators. The 2018 Luo–Wang power finding is marked abstract-only.
+
+- 2026-11-05, R2-D2. Started the running literature review. Recommend citing Ponomarev and Semenova (2025), Remark 2 and equation (3.22), in the introduction for the precision advantage of a redundant population bound. See `literature-review.md`.
+
+- 2026-11-05, R2-D2. Implemented Luke’s three required revisions and preserved the scope of his survival result. Luke authorized sign-off on those terms. Rebuilt and visually verified both pages of the agreed outline.
+
+- 2026-11-05, Luke. Reviewed R2-D2's paper-structure draft: ready with fixes. All source pointers verified. Proposed:
+  positive statement in Section 3, a home for Federico's two-moment results (Section 4 by number of cores), one
+  coordinate system for the Section 3 example.
+- 2026-11-05, R2-D2. Saved and visually checked the two-page paper structure for Luke’s review. Consensus pending.
+
+- 2026-11-05, R2-D2. At Ivan’s request, prepared the two-page literature note `core-determining-classes.tex/pdf` with a research sub-agent. Chesher–Rosen (2020), pp. 104–105, and Luo–Ponomarev–Wang (2026), p. 25, explicitly discuss inference from redundant moments. The power figure remains pending.
+
+- 2026-11-05, Luke. Recorded R2-D2's relayed Round 1 reply; Round 2 accepts its qualification of Table 2 and its
+  two-sided keep/drop figure. Aligned; two questions for Ivan.
+- 2026-11-05, Luke. Debate Round 1 after reading R2-D2's first read: agreement on the main assessment; Luke concedes the
+  equal-variance point (raised as a story question for Ivan) and one overstatement on frequency; adopts R2-D2's
+  worst-case envelope; proposes a common position. Open for Ivan: notion of redundancy; who produces the L1/L2 exhibit.
+- 2026-11-05, Luke. Saved independent first read before opening R2-D2's. Finding: admissibility supports
+  "retaining is not in itself a mistake"; "typically costs little" is unsupported. The only magnitudes are
+  bivariate (Table 2: losses up to 13.4 points against 37.9). No three-inequality magnitudes exist; smallest missing
+  comparison is the closed-form two-core max-test comparison (L1 vs L2).
+- 2026-11-05, R2-D2. Saved `review-r2d2-first-read-2026-11-05.md` before consulting Luke’s assessment. The November draft gives the three-inequality power functions but quantifies only a two-inequality design.
+
+- 2026-11-05, R2-D2. Ivan wants to test whether retaining a redundant inequality typically costs little power. Wrote the narrowed first-read assignment for Luke and R2-D2. Luke’s receipt is pending.
 
 - 2026-11-05, Luke. Reorganization implemented per the revised plan; `README.md` at the root. No deletions.
   `supporting/i-relevant-notes.tex` compiles with its figure. Ivan to commit.
