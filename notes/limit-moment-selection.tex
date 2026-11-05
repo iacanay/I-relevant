@@ -1,0 +1,279 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb, amsthm, bm}
+\usepackage[margin=1in]{geometry}
+\usepackage[skip=0.6em]{parskip}
+
+\newtheorem{proposition}{Proposition}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+
+\begin{document}
+
+\begin{center}
+{\Large Moment selection and the Gaussian limit experiment}\\[3pt]
+{\small Ivan A. Canay :: August 28, 2026}
+\end{center}
+
+\medskip
+
+This note clarifies the relation between finite-sample generalized moment
+selection and the Gaussian limit experiment used to study local power and
+admissibility.  The main conclusion is simple.  The fixed-drift Gaussian
+experiment is the correct limit experiment for the question of interest.
+Standard moment selection retains every inequality whose standardized drift
+has a finite limit.  It deletes a moment only when its slackness diverges on
+the slower selection scale.  Thus moment selection matters at the boundary of
+the local experiment, not at an ordinary finite point of that experiment.
+
+This distinction also clarifies the multiple-core problem.  Deleting an
+inequality that is far inside the null is different from determining which
+core moment realizes the maximum in the local mean restriction.  The latter
+cannot be learned without error when the core means have a finite local gap.
+
+\section{A convenient normalization}
+
+Suppose that the null moment inequalities are
+\[
+E[m_j(W,\theta)]\le 0,
+\qquad j=1,\ldots,d.
+\]
+Define the studentized statistics and their population drifts by
+\[
+X_{j,n}
+:=
+\frac{\sqrt n\,\overline m_{j,n}(\theta_n)}
+     {\widehat\sigma_{j,n}},
+\qquad
+\mu_{j,n}
+:=
+\frac{\sqrt n\,E[m_j(W,\theta_n)]}
+     {\sigma_{j,n}}.
+\]
+Positive values indicate violation and negative values indicate slackness.
+Under the usual local asymptotic approximation,
+\begin{equation}\label{eq:gaussian-limit}
+X_n\ \Rightarrow\ X\sim N_d(\mu,\Omega)
+\qquad\text{when}\qquad
+\mu_n\to\mu\in\mathbf R^d,
+\end{equation}
+where $\Omega$ is the limiting correlation matrix.
+
+For concreteness, consider the hard-threshold version of generalized moment
+selection.  Let $\kappa_n$ satisfy
+\begin{equation}\label{eq:kappa}
+\kappa_n\to\infty,
+\qquad
+\frac{\kappa_n}{\sqrt n}\to0,
+\end{equation}
+and retain moment $j$ when
+\[
+X_{j,n}\ge-\kappa_n.
+\]
+Equivalently, the selected set is
+\begin{equation}\label{eq:selected-set}
+\widehat{\mathcal J}_n
+:=
+\{j:X_{j,n}\ge-\kappa_n\}.
+\end{equation}
+Other GMS functions lead to the same conclusion below because their argument
+is $X_n/\kappa_n$, which converges to zero under every finite local drift.
+
+\section{Two asymptotic scales}
+
+The root-$n$ drift $\mu_{j,n}$ governs the limiting statistic and local power.
+The ratio $\mu_{j,n}/\kappa_n$ governs moment selection.  These are different
+asymptotic objects.
+
+\begin{proposition}[What GMS selects]\label{prop:gms-scales}
+Suppose that
+\[
+X_n=\mu_n+Z_n+o_p(1),
+\qquad
+Z_n=O_p(1),
+\]
+and let $\widehat{\mathcal J}_n$ be defined by
+\eqref{eq:selected-set}.
+
+\begin{enumerate}
+\item If $\mu_n\to\mu\in\mathbf R^d$, then
+\[
+P(\widehat{\mathcal J}_n=\{1,\ldots,d\})\to1.
+\]
+
+\item If, for some $j$,
+\[
+\frac{\mu_{j,n}}{\kappa_n}\to-c
+\]
+with $c>1$, then moment $j$ is deleted with probability tending to one.  If
+$c<1$, it is retained with probability tending to one.
+
+\item If the $j$th population inequality is separated from equality by a
+fixed amount, so that
+\[
+E[m_j(W,\theta_n)]\le-\delta
+\]
+for some $\delta>0$ and its standard deviation remains bounded, then moment
+$j$ is deleted with probability tending to one.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Since $Z_n=O_p(1)$ and $\kappa_n\to\infty$,
+\[
+\frac{X_n}{\kappa_n}
+=
+\frac{\mu_n}{\kappa_n}+o_p(1).
+\]
+If $\mu_n$ has a finite limit, every coordinate of this ratio converges to
+zero, which proves the first claim.  Under the second claim,
+$X_{j,n}/\kappa_n\to_p-c$, so the selection rule is eventually on the
+appropriate side of $-1$.  For the third claim,
+$\mu_{j,n}$ is negative and of order $\sqrt n$.  Condition~\eqref{eq:kappa}
+then gives $\mu_{j,n}/\kappa_n\to-\infty$.
+\end{proof}
+
+The boundary case $c=1$ is deliberately excluded from the second part of the
+proposition.  At that boundary, selection depends on the centering at a finer
+scale and need not have a unique limit.  This is the role of the additional
+selection-scale parameter in \texttt{Addition-2.pdf}.
+
+Proposition~\ref{prop:gms-scales} distinguishes three uses of the word
+``slack.''  A moment with a finite negative value of $\mu_j$ is locally slack,
+but it is statistically close to a binding moment and GMS retains it.  A
+moment with drift of order $-\kappa_n$ lies on the selection scale.  A moment
+that is slack by a fixed population amount has drift of order $-\sqrt n$ and
+is deleted asymptotically.
+
+\section{Why the Gaussian experiment does not contain an oracle selector}
+
+Moment selection is a component of a testing rule, not a primitive of a
+statistical experiment.  One can define a data-dependent selector in the
+Gaussian experiment~\eqref{eq:gaussian-limit}, but it cannot identify the
+binding set without error over the finite mean space.
+
+\begin{proposition}[No oracle selection at finite drifts]
+Let $X\sim N_d(\mu,\Omega)$ with $\Omega$ positive definite.  Suppose that two
+finite mean vectors $\mu$ and $\nu$ have different binding-set or active-branch
+labels.  There is no measurable selector that returns the correct label with
+probability one under both $N_d(\mu,\Omega)$ and $N_d(\nu,\Omega)$.
+\end{proposition}
+
+\begin{proof}
+Gaussian distributions with a common positive-definite covariance matrix and
+finite mean vectors are mutually absolutely continuous.  Therefore, an event
+that has probability one under $N_d(\mu,\Omega)$ also has probability one
+under $N_d(\nu,\Omega)$.  If the two correct labels differ, the two events on
+which a selector returns the correct label are disjoint.  They cannot both
+have probability one.
+\end{proof}
+
+This is the limit-experiment version of the contiguity obstruction.  Local
+slackness cannot be consistently distinguished from binding, and two active
+branches separated by a finite local gap cannot be identified perfectly.
+The limiting version of standard GMS avoids this classification problem by
+retaining all finite-drift moments.
+
+\section{The two-core problem}
+
+Consider the identity-covariance experiment
+\[
+X\sim N_3(\mu,I_3),
+\qquad
+\mu_3\le\max\{\mu_1,\mu_2\},
+\]
+where coordinates 1 and 2 are core moments and coordinate 3 is redundant.
+There are two distinct selection questions.
+
+First, GMS asks whether an inequality is sufficiently far inside the null to
+be deleted.  By Proposition~\ref{prop:gms-scales}, both core moments and the
+redundant moment are retained whenever their local means are finite.
+
+Second, a branchwise gated repair would need to determine which core realizes
+$\max\{\mu_1,\mu_2\}$.  This is not the same question.  For example, the
+natural rule that selects core 1 when $X_1>X_2$ satisfies
+\begin{equation}\label{eq:active-core-probability}
+P_\mu(X_1>X_2)
+=
+\Phi\left(\frac{\mu_1-\mu_2}{\sqrt2}\right).
+\end{equation}
+If core 1 is active, the expression in~\eqref{eq:active-core-probability} is
+the probability of selecting it.  This probability equals $1/2$ at a tie and
+is strictly below one for every finite core gap.  It converges to one only
+when the standardized gap diverges.
+
+Moreover, a core moment can fail to realize the maximum while still having a
+positive local mean.  Such a moment is locally violated, not slack relative
+to the null, and GMS will not delete it.  Thus ordinary GMS cannot be
+interpreted as an asymptotically perfect active-core selector.
+
+When one core is slack on the GMS scale, the situation is different.  That
+core is deleted with probability tending to one, and the remaining problem
+reduces to the one-core experiment.  The bivariate gated improvement can then
+apply to that separated subproblem.  This is a lower-dimensional boundary
+regime, not a solution to the problem over the full finite-drift mean space.
+
+\section{Implications for admissibility}
+
+Admissibility is defined for a fixed experiment and a fixed parameter space.
+For local asymptotic admissibility, the relevant experiment is
+\[
+X\sim N_d(\mu,\Omega),
+\qquad
+\mu\in\Lambda\subseteq\mathbf R^d,
+\]
+with the full vector of finite local means retained.  There are three reasons
+this is the natural object.
+
+\begin{enumerate}
+\item It is the weak limit of the vector of studentized sample moments along
+root-$n$ local sequences.
+
+\item It is the fixed-drift limit of the GMS procedure itself: the selection
+input converges to zero, so the limiting critical value treats every moment
+as potentially binding.
+
+\item The alternatives for which moment selection deletes a coordinate lie
+on a different scale.  They correspond to sequences escaping to the boundary
+of the finite mean space rather than to omitted points of the ordinary local
+experiment.
+\end{enumerate}
+
+Consequently, the sensitivity of the long or max test to a finite negative
+mean is not an artifact.  It is exactly the local behavior that the limit
+experiment is intended to record.  Moment selection recovers the appropriate
+lower-dimensional problem far from the local boundary, but it does not remove
+the multiple-core adaptation problem within that boundary.
+
+In particular, the unresolved admissibility question in
+\texttt{three-dimensional-case.pdf} remains genuine.  A branch-specific
+bivariate dominator is not a single test that dominates over the union of the
+two core branches.  Any global repair must account for the nonzero probability
+of selecting the wrong active core when the core gap is finite.
+
+\section{A useful scale-separation statement}
+
+The connection between the finite-sample and limit analyses can be summarized
+as follows.
+
+\begin{enumerate}
+\item On every fixed finite-drift sequence, and uniformly on compact drift
+sets under the corresponding uniform central limit theorem, GMS retains all
+moments.  The full-dimensional Gaussian test is therefore the relevant object
+for local power and admissibility.
+
+\item On sequences where an inequality is slack by more than the GMS
+threshold, that moment is deleted and the limiting testing problem becomes
+lower-dimensional.
+
+\item Near a multiple-core branch boundary, no selector can determine the
+active core without nontrivial error.  This transition region is where the
+three-dimensional admissibility problem has bite.
+\end{enumerate}
+
+The two-rate analysis in \texttt{Addition-2.pdf} supplements the Gaussian
+limit experiment by describing how the procedure behaves as parameters escape
+the finite local mean space.  It does not replace that experiment.  For the
+admissibility project, the fixed-drift Gaussian experiment is the correct and
+natural starting point.
+
+\end{document}

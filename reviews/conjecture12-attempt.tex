@@ -1,0 +1,349 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb, amsthm, bm}
+\usepackage[margin=1in]{geometry}
+\usepackage[skip=0.6em]{parskip}
+
+\newtheorem{lemc}{Lemma}[section]
+\newtheorem{propc}[lemc]{Proposition}
+\newtheorem{thmc}[lemc]{Theorem}
+\theoremstyle{remark}
+\newtheorem{remc}[lemc]{Remark}
+
+\newcommand{\E}{\mathrm E}
+\newcommand{\R}{\mathbf R}
+\newcommand{\cC}{\mathcal C}
+\newcommand{\cR}{\mathcal R}
+\newcommand{\cF}{\mathcal F}
+\newcommand{\wt}{\widetilde}
+
+\begin{document}
+
+\begin{center}
+{\Large Toward Conjecture 12}\\[3pt]
+{\small A best-effort attack: partial results, a barrier theorem, and a proof
+plan :: August 29, 2026}
+\end{center}
+
+\medskip
+
+This note does two things. Section~1 records my assessment of the summary
+note for Fede. The rest is the honest state of my attack on Conjecture~12
+($|\cC|\ge2$ implies every nice test is admissible): a master lemma that
+unifies every admissibility proof we have (Section~2); a barrier theorem
+showing that this method \emph{provably cannot} decide the remaining cases
+(Section~3); two rigidity results that cut off the natural routes to a
+counterexample (Sections~4 and~5); a reduction of the two-bad-facet case to
+a single scalar inequality (Section~6); and the proof plan that all of this
+points to (Section~7). I could not prove the conjecture. I believe the
+material below is the reason no one-step proof exists, and it isolates the
+one missing lemma. Compact proofs of the results stated without proof in the
+summary note are collected in the appendix.
+
+\section{Assessment of the summary note}
+
+The note is accurate: I verified every stated result against the arguments
+we have. Suggested repairs, all minor: the result numbering is
+nonsequential (Lemma~1, Lemma~6, Definition~3, \dots) and should be
+renumbered; ``or move involved'' should read ``or more involved''; in
+Definition~3 the polyhedral criterion should note that irredundancy makes
+$b_j=h_A(a_j)$, so the halfspaces are supporting; and the claim that the
+redundant-only test is inadmissible for $\cC=\{1\}$ in every dimension
+deserves its one-line justification --- the test depends only on
+$(X_1,X_r)$, the projections of $\Lambda_0$ and $\Lambda_1$ fill the
+bivariate null and alternative, and the bivariate dominator therefore lifts
+(its level and power depend only on the $(X_1,X_r)$-marginal, which is
+bivariate normal with correlation $\Omega_{1r}$, covered by the theorem for
+every $\rho$). Two additions worth making: a sentence scoping the bivariate
+necessity via $\Pi_\rho=\Omega_\rho\Lambda_1^*$, so the reader sees why
+necessity is a $\Lambda_1^*\neq\{0\}$ phenomenon; and a description of the
+open frontier --- regions with at least two essential infeasible facets,
+with the canonical minimal examples (a rectangle with $|\cR|\ge2$; a
+rectangle plus one binding infeasible cut; the tilted-gate family).
+
+\section{The constraint set and the separating-score method}
+
+Fix $|\cC|\ge2$ and a nice $A$, and let $\psi$ be a level-$\alpha$ test that
+weakly dominates $\phi_A$; put $h:=\psi-\phi_A$ and
+$M:=\E_0h^+=\E_0h^-$. Write $\wt A$ for the \emph{feasible hull} of $A$:
+the intersection of its supporting halfspaces with normals in
+$\cF(\Omega,\Lambda)$.
+
+\begin{lemc}[the constraint set]\label{lem:constraints}
+(i) $\{h>0\}\subseteq A$ and $\{h<0\}\subseteq A^c$;
+(ii) $\E_0h=0$;
+(iii) $q:=\E_0[Xh]=0$;
+(iv) $\E_0[e^{\theta'X}h]\ge0$ for every $\theta\in\Omega^{-1}\Lambda_1$;
+(v) $h^-=0$ a.s.\ on $\wt A^{\,c}$, so $h^-$ is supported on
+$\wt A\setminus A$.
+\end{lemc}
+
+The proofs are those of the earlier notes (appendix). Every admissibility
+result we have follows from Lemma~\ref{lem:constraints} through one scalar
+comparison:
+
+\begin{lemc}[separating score]\label{lem:score}
+Suppose there exists
+\begin{equation}\label{eq:score-class}
+k(x)=c_0+\ell'x+\sum_{i=1}^m\nu_i\,e^{\theta_i'x},
+\qquad
+\nu_i\ge0,\ \ \theta_i\in\Omega^{-1}\Lambda_1,
+\end{equation}
+with $k\le0$ on $A$ and $k>0$ a.e.\ on $\wt A\setminus A$. Then $\phi_A$ is
+$\alpha$-admissible.
+\end{lemc}
+
+\begin{proof}
+By (ii)--(iv), $\E_0[kh]=c_0\E_0h+\ell'q+\sum_i\nu_i\E_0[e^{\theta_i'X}h]
+\ge0$. By (i) and (v), $\E_0[kh]=\int_Akh^+ -\int_{\wt A\setminus A}kh^-
+\le-\int kh^-<0$ whenever $M>0$. Hence $M=0$, $h=0$ $P_0$-a.s., and mutual
+absolute continuity finishes the argument.
+\end{proof}
+
+Feasible support is the case $\wt A=A$ (no score needed); one essential bad
+facet is the case $k=u'x-\kappa$, linear. The natural question is whether
+Lemma~\ref{lem:score} can reach the frontier regions. It cannot.
+
+\section{A barrier theorem}
+
+Take the canonical frontier case: $\Omega=I_4$, $\cC=\{1,2\}$,
+$\cR=\{3,4\}$, and the exact-size rectangle
+$A=\bigcap_{j=1}^4\{x_j\le\kappa_j\}$, whose two bad facets are the
+redundant faces $e_3,e_4$.
+
+\begin{thmc}[no separating score exists]\label{thm:barrier}
+For this $A$, no function $k$ of the form~\eqref{eq:score-class} satisfies
+$k\le0$ on $A$ and $k>0$ on $\wt A\setminus A$.
+\end{thmc}
+
+\begin{proof}
+First, each $\theta_i$ must be nonnegative: if $\theta_{ij}<0$, move from
+any $y^0\in A$ along $-e_j$ (which stays in $A$); the $i$th term grows
+exponentially while $|\ell'x|$ grows linearly and the other terms are
+nonnegative, so $k>0$ somewhere on $A$. Being also in $\Lambda_1$, each
+$\theta_i$ is feasible, and any nonzero feasible $\theta\ge0$ has
+$\theta_1+\theta_2>0$ (if $\theta_1=\theta_2=0$, feasibility forces
+$\theta_3=\theta_4=0$). Second, $k\le0$ on $A$ as $x_j\to-\infty$ forces
+$\ell\ge0$.
+
+Now consider the gap points $z_T=(-T,-T,\kappa_3+1,\kappa_4-1)$. They
+violate the third face, satisfy the others, and lie in $\wt A$ for large
+$T$: for feasible $\theta$,
+$\theta'z_T-\theta'\kappa
+=\theta_3-\theta_4(\cdot)-(T+\kappa_1)\theta_1-(T+\kappa_2)\theta_2
+\le(\theta_1+\theta_2)(1-T-\min_j\kappa_j)\le0$
+using $\theta_3\le\max(\theta_1,\theta_2)\le\theta_1+\theta_2$. Since every
+$\theta_i$ has $\theta_{i1}+\theta_{i2}>0$, all exponential terms vanish as
+$T\to\infty$, so $k(z_T)=c_0+\ell'z_T+o(1)$. Positivity for all $T$ forces
+$\ell_1+\ell_2\le0$, hence $\ell_1=\ell_2=0$; the variant with
+$x_4\to-\infty$ (still in the gap and in $\wt A$) forces $\ell_4=0$, and
+the symmetric fourth-face lobe forces $\ell_3=0$. So $\ell=0$ and
+$k=c_0+\sum_i\nu_ie^{\theta_i'x}$. If $c_0>0$, then $k(z_T)\to c_0$ is fine
+but deep points of $A$ give $k\to c_0>0$, violating $k\le0$ on $A$. If
+$c_0<0$, then $k(z_T)\to c_0<0$, violating gap positivity. If $c_0=0$, then
+$k\ge0$ everywhere, and $k\le0$ on $A$ forces $\nu=0$, i.e.\ $k\equiv0$,
+violating gap positivity. Contradiction in every case.
+\end{proof}
+
+The same argument runs for the three-dimensional tilted-gate family
+$A(\lambda)=\{x_1\le\kappa,x_2\le\kappa,x_1+\lambda x_3\le b,
+x_2+\lambda x_3\le b\}$, $\lambda>1$: each gate's ``dead lobe'' (both cores
+escaping to $-\infty$ along the gate) forces $\ell$ proportional to that
+gate's normal, and the two lobes together force $\ell=0$, after which the
+constant-term trichotomy applies.
+
+The interpretation is sharp. Every admissibility proof we possess
+aggregates Lemma~\ref{lem:constraints} into one scalar comparison, and
+Theorem~\ref{thm:barrier} says no such aggregation can decide the frontier.
+The obstruction lives in the \emph{dead zones}: gap regions escaping to
+$-\infty$ in all core coordinates, where every alternative tilt vanishes
+and only the (sign-constrained) linear terms reach --- and two bad facets
+make incompatible demands on the single linear term. A proof of
+Conjecture~12 therefore needs either a new confinement principle that
+empties the dead zones before scoring, or a genuinely non-scalar use of the
+constraints; and a counterexample, if one exists, must place comparison
+mass in the dead zones. The next two sections squeeze the second
+possibility.
+
+\section{No dominator hides in a dead slab}
+
+\begin{propc}[slab rigidity]\label{prop:slab}
+Let $\Omega=I_d$ and let $A$ be the exact-size rectangle (any $|\cC|\ge1$,
+any $|\cR|$). Fix $T>0$ and suppose $h=1\{x_1\le-T\}\,g(x_2,\dots,x_d)$
+satisfies the conditions of a dominance perturbation
+(Lemma~\ref{lem:constraints}(i)--(ii) and $\E_\mu h\ge0$ for all
+$\mu\in\Lambda_1$). Then $g=0$ a.s.
+\end{propc}
+
+\begin{proof}
+By independence, $\E_\mu h=\Phi(-T-\mu_1)\,\E_\nu g$ with
+$\nu=(\mu_2,\dots,\mu_d)$. As $\mu_1\to\infty$ the constraint
+$\mu_r\le\max_c\mu_c$ frees $\nu$ completely, so $\E_\nu g\ge0$ for
+\emph{every} $\nu\in\R^{d-1}$, and (ii) gives $\E_0g=0$. The sign structure
+makes $g$ a dominance perturbation of the $(d-1)$-dimensional section
+rectangle against the \emph{unrestricted} alternative. In the unrestricted
+problem every direction is an alternative direction, so every closed convex
+acceptance region is feasibly supported, and the confinement argument of
+Lemma~\ref{lem:constraints}(v) applies to every supporting halfspace of the
+section: $g^-=0$ a.s., and $\E_0g=0$ then gives $g=0$ a.s.
+\end{proof}
+
+So the dead zones, where the barrier lives, cannot host a self-contained
+dominator: a slab of a $|\cC|\ge2$ problem faces an effectively
+unrestricted alternative, which is the Birnbaum regime where convexity
+already wins. Any dominator must couple dead zones to live zones.
+
+\section{The natural coupling fails: localized gates}
+
+There is exactly one natural family of couplings: borrow the $|\cC|=1$
+gated dominator and arm it only when the data indicate the other core is
+dead. In the three-dimensional two-core model with the equal-cutoff
+rectangle, let $g_{cr}$ denote the calibrated gate swap in coordinates
+$(c,r)$ (reject the diagonal corner $G_{cr}$, accept the strip $D_{cr}$,
+with $P_0(G_{cr})=P_0(D_{cr})$), and define
+\[
+h_L
+:=
+1\{x_1\le-L\}\,g_{23}(x_2,x_3)
++
+1\{x_2\le-L\}\,g_{13}(x_1,x_3)~.
+\]
+This satisfies the sign structure and $\E_0h_L=0$, and it gains where it was
+designed to: numerically, at $\mu=(2,-5,1)$ (core~1 active, core~2 dead),
+$\E_\mu h_L\simeq+0.108$. But it violates the first-moment identity:
+$q_2=\Phi(-L)\,\E_0[X_2g_{23}]>0$, and Lemma~\ref{lem:constraints}(iii)
+says a dominator must have $q_2=0$. The violation is realized at near-null
+alternatives with a dead core: at $\mu=(t,-3,0)\in\Lambda_1$ the armed
+$(2,3)$-gate loses a fixed amount, $\Phi(-L)\Delta_{23}(-3,0)<0$, while the
+compensating $(1,3)$-gain vanishes linearly in $t$. Numerically with
+$L=2$, $\alpha=0.05$: $\E_\mu h_L\simeq+0.0113$ at $t=0.5$, $+0.0017$ at
+$t=0.1$, and $-2.8\times10^{-4}$ at $t=0.005$. Repairing this requires a
+switch with $\E_0[\text{switch}]=0$, which the sign structure forbids (the
+negative part of the switch times the negative part of the gate puts
+$h>0$ outside $A$). I regard this as the strongest concrete evidence for
+the conjecture: the only known source of power improvements, transplanted
+in its most favorable form, is killed by the first-moment identity exactly
+where that identity has bite.
+
+\section{The two-facet case is one scalar inequality}
+
+\begin{lemc}[absolute-value reduction]\label{lem:absred}
+Let $A=\wt A\cap\{g_u\le0\}\cap\{g_w\le0\}$ be nice with two essential bad
+facets, where $g_u(x)=u'x-\kappa_u$, $g_w(x)=w'x-\kappa_w$. If $M>0$, then
+\[
+\E_0\bigl[\,|g_u(X)-g_w(X)|\,h\bigr]<0~.
+\]
+Consequently, Conjecture~12 holds for all such $A$ if and only if every
+dominance perturbation satisfies
+$\E_0[\,|(u-w)'X-(\kappa_u-\kappa_w)|\,h]\ge0$.
+\end{lemc}
+
+\begin{proof}
+Let $f=\max(g_u,g_w)$. Then $f\le0$ on $A$ and $f>0$ a.e.\ on
+$\wt A\setminus A$, so as in Lemma~\ref{lem:score}, $M>0$ implies
+$\E_0[fh]<0$. But $f=\tfrac12(g_u+g_w)+\tfrac12|g_u-g_w|$, and the affine
+part integrates to zero against $h$ by (ii)--(iii).
+\end{proof}
+
+For $A(\lambda)$ the relevant direction is $u-w\propto(1,-1,0)$, and
+\emph{both} $\pm(1,-1,0)$ lie in $\Lambda_1$, so two-sided exponential
+information $\E_0[\cosh\{t(X_1-X_2)\}h]\ge0$ is available for every $t$.
+The missing step is exactly that $|z|$ is not a mixture of
+$\cosh(tz)$'s and affine functions --- every such mixture grows
+superlinearly --- which is Theorem~\ref{thm:barrier} again in scalar form.
+For the four-dimensional rectangle, $u-w=e_3-e_4$ and neither sign is in
+$\Lambda_1$, so even this reduction has less to work with; the rectangle
+with $|\cR|\ge2$ is, I believe, the hardest case.
+
+\section{The proof plan}
+
+The results above locate the single missing ingredient.
+
+\emph{Step 1 (the key lemma: dead-zone confinement).} Prove that every
+dominance perturbation has $h=0$ a.s.\ on the dead zones --- gap regions
+along which all coordinates in some core-detecting set escape to
+$-\infty$. Proposition~\ref{prop:slab} proves this for product-form $h$;
+the open problem is the coupled case. The natural tool is a conditional
+argument in the spirit of the bivariate rearrangement lemma: condition on
+the deep core coordinates and use the fact that the conditional problem is
+effectively unrestricted, where the section of a nice region is convex and
+hence rigid. The technical difficulty is that dominance constrains only
+the $x_1$-integral of the conditional perturbations, not each slice.
+
+\emph{Step 2 (score on the truncated gap).} Granted Step~1, $h^-$ is
+confined to the part of $\wt A\setminus A$ where some feasible tilt stays
+active. There the barrier computation no longer applies, and finite
+mixtures~\eqref{eq:score-class} plausibly separate: each lobe of the
+truncated gap is exposed by tilts near the feasible boundary of its gate
+normal. This should be checked first numerically (a small convex program:
+minimize the gap infimum of $k$ minus the $A$-supremum over
+$(c_0,\ell,\nu,\theta)$), then proved for the canonical regions.
+
+\emph{Step 3 (the decisive experiment, in parallel).} The discretized
+linear program from the earlier note, aimed at $A(2)$ and at the
+four-dimensional rectangle, with the $1\leftrightarrow2$ symmetry imposed
+and the alternative net including deep rays. A robustly positive value
+yields the counterexample; a vanishing value yields, through the dual
+solution, the weights of the separating construction that Step~2 needs ---
+including any capacity multipliers (dual variables on $0\le\psi\le1$),
+which are exactly the terms the score class~\eqref{eq:score-class} lacks
+and which a Blyth-type argument would build implicitly.
+
+\emph{Where I stand.} Sections~4 and~5 close the two natural routes to a
+counterexample; Section~3 explains why no proof has appeared. My credence
+in Conjecture~12 has gone up: the dead zones are the only place a
+dominator could live, and they are inert both in isolation
+(Proposition~\ref{prop:slab}) and under the one natural coupling
+(Section~5). But the conjecture is genuinely open, and Step~1 is where I
+would spend effort --- it is a self-contained lemma, its product-form case
+is already proved, and it converts the barrier from an obstruction into a
+two-line finish.
+
+\appendix
+
+\section{Proofs of the results stated in the summary note}
+
+\emph{Lemma 1 (dual-cone dichotomy).} For $\cC=\{1\}$: normalizing
+$\mu_1=1$, $v_1+\sum_r\mu_rv_r\ge0$ for all $\mu_r\le1$ forces $v_r\le0$
+(let $\mu_r\to-\infty$) and then $v_1+\sum_rv_r\ge0$ (at $\mu_r=1$);
+conversely these suffice, and the cone representation is a direct check.
+For $|\cC|\ge2$: $e_c+se_{c'}\in\Lambda_1$ for all real $s$ kills the core
+coordinates pairwise; means with one redundant coordinate at the core
+maximum and the others at $-M$ kill the redundant coordinates.
+
+\emph{Lemma 6 (first-order restriction).} $\mu=0\in\Lambda_0$ gives
+$\E_0\psi\le\alpha=\E_0\phi$; dominance along $te_c\in\Lambda_1$ and
+continuity of Gaussian power functions give the reverse, so $\E_0h=0$.
+For $\mu\in\Lambda_1$, $t\mapsto\E_0[he^{t(\Omega^{-1}\mu)'X}]$ is
+nonnegative for $t>0$ (dominance along $t\mu$, a ray in the cone
+$\Lambda_1$), vanishes at $t=0$, and is differentiable there ($|h|\le1$,
+Gaussian m.g.f.), so its right derivative $(\Omega^{-1}\mu)'q$ is
+nonnegative; hence $\Omega^{-1}q\in\Lambda_1^*$.
+
+\emph{Proposition 4 (feasible support suffices).} For nonzero
+$a\in\cF(\Omega,\Lambda)$ with $h_A(a)<\infty$: $\Omega a\in\Lambda$ and
+$a'\Omega a>0$ put $\Omega a\in\Lambda_1$, so
+$\E_0[e^{ta'X}h]\ge0$ for all $t>0$; since $h^+$ lives on
+$A\subseteq\{a'x\le h_A(a)\}$, letting $t\to\infty$ kills
+$h^-$ above the supporting plane. Lindel\"of reduces the union of the
+half-space complements to a countable one, so $h^-=0$ a.s.\ on $A^c$ when
+$A$ is feasibly supported; $\E_0h=0$ then gives $h=0$ a.s.
+
+\emph{Proposition 5.} If all finite normals are feasible, the feasible
+supporting halfspaces include all supporting halfspaces, whose intersection
+is $A$. Conversely with $|\cC|=1$, $\cF$ is a closed convex cone (the
+defining constraint is linear), the barrier cone of $A$ lies in the closed
+convex cone generated by the feasible normals used in the representation,
+hence in $\cF$.
+
+\emph{Proposition 7 (one arbitrary halfspace).} Confinement puts $h^-$ on
+$\{u'x>\kappa\}\cap A_f$; $h^+$ lives on $A\subseteq\{u'x\le\kappa\}$; if
+$M>0$ then $\E_0[(u'X-\kappa)h]<0$, contradicting $u'q=0$ from Lemma~6 and
+the dichotomy.
+
+\emph{Corollaries 8--9 and core-only rectangles.} Corollary~8: $A_f=\R^d$,
+$u=a$. Corollary~9: core faces are feasible since
+$(\Omega e_c)_r=\Omega_{rc}<1=(\Omega e_c)_c$; the single redundant face is
+the extra halfspace. Core-only rectangles: all facets feasible by the same
+computation, so Proposition~4 applies for any $|\cC|\ge1$.
+
+\end{document}

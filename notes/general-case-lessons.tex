@@ -1,0 +1,317 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath,amssymb,bm}
+\usepackage[margin=0.72in]{geometry}
+\usepackage[skip=0.42em]{parskip}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+
+\definecolor{navy}{HTML}{17324D}
+\definecolor{softblue}{HTML}{EAF1F7}
+\definecolor{rulegray}{HTML}{CBD2D9}
+
+\newcommand{\E}{\mathrm E}
+\newcommand{\R}{\mathbf R}
+\newcommand{\cC}{\mathcal C}
+\newcommand{\cR}{\mathcal R}
+\newcommand{\cF}{\mathcal F}
+\newcommand{\1}{\mathbf 1}
+\newcommand{\result}[2]{%
+  \par\medskip\noindent
+  \begingroup\color{navy}\textbf{#1.}\endgroup\ \emph{#2}\par\smallskip}
+
+\begin{document}
+
+\begin{center}
+{\Large\bfseries\color{navy} Admissibility and redundant moments}\\[3pt]
+{\large Note for Fede}\\[5pt]
+{\small Ivan A. Canay \quad August 30, 2026}
+\end{center}
+
+% \vspace{2pt}
+% \noindent\colorbox{softblue}{%
+% \parbox{0.965\textwidth}{\small
+% Redundant moments can be used by admissible tests, but the geometry changes with % the number of core moments.  With one core moment, first-order transfers are
+% available and the way redundant moments enter the test matters.  With at
+% least two core moments, every dominator must match first moments at the null,
+% which makes admissibility substantially easier to establish.}}
+
+\section{The experiment and the question}
+
+Let
+\[
+X\sim N_d(\mu,\Omega)~,
+\]
+where $\Omega$ is a positive-definite correlation matrix.  Partition the
+indices into nonempty sets of core moments $\cC$ and redundant moments
+$\cR$.  The maintained mean space is
+\[
+\Lambda
+=
+\left\{\mu\in\R^d:
+\mu_r\le \max_{c\in\cC}\mu_c
+\text{ for every }r\in\cR
+\right\}~.
+\]
+The null and alternative are
+\[
+\Lambda_0=\Lambda\cap(-\infty,0]^d,
+\qquad
+\Lambda_1=\left\{\mu\in\Lambda:
+\max_{c\in\cC}\mu_c>0\right\}~.
+\]
+Thus a redundant coordinate can be positive only if some core coordinate is
+positive.  Redundancy is a restriction on standardized local means.  
+
+For an acceptance region $A$, write $\phi_A(x)=\1\{x\notin A\}$.  We call
+$A$ \emph{nice} if it is closed, convex, coordinatewise lower, and
+$P_0\{X\in A\}=1-\alpha$.  Such a test has level $\alpha$, with size attained at
+the origin.  The question is which nice tests are admissible, and, more
+specifically, whether using redundant moments affects admissibility.
+
+\section{What the local expansion reveals}
+
+Let $\psi$ be a candidate dominator of an exact-size test $\phi$, and define
+\[
+h=\psi-\phi,
+\qquad
+q=\E_0[Xh(X)]~.
+\]
+For a fixed alternative direction $\mu\in\Lambda_1$, a Taylor expansion of
+the power difference along the ray $t\mu$ gives
+\begin{align}
+  \E_{t\mu}h(X)
+  &=
+  \E_0\left[
+  h(X)\exp\left\{
+  t\mu'\Omega^{-1}X
+  -\frac{t^2}{2}\mu'\Omega^{-1}\mu
+  \right\}
+  \right] \notag \\
+  &=
+  \E_0h(X)
+  +t\mu'\Omega^{-1}\E_0[Xh(X)]
+  +O(t^2) \notag \\
+  &=
+  \E_0h(X)
+  +t\mu'\Omega^{-1}q
+  +O(t^2)~.\label{eq:taylor}
+  \end{align}
+Exact size and dominance imply $\E_0h=0$.  The linear term must therefore be
+nonnegative for every alternative direction.  If
+\[
+\Lambda_1^*
+:=
+\{v:\mu'v\ge0\text{ for every }\mu\in\Lambda_1\}~,
+\]
+this restriction is $\Omega^{-1}q\in\Lambda_1^*$. We call $\Lambda_1^*$ the dual cone of $\Lambda_1$.
+
+\result{Lemma 1 (dual-cone dichotomy)}{If $\cC=\{1\}$, then
+\[
+\Lambda_1^*
+=
+\left\{v\in\R^d:
+v_r\le0\ (r\in\cR),\quad
+v_1+\sum_{r\in\cR}v_r\ge0
+\right\}
+=\operatorname{cone}\{e_1,e_1-e_r:r\in\cR\}~.
+\]
+If $|\cC|\ge2$, then $\Lambda_1^*=\{0\}$.}
+
+\result{Lemma 6 (first-order restriction)}{Let $\phi$ have level $\alpha$
+and satisfy $\E_0\phi=\alpha$. If a level-$\alpha$ test $\psi$ weakly
+dominates $\phi$, then
+\[
+\E_0h=0,
+\qquad
+\Omega^{-1}q\in\Lambda_1^*~.
+\]
+Consequently, $q=0$ whenever $|\cC|\ge2$.}
+
+What we get out of the expansion.  With one
+core, the nontrivial dual cone permits nonzero first-order transfers.  This
+makes gated dominators possible for some tests, as we did in the two dimensional case. It just gives a clear way to possibly look for improvements. With at least two cores, every dominator must be invisible
+to first order.  A dominator could still operate through the quadratic or
+higher-order terms in~\eqref{eq:taylor}. But then, finding dominators becomes harder (or move involved).
+
+\section{A general sufficient condition}
+
+A nonzero sample-space normal $a\ge0$ is \emph{feasible} if
+\[
+a\in\cF(\Omega,\Lambda)
+:=
+\{a\ge0:\Omega a\in\Lambda\}~.
+\]
+Such a normal generates the alternative mean ray $t\Omega a$.  This is the
+connection between the geometry of the acceptance region and the maintained
+alternative.
+
+For a closed convex set $A$, define
+\[
+h_A(a):=\sup_{x\in A}a'x
+~,
+\]
+and
+\[
+F_A
+:=
+\left\{
+a\in\mathcal F(\Omega,\Lambda)\setminus\{0\}:
+h_A(a)<\infty
+\right\}~,
+\qquad
+\mathcal F(\Omega,\Lambda)
+=
+\{a\ge0:\Omega a\in\Lambda\}~.
+\]
+
+\result{Definition 3 (feasible support)}{A nice region $A$ is feasibly
+supported if
+\[
+A
+=
+\bigcap_{a\in F_A}
+\{x\in\mathbf R^d:a'x\le h_A(a)\}~.
+\]
+If
+\[
+A=\bigcap_{j=1}^m\{x:a_j'x\le b_j\}~,
+\]
+and all these inequalities are essential, then $A$ is feasibly
+supported if and only if
+\[
+a_j\in\cF(\Omega,\Lambda)
+\qquad\text{for every }j=1,\ldots,m~.
+\]}
+
+The inclusion $A\subseteq\bigcap_{a\in F_A}\{x:a'x\le h_A(a)\}$ always holds by the definition of \(h_A(a)\). Equality is the substantive requirement: the feasible supporting halfspaces must be sufficient to recover \(A\), excluding every point outside it. Note also that a \emph{facet} is a flat boundary face of a polyhedron, such as an edge of a polygon or a face of a box. Its defining inequality is essential if removing that inequality makes the polyhedron larger.
+
+\result{Proposition 4 (feasible support suffices)}{If a nice region $A$ is
+feasibly supported, then $\phi_A$ is $\alpha$-admissible against every
+level-$\alpha$ test, including randomized tests.}
+
+Proposition 4 gives a practical admissibility check for polyhedral acceptance regions: every facet normal \(a\) must satisfy \(\Omega a\in\Lambda\). Proposition 4 therefore proves admissibility whenever all the genuine boundary faces of \(A\) have feasible normals. This is sufficient but not necessary. When there are multiple core moments, Proposition 7 also establishes admissibility if all but one facet have feasible normals. With one core moment, feasible support coincides with the finite-normal condition, which is both necessary and sufficient in the bivariate case.
+
+\result{Proposition 5 (relation with finite normals)}{Let
+\[
+\mathcal B(A):=\{a\in\R^d:a\ne0,\ h_A(a)<\infty\}~.
+\]
+If $\mathcal B(A)\subseteq\cF(\Omega,\Lambda)$, then $A$ is feasibly
+supported. If $|\cC|=1$, the converse also holds.}
+
+Thus the older finite-normal condition is unnecessarily strong with multiple cores. An infeasible direction may be irrelevant because its supporting halfspace is implied by halfspaces with feasible facet normals. For example, with \(\Omega=I_3\), \(\cC=\{1,2\}\), and \(\cR=\{3\}\), consider
+\[
+A=\{x_1\le\kappa,\ x_2\le\kappa,\ x_1+x_3\le b,\ x_2+x_3\le b\}~.
+\]
+The direction \(a=(1,1,2)\) satisfies \(h_A(a)=2b<\infty\), so $a\in\mathcal B(A)$, but it is infeasible because
+\[
+a_3=2>\max\{a_1,a_2\}=1~.
+\]
+Nevertheless, its supporting inequality
+\[
+x_1+x_2+2x_3\le2b
+\]
+is simply the sum of the two gate inequalities. It adds no new boundary face, while all actual facet normals of \(A\) are feasible. Hence \(A\) is feasibly supported even though the finite-normal condition fails.
+
+In the bivariate model with one core and one redundant moment, the condition
+is sharp: a nice test is admissible if and only if all its finite normals are
+feasible.  A natural conjecture is that the same characterization holds with
+one core and any number of redundant moments. This is just a conjecture. 
+
+{\bf Result:} Core-only rectangles provide a useful benchmark.  
+\result{Corollary (core-only rectangles)}{Let $\Omega$ be any
+positive-definite correlation matrix and define
+\[
+A_{\cC}
+=
+\bigcap_{c\in\cC}\{x:x_c\le\kappa_c\},
+\qquad \kappa_c\in\R~.
+\]
+If $P_0\{X\in A_{\cC}\}=1-\alpha$, then $\phi_{A_{\cC}}$ is
+$\alpha$-admissible.}
+This result does not establish admissibility of every nice core-only test. We do not yet know whether \emph{every} nice core-only test is
+admissible when $|\cC|\ge2$.  Proposition 4 alone cannot establish this.
+
+\section{Adding redundant moments}
+
+\result{Proposition 7 (one arbitrary halfspace)}{Suppose $|\cC|\ge2$ and
+\[
+A=A_f\cap\{x:u'x\le\kappa\}~,
+\qquad
+A_f=\bigcap_{a\in G}\{x:a'x\le\kappa_a\}~,
+\]
+where $G\subseteq\cF(\Omega,\Lambda)\setminus\{0\}$ and $u\ne0$.
+If $A$ is nice, then $\phi_A$ is $\alpha$-admissible.}
+
+Here \(A_f\) can be defined by any collection of feasible halfspaces; \(G\) need not contain all feasible supporting directions. Proposition 7 allows \(A\) to include one additional halfspace whose normal \(u\) is completely unrestricted and may involve several redundant coordinates. For a polyhedron, the practical implication is that all but at most one of its facet normals may be feasible. This does not mean that \(A\) has only one infeasible finite-support direction, because combinations of its facet normals may generate others. The proposition does not cover regions with two or more infeasible facets.
+
+Two useful consequences show the scope of Proposition 7. 
+
+\result{Corollary 8}{Suppose $|\cC|\ge2$. For every $a\ge0$, $a\ne0$, the
+test
+\[
+\phi_a(x)
+=
+\1\left\{a'x>z_{1-\alpha}\sqrt{a'\Omega a}\right\}~,
+\]
+is $\alpha$-admissible. This includes vectors $a$ supported only on redundant
+coordinates.}
+
+In particular, taking \(a=e_j\) shows that the test \(\1\{X_j>z_{1-\alpha}\}\) is admissible for \emph{any} $j$.
+
+\result{Corollary 9}{Suppose $|\cC|\ge2$, $|\cR|=1$, and $\Omega$ is any
+positive-definite correlation matrix. Define
+\[
+A_{\bm\kappa}=\bigcap_{j=1}^d\{x:x_j\le\kappa_j\},
+\qquad \kappa_j\in\R~.
+\]
+If $P_0\{X\in A_{\bm\kappa}\}=1-\alpha$, then $\phi_{A_{\bm\kappa}}$ is
+$\alpha$-admissible.}
+
+Thus, with at least two core moments, adding one redundant moment to an exact-size rectangular test preserves admissibility for any positive-definite correlation matrix.
+
+The singleton-core case is different.
+
+\result{Corollary 10}{Suppose $\cC=\{1\}$. Fix $b\in\R^d$ with $b_1=0$ and
+$b_r>0$ for every $r\in\cR$, and let
+\[
+a_\varepsilon=e_1+\varepsilon b~.
+\]
+For every positive-definite correlation matrix $\Omega$, the exact-size test
+based on $a_\varepsilon'X$ is $\alpha$-admissible for all sufficiently small
+$\varepsilon>0$.}
+
+\result{Proposition 11}{Suppose $\Omega=I_d$, $\cC=\{1\}$, and
+$\cR=\{2,\ldots,d\}$. Let
+\[
+A_{\bm\kappa}=\bigcap_{j=1}^d\{x:x_j\le\kappa_j\}~,
+\]
+have exact size. For any $r\in\cR$, there is a finite $b_r$ such that the
+test with acceptance region
+\[
+A_{\bm\kappa}^{(r)}
+=
+\{x_1\le\kappa_1,\ x_1+x_r\le b_r\}
+\cap
+\bigcap_{j\notin\{1,r\}}\{x_j\le\kappa_j\}~,
+\]
+has the same size and strictly dominates $\phi_{A_{\bm\kappa}}$ at every
+$\mu\in\Lambda_1$.}
+
+These results show that redundant moments can enter an admissible test with
+one core, but the form of the test matters.  A feasible weighted sum can be
+admissible, while separate rectangular cutoffs are not.  The redundant-only
+test gives the sharpest contrast.  Rejecting when a single $X_r$ exceeds its
+calibrated quantile is admissible when $|\cC|\ge2$ by Corollary 8.  When
+$\cC=\{1\}$, the same test is inadmissible for every correlation matrix: it
+depends only on $(X_1,X_r)$ and violates the bivariate necessary-and-sufficient
+condition.
+
+\result{Conjecture 12 (multiple-core admissibility)}{If $|\cC|\ge2$, every
+nice test is $\alpha$-admissible.}
+
+Conjecture 12 if true, would be great. I suspect it is true, but proving it appears to be quite challenging. But given that it looks difficult, I would not keey trying as we have what we need. Identification redundancy
+does not imply inferential uselessness. We have the general results and could provide illustrations using the results from the 2 and 3 dimensional cases.
+
+\end{document}

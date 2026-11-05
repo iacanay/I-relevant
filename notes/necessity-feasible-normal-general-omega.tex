@@ -1,0 +1,958 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb, amsthm, bm}
+\usepackage[margin=1in]{geometry}
+\usepackage[skip=0.6em]{parskip}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+
+\begin{document}
+
+\begin{center}
+{\Large Feasible normals and admissibility\\ in the restricted bivariate normal problem\\ under general correlation}\\[3pt]
+{\small Ivan A. Canay :: August 27, 2026}
+\end{center}
+
+\medskip
+
+\section*{Setup and statement}
+
+Let
+\[
+X\sim N_2(\mu,\Omega_\rho),
+\qquad
+\Omega_\rho=
+\begin{pmatrix}
+1&\rho\\
+\rho&1
+\end{pmatrix},
+\qquad -1<\rho<1~,
+\]
+and define
+\[
+\Lambda=\{\mu:\mu_2\le \mu_1\}~,
+\]
+\[
+\Lambda_0=\{\mu\in\Lambda:\mu_1\le0\}~,
+\qquad
+\Lambda_1=\{\mu\in\Lambda:\mu_1>0\}~.
+\]
+A nonrandomized test is written as
+\[
+\phi_A(x)=I\{x\notin A\}~,
+\]
+where $A\subseteq\mathbf R^2$ is the acceptance region.  Throughout this note,
+$A$ is assumed to be closed, convex, and coordinatewise lower:
+\[
+x\in A,
+\quad y\le x
+\quad\Longrightarrow\quad
+y\in A~.
+\]
+For a closed convex set $C$, write
+\[
+h_C(a):=\sup_{x\in C}a'x
+\]
+for its support function, allowing the value $+\infty$.
+
+Relative to $P_0=N_2(0,\Omega_\rho)$, the natural parameter corresponding to
+the mean $\mu$ is $\vartheta=\Omega_\rho^{-1}\mu$.  A supporting normal $a$
+therefore generates the mean ray $\mu_\lambda=\lambda\Omega_\rho a$.  This
+suggests the feasible normal cone
+\begin{equation}\label{eq:feasible-cone-general}
+\begin{split}
+\mathcal F_\rho
+&:=\{a\in\mathbf R^2:a\ge0,\ \Omega_\rho a\in\Lambda\}\\
+&=\{a\in\mathbf R^2:0\le a_2\le a_1\}
+=\operatorname{cone}\{(1,0),(1,1)\}~.
+\end{split}
+\end{equation}
+The second equality follows because
+\[
+(\Omega_\rho a)_1-(\Omega_\rho a)_2
+=(1-\rho)(a_1-a_2)~.
+\]
+Thus the feasible normal cone does not depend on $\rho$, even though the
+likelihood-ratio geometry does.  The phrase ``all finite normals lie in
+$\mathcal F_\rho$'' means
+\begin{equation}\label{eq:finite-normal-condition}
+a\ne0,
+\quad h_A(a)<\infty
+\quad\Longrightarrow\quad
+a\in\mathcal F_\rho~.
+\end{equation}
+For a lower set, finite support already forces $a\ge0$, so failure of
+\eqref{eq:finite-normal-condition} is equivalent to the existence of some
+$a\ne0$ with
+\[
+h_A(a)<\infty~,
+\qquad
+0\le a_1<a_2~.
+\]
+
+The main result to be established is the following characterization.
+
+\begin{theorem}[Feasible-normal characterization]\label{thm:iff}
+Let $A\subseteq\mathbf R^2$ be closed, convex, and coordinatewise lower, and suppose
+\[
+P_0(X\in A)=1-\alpha~,
+\qquad 0<\alpha<1~.
+\]
+For every $-1<\rho<1$, the test $\phi_A=I\{X\notin A\}$ is
+$\alpha$-admissible against all level-$\alpha$ tests if and only if all finite
+normals of $A$ lie in $\mathcal F_\rho$, that is, if and only if
+\eqref{eq:finite-normal-condition} holds.
+\end{theorem}
+
+The proof has two parts.  The sufficient direction is the Lehmann--Romano ray
+argument.  The necessary direction is constructive.  Under nonnegative
+correlation, a bad finite normal can be repaired by the same hull and diagonal
+calibration used in the identity-covariance problem.  Under negative
+correlation, the proof first checks whether $A$ is lower along the second
+extreme ray of the transfer order.  If it is not, a conditional monotone
+rearrangement strictly improves the test.  If it is, the resulting slope bound
+restores the gain-loss ordering needed for the diagonal repair.
+
+\section*{1. Sufficiency}
+
+We use the following standard consequence of the Lehmann--Romano complete-class
+result for exponential families.
+
+\begin{proposition}[Lehmann--Romano ray criterion]\label{prop:LR}
+Consider an exponential family with natural statistic $T$ and natural parameter
+space $\Theta$.  Let $\Theta_H$ be the null parameter set and let $\Theta'$ be
+an alternative set.  Let $A_0$ be a closed convex acceptance region for a
+nonrandomized test.  Suppose that whenever
+\[
+A_0\subseteq\{t:a't\le c\}
+\]
+for some nonzero $a$, there exist $\vartheta^*\in\Theta$ and
+$\lambda_n\to\infty$ such that
+\[
+\vartheta^*+\lambda_n a\in\Theta'~.
+\]
+Then the test with acceptance region $A_0$ is $d$-admissible.  If, in addition,
+the test has exact size $\alpha$ attained at a finite null point, then it is
+$\alpha$-admissible.  These conclusions allow randomized competing tests.
+\end{proposition}
+
+\begin{lemma}[Sufficiency of feasible normals]\label{lem:sufficiency}
+If $A$ is closed, convex, coordinatewise lower, satisfies
+$P_0(A)=1-\alpha$, and satisfies \eqref{eq:finite-normal-condition}, then
+$\phi_A$ is $\alpha$-admissible against all level-$\alpha$ tests.
+\end{lemma}
+
+\begin{proof}
+Relative to $P_0$, the normal experiment has the canonical representation
+\[
+\frac{dP_\mu}{dP_0}(x)
+=\exp\left\{(\Omega_\rho^{-1}\mu)'x
+-\frac12\mu'\Omega_\rho^{-1}\mu\right\}~,
+\]
+with natural parameter $\vartheta=\Omega_\rho^{-1}\mu$ and statistic
+$T(x)=x$.  The alternative set in the natural parameter space is
+\[
+\Theta'=\Omega_\rho^{-1}\Lambda_1~.
+\]
+
+We verify the ray condition in Proposition~\ref{prop:LR}.  Suppose
+\[
+A\subseteq\{x:a'x\le c\}
+\]
+for some nonzero $a$.  Then $h_A(a)<\infty$, so by
+\eqref{eq:finite-normal-condition}, $a\in\mathcal F_\rho$.  Consider the
+natural-parameter ray $\vartheta_\lambda=\lambda a$.  Its corresponding mean is
+\[
+\mu_\lambda=\lambda\Omega_\rho a~.
+\]
+By \eqref{eq:feasible-cone-general}, $\mu_\lambda\in\Lambda$.  Moreover,
+$a\ne0$ and $0\le a_2\le a_1$ imply $a_1>0$, and
+\[
+(\mu_\lambda)_1
+=\lambda(a_1+\rho a_2)>0~.
+\]
+Indeed, this is immediate when $\rho\ge0$, while for $\rho<0$,
+\[
+a_1+\rho a_2\ge (1+\rho)a_1>0~.
+\]
+Hence $\mu_\lambda\in\Lambda_1$, or equivalently
+$\vartheta_\lambda\in\Theta'$, for every $\lambda>0$.  The ray condition holds
+with $\vartheta^*=0$ and any sequence $\lambda_n\to\infty$.
+
+Because $A$ is coordinatewise lower, the rejection region $A^c$ is
+coordinatewise upper.  For every $\mu\in\Lambda_0$, we have $\mu\le0$.
+Coupling $X=\mu+Z$ with $Z\sim N_2(0,\Omega_\rho)$ gives
+$\mu+Z\le Z$ coordinatewise, and therefore
+\[
+P_\mu(X\notin A)\le P_0(Z\notin A)=\alpha~.
+\]
+Thus the test has level $\alpha$, and exact size is attained at the finite null
+point $\mu=0$.  Proposition~\ref{prop:LR} gives $\alpha$-admissibility against
+all level-$\alpha$ tests, including randomized competitors.
+\end{proof}
+
+\section*{2. The transfer order}
+
+The necessity proof uses the order with respect to which every
+restricted-alternative likelihood ratio is increasing.  Define
+\[
+T_{1,\rho}(x):=(\Omega_\rho^{-1}\mathbf 1)'x
+=\frac{x_1+x_2}{1+\rho}~,
+\qquad
+T_{2,\rho}(x):=-(\Omega_\rho^{-1}e_2)'x
+=\frac{\rho x_1-x_2}{1-\rho^2}~,
+\]
+and write
+\[
+x\succeq_{\Lambda,\rho}y
+\quad\Longleftrightarrow\quad
+T_{1,\rho}(x)\ge T_{1,\rho}(y)
+\quad\text{and}\quad
+T_{2,\rho}(x)\ge T_{2,\rho}(y)~.
+\]
+The positive cone of this order is
+\begin{equation}\label{eq:transfer-cone}
+\begin{split}
+\Pi_\rho
+&:=\{d:x+d\succeq_{\Lambda,\rho}x\}\\
+&=\operatorname{cone}\{(1,\rho),(1,-1)\}\\
+&=\{d:d_1+d_2\ge0,\ \rho d_1-d_2\ge0\}~.
+\end{split}
+\end{equation}
+Intuitively, $\Pi_\rho$ is the cone of universally power-improving moves in
+sample space for the restricted alternatives.  The direction $(1,\rho)$ raises
+the common-shift score $T_{1,\rho}$ while leaving $T_{2,\rho}$ unchanged.  The
+direction $(1,-1)$ raises the slack score $T_{2,\rho}$ while leaving
+$T_{1,\rho}$ unchanged.
+
+For $\mu\in\Lambda_1$, write
+\[
+u:=\mu_1>0~,
+\qquad
+v:=\mu_1-\mu_2\ge0,
+\qquad
+\mu=u\mathbf 1-ve_2~.
+\]
+Then, relative to $P_0$,
+\begin{equation}\label{eq:LR-density}
+L_\mu(x):=\frac{dP_\mu}{dP_0}(x)
+=\exp\left\{uT_{1,\rho}(x)+vT_{2,\rho}(x)
+-\frac12\mu'\Omega_\rho^{-1}\mu\right\}~.
+\end{equation}
+Thus $L_\mu$ is strictly increasing in $T_{1,\rho}$ and weakly increasing in
+$T_{2,\rho}$.
+
+We first replace $A$ by its closed $-\Pi_\rho$-hull,
+\[
+\widehat A_\rho:=\operatorname{cl}(A-\Pi_\rho)~.
+\]
+Equivalently, $\widehat A_\rho$ is the smallest closed set containing $A$ that
+is closed under moves opposite to the restricted likelihood-ratio order.  This
+operation removes boundary pieces whose supporting normals point in infeasible
+directions.  It may add too much acceptance probability, so the next step will
+restore the original size by cutting $\widehat A_\rho$ with a feasible diagonal
+halfspace.
+
+For a rectangle, the hull operation retains the diagonal repair from the
+identity-covariance problem because $(1,-1)$ remains an extreme ray of
+$\Pi_\rho$.  The other extreme ray changes from $(1,0)$ to $(1,\rho)$.  When
+$\rho\ge0$, its negative is already a coordinatewise downward move and adds
+nothing to a lower acceptance region.  When $\rho<0$, it contributes an
+additional likelihood-ratio-improving transfer.  Lemma~\ref{lem:hull} treats
+both cases at once.
+
+\begin{lemma}[The feasible-normal hull]\label{lem:hull}
+The set $\widehat A_\rho$ is closed, convex, coordinatewise lower, and
+$\Pi_\rho$-lower, meaning
+\[
+x\in\widehat A_\rho~,
+\quad p\in\Pi_\rho
+\quad\Longrightarrow\quad
+x-p\in\widehat A_\rho~.
+\]
+Moreover, every nonzero finite-support direction of $\widehat A_\rho$ lies in
+$\mathcal F_\rho$.  If $A$ has a finite-support direction $a$ with
+$a_2>a_1$, then
+\[
+A\subsetneq\widehat A_\rho
+\qquad\text{and}\qquad
+P_0(\widehat A_\rho)>P_0(A)~.
+\]
+\end{lemma}
+
+\begin{proof}
+Because $\widehat A_\rho$ is the closure of the Minkowski sum
+$A+(-\Pi_\rho)$, it is closed and convex.  It contains $A$ because
+$0\in\Pi_\rho$.  It is coordinatewise lower because $A$ is coordinatewise
+lower: if $x=y-p$ with $y\in A$ and $p\in\Pi_\rho$, and if $z\le x$, then
+\[
+z=(y-(x-z))-p~,
+\]
+where $y-(x-z)\in A$.  Passing to the closure preserves the lower-set
+property.  The $\Pi_\rho$-lower property follows from the definition.
+
+The support function satisfies
+\[
+h_{\widehat A_\rho}(a)=h_A(a)+h_{-\Pi_\rho}(a)~,
+\]
+with the usual convention for extended-real sums.  Since $-\Pi_\rho$ is
+generated by $(-1,-\rho)$ and $(-1,1)$,
+\begin{equation}\label{eq:polar-condition}
+\begin{split}
+h_{-\Pi_\rho}(a)<\infty
+&\quad\Longleftrightarrow\quad
+a_1+\rho a_2\ge0
+\quad\text{and}\quad
+a_2\le a_1~.
+\end{split}
+\end{equation}
+Also, since $A$ is coordinatewise lower and nonempty, $h_A(a)<\infty$ implies
+$a\ge0$.  If $h_{\widehat A_\rho}(a)<\infty$ and $a\ne0$, it follows that
+$a\ge0$ and $a_2\le a_1$.  The remaining inequality in
+\eqref{eq:polar-condition} is then automatic: it is immediate for $\rho\ge0$,
+while for $\rho<0$,
+\[
+a_1+\rho a_2\ge(1+\rho)a_1\ge0~.
+\]
+Therefore
+\[
+0\le a_2\le a_1~,
+\]
+so $a\in\mathcal F_\rho$.
+
+Finally, suppose that $h_A(a)<\infty$ for some $a$ with $a_2>a_1$.  Then
+$h_{\widehat A_\rho}(a)=+\infty$, because $a$ is not in the polar cone of
+$-\Pi_\rho$.  Indeed, $(-1,1)\in-\Pi_\rho$ and
+\[
+a'(-1,1)=a_2-a_1>0~.
+\]
+Every point $x\in A$ therefore generates the ray
+$x+t(-1,1)\in A-\Pi_\rho$.  Along this ray the support functional tends to
+$+\infty$:
+\[
+a'\{x+t(-1,1)\}=a'x+t(a_2-a_1)\longrightarrow+\infty~.
+\]
+Hence $\widehat A_\rho$ is not contained in the supporting halfspace
+$\{x:a'x\le h_A(a)\}$ that contains $A$, so
+$\widehat A_\rho\setminus A$ is nonempty.  Since $P_0(A)\in(0,1)$ and $A$ is
+convex, $A$ has nonempty interior.  Taking a point of $\widehat A_\rho$ outside
+that supporting halfspace and joining it to an interior point of $A$ gives
+points of $\operatorname{int}(\widehat A_\rho)\setminus A$.  Thus
+$\widehat A_\rho\setminus A$ contains a nonempty open set.  The density of
+$N_2(0,\Omega_\rho)$ is everywhere positive, and therefore
+\[
+P_0(\widehat A_\rho)>P_0(A)~.
+\]
+\end{proof}
+
+\begin{lemma}[Calibration of the competitor]\label{lem:competitor}
+Suppose that $P_0(A)=1-\alpha$ and that $A$ has a finite-support direction
+$a$ satisfying $a_2>a_1$.  Then there exists a finite number $b$ such that
+\[
+P_0\bigl(\widehat A_\rho
+\cap\{x:T_{1,\rho}(x)\le b\}\bigr)=1-\alpha~.
+\]
+For any such $b$, define
+\[
+A':=\widehat A_\rho\cap\{x:T_{1,\rho}(x)\le b\}~.
+\]
+Then $A'$ is closed, convex, and coordinatewise lower, satisfies
+$P_0(A')=1-\alpha$, and every nonzero finite-support direction of $A'$ lies in
+$\mathcal F_\rho$.  Consequently, the test
+$\phi_{A'}(x)=I\{x\notin A'\}$ has level $\alpha$, attained at $\mu=0$.
+\end{lemma}
+
+\begin{proof}
+By Lemma~\ref{lem:hull},
+\[
+P_0(\widehat A_\rho)>P_0(A)=1-\alpha~.
+\]
+The map
+\[
+t\longmapsto
+P_0\bigl(\widehat A_\rho
+\cap\{x:T_{1,\rho}(x)\le t\}\bigr)
+\]
+is continuous because $T_{1,\rho}(X)$ has a nondegenerate normal distribution
+under $P_0$.  It converges to zero as $t\to-\infty$ and to
+$P_0(\widehat A_\rho)$ as $t\to\infty$.  Hence there exists a finite $b$ for
+which the displayed probability equals $1-\alpha$.
+
+The set $A'$ is closed and convex because it is the intersection of two sets
+with these properties.  It is also coordinatewise lower.  Indeed,
+\[
+T_{1,\rho}(x)=\frac{x_1+x_2}{1+\rho}
+\]
+is coordinatewise increasing because $1+\rho>0$.  Its null probability equals
+$1-\alpha$ by construction.
+
+It remains to characterize the finite-support directions of $A'$.  We first
+show that $A'$ is $\Pi_\rho$-lower.  Let $x\in A'$ and $p\in\Pi_\rho$.
+Lemma~\ref{lem:hull} implies that $x-p\in\widehat A_\rho$.  Moreover,
+$T_{1,\rho}(p)\ge0$ by the definition of $\Pi_\rho$, and therefore
+\[
+T_{1,\rho}(x-p)
+=T_{1,\rho}(x)-T_{1,\rho}(p)
+\le T_{1,\rho}(x)
+\le b~.
+\]
+Thus $x-p\in A'$.
+
+Now let $a\ne0$ satisfy $h_{A'}(a)<\infty$, and fix $x\in A'$.  Since $A'$ is
+coordinatewise lower, $x-te_j\in A'$ for every $t\ge0$ and $j=1,2$.  If
+$a_j<0$, then
+\[
+a'(x-te_j)=a'x-ta_j\longrightarrow+\infty~,
+\]
+contradicting $h_{A'}(a)<\infty$.  Hence $a_1\ge0$ and $a_2\ge0$.
+
+Because $(1,-1)\in\Pi_\rho$ and $A'$ is $\Pi_\rho$-lower,
+\[
+x-t(1,-1)\in A'
+\qquad\text{for every }t\ge0~.
+\]
+If $a_2>a_1$, then
+\[
+a'\{x-t(1,-1)\}
+=a'x+t(a_2-a_1)
+\longrightarrow+\infty~,
+\]
+again contradicting finite support.  Therefore $a_2\le a_1$.  We have shown
+that every nonzero $a$ with $h_{A'}(a)<\infty$ satisfies
+\[
+0\le a_2\le a_1~,
+\]
+so $a\in\mathcal F_\rho$.
+
+Finally, the complement of $A'$ is coordinatewise upper.  For every
+$\mu\in\Lambda_0$, we have $\mu\le0$.  Coupling $X=\mu+Z$ with
+$Z\sim N_2(0,\Omega_\rho)$ gives
+\[
+P_\mu(X\notin A')\le P_0(Z\notin A')=\alpha~.
+\]
+Equality holds at the finite null point $\mu=0$, which proves the last claim.
+\end{proof}
+
+\begin{lemma}[Transfer domination criterion]\label{lem:transfer}
+Let $G$ and $D$ be Borel sets with
+\[
+P_0(G)=P_0(D)>0~.
+\]
+Suppose that, for every $g\in G$ and $d\in D$,
+\[
+T_{1,\rho}(g)>T_{1,\rho}(d)
+\qquad\text{and}\qquad
+T_{2,\rho}(g)\ge T_{2,\rho}(d)~.
+\]
+Then
+\[
+P_\mu(G)>P_\mu(D)
+\qquad\text{for every }\mu\in\Lambda_1~.
+\]
+\end{lemma}
+
+\begin{proof}
+Let $m=P_0(G)=P_0(D)$.  Using the likelihood ratio in
+\eqref{eq:LR-density},
+\[
+m\{P_\mu(G)-P_\mu(D)\}
+=
+\int_G\int_D
+\{L_\mu(g)-L_\mu(d)\}\,dP_0(d)\,dP_0(g)~.
+\]
+For $\mu\in\Lambda_1$, the coefficient on $T_{1,\rho}$ in
+\eqref{eq:LR-density} is $u=\mu_1>0$, while the coefficient on
+$T_{2,\rho}$ is $v=\mu_1-\mu_2\ge0$.  The assumed ordering therefore gives
+\[
+L_\mu(g)>L_\mu(d)
+\]
+for every pair $(g,d)\in G\times D$.  Since $m>0$, the double integral is
+strictly positive, which proves the result.
+\end{proof}
+
+\section*{3. Necessity}
+
+It remains to prove that a bad finite normal generates sets $G$ and $D$
+satisfying Lemma~\ref{lem:transfer}.  The proof is slicewise.  The first step is
+to observe that, although the transfer cone $\Pi_\rho$ depends on $\rho$, its
+lower hull does not.  Let
+\[
+K:=\operatorname{cone}\{(1,-1)\}~.
+\]
+Since $K\subseteq\Pi_\rho$, we have $A-K\subseteq A-\Pi_\rho$.  For the reverse
+inclusion, recall that
+\[
+\Pi_\rho=\operatorname{cone}\{(1,\rho),(1,-1)\}~.
+\]
+If $\rho\ge0$, subtracting a nonnegative multiple of $(1,\rho)$ is a
+coordinatewise downward move and is already absorbed by $A$.  If $\rho<0$,
+then
+\[
+(1,\rho)=(-\rho)(1,-1)+(1+\rho)e_1~,
+\]
+where both coefficients are positive.  Subtracting the second term is again a
+coordinatewise downward move.  Hence, in both cases,
+\begin{equation}\label{eq:hull-reduction}
+A-\Pi_\rho=A-K,
+\qquad
+\widehat A_\rho=\operatorname{cl}(A-K)~.
+\end{equation}
+
+For $s\in\mathbf R$, define the horizontal boundary of $A$ by
+\[
+\beta(s):=\sup\{x_1:(x_1,s)\in A\}\in[-\infty,+\infty]~.
+\]
+Since $A$ is closed, convex, and coordinatewise lower,
+\[
+A\cap\{x_2=s\}=\{(x_1,s):x_1\le\beta(s)\}~,
+\]
+with the usual interpretation when $\beta(s)=\pm\infty$.  The function
+$\beta$ is concave in the extended-real sense.  Set
+\[
+m(s):=\beta(s)+s,
+\qquad
+M(s):=\sup_{r\le s}m(r)~.
+\]
+Thus $m(s)$ is the largest value of the unscaled diagonal score
+$x_1+x_2=(1+\rho)T_{1,\rho}(x)$ on the horizontal slice of $A$, and $M(s)$ is
+its running maximum from below.
+
+\begin{lemma}[Slice formula for $\widehat A_\rho$]\label{lem:slice-formula}
+For every $s\in\mathbf R$,
+\[
+\widehat A_\rho\cap\{x_2=s\}
+=
+\{(x_1,s):x_1\le M(s)-s\}~.
+\]
+Equivalently,
+\[
+(x_1,s)\in\widehat A_\rho
+\quad\Longleftrightarrow\quad
+x_1+s\le M(s)~.
+\]
+\end{lemma}
+
+\begin{proof}
+We first verify that the set
+\[
+C:=\{(x_1,s):x_1+s\le M(s)\}
+\]
+is closed.  The function $M$ is never $-\infty$.  To see this, fix
+$(x_1^0,s_0)\in A$.  If $s\ge s_0$, then $M(s)\ge m(s_0)>-\infty$; if
+$s<s_0$, coordinatewise lowerness gives $(x_1^0,s)\in A$, so
+$M(s)\ge m(s)>-\infty$.
+
+The function $M$ is nondecreasing.  It is also concave whenever it is finite.
+Indeed, for $s_1,s_2\in\mathbf R$, choose $r_i\le s_i$ such that
+$m(r_i)\ge M(s_i)-\varepsilon$, $i=1,2$.  For every $\lambda\in[0,1]$,
+concavity of $m$ gives
+\begin{align*}
+M\{\lambda s_1+(1-\lambda)s_2\}
+&\ge m\{\lambda r_1+(1-\lambda)r_2\}\\
+&\ge \lambda M(s_1)+(1-\lambda)M(s_2)-\varepsilon~.
+\end{align*}
+Letting $\varepsilon\downarrow0$ proves the claim.
+
+If $M$ takes the value $+\infty$ at some point, then it is identically
+$+\infty$.  Monotonicity gives this conclusion to the right.  To see it to the
+left, suppose $M(s_0)=+\infty$ and fix $t<s_0$.  Choose $r_n\le s_0$ with
+$m(r_n)\to+\infty$.  If $r_n\le t$ along a subsequence, then $M(t)=+\infty$.
+Otherwise, $t<r_n\le s_0$ eventually.  Since $A$ is coordinatewise lower,
+$\beta(t)\ge\beta(r_n)$, and hence
+\[
+m(t)\ge m(r_n)+t-r_n
+\ge m(r_n)+t-s_0\longrightarrow+\infty~.
+\]
+Thus $M(t)=+\infty$ in this case as well.  It follows that either
+$M\equiv+\infty$, in which case $C=\mathbf R^2$, or $M$ is a finite concave
+function on $\mathbf R$.  In the latter case $M$ is continuous.  Therefore $C$
+is closed in either case.
+
+Now suppose $(x_1,s)\in A-K$.  By \eqref{eq:hull-reduction}, there exist
+$(y_1,r)\in A$ and $\tau\ge0$ such that
+\[
+(x_1,s)=(y_1,r)-\tau(1,-1)~.
+\]
+Hence $r=s-\tau\le s$ and
+\[
+x_1+s=y_1+r\le m(r)\le M(s)~.
+\]
+Thus $A-K\subseteq C$.  Since $C$ is closed,
+$\widehat A_\rho=\operatorname{cl}(A-K)\subseteq C$.
+
+Conversely, suppose $x_1+s<M(s)$.  Then there exists $r\le s$ such that
+\[
+m(r)>x_1+s~.
+\]
+Choose $y_1\le\beta(r)$ with $y_1+r>x_1+s$.  Then $(y_1,r)\in A$.  Since $A$
+is coordinatewise lower, the point
+\[
+\widetilde y_1:=x_1+s-r<y_1
+\]
+also satisfies $(\widetilde y_1,r)\in A$.  Setting $\tau=s-r\ge0$ gives
+\[
+(x_1,s)=(\widetilde y_1,r)-\tau(1,-1)\in A-K~.
+\]
+Thus every point satisfying the strict inequality belongs to $A-K$.  If
+$x_1+s=M(s)$, apply this argument to $(x_1-1/n,s)$ and let $n\to\infty$.
+Since $\widehat A_\rho$ is closed, the point $(x_1,s)$ also belongs to
+$\widehat A_\rho$.  This proves the formula.
+\end{proof}
+
+For $\rho<0$, write
+\[
+q_\rho:=(1,\rho)~,
+\]
+and say that a set $C$ is $q_\rho$-lower if
+\[
+x\in C,\quad t\ge0
+\quad\Longrightarrow\quad
+x-tq_\rho\in C~.
+\]
+This property is automatic when $\rho\ge0$ and $C$ is coordinatewise lower,
+but not when $\rho<0$: subtracting $q_\rho$ lowers the first coordinate and
+raises the second.  The next two lemmas handle the two possibilities.
+
+\begin{lemma}[Conditional rearrangement]\label{lem:rearrangement}
+Suppose $\rho<0$.  If $A$ is not $q_\rho$-lower, then there exists a Borel
+acceptance region $A^{\mathrm r}$ such that the test
+$\phi_{A^{\mathrm r}}=I\{X\notin A^{\mathrm r}\}$ has level $\alpha$ and
+\[
+P_\mu(A^{\mathrm r})<P_\mu(A)
+\qquad\text{for every }\mu\in\Lambda_1~.
+\]
+Consequently, $\phi_{A^{\mathrm r}}$ strictly dominates $\phi_A$.
+\end{lemma}
+
+\begin{proof}
+Introduce the coordinates
+\[
+Z=X_1,
+\qquad
+E=X_2-\rho X_1~.
+\]
+Writing $\mu=(u,u-v)$, where $v\ge0$ on $\Lambda$, we have
+\[
+Z\sim N(u,1),
+\qquad
+E\sim N((1-\rho)u-v,1-\rho^2),
+\qquad
+Z\perp E~.
+\]
+For $e\in\mathbf R$, let
+\[
+A_e:=\{z:(z,e+\rho z)\in A\},
+\qquad
+p(e):=\Phi(A_e),
+\]
+where $\Phi$ denotes standard normal probability.  By Fubini's theorem,
+$p$ is measurable.  Moreover, if $e_1\le e_2$, coordinatewise lowerness of
+$A$ gives $A_{e_2}\subseteq A_{e_1}$.  Hence $p$ is nonincreasing.
+
+Let
+\[
+c(e):=\Phi^{-1}\{p(e)\},
+\]
+with the conventions $c(e)=-\infty$ when $p(e)=0$ and $c(e)=+\infty$ when
+$p(e)=1$, and define
+\begin{equation}\label{eq:rearranged-set}
+A^{\mathrm r}
+:=\{x:x_1\le c(x_2-\rho x_1)\}~.
+\end{equation}
+The function $c$ is measurable and nonincreasing.  Thus, in $(z,e)$
+coordinates, $A^{\mathrm r}=\{(z,e):z\le c(e)\}$ is Borel and
+coordinatewise lower.
+
+Under $P_0$, $Z$ and $E$ are independent and the conditional standard normal
+mass of every section is preserved.  It follows that
+\[
+P_0(A^{\mathrm r})=P_0(A)=1-\alpha~.
+\]
+If $\mu\in\Lambda_0$, then $u\le0$, $v\ge0$, and
+\[
+\bigl(u,(1-\rho)u-v\bigr)\le(0,0)~.
+\]
+Since $A^{\mathrm r}$ is lower in $(z,e)$ coordinates, translation coupling
+therefore gives
+\[
+P_\mu(A^{\mathrm r})\ge P_0(A^{\mathrm r})=1-\alpha~.
+\]
+The rearranged test consequently has level $\alpha$, with equality at
+$\mu=0$.
+
+Now fix $\mu\in\Lambda_1$, so that $u>0$.  Conditional on $E=e$, the
+likelihood ratio of $N(u,1)$ relative to $N(0,1)$ is strictly increasing in
+$z$.  Among all subsets of the real line having standard normal probability
+$p(e)$, the left halfline $(-\infty,c(e)]$ therefore minimizes their
+$N(u,1)$ probability.  Applying this conditional Neyman--Pearson inequality
+and integrating over $E$ yields
+\begin{equation}\label{eq:weak-rearrangement}
+P_\mu(A^{\mathrm r})\le P_\mu(A)~.
+\end{equation}
+
+It remains to prove strictness.  Because $A$ is not $q_\rho$-lower, there are
+$x\in A$ and $t>0$ for which $x-tq_\rho\notin A$.  The set $A$ has nonempty
+interior.  By moving $x$ slightly toward an interior point of $A$, if
+necessary, we may find $x^0\in\operatorname{int}(A)$ and $t_0>0$ such that
+$x^0-t_0q_\rho\notin A$.  Closedness of $A$ then gives small open
+neighborhoods of these two points, the first contained in $A$ and the second
+contained in its complement.  Under the invertible map
+\[
+H(x)=(x_1,x_2-\rho x_1),
+\]
+the two centers have the same second coordinate and their first coordinates
+differ by $t_0$.  The images of the neighborhoods consequently contain two
+rectangles with a common nonempty interval of $e$ values.  For every $e$ in a
+smaller such interval, $A_e$ contains an interval lying strictly to the right
+of an interval it omits.  Thus $A_e$ is not a left halfline modulo standard
+normal measure.  The conditional Neyman--Pearson inequality is strict for all
+these $e$.  Since the density of $E$ is everywhere positive, integration
+makes \eqref{eq:weak-rearrangement} strict for every $u>0$, and hence for every
+$\mu\in\Lambda_1$.
+\end{proof}
+
+\begin{lemma}[Gain-loss separation]\label{lem:gain-loss}
+Let $A'$ be defined as in Lemma~\ref{lem:competitor}, and define the gain and
+loss sets
+\[
+G:=A\setminus A'
+=A\cap\{T_{1,\rho}>b\},
+\qquad
+D:=A'\setminus A~.
+\]
+Suppose either that $0\le\rho<1$, or that $-1<\rho<0$ and $A$ is
+$q_\rho$-lower.  Then
+\[
+P_0(G)=P_0(D)>0~.
+\]
+Moreover, for every $g\in G$ and every $d\in D$,
+\[
+T_{1,\rho}(g)>T_{1,\rho}(d)
+\qquad\text{and}\qquad
+T_{2,\rho}(g)\ge T_{2,\rho}(d)~.
+\]
+\end{lemma}
+
+\begin{proof}
+Since $A\subseteq\widehat A_\rho$ and
+$A'=\widehat A_\rho\cap\{T_{1,\rho}\le b\}$,
+\[
+A\setminus A'=A\cap\{T_{1,\rho}>b\}=G~.
+\]
+Also $D=A'\setminus A$.  Because $P_0(A)=P_0(A')=1-\alpha$,
+\[
+P_0(G)=P_0(D)~.
+\]
+This common mass is positive.  Otherwise $A$ and $A'$ would be equal up to a
+Gaussian null set.  Since both sets are closed, convex, and have positive
+Gaussian probability, they have nonempty interiors.  If the sets were not
+equal, joining a point in one set but not the other to an interior point of the
+first set would produce a nonempty open subset of their symmetric difference.
+The Gaussian density is everywhere positive, so the symmetric difference could
+not have probability zero.  Hence null symmetric difference would imply
+$A=A'$.  This is impossible because Lemma~\ref{lem:competitor} shows that every
+finite-support direction of $A'$ lies in $\mathcal F_\rho$, whereas $A$ has a
+finite-support direction outside $\mathcal F_\rho$.
+
+We now prove the ordering.  Write
+\[
+B_\rho:=(1+\rho)b~,
+\]
+so that $T_{1,\rho}(x)\le b$ is equivalent to
+$x_1+x_2\le B_\rho$.  On the slice $x_2=s$, the gain set is
+\[
+G_s
+:=\{x_1:(x_1,s)\in G\}
+=
+(B_\rho-s,\beta(s)]~.
+\]
+Thus
+\begin{equation}\label{eq:gain-slice}
+G_s\ne\varnothing
+\quad\Longleftrightarrow\quad
+m(s)>B_\rho~.
+\end{equation}
+Using Lemma~\ref{lem:slice-formula}, the loss slice is
+\[
+D_s
+:=\{x_1:(x_1,s)\in D\}
+=
+(\beta(s),\min\{M(s),B_\rho\}-s]~.
+\]
+Consequently,
+\begin{equation}\label{eq:loss-slice}
+D_s\ne\varnothing
+\quad\Longleftrightarrow\quad
+M(s)>m(s)
+\quad\text{and}\quad
+m(s)<B_\rho~.
+\end{equation}
+
+Let
+\[
+s_+:=\sup\{s:m(s)>B_\rho\}~.
+\]
+The set in braces is nonempty because $P_0(G)>0$.  We claim that
+\[
+G_s\ne\varnothing\quad\Longrightarrow\quad s\le s_+,
+\]
+and
+\[
+D_s\ne\varnothing\quad\Longrightarrow\quad s\ge s_+~.
+\]
+The first implication follows from the definition of $s_+$ and
+\eqref{eq:gain-slice}.  For the second, suppose toward a contradiction that
+$D_s\ne\varnothing$ for some $s<s_+$.  By \eqref{eq:loss-slice},
+$M(s)>m(s)$, so there is $q\le s$ such that
+\[
+m(q)>m(s)~.
+\]
+Necessarily $q<s$.  Since $s<s_+$, there is also $r>s$ such that
+\[
+m(r)>B_\rho>m(s)~.
+\]
+Because $q<s<r$ and $m$ is concave, for the unique $\lambda\in(0,1)$ satisfying
+$s=\lambda q+(1-\lambda)r$ we obtain
+\[
+m(s)
+\ge
+\lambda m(q)+(1-\lambda)m(r)
+>
+m(s)~,
+\]
+a contradiction.  Hence no loss slice lies below $s_+$.  Since $D$ is nonempty,
+this also shows that $s_+$ is finite.
+
+It follows that every $g\in G$ and $d\in D$ satisfy
+\[
+g_2\le s_+\le d_2~.
+\]
+In fact, $g_2<d_2$, because a gain slice requires $m(s)>B_\rho$, whereas a
+loss slice requires $m(s)<B_\rho$.
+By definition of the gain and loss sets,
+\[
+T_{1,\rho}(g)>b\ge T_{1,\rho}(d)~.
+\]
+If $\rho\ge0$, the identity
+\[
+T_{2,\rho}(x)
+=\frac{\rho T_{1,\rho}(x)-x_2}{1-\rho}
+\]
+gives
+\[
+T_{2,\rho}(g)-T_{2,\rho}(d)
+=
+\frac{
+\rho\{T_{1,\rho}(g)-T_{1,\rho}(d)\}+d_2-g_2
+}{1-\rho}
+\ge0~,
+\]
+which proves the result in this case.
+
+Suppose instead that $\rho<0$ and $A$ is $q_\rho$-lower.  If $s<t$ and
+$(x_1,s)\in A$, set $\tau=(t-s)/(-\rho)$.  Then
+\[
+(x_1,s)-\tau q_\rho=(x_1-\tau,t)\in A~.
+\]
+It follows that
+\[
+\beta(t)\ge\beta(s)-\frac{t-s}{-\rho}
+\]
+whenever the relevant boundaries are finite, and hence
+\begin{equation}\label{eq:slope-bound}
+m(s)-m(t)
+\le
+\frac{1+\rho}{-\rho}(t-s)~.
+\end{equation}
+For $g\in G$ and $d\in D$, put $s=g_2$ and $t=d_2$.  We have $s<t$,
+and the boundaries at $s$ and $t$ are finite.  Indeed, a gain point makes the
+slice at $s$ nonempty, while $q_\rho$-lowerness carries such a point to height
+$t$; moreover, $\beta(s)=+\infty$ would force $\beta(t)=+\infty$, contrary to
+the existence of a loss point at $t$.  Therefore
+\[
+g_1+s\le m(s),
+\qquad
+d_1+t>m(t),
+\]
+and therefore, by \eqref{eq:slope-bound},
+\[
+(g_1+g_2)-(d_1+d_2)
+<\frac{1+\rho}{-\rho}(d_2-g_2)~.
+\]
+Since $\rho<0$, multiplication reverses this strict inequality.  Consequently,
+\begin{align*}
+(1-\rho^2)\{T_{2,\rho}(g)-T_{2,\rho}(d)\}
+&=\rho\{(g_1+g_2)-(d_1+d_2)\}
+ +(1+\rho)(d_2-g_2)\\
+&>0~.
+\end{align*}
+This proves the asserted pairwise ordering in both cases.
+\end{proof}
+
+\begin{lemma}[Necessity of feasible normals]\label{lem:necessity}
+If $A$ has a finite-support direction $a$ with $a_2>a_1$, then $\phi_A$ is
+inadmissible.  More precisely, there exists a level-$\alpha$ test $\phi^*$
+such that
+\[
+P_\mu(\phi^*=1)>P_\mu(\phi_A=1)
+\qquad\text{for every }\mu\in\Lambda_1~.
+\]
+\end{lemma}
+
+\begin{proof}
+First suppose $\rho\ge0$, and construct $A'$ as in
+Lemma~\ref{lem:competitor}.  That lemma shows that $\phi_{A'}$ has level
+$\alpha$.  Writing $G=A\setminus A'$ and $D=A'\setminus A$, the difference in
+power is
+\[
+P_\mu(X\notin A')-P_\mu(X\notin A)
+=P_\mu(G)-P_\mu(D)~.
+\]
+Lemma~\ref{lem:gain-loss} verifies the hypotheses of the transfer criterion,
+Lemma~\ref{lem:transfer}.  Hence this difference is strictly positive for
+every $\mu\in\Lambda_1$.
+
+Now suppose $\rho<0$.  If $A$ is not $q_\rho$-lower,
+Lemma~\ref{lem:rearrangement} supplies a level-$\alpha$ test that strictly
+dominates $\phi_A$ at every $\mu\in\Lambda_1$.  If $A$ is $q_\rho$-lower,
+construct $A'$ as in Lemma~\ref{lem:competitor}.  The negative-correlation
+part of Lemma~\ref{lem:gain-loss} again verifies the hypotheses of
+Lemma~\ref{lem:transfer}, so $\phi_{A'}$ strictly dominates $\phi_A$ on
+$\Lambda_1$.  These cases exhaust $-1<\rho<1$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:iff}]
+If all finite normals of $A$ lie in $\mathcal F_\rho$,
+Lemma~\ref{lem:sufficiency} gives $\alpha$-admissibility against all
+level-$\alpha$ tests.
+
+Conversely, suppose the finite-normal condition fails.  Since $A$ is
+coordinatewise lower, every finite-support direction is nonnegative.  Thus
+there exists $a\ne0$ such that
+\[
+h_A(a)<\infty,
+\qquad
+0\le a_1<a_2~.
+\]
+Lemma~\ref{lem:necessity} constructs a level-$\alpha$ test that strictly
+dominates $\phi_A$ at every $\mu\in\Lambda_1$.  Therefore $\phi_A$ is
+inadmissible.
+\end{proof}
+
+\begin{remark}[Why the identity case needs no extra step]
+When $\rho=0$, the score $T_{2,0}(x)=-x_2$.  The vertical separation
+$g_2<d_2$ therefore gives the required score ordering directly.  Equivalently,
+$q_0=(1,0)$, and coordinatewise lowerness already implies $q_0$-lowerness.
+For $\rho<0$, neither fact remains true: $T_{2,\rho}$ contains a negative
+multiple of $T_{1,\rho}$, and subtracting $q_\rho$ raises the second
+coordinate.  The rearrangement lemma handles acceptance regions that fail
+this new directional monotonicity; the slope bound in
+Lemma~\ref{lem:gain-loss} handles those that satisfy it.  This is precisely
+the additional work required beyond the identity-covariance proof.
+\end{remark}
+
+\end{document}

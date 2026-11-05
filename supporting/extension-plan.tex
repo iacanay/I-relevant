@@ -1,0 +1,487 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb, amsthm, bm}
+\usepackage[margin=1in]{geometry}
+\usepackage[skip=0.6em]{parskip}
+
+\newtheorem{proposition}{Proposition}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+
+\begin{document}
+
+\begin{center}
+{\Large Extension plan: redundant moments in a\\ studentized Gaussian limit experiment}\\[3pt]
+{\small Ivan A. Canay :: August 27, 2026}
+\end{center}
+
+\medskip
+
+\section*{1. Motivation and limit experiment}
+
+Consider a moment inequality problem based on a known vector-valued function $m(W,\theta)\in\mathbf R^d$.  The null hypothesis at a fixed value of $\theta$ is
+\[
+E[m(W,\theta)]\le0~.
+\]
+Under the usual local asymptotic approximation, the vector of studentized sample moments converges to
+\[
+X\sim N_d(\mu,\Omega)~,
+\]
+where $\Omega$ is a positive-definite correlation matrix.  The correlation matrix is part of the limit experiment and should be left unrestricted.
+
+Partition the moment indices into two nonempty sets.  Let $\mathcal C$ denote the \emph{core} moments, which contain all identifying information, and let $\mathcal R$ denote the moments that are redundant for identification. We assume $|\mathcal C| \geq 1$ and $|\mathcal R| \geq 1$. Write
+\[
+\mu=(\mu_{\mathcal C}',\mu_{\mathcal R}')'~.
+\]
+The proposed restriction on the standardized mean vector is
+\begin{equation}\label{eq:redundancy}
+\text{for every }r\in\mathcal R,\quad
+\mu_r\le\mu_c\text{ for some }c\in\mathcal C~.
+\end{equation}
+Equivalently, define
+\[
+\Lambda
+:=
+\left\{\mu\in\mathbf R^d:
+\mu_r\le\max_{c\in\mathcal C}\mu_c
+\text{ for every }r\in\mathcal R
+\right\}~.
+\]
+The restricted null and alternative are
+\[
+\Lambda_0:=\Lambda\cap(-\infty,0]^d~,
+\qquad
+\Lambda_1:=\Lambda\setminus\Lambda_0
+=
+\left\{\mu\in\Lambda:
+\max_{c\in\mathcal C}\mu_c>0
+\right\}~.
+\]
+A redundant moment cannot have a positive mean unless at least one core moment also has a positive mean.  Therefore the core moments determine whether the null is violated, even though the redundant moments may still contain useful sampling information.
+
+\section*{2. Why the restriction is imposed after studentization}
+
+Condition~\eqref{eq:redundancy} is a restriction on the standardized local means.  This point should be stated explicitly.  If $\delta_j$ denotes the local drift of the unstandardized $j$th moment and $\sigma_j$ is its standard deviation, then
+\[
+\mu_j=\frac{\delta_j}{\sigma_j}~.
+\]
+An ordering of the unstandardized drifts, such as $\delta_r\le\delta_c$, becomes
+\[
+\sigma_r\mu_r\le\sigma_c\mu_c~,
+\]
+and does not in general imply $\mu_r\le\mu_c$.  The standardized restriction is therefore a substantive feature of the model, not a normalization that follows automatically from redundancy of the original moments.  It is also the scale-invariant formulation: multiplying a moment by a positive constant changes neither its studentized statistic nor its standardized local mean.
+
+\section*{3. Feasible normals under arbitrary correlation}
+
+Let $A\subseteq\mathbf R^d$ be the acceptance region of the nonrandomized test
+\[
+\phi_A(x)=I\{x\notin A\}~.
+\]
+Suppose that $A$ is closed, convex, and coordinatewise lower, and that
+\[
+P_0(X\in A)=1-\alpha~.
+\]
+For a closed convex set $C$, write
+\[
+h_C(a):=\sup_{x\in C}a'x
+\]
+for its support function.  Since $A$ is coordinatewise lower, $h_A(a)<\infty$ for a nonzero direction $a$ only if $a\ge0$.
+
+Relative to $P_0=N_d(0,\Omega)$, the Gaussian family has the canonical representation
+\[
+\frac{dP_\vartheta}{dP_0}(x)
+=
+\exp\left\{\vartheta'x-\frac12\vartheta'\Omega\vartheta\right\}~,
+\qquad
+\vartheta=\Omega^{-1}\mu~.
+\]
+The corresponding null and alternative subsets of the natural parameter space are
+\[
+\Theta_H:=\Omega^{-1}\Lambda_0~,
+\qquad
+\Theta':=\Omega^{-1}\Lambda_1~.
+\]
+Consequently, a supporting normal $a$ generates the natural-parameter ray
+$\vartheta_\lambda=\lambda a$ and the corresponding mean ray
+\[
+\mu_\lambda=\lambda\Omega a~.
+\]
+This suggests the feasible-normal set
+\begin{equation}\label{eq:feasible-set}
+\mathcal F(\Omega,\Lambda)
+:=
+\{a\in\mathbf R^d:a\ge0,\ \Omega a\in\Lambda\}~.
+\end{equation}
+
+\begin{proposition}[Feasible-normal sufficiency]\label{prop:sufficiency}
+Let $X\sim N_d(\mu,\Omega)$, where $\Omega$ is a positive-definite correlation matrix, and let $\Lambda_0$ and $\Lambda_1$ be defined above.  Suppose that $A$ is closed, convex, and coordinatewise lower, satisfies $P_0(X\in A)=1-\alpha$, and
+\[
+a\ne0,\quad h_A(a)<\infty
+\quad\Longrightarrow\quad
+a\in\mathcal F(\Omega,\Lambda)~.
+\]
+Then $\phi_A$ is $\alpha$-admissible against all level-$\alpha$ tests, including randomized competitors.
+\end{proposition}
+
+The argument applies Theorem 6.7.1 and Corollary 6.7.1 of Lehmann and Romano (2005).  Let $a$ be a finite supporting normal.  By assumption, $\Omega a\in\Lambda$.  Set $\vartheta_\lambda=\lambda a$, whose corresponding mean is $\mu_\lambda=\lambda\Omega a$.  This mean ray cannot remain in the null: if $\Omega a\le0$, then
+\[
+a'\Omega a\le0~,
+\]
+which contradicts positive definiteness because $a\ne0$.  Thus $\Omega a$ has a positive coordinate.  Condition~\eqref{eq:redundancy} then implies that some core coordinate is positive, so $\mu_\lambda\in\Lambda_1$, or equivalently $\vartheta_\lambda\in\Theta'$, for every $\lambda>0$.  This verifies the Lehmann--Romano ray condition with $\vartheta^*=0$.  Finally, coordinatewise lowerness makes $\mu=0$ a least favorable null point and gives exact size there.  Since $\vartheta=0$ is a finite point in $\Theta_H$, the corollary gives $\alpha$-admissibility, including against randomized competitors.
+
+\section*{4. An admissible test that uses redundant moments}
+
+Proposition~\ref{prop:sufficiency} gives a simple construction that works for every positive-definite correlation matrix.  Fix any core index $c_0\in\mathcal C$, and let $b\in\mathbf R^d$ satisfy
+\[
+b_c=0\quad(c\in\mathcal C),
+\qquad
+b_r>0\quad(r\in\mathcal R)~.
+\]
+For $\varepsilon>0$, define
+\[
+a_\varepsilon=e_{c_0}+\varepsilon b~.
+\]
+At $\varepsilon=0$,
+\[
+(\Omega e_{c_0})_{c_0}=1,
+\qquad
+(\Omega e_{c_0})_r=\Omega_{r c_0}<1
+\quad\text{for every }r\in\mathcal R~.
+\]
+The strict inequality follows from positive definiteness and the fact that $\Omega$ is a correlation matrix.  Since $\mathcal R$ is finite, continuity implies that, for all sufficiently small $\varepsilon>0$,
+\[
+(\Omega a_\varepsilon)_r
+<
+(\Omega a_\varepsilon)_{c_0}
+\quad\text{for every }r\in\mathcal R~.
+\]
+Hence $a_\varepsilon\in\mathcal F(\Omega,\Lambda)$.
+
+Let $z_{1-\alpha}=\Phi^{-1}(1-\alpha)$ and consider
+\begin{equation}\label{eq:augmented-test}
+\phi_\varepsilon(x)
+=
+I\left\{
+a_\varepsilon'x>
+z_{1-\alpha}\sqrt{a_\varepsilon'\Omega a_\varepsilon}
+\right\}~.
+\end{equation}
+This test assigns strictly positive weight to every redundant moment.  Its acceptance region is a closed, convex, coordinatewise lower halfspace, and its only finite normal is $a_\varepsilon$.  Proposition~\ref{prop:sufficiency} therefore gives the following conclusion.
+
+\begin{proposition}[Admissible use of redundant moments]\label{prop:existence}
+For every positive-definite correlation matrix $\Omega$, there exists $\varepsilon>0$ such that the test in~\eqref{eq:augmented-test} has exact size $\alpha$ and is $\alpha$-admissible against all level-$\alpha$ tests.  The test places strictly positive weight on every moment in $\mathcal R$.
+\end{proposition}
+
+This result makes the paper's main point directly.  Moments that are redundant for identification need not be irrelevant for inference.  They can enter a test that is globally admissible in the Gaussian limit experiment, without imposing any special structure on the correlation matrix. In particular, a test that uses one selected core moment and all redundant moments is admissible.
+
+This does not say it is the best test, or that it has attractive power against every alternative. It says no other level-\(\alpha\) test can weakly improve its power everywhere in \(\Lambda_1\) and improve it strictly somewhere. Ignoring the other core moments may look inefficient for some alternatives, but any attempt to repair that weakness must sacrifice power somewhere else, particularly along the LR ray generated by \(a_\varepsilon\).
+
+\section*{5. A dominated rectangular test}
+
+\subsection*{5.1 One core and arbitrarily many redundant moments}
+
+Proposition~\ref{prop:existence} does not imply that every use of the redundant
+moments is admissible.  A general example can be obtained under identity
+covariance without reducing the experiment to two dimensions.  Suppose that
+there is one core moment and an arbitrary number of redundant moments:
+\[
+\Omega=I_d,
+\qquad
+\mathcal C=\{1\},
+\qquad
+\mathcal R=\{2,\ldots,d\},
+\]
+and
+\[
+\Lambda
+=
+\{\mu\in\mathbf R^d:\mu_r\le\mu_1
+  \text{ for every }r\in\mathcal R\}~.
+\]
+In this case $\Lambda_1=\{\mu\in\Lambda:\mu_1>0\}$.
+
+Consider a finite rectangular acceptance region
+\begin{equation}\label{eq:general-rectangle}
+A_{\bm\kappa}
+:=
+\bigcap_{j=1}^d\{x_j\le\kappa_j\},
+\qquad
+\prod_{j=1}^d\Phi(\kappa_j)=1-\alpha~.
+\end{equation}
+The resulting test is a standard componentwise-threshold procedure that uses
+the core moment and every redundant moment.  Fix any $r\in\mathcal R$.  Since
+\[
+0<\Phi(\kappa_1)\Phi(\kappa_r)<\Phi(\kappa_1),
+\]
+there is a unique finite $b_r$ satisfying
+\begin{equation}\label{eq:gate-calibration}
+P_0\{X_1\le\kappa_1,\ X_1+X_r\le b_r\}
+=
+\Phi(\kappa_1)\Phi(\kappa_r)~.
+\end{equation}
+Replace the redundant face $x_r\le\kappa_r$ by the gated-sum face
+$x_1+x_r\le b_r$, leaving every other face unchanged.  The resulting
+acceptance region is
+\begin{equation}\label{eq:gated-rectangle}
+A_{\bm\kappa}^{(r)}
+:=
+\{x_1\le\kappa_1,\ x_1+x_r\le b_r\}
+\cap
+\bigcap_{j\notin\{1,r\}}\{x_j\le\kappa_j\}~.
+\end{equation}
+
+\begin{proposition}[A dominated rectangle]\label{prop:rectangle-dominated}
+Under the preceding conditions, the test with acceptance region
+$A_{\bm\kappa}^{(r)}$ has exact size $\alpha$ and strictly dominates the test
+with acceptance region $A_{\bm\kappa}$.  In particular,
+\[
+P_\mu\{X\notin A_{\bm\kappa}^{(r)}\}
+>
+P_\mu\{X\notin A_{\bm\kappa}\}
+\qquad
+\text{for every }\mu\in\Lambda_1~.
+\]
+\end{proposition}
+
+To see this, first note that independence and
+\eqref{eq:gate-calibration} give
+\[
+P_0(A_{\bm\kappa}^{(r)})
+=
+P_0(A_{\bm\kappa})
+=1-\alpha~.
+\]
+The set $A_{\bm\kappa}^{(r)}$ is coordinatewise lower, so its test has level
+$\alpha$, attained at $\mu=0$.
+
+It remains to compare power.  In the $(1,r)$ coordinates, the region newly
+rejected by the gated test is
+\[
+G_r
+:=
+\{x_1\le\kappa_1,\ x_r\le\kappa_r,\ x_1+x_r>b_r\},
+\]
+whereas the region newly accepted is
+\[
+D_r
+:=
+\{x_1\le\kappa_1,\ x_r>\kappa_r,\ x_1+x_r\le b_r\}~.
+\]
+Calibration implies $P_0(G_r)=P_0(D_r)>0$.  Every $g\in G_r$ and $d\in D_r$
+satisfy
+\[
+g_1+g_r>d_1+d_r,
+\qquad
+-g_r>-d_r~.
+\]
+For $\mu\in\Lambda_1$, write
+\[
+u:=\mu_1>0,
+\qquad
+v:=\mu_1-\mu_r\ge0~.
+\]
+The likelihood ratio in the $(1,r)$ coordinates is proportional to
+\[
+\exp\{u(x_1+x_r)+v(-x_r)\}~.
+\]
+It is therefore strictly larger at every point in $G_r$ than at every point
+in $D_r$.  Since the two sets have the same positive probability under
+$P_0$, it follows that
+\[
+P_\mu(G_r)>P_\mu(D_r)~.
+\]
+The remaining coordinates are independent and enter both acceptance regions
+through the same rectangular constraints.  Multiplying the last difference
+by
+\[
+\prod_{j\notin\{1,r\}}\Phi(\kappa_j-\mu_j)>0
+\]
+proves the proposition.
+
+The equal-cutoff case gives a familiar implication.  Let
+\[
+\kappa_d:=\Phi^{-1}\{(1-\alpha)^{1/d}\}~.
+\]
+Then \eqref{eq:general-rectangle} generates the usual max test
+\[
+\phi_{\max}(x)
+=
+I\left\{\max_{1\le j\le d}x_j>\kappa_d\right\}~.
+\]
+Proposition~\ref{prop:rectangle-dominated} shows that it is strictly dominated
+by the gated max test
+\[
+I\left\{
+x_1>\kappa_d
+\text{ or }
+x_1+x_r>b_r
+\text{ or }
+\max_{j\notin\{1,r\}}x_j>\kappa_d
+\right\}~.
+\]
+Only one redundant face is replaced; every other moment enters exactly as it
+did in the original max test.  Thus the original procedure is inadmissible not
+because it uses redundant moments, but because it gives a redundant moment an
+unconditional rejection face.
+
+The singleton-core assumption guarantees the two inequalities used in the
+proof: the paired core mean is positive under every alternative, and it is no
+smaller than the paired redundant mean.  The next result isolates these
+conditions and shows that the singleton-core assumption is stronger than
+necessary.
+
+\subsection*{5.2 A nonnegative core that dominates selected redundant moments}
+
+Return to arbitrary nonempty sets $\mathcal C$ and $\mathcal R$, and continue
+to assume that $\Omega=I_d$.  Let $\widetilde\Lambda\subseteq\Lambda$ be the
+maintained mean space, suppose that $0\in\widetilde\Lambda$, and write
+$\widetilde\Lambda_j:=\widetilde\Lambda\cap\Lambda_j$ for $j\in\{0,1\}$.
+Suppose that there exist a fixed core index $c^*\in\mathcal C$ and a nonempty
+subset $\mathcal S\subseteq\mathcal R$ such that
+\begin{equation}\label{eq:dominating-core}
+\mu_{c^*}\ge0
+\quad\text{and}\quad
+\mu_r\le\mu_{c^*}
+\quad\text{for every }r\in\mathcal S
+\text{ and every }\mu\in\widetilde\Lambda_1~.
+\end{equation}
+The index $c^*$ is fixed across the parameter space, but it need not maximize
+the core means.  The first inequality in~\eqref{eq:dominating-core} prevents
+the selected core-redundant pair from having a negative common drift when an
+alternative is generated by another core moment.
+
+Consider again the rectangular acceptance region
+$A_{\bm\kappa}$ in~\eqref{eq:general-rectangle}.  Fix any $r\in\mathcal S$,
+and let $b_{c^*r}$ be the unique finite number satisfying
+\begin{equation}\label{eq:general-gate-calibration}
+P_0\{X_{c^*}\le\kappa_{c^*},\
+      X_{c^*}+X_r\le b_{c^*r}\}
+=
+\Phi(\kappa_{c^*})\Phi(\kappa_r)~.
+\end{equation}
+Define
+\begin{equation}\label{eq:general-gated-rectangle}
+A_{\bm\kappa}^{(c^*,r)}
+:=
+\{x_{c^*}\le\kappa_{c^*},\
+  x_{c^*}+x_r\le b_{c^*r}\}
+\cap
+\bigcap_{j\notin\{c^*,r\}}\{x_j\le\kappa_j\}~.
+\end{equation}
+
+\begin{proposition}[A dominating core-redundant pair]
+\label{prop:dominating-pair}
+Suppose that $\Omega=I_d$ and condition~\eqref{eq:dominating-core} holds.
+For any $r\in\mathcal S$, the test with acceptance region
+$A_{\bm\kappa}^{(c^*,r)}$ has exact size $\alpha$ and weakly dominates the
+test with acceptance region $A_{\bm\kappa}$ over
+$\widetilde\Lambda_1$.  The power inequality is strict at every
+$\mu\in\widetilde\Lambda_1$ for which
+$(\mu_{c^*},\mu_r)\ne(0,0)$.  Hence the rectangular test is inadmissible if
+the alternative contains at least one such parameter value.
+\end{proposition}
+
+The proof is the same transfer argument as before, but the decomposition makes
+clear why maximality is unnecessary.  In the $(c^*,r)$ coordinates, let
+\[
+G_{c^*r}
+:=
+\{x_{c^*}\le\kappa_{c^*},\ x_r\le\kappa_r,\
+  x_{c^*}+x_r>b_{c^*r}\}
+\]
+and
+\[
+D_{c^*r}
+:=
+\{x_{c^*}\le\kappa_{c^*},\ x_r>\kappa_r,\
+  x_{c^*}+x_r\le b_{c^*r}\}~.
+\]
+Equation~\eqref{eq:general-gate-calibration} gives
+$P_0(G_{c^*r})=P_0(D_{c^*r})>0$.  Moreover, every
+$g\in G_{c^*r}$ and $d\in D_{c^*r}$ satisfy
+\[
+g_{c^*}+g_r>d_{c^*}+d_r,
+\qquad
+-g_r>-d_r~.
+\]
+For any $\mu\in\widetilde\Lambda_1$,
+condition~\eqref{eq:dominating-core} allows us to write
+\[
+u:=\mu_{c^*}\ge0,
+\qquad
+v:=\mu_{c^*}-\mu_r\ge0~.
+\]
+The likelihood ratio in the selected coordinates is proportional to
+\[
+\exp\{u(x_{c^*}+x_r)+v(-x_r)\}~.
+\]
+It follows that $P_\mu(G_{c^*r})\ge P_\mu(D_{c^*r})$, with strict inequality
+unless $u=v=0$, which is equivalent to
+$(\mu_{c^*},\mu_r)=(0,0)$.  Independence factors out the remaining
+rectangular constraints, exactly as in the proof of
+Proposition~\ref{prop:rectangle-dominated}.  Calibration and coordinatewise
+lowerness give exact size and complete the proof.
+
+Proposition~\ref{prop:dominating-pair} permits any number of other core and
+redundant moments.  A known largest core moment satisfies
+condition~\eqref{eq:dominating-core}, but this is more than the argument
+requires.  It is enough to know a fixed core moment that is nonnegative over
+the alternative and dominates one selected redundant moment.  One such pair
+is sufficient to establish inadmissibility of the full rectangle; all other
+moments may continue to enter through their original rectangular faces.
+
+The nonnegativity condition cannot be dropped from this argument.  The
+ordering $\mu_r\le\mu_{c^*}$ alone permits
+$\mu_r=\mu_{c^*}=t<0$ while another core mean is positive.  Along this common
+negative drift, the likelihood ratio is increasing in the opposite direction
+in $x_{c^*}+x_r$, and the calibrated transfer can reduce power.  Under the
+baseline restriction $\mu_r\le\max_{c\in\mathcal C}\mu_c$, no fixed core
+coordinate need be nonnegative throughout the alternative.  If the identity
+of a suitable core coordinate varies with $\mu$, the construction produces a
+different pointwise competitor on each component of the alternative, not one
+test that dominates globally.  That case still requires a multivariate
+argument.
+
+\section*{6. Proposed structure of the argument}
+
+The paper can make the distinction between identification and inference in
+four steps.
+
+First, Proposition~\ref{prop:sufficiency} gives a general sufficient condition
+for admissibility in the studentized Gaussian experiment, while
+Proposition~\ref{prop:existence} shows that, for every correlation matrix, an
+admissible test can place positive weight on every redundant moment.
+
+Second, Propositions~\ref{prop:rectangle-dominated}
+and~\ref{prop:dominating-pair} show that this conclusion does not apply to
+every use of the redundant moments.  Under identity covariance, the standard
+max test is strictly dominated in arbitrary dimension when there is one core
+moment.  More generally, the same construction applies whenever a fixed core
+moment is nonnegative over the alternative and dominates a selected redundant
+moment.
+
+Third, the finite-sample moment-inequality problem can be used to introduce
+the short and long tests and derive their local power curves.  The crossing
+curves show that dropping redundant moments is not uniformly desirable, even
+though the long test is inadmissible in the unrestricted class.
+
+Fourth, the bivariate Gaussian experiment gives a complete account of this
+distinction.  The general-correlation characterization identifies the
+feasible-normal condition as both sufficient and necessary.  It also explains
+why the short and gated-sum tests are globally admissible, whereas the long
+rectangle is not.
+
+A full necessity characterization for arbitrary $\Omega$ and arbitrary
+core-redundant partitions is not needed for this argument.  The remaining
+tasks are to connect condition~\eqref{eq:redundancy} to the motivating moment
+inequality models after studentization and to embed the limit-experiment
+results in the finite-sample procedures studied in the two-moment model.
+
+\begin{thebibliography}{9}
+
+\bibitem{LehmannRomano2005}
+Lehmann, E. L. and Romano, J. P. (2005).
+\textit{Testing Statistical Hypotheses}. Third edition. Springer.
+
+\end{thebibliography}
+
+\end{document}

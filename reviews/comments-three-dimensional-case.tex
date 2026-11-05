@@ -1,0 +1,216 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage[skip=0.6em]{parskip}
+
+\newcommand{\E}{\mathrm{E}}
+
+\begin{document}
+
+\begin{center}
+{\Large Comments on ``The three-dimensional core--redundant case''}\\[3pt]
+{\small Accuracy check, with focus on the proof of Proposition 1 :: August 28, 2026}
+\end{center}
+
+\medskip
+
+\section*{Summary}
+
+The mathematics in the note is sound. I verified every formal argument
+step by step and recomputed all numerical claims independently. The proof
+of Proposition~1 (admissibility of finite rectangles) is correct as
+written: the zero-mass step, the three first-moment identities, the
+exponential-tilt argument killing negative comparison mass above the core
+cutoffs, and the final $X_3$-moment contradiction all go through. The
+comments below are of three kinds: (i) places in the proof of
+Proposition~1 where a hypothesis is used silently and one sentence would
+make the argument airtight; (ii) one substantive restriction missing from
+Proposition~2 ($\alpha<1/2$); and (iii) a small gap in the proof of
+Proposition~4 (positivity of the transfer sets) plus minor items. None of
+these affects the correctness of the stated results, except that
+Proposition~2 as stated is false for $\alpha\ge1/2$ and should carry the
+restriction explicitly.
+
+\section{Proposition 1: verification and suggestions}
+
+\textbf{Steps verified.} (a) $0\in\Lambda_0$, so $\E_0\psi\le\alpha=
+\E_0\phi_c$; the ray $te_1$ lies in $\Lambda_1$ for all $t>0$ and power
+functions of tests under Gaussian shifts are continuous, so $\E_0h=0$.
+(b) The identity $\E_{td}h=\exp\{-t^2\|d\|^2/2\}\,\E_0[h\,e^{td'X}]$ is
+correct, and since $g(t):=\E_0[h\,e^{td'X}]$ satisfies $g(0)=0$ and
+$g(t)\ge0$ for $t>0$, the right derivative gives $d'q\ge0$. (c) The
+directions $(1,s,0)$ and $(s,1,0)$ do belong to $\Lambda_1$ for every
+real $s$ (the max restriction never binds since the third coordinate is
+zero), and they force $q_1=q_2=0$; the directions $(1,0,r)$, $r\le1$,
+then force $q_3=0$. (d) The support inclusions in (10) hold pointwise,
+not merely up to null sets: on $A_c$, $h=\psi\ge0$; on $A_c^c$,
+$h=\psi-1\le0$. (e) The tilt bound
+$\E_0[e^{tX_j}h]\le e^{tc_j}M^+-e^{t(c_j+\varepsilon)}m_{j,\varepsilon}$
+is correct and the union over $\varepsilon=1/n$ delivers
+$h^-=0$ a.s.\ on $\{X_j>c_j\}$ for $j=1,2$. (f) The final display is
+correct: $\E_0[X_3h^+]\le c_3M$ because $X_3\le c_3$ on the support of
+$h^+$, while $\E_0[X_3h^-]>c_3M$ strictly when $M>0$ because $X_3>c_3$
+a.s.\ on $\{h^->0\}$. The contradiction with $q_3=0$, and the passage
+from $h=0$ $P_0$-a.s.\ to identical power functions via mutual absolute
+continuity of Gaussian shifts, are both fine.
+
+\textbf{Suggested changes.}
+
+\textbf{1.1 (Cone property used silently).} The derivation of the
+directional inequality $d'q\ge0$ requires $td\in\Lambda_1$ for all $t>0$,
+not merely $d\in\Lambda_1$. This holds because $\Lambda_1$ is a cone
+(both $\mu_3\le\max\{\mu_1,\mu_2\}$ and $\max\{\mu_1,\mu_2\}>0$ are
+preserved under positive scaling), but the proof never says so. I would
+add one sentence: ``Since $\Lambda_1$ is a cone, $td\in\Lambda_1$ for
+every $t>0$.''
+
+\textbf{1.2 (Differentiation under the expectation).} The right
+derivative of $g(t)=\E_0[h\,e^{td'X}]$ at $t=0$ is computed by
+differentiating inside the expectation. This is justified because $h$ is
+bounded ($|h|\le1$) and the standard Gaussian has a moment generating
+function finite everywhere, but a clause to that effect would help,
+e.g.\ ``differentiation under the expectation is justified by dominated
+convergence since $|h|\le1$ and $\E_0\exp\{t\,|d'X|\}<\infty$ for all
+$t$.''
+
+\textbf{1.3 (Strictness in the final display).} The display
+\[
+\E_0[X_3h]=\E_0[X_3h^+]-\E_0[X_3h^-]<c_3M-c_3M=0
+\]
+compresses one weak and one strict inequality into a single strict one.
+The strictness comes only from the second term: $X_3>c_3$ holds a.s.\ on
+$\{h^->0\}$, so $\E_0[X_3h^-]>c_3M$ when $M>0$, while
+$\E_0[X_3h^+]\le c_3M$ is weak. This is correct, but since the whole
+contradiction rests on this sign, I would spell it out in two
+inequalities rather than one chained display.
+
+\textbf{1.4 (``Up to null sets'').} As noted in (d) above, the
+inclusions in the sign-support display hold everywhere, so the
+qualifier ``up to null sets'' can be dropped. Harmless either way.
+
+\textbf{1.5 (Undefined term).} The statement uses
+``$\alpha$-admissible against all level-$\alpha$ tests'' without a
+definition in this note. If the term is defined in the extension plan,
+a pointer suffices; otherwise state it: no level-$\alpha$ test
+$\psi$ satisfies $\E_\mu\psi\ge\E_\mu\phi_c$ for all
+$\mu\in\Lambda_1$ with strict inequality for some $\mu\in\Lambda_1$.
+Note also that the proof establishes something slightly stronger than
+nonexistence of a strict improvement: any weak dominator coincides with
+$\phi_c$ a.s.\ under every $P_\mu$. Worth stating, since it is used
+verbatim in the proof of Proposition~2 (``the same continuity
+argument'').
+
+\section{Numerical claims (Section 2 of the note)}
+
+I recomputed the calibration and the counterexample independently
+(adaptive quadrature for the gated acceptance probability, root-finding
+for $b$). All figures match to the displayed precision:
+\[
+\kappa=2.121201,\qquad b=3.117267,
+\]
+and at $\mu=(0.1,-5,0.1)\in\Lambda_1$,
+\[
+P_\mu(A_\kappa)=0.957209,\qquad
+P_\mu(A_b^{\mathrm g})=0.965438,
+\]
+so the rejection probabilities $0.042791$ and $0.034562$ are correct and
+the symmetric gate indeed fails to dominate. I also confirmed the
+support-function computation $h_{A_b^{\mathrm g}}(1,1,2)=2b$: the bound
+$x_1+x_2+2x_3=(x_1+x_3)+(x_2+x_3)\le2b$ is attained at
+$(t,\,t,\,b-t)$ for any $t\le\kappa$. The geometric obstruction
+argument (the common transfer cone is $\{0\}$) is correct.
+
+One wording item: ``each satisfies~(2)'' reads oddly since (2) is a set;
+``belongs to'' is what is meant.
+
+\section{Proposition 2: a missing restriction on $\alpha$}
+
+The Neyman--Pearson step asserts that $\phi_3=I\{x_3>z_\alpha\}$
+\emph{uniquely} maximizes $\E_0[X_3\eta]$ over $0\le\eta\le1$ with
+$\E_0\eta\le\alpha$. This is true if and only if $z_\alpha>0$, i.e.\
+$\alpha<1/2$. If $\alpha\ge1/2$, then $z_\alpha\le0$ and the maximizer is
+$I\{x_3>0\}$, which spends mass $1/2\le\alpha$ and does not coincide
+with $\phi_3$: rejection mass placed where $X_3<0$ lowers the
+objective, so $\phi_3$ is not optimal and the uniqueness step fails. The proposition should
+therefore either restrict to $\alpha\in(0,1/2)$ (harmless in practice)
+or the proof should be adjusted. Also, ``equality in the preceding
+optimization is unique up to null sets'' deserves one supporting clause:
+uniqueness holds because $P_0(X_3=z_\alpha)=0$ and any maximizer must
+spend the full mass $\alpha$ on $\{X_3>z_\alpha\}$ when $z_\alpha>0$.
+
+The rest of the proof is fine: $d^\pm=(\pm1,\mp1,1)\in\Lambda_1$, and
+adding the two directional inequalities gives $q_3\ge0$ as claimed. The
+follow-up remark that a conservative cutoff $c>z_\alpha$ is dominated by
+$\phi_3$ is correct (strictly higher power at every mean, same level).
+
+\section{Proposition 4: two small gaps}
+
+\textbf{4.1 (Positivity of the transfer sets).} The proof asserts
+``Calibration gives $P_0(G_r)=P_0(D_r)>0$.'' Equality is immediate, but
+positivity requires $b_r<c_1+c_r$, which is not stated. It does follow
+from the calibration: if $b_r\ge c_1+c_r$, then
+$\{x_1\le c_1,\ x_r\le c_r\}\subseteq\{x_1\le c_1,\ x_1+x_r\le b_r\}$
+with a containment of positive measure, so the left side of the
+calibration identity would strictly exceed $\Phi(c_1)\Phi(c_r)$. One
+sentence fixes this. (Existence and uniqueness of the finite $b_r$ --
+monotone and continuous in $b_r$ from $0$ to $\Phi(c_1)$, with target
+strictly inside -- could also be recorded, though ``the unique finite
+$b_r$'' is defensible as written.)
+
+\textbf{4.2 (Strictness of the transfer).} The proof concludes
+$P_\mu(G_r)>P_\mu(D_r)$ from ``the likelihood ratio is strictly larger
+at every point of $G_r$ than at every point of $D_r$'' plus equal
+positive null probabilities. The pointwise comparison alone gives only
+$\inf_{G_r}\ge\sup_{D_r}$ type control after taking limits, and the
+cleanest route is the explicit separating constant: with
+$\ell(x):=u(x_1+x_r)-vx_r$ and $L:=ub_r-vc_r$, one has $\ell>L$ on
+$G_r$ (strictly, since $x_1+x_r>b_r$ and $u>0$) and $\ell\le L$ on
+$D_r$. Hence
+\[
+P_\mu(G_r)\propto\int_{G_r}e^{\ell}\,dP_0>e^{L}P_0(G_r)
+=e^{L}P_0(D_r)\ge\int_{D_r}e^{\ell}\,dP_0\propto P_\mu(D_r),
+\]
+with the same proportionality constant on both sides. Note the
+inequality on $D_r$ is weak when $v=0$, which is why the separating
+constant, rather than a two-sided strict comparison, is the right tool.
+The remainder of the proof (factorization over the untouched coordinate
+$s$, level control by coordinatewise lowerness) is correct.
+
+\section{Minor items}
+
+\textbf{5.1.} ``The three first Gaussian moments of $h$'' is unusual
+phrasing; ``the first-moment identities $\E_0[X_jh]=0$, $j=1,2,3$''
+says what is meant.
+
+\textbf{5.2.} In Proposition 3, ``size attained at the origin'' is
+correct but the size is attained along the entire ray
+$\mu_1=\mu_2=\mu_3\le0$ in the null; if the intended reading is
+uniqueness of the attainment point, that is false. As a statement of
+existence it is fine.
+
+\textbf{5.3.} The claim that ``a randomized mixture of the two
+single-gate dominators does dominate the rectangle'' is correct: the
+half-half mixture is level $\alpha$ by linearity and its power is the
+average of two functions, each strictly above the rectangle's power on
+$\Lambda_1^{1\mid23}$.
+
+\textbf{5.4.} The double-gate admissibility argument in Section 4 checks
+out internally: every finite-support direction of
+$A^{\mathrm{gg}}_{a,b_2,b_3}$ is a nonnegative combination of $e_1$,
+$(1,1,0)$, $(1,0,1)$, and any such combination
+$(\lambda_1+\lambda_2+\lambda_3,\ \lambda_2,\ \lambda_3)$ with
+$\lambda\ge0$ satisfies $a_2\le a_1$ and $a_3\le a_1$. I could not
+verify the external Proposition~1 of the extension plan itself, since
+that document is not included; the conclusion is conditional on that
+result being as described.
+
+\textbf{5.5.} The closing remark of Section 3 states there is no known
+inadmissible exact-size test with closed, convex, coordinatewise-lower
+acceptance region in the two-core model. This is consistent with
+everything proved in the note, but as phrased it sits close to the
+admissibility results of Section 3; a reader may wonder whether
+Proposition~1's argument extends to all such regions. If it does not,
+one clause saying why (the tilt argument uses the rectangular faces in
+an essential way) would preempt the question.
+
+\end{document}

@@ -1,0 +1,278 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb, amsthm, bm}
+\usepackage[margin=1in]{geometry}
+\usepackage[skip=0.6em]{parskip}
+
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+
+\newcommand{\E}{\mathrm{E}}
+\newcommand{\R}{\mathbf R}
+\newcommand{\cC}{\mathcal C}
+\newcommand{\cR}{\mathcal R}
+\newcommand{\cF}{\mathcal F}
+
+\begin{document}
+
+\begin{center}
+{\Large Improvements to the extension plan}\\[3pt]
+{\small Generalizing the two-core machinery to arbitrary $d$, partitions, and
+$\Omega$ :: August 28, 2026}
+\end{center}
+
+\medskip
+
+The answer to your question is yes: the two arguments developed for the
+three-dimensional two-core case --- the confinement (tilt) argument and the
+first-moment argument --- generalize with no essential change to the full
+setting of the extension plan: arbitrary dimension, arbitrary nonempty
+partition $(\cC,\cR)$, and arbitrary positive-definite correlation matrix
+$\Omega$. This upgrades the plan in three places: Proposition~1's hypothesis
+can be weakened, a new general admissibility result becomes available for
+$|\cC|\ge2$, and the paper acquires a cleaner organizing principle --- a
+dichotomy in $|\cC|$ that explains, in one line, why the $\cC=\{1\}$ and
+$|\cC|\ge2$ cases behave so differently. Notation follows the plan;
+throughout, $A$ is closed, convex, coordinatewise lower, with
+$P_0(X\in A)=1-\alpha$, and $\cF(\Omega,\Lambda)=\{a\ge0:\Omega a\in\Lambda\}$.
+
+\section{The organizing dichotomy}
+
+For a cone $K$, write $K^*:=\{d:\mu'd\ge0\ \text{for all}\ \mu\in K\}$ for
+its dual cone. In the two-core note, $\Lambda_1^*$ was called the transfer
+cone. The following computation is elementary but, I think, should be a
+displayed lemma in the paper, because everything downstream is governed by
+it.
+
+\begin{lemma}[Transfer-cone dichotomy]\label{lem:dichotomy}
+(i) If $|\cC|=1$, say $\cC=\{1\}$, then
+\[
+\Lambda_1^*
+=
+\Bigl\{d\in\R^d:\ d_r\le0\ \text{for all}\ r\in\cR,\
+d_1+\textstyle\sum_{r\in\cR}d_r\ge0\Bigr\},
+\]
+a nontrivial polyhedral cone containing the gate directions
+$e_1-e_r$. (ii) If $|\cC|\ge2$, then $\Lambda_1^*=\{0\}$.
+\end{lemma}
+
+\begin{proof}
+(i) Normalize $\mu_1=1$. The constraint $d_1+\sum_r\mu_rd_r\ge0$ for all
+$\mu_r\le1$ forces $d_r\le0$ (send $\mu_r\to-\infty$), and the infimum is
+then attained at $\mu_r=1$, giving $d_1+\sum_rd_r\ge0$; conversely these two
+conditions suffice. (ii) Let $d\in\Lambda_1^*$. For distinct
+$c,c'\in\cC$, the mean $e_c+se_{c'}$ lies in $\Lambda_1$ for every
+$s\in\R$, so $d_c+sd_{c'}\ge0$ for all $s$, forcing $d_{c'}=0$; running over
+ordered pairs gives $d_c=0$ for all $c\in\cC$. For $r\in\cR$, the mean with
+$\mu_c=1$ for one core, $\mu_r=1$, and all other redundant coordinates at
+$-M$ lies in $\Lambda_1$; letting $M\to\infty$ forces $d_{r'}\le0$ for
+every $r'$, and setting all redundant coordinates equal to $1$ gives
+$\sum_rd_r\ge0$, whence $d_r=0$ for all $r$.
+\end{proof}
+
+Two consequences frame the whole plan. First, when $|\cC|=1$ the set
+$\Lambda$ is convex (the constraint $\mu_r\le\mu_1$ is linear), so
+$\cF(\Omega,\Lambda)$ is a convex cone; when $|\cC|\ge2$, $\Lambda$ is a
+nonconvex union of branches and $\cF$ is nonconvex. Second, the nonzero
+elements of $\Lambda_1^*$ for $|\cC|=1$ are precisely the pointwise
+transfer directions that generate the gated dominators of Section~5 of the
+plan, while for $|\cC|\ge2$ no pointwise transfer exists and --- as shown
+below --- every weak dominator of an exact-size test must match its full
+first-moment vector under $P_0$. Domination constructions live exactly
+where $\Lambda_1^*\ne\{0\}$; admissibility results live where
+$\Lambda_1^*=\{0\}$. I would state this dichotomy early and hang
+Sections~3--5 of the plan on it.
+
+\section{Upgrade 1: weaken Proposition 1 to feasible support}
+
+Say $A$ is \emph{feasibly supported} if
+\[
+A=\bigcap_{a\in F}\{x:a'x\le h_A(a)\},
+\qquad
+F:=\{a\in\cF(\Omega,\Lambda):a\ne0,\ h_A(a)<\infty\},
+\]
+i.e.\ the supporting halfspaces with feasible normals already determine $A$.
+For polyhedra this holds if and only if every facet normal is feasible.
+Proposition~1 of the plan assumes more: that \emph{every} finite-support
+direction is feasible.
+
+\begin{proposition}[Feasible support suffices; general $\Omega$]
+\label{prop:A}
+If $A$ is feasibly supported, then $\phi_A$ is $\alpha$-admissible against
+all level-$\alpha$ tests, including randomized competitors.
+\end{proposition}
+
+\begin{proof}
+Let $\psi$ be level $\alpha$ and weakly dominate $\phi_A$ on $\Lambda_1$;
+set $h:=\psi-\phi_A$, so $\{h>0\}\subseteq A$ and $\{h<0\}\subseteq A^c$.
+Coordinatewise lowerness and $\Lambda_0\subseteq(-\infty,0]^d$ make $\mu=0$
+least favorable, so $\E_0\psi\le\alpha=\E_0\phi_A$; dominance along the ray
+$te_c\in\Lambda_1$ ($c\in\cC$) and continuity of power functions give the
+reverse inequality, hence $\E_0h=0$. Now fix $a\in F$. As in the plan's
+Proposition~1, $\Omega a\in\Lambda$ and $a'\Omega a>0$ imply
+$\Omega a\in\Lambda_1$, and $\Lambda_1$ is a cone, so
+$t\,\Omega a\in\Lambda_1$ for all $t>0$. Dominance along this mean ray and
+the canonical representation give
+$\E_0[e^{ta'X}h]\ge0$ for all $t>0$. Since $h^+$ is supported on
+$A\subseteq\{a'x\le h_A(a)\}$, the standard bound
+\[
+\E_0[e^{ta'X}h]
+\le
+e^{th_A(a)}\E_0h^+
+-e^{t(h_A(a)+\varepsilon)}
+\E_0\bigl[h^-1\{a'X\ge h_A(a)+\varepsilon\}\bigr]
+\]
+shows that $\E_0[h^-1\{a'X\ge h_A(a)+\varepsilon\}]=0$ for every
+$\varepsilon>0$, hence $h^-=0$ a.s.\ on $\{a'x>h_A(a)\}$. The complement
+$A^c=\bigcup_{a\in F}\{a'x>h_A(a)\}$ is open, so by Lindel\"of a countable
+subfamily covers it and $h^-=0$ a.s.\ on $A^c$, hence a.s. Then $\E_0h=0$
+forces $h=0$ $P_0$-a.s., and mutual absolute continuity of the Gaussian
+shifts makes a strict improvement impossible.
+\end{proof}
+
+Three remarks. First, the proof is elementary and self-contained; Lehmann
+and Romano's Theorem~6.7.1 is no longer needed, though it can still be
+cited for context. Second, when $|\cC|=1$ the upgrade is vacuous:
+$\cF(\Omega,\Lambda)$ is then a convex cone
+(Lemma~\ref{lem:dichotomy}), the finite-support directions of $A$ form the
+closed convex cone generated by its facet normals, and feasible support is
+equivalent to the plan's condition. The strict gain occurs exactly when
+$|\cC|\ge2$, where $\cF$ is nonconvex: sums of feasible facet normals may
+leave $\cF$, and the plan's condition then fails for regions that
+Proposition~\ref{prop:A} still covers (the symmetric gate of the
+three-dimensional note is the canonical example). So the weakening is free
+precisely where the current plan has the least to say. Third,
+Proposition~2 of the plan is an immediate corollary, unchanged.
+
+\section{Upgrade 2: a new result for $|\cC|\ge2$}
+
+The first-moment argument of the two-core note generalizes verbatim. Let
+$\psi$ weakly dominate $\phi_A$ and $h=\psi-\phi_A$, so $\E_0h=0$ as
+above. For $\mu^*\in\Lambda_1$, dominance along the mean ray $t\mu^*$ and
+differentiation at $t=0^+$ (justified since $|h|\le1$ and the Gaussian
+m.g.f.\ is finite) give $(\Omega^{-1}\mu^*)'q\ge0$ where
+$q:=\E_0[Xh(X)]$, i.e.\ $\mu^{*\prime}(\Omega^{-1}q)\ge0$ for every
+$\mu^*\in\Lambda_1$. Thus $\Omega^{-1}q\in\Lambda_1^*$, and
+Lemma~\ref{lem:dichotomy} gives:
+
+\begin{lemma}\label{lem:qzero}
+If $|\cC|\ge2$, every weak dominator of an exact-size test satisfies
+$q=\E_0[Xh]=0$.
+\end{lemma}
+
+\begin{proposition}[Feasible support plus one halfspace; $|\cC|\ge2$,
+general $\Omega$]\label{prop:B}
+Suppose $|\cC|\ge2$ and $A=A_g\cap\{x:u'x\le\kappa\}$, where $A_g$ is an
+intersection of halfspaces with normals in $\cF(\Omega,\Lambda)$ and
+$u\ne0$ is arbitrary. Then $\phi_A$ is $\alpha$-admissible.
+\end{proposition}
+
+\begin{proof}
+The confinement step of Proposition~\ref{prop:A} gives $h^-=0$ a.s.\ on
+$A_g^c$, so $h^-$ is supported on $\{u'x>\kappa\}\cap A_g$ while $h^+$ is
+supported on $A\subseteq\{u'x\le\kappa\}$. With
+$M:=\E_0h^+=\E_0h^-$, if $M>0$ then $\E_0[u'Xh^+]\le\kappa M$ and
+$\E_0[u'Xh^-]>\kappa M$ (strictly, since $u'X>\kappa$ a.s.\ on
+$\{h^->0\}$ and $P_0(u'X=\kappa)=0$), so $u'q<0$, contradicting
+Lemma~\ref{lem:qzero}. Hence $M=0$ and the proof concludes as before.
+\end{proof}
+
+Its corollaries are the payoff.
+
+\begin{corollary}[Rectangles with one redundant moment]\label{cor:rect}
+Let $|\cC|\ge2$, $|\cR|=1$, and $\Omega$ be any positive-definite
+correlation matrix. Every finite rectangle
+$A_{\bm\kappa}=\bigcap_j\{x_j\le\kappa_j\}$ with $P_0(A_{\bm\kappa})
+=1-\alpha$ is $\alpha$-admissible.
+\end{corollary}
+
+\begin{proof}
+Each core face is feasible: $(\Omega e_c)_r=\Omega_{rc}<1=(\Omega e_c)_c
+\le\max_{c'\in\cC}(\Omega e_c)_{c'}$, since $\Omega$ is a nondegenerate
+correlation matrix. The single redundant face $\{x_r\le\kappa_r\}$ is the
+one extra halfspace (it is never feasible: $(\Omega e_r)_r=1>
+\max_c\Omega_{cr}$). Apply Proposition~\ref{prop:B}.
+\end{proof}
+
+This generalizes the three-dimensional admissibility result for rectangles
+from $(d,\Omega)=(3,I_3)$ to arbitrary dimension and arbitrary correlation,
+in one stroke. Note the contrast with the plan's Section~5: with
+$|\cC|=1$ the same rectangles are strictly dominated. The rectangle's
+status flips exactly at the dichotomy of Lemma~\ref{lem:dichotomy}, which
+is, I think, the cleanest single sentence the paper can offer about
+identification versus inference.
+
+\begin{corollary}[All one-sided tests; $|\cC|\ge2$]\label{cor:halfspace}
+Let $|\cC|\ge2$ and $a\ge0$, $a\ne0$, be \emph{any} nonnegative weight
+vector --- feasibility not required, including weights concentrated
+entirely on $\cR$. Then
+$\phi(x)=I\{a'x>z_{1-\alpha}\sqrt{a'\Omega a}\}$ is $\alpha$-admissible
+for every $\alpha\in(0,1)$.
+\end{corollary}
+
+\begin{proof}
+Take $A_g=\R^d$ and $u=a$ in Proposition~\ref{prop:B}; the acceptance
+region is lower and has exact size at the origin.
+\end{proof}
+
+Corollary~\ref{cor:halfspace} strengthens the plan's Proposition~2 in the
+$|\cC|\ge2$ case in two directions: the perturbation parameter
+$\varepsilon$ and the feasibility requirement $a_\varepsilon\in
+\cF(\Omega,\Lambda)$ are unnecessary --- any nonnegative weighting of core
+and redundant moments is admissible, including the redundant-only test ---
+and no restriction on $\alpha$ is needed. The $\varepsilon$-construction
+remains exactly the right tool for $|\cC|=1$, where
+Lemma~\ref{lem:qzero} fails and feasibility is doing real work. I would
+present Proposition~2 as the $|\cC|=1$ result and
+Corollary~\ref{cor:halfspace} as its $|\cC|\ge2$ counterpart.
+
+\section{Suggested edits to the plan, section by section}
+
+\emph{Section 3.} Replace the hypothesis of Proposition~1 by feasible
+support (Proposition~\ref{prop:A}); the current version survives as the
+special case in which all finite-support directions are feasible, and the
+equivalence of the two conditions when $|\cC|=1$ is worth a remark. The
+proof becomes self-contained.
+
+\emph{Section 4.} Keep Proposition~2 for $|\cC|=1$; add
+Corollary~\ref{cor:halfspace} for $|\cC|\ge2$. The paper's headline ---
+redundant moments need not be irrelevant for inference --- becomes
+stronger: with at least two core moments, \emph{every} nonnegative
+weighting is admissible.
+
+\emph{Section 5.} Unchanged, but preface it with
+Lemma~\ref{lem:dichotomy}: the gate directions used in Propositions~3
+and~4 are exactly the nonzero elements of $\Lambda_1^*$ (for
+Proposition~4, of $\widetilde\Lambda_1^*$ --- condition~(16) is precisely
+what makes that dual cone nontrivial). This unifies the two halves of the
+paper: dominators exist when the relevant dual cone is nontrivial, and
+when it is trivial the first-moment identity $q=0$ converts the same tilt
+comparisons into admissibility proofs.
+
+\emph{Section 6, step 4.} The claim that the feasible-normal condition is
+``both sufficient and necessary'' should be scoped to the bivariate
+($|\cC|=1$) model, where $\cF$ is convex and the gated dominators supply
+necessity. For $|\cC|\ge2$ necessity fails badly ---
+Corollaries~\ref{cor:rect} and~\ref{cor:halfspace} are admissible tests
+violating it --- and the correct statement of what remains open is: nice
+regions requiring at least two infeasible supporting halfspaces (e.g.\
+rectangles with $|\cC|\ge2$ and $|\cR|\ge2$, or a rectangle plus a binding
+infeasible cut). Whether any such test is inadmissible is exactly the
+two-core frontier question discussed in my previous note, now posed at
+full generality; my conjecture there (all nice tests admissible when
+$\Lambda_1^*=\{0\}$) extends to this setting with the same caveats.
+
+One further remark on scope: everything above uses only that $\Lambda_1$
+is a cone containing the directions listed in the proof of
+Lemma~\ref{lem:dichotomy}, that $\Lambda_0\subseteq(-\infty,0]^d$, and
+that $A$ is lower with exact size. So the machinery is robust to the
+refinements of $\Lambda$ contemplated in Section~5.2 of the plan: for a
+maintained $\widetilde\Lambda\subseteq\Lambda$, the two regimes are
+governed by $\widetilde\Lambda_1^*$, and
+Propositions~\ref{prop:A}--\ref{prop:B} hold with
+$\cF(\Omega,\widetilde\Lambda)$ and $\widetilde\Lambda_1^*=\{0\}$ in the
+obvious places.
+
+\end{document}

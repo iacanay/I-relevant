@@ -1,0 +1,215 @@
+\documentclass[10pt]{article}
+
+\usepackage[margin=0.68in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{array,booktabs,longtable,tabularx}
+\usepackage{ragged2e}
+\usepackage[table]{xcolor}
+\usepackage{enumitem}
+\usepackage{xurl}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[skip=0.42em]{parskip}
+
+\definecolor{navy}{HTML}{17324D}
+\definecolor{highbg}{HTML}{DCEFE4}
+\definecolor{highfg}{HTML}{17623A}
+\definecolor{maybebg}{HTML}{FFF0C9}
+\definecolor{maybefg}{HTML}{805B00}
+\definecolor{oldbg}{HTML}{ECEFF2}
+\definecolor{oldfg}{HTML}{5B6570}
+\definecolor{rulegray}{HTML}{CBD2D9}
+\definecolor{softblue}{HTML}{EAF1F7}
+
+\newcommand{\high}{\colorbox{highbg}{\textcolor{highfg}{\sffamily\bfseries HIGH}}}
+\newcommand{\maybe}{\colorbox{maybebg}{\textcolor{maybefg}{\sffamily\bfseries MAYBE}}}
+\newcommand{\obsolete}{\colorbox{oldbg}{\textcolor{oldfg}{\sffamily\bfseries OBSOLETE}}}
+\newcommand{\fname}[1]{{\footnotesize\nolinkurl{#1}}}
+\newcommand{\tightitem}{\setlist[itemize]{leftmargin=1.3em,itemsep=1pt,topsep=2pt,parsep=0pt}}
+\newcommand{\entry}[5]{#1 & \fname{#2} & #3 & #4 & #5 \\ \addlinespace[3pt]}
+\newcolumntype{L}[1]{>{\RaggedRight\arraybackslash}p{#1}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\small\sffamily i-relevant project map}
+\rhead{\small\sffamily 28 August 2026}
+\cfoot{\small\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+\setlength{\headheight}{14pt}
+\setlength{\LTpre}{4pt}
+\setlength{\LTpost}{8pt}
+\setlength{\tabcolsep}{4.5pt}
+\renewcommand{\arraystretch}{1.10}
+\arrayrulecolor{rulegray}
+
+\begin{document}
+
+\begin{center}
+  {\LARGE\sffamily\bfseries\color{navy} Master structure}\\[3pt]
+  {\large\sffamily Authority map and complete inventory for \texttt{i-relevant}}\\[7pt]
+  {\small Ivan A. Canay \enspace $\cdot$ \enspace Research audit as of 28 August 2026}
+\end{center}
+
+\vspace{2pt}
+\noindent\colorbox{softblue}{\parbox{0.965\textwidth}{
+\textbf{Bottom line.}  The project now has a general theorem spine.  The finite-sample GMS paper motivates the problem; the fixed-drift Gaussian experiment is the natural local experiment; bivariate admissibility has a sharp feasible-normal characterization under every nonsingular correlation; and the general core--redundant note shows that the number of core moments determines which proof mechanism is available.  With one core, a nontrivial transfer cone permits gated domination.  With at least two cores, the transfer cone is trivial and first-moment rigidity produces a larger admissible class.  The remaining tasks are the higher-dimensional singleton-core necessity problem and the multiple-core two-infeasible-facet frontier.
+}}
+
+\section*{1. How to use this map}
+
+Files are grouped into \emph{logical documents}: a synchronized \texttt{.tex}/\texttt{.pdf} pair is one item, not two.  The inventory covers all 68 research-facing files currently in scope.  This count includes the six files in \fname{Reviews/}, the new \fname{general-case.tex / .pdf}, and \fname{Fables-comments.md}.  Hidden version-control data, LaTeX build sidecars (\texttt{.aux}, \texttt{.log}, and similar), and temporary render caches are outside the document inventory.
+
+\textbf{Physical organization.}  The project root contains current and potentially useful material; \fname{obsolete/} contains the 22 research-facing files classified obsolete below plus nine LaTeX sidecars.  The archive is reversible: nothing was deleted.
+
+\textbf{End-of-day trigger.}  When Ivan says \emph{``I'm done for the day,''} R2-D2 reconciles this map with the folder, archives unambiguously superseded files, recompiles and visually verifies the PDF, and updates the project dossier and registry.  Uncertain authority stays in place and is flagged rather than guessed.
+
+\begin{tabularx}{\textwidth}{@{}p{0.16\textwidth}X@{}}
+\high & Current authority or essential paper context.  These are the documents to read and cite first.\\[3pt]
+\maybe & Correct or potentially useful supporting result, audit trail, proof component, or expository asset, but not the present authority.\\[3pt]
+\obsolete & Superseded version, false conjecture, stale conversation snapshot, duplicate, or research direction that no longer matches the maintained problem.  ``Obsolete'' does not always mean every line is false.\\
+\end{tabularx}
+
+\textbf{Authority rule.}  When two files disagree, use the newest \high\ document.  Within a logical pair, use the \texttt{.tex} source if the PDF is flagged as stale below.
+
+\section*{2. Canonical reading order}
+
+\begin{longtable}{@{}L{0.035\textwidth}L{0.31\textwidth}L{0.565\textwidth}@{}}
+\toprule
+& \textbf{Document} & \textbf{Why it is in the spine}\\
+\midrule
+\endhead
+1 & \fname{Addition-2.pdf} & The paper-level finite-sample problem: long versus short moment models under GMS, local-power ambiguity, and the substantive meaning of core versus redundant moments.\\[4pt]
+2 & \fname{limit-moment-selection.tex / .pdf} & The bridge to the experiment used for admissibility: all finite local drifts survive GMS, while deletion occurs only on the slower $\kappa_n$ selection scale.  There is no oracle active-core selector inside the fixed-drift experiment.\\[4pt]
+3 & \fname{necessity-feasible-normal-general-omega.tex / .pdf} & The authoritative bivariate theorem: for every $\rho\in(-1,1)$, an exact-size closed convex lower test is globally admissible if and only if all finite normals are feasible.\\[4pt]
+4 & \fname{general-case.tex / .pdf} & The authoritative general theory: dual-cone dichotomy, feasible-support sufficiency, first-moment rigidity, the one-extra-halfspace theorem, and the opposing singleton-core and multiple-core rectangle results.\\[4pt]
+5 & \fname{three-dimensional-case.tex / .pdf} & The principal special case and hostile-check note: it develops the two-core/one-redundant and one-core/two-redundant geometries and isolates the two-bad-facet frontier.\\
+\bottomrule
+\end{longtable}
+
+\textbf{The live research question.}  The core-count dichotomy is now established at the level needed for the general theory.  What remains is necessity beyond the bivariate model.  With one core and several redundant moments, the conditional rearrangement extends naturally but the multivariate hull-and-calibration geometry is missing.  With at least two cores, any inadmissible nice polyhedron must require at least two essential infeasible facets.  These are distinct research frontiers and should not be conflated with moment selection.
+
+\section*{3. Complete document inventory}
+
+\subsection*{3.1 Current authority and essential context}
+
+\begin{longtable}{@{}L{0.035\textwidth}L{0.285\textwidth}L{0.455\textwidth}L{0.125\textwidth}@{}}
+\toprule
+\textbf{ID} & \textbf{Logical document} & \textbf{Very brief takeaway} & \textbf{Class}\\
+\midrule
+\endfirsthead
+\toprule
+\textbf{ID} & \textbf{Logical document} & \textbf{Very brief takeaway} & \textbf{Class}\\
+\midrule
+\endhead
+H1 & \fname{Addition-2.pdf} & \textbf{Paper draft.} Establishes the finite-sample GMS setting and the ambiguous local-power comparison between long and short models. & \high\\[4pt]
+H2 & \fname{limit-moment-selection.tex / .pdf} & \textbf{Conceptual bridge.} Confirms that the fixed-drift Gaussian experiment is the natural local experiment and separates local-power and selection scales. & \high\\[4pt]
+H3 & \fname{necessity-feasible-normal-general-omega.tex / .pdf} & \textbf{Main theorem.} Gives the bivariate feasible-normal iff characterization for all nonsingular correlations. & \high\\[4pt]
+H4 & \fname{general-case.tex / .pdf} & \textbf{General theorem note.} Organizes arbitrary dimension and correlation through the dual-cone dichotomy and proves the feasible-support and one-extra-halfspace results. & \high\\[4pt]
+H5 & \fname{three-dimensional-case.tex / .pdf} & \textbf{Frontier results.} Shows that multi-core geometry can rescue rectangles, whereas the one-core geometry permits gated domination. & \high\\[4pt]
+H6 & \fname{master-structure.tex / .pdf} & \textbf{Control document.} Records the current authority structure, complete inventory, supersession map, and next-step recommendation. & \high\\
+\bottomrule
+\end{longtable}
+
+\subsection*{3.2 Supporting or potentially relevant documents}
+
+\begin{longtable}{@{}L{0.050\textwidth}L{0.270\textwidth}L{0.455\textwidth}L{0.125\textwidth}@{}}
+\toprule
+\textbf{ID} & \textbf{Logical document} & \textbf{Very brief takeaway} & \textbf{Class}\\
+\midrule
+\endfirsthead
+\toprule
+\textbf{ID} & \textbf{Logical document} & \textbf{Very brief takeaway} & \textbf{Class}\\
+\midrule
+\endhead
+M1 & \fname{admissibility-compact-v3.md} & \textbf{Checkpoint memo.} Best compact record of the June bivariate state, including the transfer order and the then-current feasible-normal program. & \maybe\\[4pt]
+M2 & \fname{i-relevant-notes.tex / .pdf} & \textbf{Broad synthesis.} Collects unrestricted LR admissibility, short/long power crossing, rectangles, gated domination, and early AS connections. & \maybe\\[4pt]
+M3 & \fname{Theorem2-rectanglev2.tex / .pdf} & \textbf{Standalone theorem.} Correctly characterizes admissibility within the full rectangular class; later global results change its interpretation. & \maybe\\[4pt]
+M4 & \fname{assessment-beyond-rectangles.tex / .pdf} & \textbf{Formal audit.} Refutes the proposed broad class theorem and proves gated domination of finite ordered rectangles.  The TeX is newer than the PDF. & \maybe\\[4pt]
+M5 & \fname{counter-example-june27.tex / .pdf} & \textbf{Foundational correction.} Demonstrates that closed convexity alone is insufficient after restricting the mean space. & \maybe\\[4pt]
+M6 & \fname{feasible-normal-transfer.tex / .pdf} & \textbf{Intermediate theory.} Proves feasible-normal sufficiency and formulates the transfer diagnostic; superseded as an iff result by H3. & \maybe\\[4pt]
+M7 & \fname{necessity-feasible-normal-clean.tex / .pdf} & \textbf{Special-case proof.} Valid identity-covariance version of the feasible-normal characterization; H3 is the general authority. & \maybe\\[4pt]
+M8 & \fname{lemma3-alt.tex / .pdf} & \textbf{Proof component.} Direct calibration and finite-normal repair used in the necessity argument. & \maybe\\[4pt]
+M9 & \fname{theorem1-lr-proof-updatedV2.tex / .pdf} & \textbf{Foundation.} Clean standalone LR proof, including exact size and randomized competitors; incorporated into later notes. & \maybe\\[4pt]
+M10 & \fname{files2/short-test-admissibility.tex} & \textbf{Foundation.} Proves the short $X_1$ test globally admissible by the LR ray criterion. & \maybe\\[4pt]
+M11 & \fname{admissibility-map-plan.tex / .pdf} & \textbf{Status map.} Concisely separates positive results from inadmissibility diagnostics, but its open-action list predates the completed necessity theorem. & \maybe\\[4pt]
+M12 & \fname{reactions-june27.md} & \textbf{Research reaction.} Introduces the useful transfer coordinates and interprets infeasible normals as evidence of wasted rejection mass. & \maybe\\[4pt]
+M13 & \fname{handoff-Aug26.md} & \textbf{Proof audit.} Records gaps in the identity-covariance necessity proof and the checks needed to repair them; those repairs are now incorporated. & \maybe\\[4pt]
+M14 & \fname{references/Lehmann_and_Romano-TestingStatisticalHypotheses-Ch6.pdf} & \textbf{External source.} Primary reference for the exponential-family/normal admissibility criterion repeatedly used in the project. & \maybe\\[4pt]
+M15 & \fname{extension-plan.tex / .pdf} & \textbf{General-theory precursor.} Introduced the arbitrary-dimensional core--redundant formulation and early sufficient and domination results; H4 is now the authority. & \maybe\\[4pt]
+M16 & \fname{Fables-comments.md} & \textbf{Interpretive memo.} Recasts the bivariate iff theorem as transfer-order monotonicity, records the covariance flip in $d=3$, and identifies the singleton-core extension route. & \maybe\\[4pt]
+M17 & \fname{Reviews/comments-three-dimensional-case.tex / .pdf} & \textbf{External audit.} Prompted several proof and exposition repairs in H5; one proposed restriction on $\alpha$ was checked and rejected. & \maybe\\[4pt]
+M18 & \fname{Reviews/nice-tests-two-core-admissibility.tex / .pdf} & \textbf{External theorem note.} Supplied the feasible-support and one-extra-halfspace ideas; its unsupported two-bad-cut corollary is not used. & \maybe\\[4pt]
+M19 & \fname{Reviews/extension-plan-improvements.tex / .pdf} & \textbf{External synthesis.} Proposed the general dual-cone and first-moment results incorporated, with qualifications, into H4. & \maybe\\
+\bottomrule
+\end{longtable}
+
+\subsection*{3.3 Obsolete, superseded, or non-authoritative documents}
+
+\begin{longtable}{@{}L{0.035\textwidth}L{0.285\textwidth}L{0.455\textwidth}L{0.125\textwidth}@{}}
+\toprule
+\textbf{ID} & \textbf{Logical document} & \textbf{Takeaway / reason} & \textbf{Class}\\
+\midrule
+\endfirsthead
+\toprule
+\textbf{ID} & \textbf{Logical document} & \textbf{Takeaway / reason} & \textbf{Class}\\
+\midrule
+\endhead
+O1 & \fname{obsolete/Theorem2-rectangle.tex / .pdf} & \textbf{Version history.} First rectangle proof; version 2 strengthens and cleans the result. & \obsolete\\[4pt]
+O2 & \fname{obsolete/admissibility-compact-v2.md} \newline \fname{obsolete/files2/admissibility-compact-v2.md} & \textbf{Duplicate snapshot.} Exact duplicate copies of an earlier checkpoint in which the long-test problem was still unresolved. & \obsolete\\[4pt]
+O3 & \fname{obsolete/admissibility-conversation-compact.md} & \textbf{Conversation history.} Preserves early reasoning, including a candidate restricted theorem later refuted. & \obsolete\\[4pt]
+O4 & \fname{obsolete/extensions.md} & \textbf{Abandoned agenda.} Pursues an ordered-coordinate/equicorrelation extension rather than the maintained core--redundant structure. & \obsolete\\[4pt]
+O5 & \fname{obsolete/general-conjecture-wrong.tex / .pdf} & \textbf{Negative lesson.} The proposed class based on two monotonicities and support sorting is false; M4 supplies the counterexample. & \obsolete\\[4pt]
+O6 & \fname{obsolete/scratch-idea.tex / .pdf} & \textbf{Idea provenance.} Early class-restricted admissibility conjecture, superseded by the gated counterexample and feasible-normal theory. & \obsolete\\[4pt]
+O7 & \fname{obsolete/i-relevant-notes-old1.tex} & \textbf{Version history.} Earliest broad notes; later files correct the restricted-space claims and proof gaps. & \obsolete\\[4pt]
+O8 & \fname{obsolete/i-relevant-notes-old2.tex} & \textbf{Version history.} Intermediate notes with an incomplete/incorrect restricted admissibility route. & \obsolete\\[4pt]
+O9 & \fname{obsolete/i-relevant-notes-old3.tex} & \textbf{Version history.} Last pre-synthesis draft; superseded by M2 and the focused theorem files. & \obsolete\\[4pt]
+O10 & \fname{obsolete/necessity-feasible-normal.tex / .pdf} & \textbf{Proof history.} Preliminary necessity proof, now superseded; its PDF is also stale relative to its TeX source. & \obsolete\\[4pt]
+O11 & \fname{obsolete/necessity-feasible-normal-clean-orig.tex / .pdf} & \textbf{Proof history.} Pre-repair identity-covariance proof; M7 and M8 replace it. & \obsolete\\[4pt]
+O12 & \fname{obsolete/theorem1-lr-proof.tex / .pdf} & \textbf{Version history.} First LR write-up; later revisions clarify the supported statement and exact-size condition. & \obsolete\\[4pt]
+O13 & \fname{obsolete/theorem1-lr-proof-updated.tex / .pdf} & \textbf{Version history.} Intermediate LR revision; M9 is the retained standalone version. & \obsolete\\
+\bottomrule
+\end{longtable}
+
+\section*{4. Supporting artifacts and archives}
+
+These are not research documents in the narrow sense, but they are included so the inventory accounts for every research-facing item in scope.
+
+\begin{longtable}{@{}L{0.035\textwidth}L{0.27\textwidth}L{0.465\textwidth}L{0.125\textwidth}@{}}
+\toprule
+\textbf{ID} & \textbf{File} & \textbf{Use} & \textbf{Class}\\
+\midrule
+\endhead
+A1 & \fname{short_vs_long.png} & \textbf{Figure.} Direct visual comparison of the short and long procedures; useful for exposition even though the project has moved beyond pairwise power crossing. & \maybe\\[4pt]
+A2 & \fname{long_test_hull_gated_diagram.png} & \textbf{Figure.} Visualizes the long rectangle, its transfer hull, and the gated repair; useful for explaining the bivariate domination mechanism. & \maybe\\[4pt]
+A3 & \fname{figure-1.R} & \textbf{Figure source.} Produces a generic Gaussian-shift/convex-region illustration; potentially reusable, but not part of the current proof chain. & \maybe\\[4pt]
+A4 & \fname{obsolete/files2.zip} & \textbf{Archive.} Contains the duplicate v2 memo and the standalone short-test proof already listed above; adds no unique research content. & \obsolete\\
+\bottomrule
+\end{longtable}
+
+\section*{5. Supersession map}
+
+\begingroup\small
+\noindent\textbf{Old notes.} \fname{obsolete/i-relevant-notes-old1/2/3.tex} $\longrightarrow$ \fname{i-relevant-notes.tex / .pdf} and the focused theorem notes.\par\vspace{2pt}
+\noindent\textbf{LR proof.} \fname{obsolete/theorem1-lr-proof.tex / .pdf} and \fname{obsolete/theorem1-lr-proof-updated.tex / .pdf} $\longrightarrow$ \fname{theorem1-lr-proof-updatedV2.tex / .pdf}, then incorporated into later notes.\par\vspace{2pt}
+\noindent\textbf{Rectangles.} \fname{obsolete/Theorem2-rectangle.tex / .pdf} $\longrightarrow$ \fname{Theorem2-rectanglev2.tex / .pdf}.\par\vspace{2pt}
+\noindent\textbf{Failed broad class.} \fname{obsolete/scratch-idea} and \fname{obsolete/general-conjecture-wrong} $\longrightarrow$ \fname{assessment-beyond-rectangles.tex / .pdf} and the gated-test result.\par\vspace{2pt}
+\noindent\textbf{Feasible normals.} \fname{feasible-normal-transfer.tex / .pdf} $\longrightarrow$ \fname{necessity-feasible-normal-clean.tex / .pdf} $\longrightarrow$ \fname{necessity-feasible-normal-general-omega.tex / .pdf}.\par\vspace{2pt}
+\noindent\textbf{Higher dimension.} Early $k>2$ ordered-coordinate agenda $\longrightarrow$ \fname{extension-plan.tex / .pdf} and \fname{three-dimensional-case.tex / .pdf} $\longrightarrow$ \fname{general-case.tex / .pdf}.
+\endgroup
+
+\section*{6. Recommended research organization}
+
+The active root should be treated as three layers, with obsolete history kept in the archive:
+
+\tightitem
+\begin{itemize}
+\item \textbf{Paper and bridge:} H1--H2 explain why the Gaussian experiment is the right object and how finite-sample moment selection maps into it.
+\item \textbf{Established theory:} H3 gives the sharp bivariate result; H4 gives the general arbitrary-correlation theorem structure and the core-count dichotomy.
+\item \textbf{Special cases and frontier:} H5 supplies the detailed three-dimensional proofs and the minimal two-bad-facet family.  M16 isolates the separate singleton-core $d\ge3$ necessity route.
+\end{itemize}
+
+\textbf{Next step.}  First formalize the $d\ge3$ singleton-core conditional rearrangement using $Z=X_1$ and $E=X_{\mathcal R}-\Omega_{\mathcal R1}X_1$, then determine whether the resulting $q$-lower region admits a multivariate hull-and-calibration argument.  In parallel but separately, retain the multiple-core two-infeasible-facet family as the main hostile check on the conjecture that every nice multiple-core test is admissible.
+
+\end{document}

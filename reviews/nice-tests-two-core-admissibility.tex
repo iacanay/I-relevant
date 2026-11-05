@@ -1,0 +1,293 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage[skip=0.6em]{parskip}
+
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+
+\newcommand{\E}{\mathrm{E}}
+\newcommand{\R}{\mathbf R}
+
+\begin{document}
+
+\begin{center}
+{\Large Nice tests in the two-core model:\\[2pt] where an inadmissible example could live}\\[4pt]
+{\small Notes on the question of whether all closed, convex, coordinatewise-lower\\
+exact-size tests are admissible when $\mathcal C=\{1,2\}$ :: August 28, 2026}
+\end{center}
+
+\medskip
+
+Throughout, $X\sim N_3(\mu,I_3)$, $\Lambda=\{\mu:\mu_3\le\max\{\mu_1,\mu_2\}\}$,
+$\Lambda_0=\Lambda\cap(-\infty,0]^3$, and
+$\Lambda_1=\{\mu\in\Lambda:\max\{\mu_1,\mu_2\}>0\}$. Call an acceptance region
+$A$ \emph{nice} if it is closed, convex, coordinatewise lower, and
+$P_0(A)=1-\alpha$. Call a direction $a\ge0$, $a\ne0$, \emph{feasible} if
+$a_3\le\max\{a_1,a_2\}$ and \emph{bad} otherwise. Note that every nonzero
+feasible direction belongs to $\Lambda_1$ (if $a_1=a_2=0$ then feasibility
+forces $a_3\le0$, hence $a=0$). For a nice $A$, lowerness implies that the
+size is attained at the origin, so any weak dominator $\psi$ of
+$\phi_A:=I\{x\notin A\}$ satisfies, by the zero-mass argument of
+Proposition~1 of the main note, $\E_0h=0$ with $h:=\psi-\phi_A$, and by the
+first-moment argument there, $q:=\E_0[Xh(X)]=0$. Both arguments use only the
+model, not the shape of $A$, so they are available for every nice test.
+
+\section{Why examples are hard to find: three structural facts}
+
+The difficulty is not bad luck. The two-core model destroys every standard
+device for proving inadmissibility, for three related reasons.
+
+\emph{First, the transfer cone is trivial.} Section~2 of the main note shows
+that the only sample-space direction $d$ with $\mu'd\ge0$ for all
+$\mu\in\Lambda_1$ is $d=0$. This is exactly the computation that makes
+Stein--Birnbaum-type \emph{necessary} conditions for admissibility vacuous
+here: those conditions require the rejection region to be monotone in
+directions that raise every alternative likelihood ratio, and there are no
+such directions. No test can be disqualified on local-monotonicity grounds.
+
+\emph{Second, the convex hull of the alternative directions is all of
+$\R^3$.} For instance $(-1,-1,0)=(1,-2,0)+(-2,1,0)$ with both summands in
+$\Lambda_1$, and $(0,0,\pm1)$ arise similarly. This is why the first-moment
+argument pins the entire vector $q=0$: a weak dominator of \emph{any}
+exact-size test must match its rejection mass and all three first moments
+under $P_0$. The usual dominators (transfers, gates) all fail this matching,
+which is why they do not exist here.
+
+\emph{Third, every nonnegative direction is either feasible or a negated
+null direction.} If $a\ge0$ is bad, then $a_3>\max\{a_1,a_2\}\ge
+\min\{a_1,a_2\}$, so $-a\in\Lambda_0$ (indeed
+$-a_3\le-\min\{a_1,a_2\}=\max\{-a_1,-a_2\}$). In the Bayes-representation
+heuristic for complete classes, a facet of an acceptance region can be
+supported either by alternative prior mass along its normal or by null prior
+mass along its negated normal. Since
+$\overline\Lambda_1\cup(-\Lambda_0)\supseteq\R_+^3$, \emph{every} facet
+orientation of a lower convex region is supportable from one side or the
+other. There is no orientation-based obstruction to being a limit of Bayes
+tests, hence no cheap route to inadmissibility.
+
+The upshot: if an inadmissible nice test exists, the phenomenon must be
+global and second-order, not directional. The next two results make this
+precise by carving out large admissible classes.
+
+\section{Feasibly supported regions are admissible}
+
+Say $A$ is \emph{feasibly supported} if
+\[
+A=\bigcap_{a\in F}\{x:a'x\le h_A(a)\},
+\qquad
+F:=\{a\ \text{feasible}:h_A(a)<\infty\},
+\]
+that is, the supporting halfspaces with feasible normals already determine
+$A$. For a polyhedron this holds if and only if every facet normal is
+feasible.
+
+\begin{proposition}[Feasible support suffices]\label{prop:feasible-support}
+Every feasibly supported nice test is $\alpha$-admissible against all
+level-$\alpha$ tests, including randomized competitors.
+\end{proposition}
+
+\begin{proof}
+Let $\psi$ weakly dominate $\phi_A$ and $h=\psi-\phi_A$, so $\E_0h=0$,
+$\{h>0\}\subseteq A$, $\{h<0\}\subseteq A^c$. Fix a nonzero $a\in F$; then
+$a\in\Lambda_1$, so dominance along the ray $ta$, $t>0$, gives
+$\E_0[e^{ta'X}h]\ge0$. Since $h^+$ is supported on
+$A\subseteq\{a'x\le h_A(a)\}$, the tilt bound of the rectangle proof applies
+verbatim: if $\E_0[h^-1\{a'X\ge h_A(a)+\varepsilon\}]>0$ for some
+$\varepsilon>0$, then
+$\E_0[e^{ta'X}h]\le e^{th_A(a)}\E_0h^+ -
+e^{t(h_A(a)+\varepsilon)}\E_0[h^-1\{a'X\ge h_A(a)+\varepsilon\}]<0$ for
+large $t$, a contradiction. Hence $h^-=0$ a.s.\ on $\{a'x>h_A(a)\}$. The
+complement $A^c=\bigcup_{a\in F}\{a'x>h_A(a)\}$ is open, so by the
+Lindel\"of property a countable subfamily covers it, and therefore $h^-=0$
+a.s.\ on $A^c$. Since $\{h^->0\}\subseteq A^c$, this gives $h^-=0$ a.s.;
+then $\E_0h=0$ forces $\E_0h^+=0$, so $h=0$ $P_0$-a.s., and mutual absolute
+continuity of Gaussian shifts finishes the proof as in the main note.
+\end{proof}
+
+Note that the proof uses only the confinement step; the first-moment
+identity is not needed. Two remarks. First, this is strictly weaker as a
+hypothesis than the feasible-normal condition of the extension plan, which
+demands that \emph{every} finite-support direction be feasible. Only the
+directions needed to \emph{define} $A$ must be feasible; sums of facet
+normals that leave the feasible set, such as $(1,1,2)$, are irrelevant.
+Second, it settles a question the main note left open:
+
+\begin{corollary}[The symmetric gate is admissible]
+The symmetric gated region
+$A_b^{\mathrm g}=\{x_1\le\kappa,\,x_2\le\kappa,\,x_1+x_3\le b,\,
+x_2+x_3\le b\}$ has facet normals $e_1$, $e_2$, $(1,0,1)$, $(0,1,1)$, all
+feasible, and is therefore admissible --- even though its finite-support
+direction $(1,1,2)$ is infeasible and the extension-plan condition fails.
+\end{corollary}
+
+So the symmetric gate and the rectangle are \emph{both} admissible and
+neither dominates the other, consistent with the power comparison in
+Section~2 of the main note.
+
+\section{One bad halfspace can be added for free}
+
+\begin{proposition}[Feasible support plus one halfspace]
+\label{prop:one-bad-facet}
+Let $A=A_g\cap\{x:u'x\le c\}$ be nice, where $A_g$ is an intersection of
+halfspaces with feasible normals and $u\ne0$ is arbitrary. Then $\phi_A$ is
+$\alpha$-admissible.
+\end{proposition}
+
+\begin{proof}
+As above, $\E_0h=0$ and now also $q=\E_0[Xh]=0$, so in particular
+$\E_0[u'Xh]=0$. The confinement step of
+Proposition~\ref{prop:feasible-support} gives $h^-=0$ a.s.\ on $A_g^c$, so
+$h^-$ is supported on $A^c\cap A_g=\{u'x>c\}\cap A_g$, while $h^+$ is
+supported on $A\subseteq\{u'x\le c\}$. With $M:=\E_0h^+=\E_0h^-$, if $M>0$
+then $\E_0[u'Xh^+]\le cM$ and $\E_0[u'Xh^-]>cM$ (strictly, since $u'X>c$
+a.s.\ on $\{h^->0\}$ and $P_0(u'X=c)=0$), whence $\E_0[u'Xh]<0$,
+contradicting $u'q=0$. So $M=0$, $h=0$ $P_0$-a.s., and the conclusion
+follows as before.
+\end{proof}
+
+This is the rectangle proof in its natural generality: the rectangle is
+$\{x_1\le c_1,x_2\le c_2\}$ (feasible normals $e_1,e_2$) intersected with
+the single bad halfspace $\{x_3\le c_3\}$. Two further corollaries are worth
+recording.
+
+\begin{corollary}
+The redundant-only halfspace $\phi_3=I\{x_3>z_\alpha\}$ is admissible for
+every $\alpha\in(0,1)$: here $A_g=\R^3$ and $u=e_3$, so
+$q_3=0$ alone yields the contradiction. This removes the
+Neyman--Pearson step from the proof of Proposition~2 of the main note, and
+with it the $\alpha<1/2$ restriction flagged in my earlier comments.
+\end{corollary}
+
+\begin{corollary}\label{cor:one-cut}
+The following exact-size regions are admissible: (i) any rectangle with one
+additional \emph{feasible} cut, e.g.\
+$\{x_1\le\kappa_1,\,x_2\le\kappa_2,\,x_3\le\kappa_3,\,a'x\le c\}$ with $a$
+feasible (here $A_g$ collects the core faces and the cut, and the sole bad
+halfspace is the $x_3$ face); and (ii) any region of the form
+$\{x_1\le\kappa_1,\,x_2\le\kappa_2,\,a'x\le c\}$ with $a$ bad --- the two
+core faces plus a single bad cut, with no $x_3$ face.
+\end{corollary}
+
+\begin{remark}[A rectangle plus a bad cut is \emph{not} covered]
+\label{rem:not-covered}
+Proposition~\ref{prop:one-bad-facet} does not apply to
+$\{x_1\le\kappa_1,\,x_2\le\kappa_2,\,x_3\le\kappa_3,\,a'x\le c\}$ with $a$
+bad and the cut binding: the $x_3$ face is itself a bad halfspace ($e_3$ is
+infeasible), so this region has \emph{two} exposed bad facets and exceeds
+the ``one arbitrary halfspace'' budget. Nor can the proof be repaired by a
+cleverer choice of $u$: any separating functional $\ell$ must have
+$\ell'x$ bounded below on the gap region, which contains points with
+$x_3=\kappa_3+\varepsilon$ and $x_1,x_2\to-\infty$; this forces
+$\ell_1=\ell_2=0$, i.e.\ $\ell\propto e_3$. But when the cut binds
+($c<a_1\kappa_1+a_2\kappa_2+a_3\kappa_3$), the lobe $\{a'x>c\}\cap A_g$
+contains points with $x_3<\kappa_3=\sup_Ax_3$, so $e_3$ fails as well. No
+separating functional exists, and this region joins the frontier of
+Section~4.
+\end{remark}
+
+\section{Where a counterexample must live}
+
+Combining the two propositions: an inadmissible nice test must have at least
+\emph{two} exposed halfspaces with bad normals, irreducibly --- the region
+cannot be rewritten as feasible halfspaces plus a single extra one. (A
+feasibly supported set cannot have a bad facet normal, since facet normals
+of an intersection of halfspaces lie in the closed cone of the normals
+used.) Moreover, the two bad facets must be arranged so that no single
+linear functional separates $A$ from the gap region $A_g\setminus A$;
+otherwise the proof of Proposition~\ref{prop:one-bad-facet} goes through
+with that functional in place of $u$.
+
+Two candidate families sit at this frontier. The simplest is the rectangle
+with one bad cut of Remark~\ref{rem:not-covered},
+\begin{equation}\label{eq:candidate-cut}
+A^{\mathrm{cut}}
+:=
+\{x_1\le\kappa_1,\ x_2\le\kappa_2,\ x_3\le\kappa_3,\ a'x\le c\},
+\qquad a\ \text{bad, cut binding},
+\end{equation}
+whose two bad facets are $e_3$ and $a$. The second is
+\begin{equation}\label{eq:candidate}
+A(\lambda)
+:=
+\{x_1\le\kappa,\ x_2\le\kappa,\ x_1+\lambda x_3\le b,\ x_2+\lambda x_3\le b\},
+\qquad \lambda>1,
+\end{equation}
+with $(\kappa,b)$ calibrated to exact size; the gate normals
+$(1,0,\lambda)$ and $(0,1,\lambda)$ are bad, both facets are exposed, and
+the gap region has two lobes, one along each bad facet, which no single
+linear functional can dominate simultaneously (the argument of
+Remark~\ref{rem:not-covered} adapts). Every tool above fails on both
+families, and I believe this is the true frontier: resolving admissibility
+of, say, $A(2)$ or of $A^{\mathrm{cut}}$ with $a=(1,1,3)$ would either
+produce the desired example or strongly indicate that none exists.
+
+One observation tempers optimism about finding inadmissibility here. Both
+families deform continuously into admissible tests. At $\lambda=1$,
+$A(\lambda)$ is the symmetric gate --- admissible by
+Proposition~\ref{prop:feasible-support}; as $\lambda\to\infty$ with $b$
+rescaled, it converges to a rectangle --- admissible by
+Proposition~\ref{prop:one-bad-facet}. Likewise $A^{\mathrm{cut}}$ tends to
+the plain rectangle as the cut is relaxed ($c$ increased until it stops
+binding) and to a region covered by
+Corollary~\ref{cor:one-cut}(ii) as the $x_3$ face is relaxed
+($\kappa_3\to\infty$). Inadmissibility, if present, would have to appear
+and then disappear along these paths. Possible, but it would be a delicate
+phenomenon.
+
+\section{Conjecture and two ways to attack it}
+
+\textbf{Conjecture.} In the two-core model, every closed, convex,
+coordinatewise-lower exact-size test is admissible.
+
+My reasons for leaning this way: the three structural facts of Section~1
+(no disqualifying directions; all first moments pinned; every facet
+orientation Bayes-supportable), plus the fact that every case resolved so
+far --- all nonnegative halfspaces, all finite rectangles, $\phi_3$, the
+symmetric gate, the regions of Corollary~\ref{cor:one-cut} --- has come out
+admissible, plus the interpolation observation above. But the conjecture is
+genuinely open on the families \eqref{eq:candidate-cut}
+and~\eqref{eq:candidate}, and I would not bet heavily.
+
+\textbf{Attack 1 (hunting: a linear-programming search).} Inadmissibility
+of $\phi_A$ is the feasibility of a linear program in the perturbation
+$h=\psi-\phi_A$: maximize $\sum_k \E_{\mu_k^*}h$ over a few probe
+alternatives $\mu_k^*$, subject to $-\phi_A\le h\le1-\phi_A$,
+$\E_\mu h\ge0$ for $\mu$ in a fine net of $\Lambda_1$ (include rays of
+large norm --- these encode the tilt constraints that do the confining), and
+$\E_\mu(\phi_A+h)\le\alpha$ for $\mu$ in a net of $\Lambda_0$. Discretize
+$x$ on a truncated grid, impose the $1\leftrightarrow2$ symmetry to halve
+the problem, and solve for $A(2)$. A robustly positive value as the nets
+refine yields a concrete dominator candidate to verify analytically; a value
+collapsing to zero is strong evidence for admissibility, and the dual
+solution --- weights on the binding $\mu$'s --- reads off the prior sequence
+for Attack~2. Either outcome is informative.
+
+\textbf{Attack 2 (proving: a Bayes representation).} To prove admissibility
+of $A(\lambda)$ directly, exhibit it as a suitable limit of Bayes tests and
+apply a Blyth-type argument. The structure of Section~1 says which priors to
+try: alternative prior mass escaping to infinity along the feasible facet
+normals $e_1,e_2$ (these generate the core faces), and null prior mass
+escaping along $-(1,0,\lambda)$ and $-(0,1,\lambda)$ --- both in $\Lambda_0$
+since $\lambda>0$ --- to generate the bad facets from the null side, with
+weights tuned so the limiting acceptance region is the polyhedron
+$A(\lambda)$. The delicate point is that the null constraints far along
+those rays are slack, so the weights must grow at the right exponential
+rate; whether this can be done consistently for two bad facets at once is
+exactly the same question the LP probes numerically.
+
+\textbf{Literature worth revisiting.} The classical admissibility theory
+for Gaussian means --- Birnbaum's convexity theorem, Stein's necessary
+condition, Matthes--Truax for exponential families, and the
+complete-class and one-sided-testing results of Marden, Perlman, and
+Brown--Marden --- is where both the necessary-condition machinery and the
+limit-of-Bayes sufficiency arguments live. As noted in Section~1, the
+necessary conditions are vacuous in this model, which is itself the clearest
+signal that the two-core problem sits in the regime where those papers'
+sufficiency techniques, not their necessity techniques, are the relevant
+ones. (Citations from memory; worth checking exact statements before
+relying on them.)
+
+\end{document}

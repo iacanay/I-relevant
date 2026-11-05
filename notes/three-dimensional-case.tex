@@ -1,0 +1,853 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb, amsthm, bm}
+\usepackage[margin=1in]{geometry}
+\usepackage[skip=0.6em]{parskip}
+
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+
+\begin{document}
+
+\begin{center}
+{\Large The three-dimensional core--redundant case}\\[3pt]
+{\small Ivan A. Canay :: August 28, 2026}
+\end{center}
+
+\medskip
+
+Consider
+\[
+X\sim N_3(\mu,I_3)~,
+\]
+where coordinates 1 and 2 are core moments and coordinate 3 is redundant.  The
+maintained mean space is
+\[
+\Lambda
+:=
+\left\{\mu\in\mathbf R^3:
+\mu_3\le\max\{\mu_1,\mu_2\}
+\right\}~.
+\]
+The null and alternative are
+\[
+\Lambda_0:=\Lambda\cap(-\infty,0]^3,
+\qquad
+\Lambda_1
+:=
+\left\{\mu\in\Lambda:
+\max\{\mu_1,\mu_2\}>0
+\right\}~.
+\]
+Fix $0<\alpha<1$.
+A level-$\alpha$ test is called $\alpha$-admissible if there is no other
+level-$\alpha$ test whose power is weakly larger at every
+$\mu\in\Lambda_1$ and strictly larger at some $\mu\in\Lambda_1$.
+
+The test of primary interest is the equal-cutoff rectangle, or max test.  Its
+acceptance region is
+\begin{equation}\label{eq:rectangle}
+A_\kappa
+:=
+\bigcap_{j=1}^3\{x_j\le\kappa\}~,
+\end{equation}
+and its rejection rule is
+\[
+\phi_{\max}(x)
+=
+I\left\{\max_{1\le j\le3}x_j>\kappa\right\}~.
+\]
+Thus the statistic is the maximum of all three coordinates and a single
+critical value is applied to that maximum.  Under independence, exact size at
+the origin requires
+\[
+\Phi(\kappa)^3=1-\alpha,
+\qquad
+\kappa=\Phi^{-1}\{(1-\alpha)^{1/3}\}~.
+\]
+Coordinatewise lowerness then makes the test level $\alpha$ over
+$\Lambda_0$, with size attained at $\mu=0$.
+
+\section{Failure of the feasible-normal sufficient condition}
+
+For the present identity-covariance experiment, the feasible-normal set in
+Proposition~1 of the extension plan becomes
+\begin{equation}\label{eq:feasible-set}
+\mathcal F(I_3,\Lambda)
+=
+\left\{a\in\mathbf R^3:
+a\ge0,\quad a_3\le\max\{a_1,a_2\}
+\right\}~.
+\end{equation}
+Indeed, the general condition is $a\ge0$ and $I_3a=a\in\Lambda$.
+
+The support function of the rectangle in~\eqref{eq:rectangle} is
+\[
+h_{A_\kappa}(a)
+=
+\begin{cases}
+\kappa(a_1+a_2+a_3),&a\ge0,\\
++\infty,&\text{otherwise}.
+\end{cases}
+\]
+Consequently, every nonzero direction $a\ge0$ is a finite-support direction
+of $A_\kappa$.  In particular, the normal to the redundant-coordinate face is
+\[
+e_3=(0,0,1),
+\qquad
+h_{A_\kappa}(e_3)=\kappa<\infty~.
+\]
+But
+\[
+(e_3)_3=1
+>
+\max\{(e_3)_1,(e_3)_2\}=0~,
+\]
+so $e_3\notin\mathcal F(I_3,\Lambda)$.  The equal-cutoff rectangle therefore
+fails Proposition~1 of the extension plan.
+
+The same conclusion holds for every finite three-dimensional rectangle, not
+only for the equal-cutoff rectangle, because each such rectangle has the
+finite normal $e_3$.  This calculation does not establish that the max test is
+inadmissible.  The extension-plan result is sufficient, not necessary, and
+its failure leaves the admissibility of the rectangle unresolved.
+
+\section{Limits of the two-dimensional gated repair}
+
+In the two-dimensional problem with one fixed core moment, a rectangular face
+for the redundant moment can be replaced by a calibrated gate involving the
+sum of the core and redundant statistics.  The power comparison works because
+every alternative satisfies both
+\[
+\mu_c>0
+\qquad\text{and}\qquad
+\mu_3\le\mu_c
+\]
+for the same fixed core coordinate $c$.
+
+There is no such fixed coordinate in the present model.  The alternative is
+the union of the two branches
+\[
+\Lambda_1^{(1)}
+:=
+\{\mu:\mu_1>0,\ \mu_3\le\mu_1\},
+\qquad
+\Lambda_1^{(2)}
+:=
+\{\mu:\mu_2>0,\ \mu_3\le\mu_2\}~,
+\]
+where the unpaired core mean is unrestricted on each branch.  On the first
+branch, the likelihood-ratio exponent can be written as
+\begin{equation}\label{eq:branch-one-lr}
+\mu'x
+=
+\mu_1(x_1+x_3)
++(\mu_1-\mu_3)(-x_3)
++\mu_2x_2~.
+\end{equation}
+The first two coefficients in~\eqref{eq:branch-one-lr} are nonnegative in the
+directions required by the bivariate transfer argument.  This supports a gate
+pairing coordinates 1 and 3, while coordinate 2 is left unchanged.  The
+analogous decomposition on the second branch supports a gate pairing
+coordinates 2 and 3.  A gate based on one fixed core coordinate need not
+improve power on the other branch: that selected core mean may be negative and
+may lie below $\mu_3$.
+
+A natural attempt to avoid selecting a core coordinate in advance is the
+symmetric gated acceptance region
+\begin{equation}\label{eq:symmetric-gate}
+A_b^{\mathrm g}
+:=
+\{x_1\le\kappa,\ x_2\le\kappa,\
+  x_1+x_3\le b,\ x_2+x_3\le b\}~.
+\end{equation}
+Equivalently, the redundant face is replaced by
+\[
+x_3+\max\{x_1,x_2\}\le b~.
+\]
+Choose $b$ so that
+\[
+P_0(A_b^{\mathrm g})=P_0(A_\kappa)=1-\alpha~.
+\]
+The finite facet normals of $A_b^{\mathrm g}$ are
+\[
+e_1,\quad e_2,\quad (1,0,1),\quad (0,1,1)~,
+\]
+and each belongs to~\eqref{eq:feasible-set}.  This alone is not enough for the
+extension-plan condition because the feasible-normal set is not convex and
+that condition concerns every finite-support direction.  In particular, the
+sum of the two gated-face
+normals is $(1,1,2)$.  It has
+$h_{A_b^{\mathrm g}}(1,1,2)=2b<\infty$, but is not feasible because
+$2>\max\{1,1\}$.  Thus the symmetric gated test, like the original rectangle,
+falls outside the sufficient condition.  More importantly here, it does not
+dominate the original rectangle.
+
+In fact, the symmetric gate does not dominate.  Its acceptance probability at
+a general mean is
+\begin{equation}\label{eq:gated-acceptance-probability}
+P_\mu(A_b^{\mathrm g})
+=
+\int_{-\infty}^{\infty}
+\varphi(z-\mu_3)
+\Phi\!\left(\min\{\kappa,b-z\}-\mu_1\right)
+\Phi\!\left(\min\{\kappa,b-z\}-\mu_2\right)
+\,dz~,
+\end{equation}
+whereas
+\begin{equation}\label{eq:rectangular-acceptance-probability}
+P_\mu(A_\kappa)
+=
+\prod_{j=1}^3\Phi(\kappa-\mu_j)~.
+\end{equation}
+For example, take $\alpha=0.05$.  Null calibration gives
+\[
+\kappa\simeq2.121201,
+\qquad
+b\simeq3.117267~.
+\]
+At
+\[
+\mu=(0.1,-5,0.1)\in\Lambda_1~,
+\]
+equations~\eqref{eq:gated-acceptance-probability} and
+\eqref{eq:rectangular-acceptance-probability} give
+\[
+P_\mu(A_\kappa)\simeq0.957209,
+\qquad
+P_\mu(A_b^{\mathrm g})\simeq0.965438~.
+\]
+The corresponding rejection probabilities are approximately $0.042791$ and
+$0.034562$.  The symmetric gated test therefore has lower power at this
+alternative.
+
+The example exposes the adaptation cost created by the maximum restriction.
+When $\mu_2$ is very negative, coordinate 1 is effectively the only relevant
+core coordinate.  Nevertheless, the symmetric gate is calibrated under the
+null to allow either core coordinate to activate the gate.  The resulting
+critical value is too large in this nearly bivariate subproblem.
+
+There is also a geometric obstruction to a simple symmetrization.  A
+sample-space move $d$ that increases every alternative likelihood ratio would
+have to satisfy
+\[
+\mu'd\ge0
+\qquad\text{for every }\mu\in\Lambda_1~.
+\]
+The unrestricted value of $\mu_2$ on $\Lambda_1^{(1)}$ forces $d_2=0$, and
+the unrestricted value of $\mu_1$ on $\Lambda_1^{(2)}$ forces $d_1=0$.
+With these equalities, taking $\mu_3=\mu_1>0$ on the first branch gives
+$d_3\ge0$, while allowing $\mu_3\to-\infty$ gives $d_3\le0$.  Hence the
+common likelihood-ratio transfer cone is
+\[
+\{0\}~.
+\]
+There is no nonzero pointwise move that improves every alternative in both
+branches.  Any dominating test, if one exists, must therefore use a genuinely
+distributional argument that adapts to the information in the data about
+which core coordinate is active.  This observation rules out the direct
+transfer argument, but it does not determine admissibility.  The next two
+sections give sharper sufficient conditions that establish admissibility of
+both the symmetric gate and the rectangle.
+
+\section{A sharper sufficient condition based on defining supports}
+
+The sufficient condition in Section~1 requires every direction in which the
+acceptance region has finite support to be feasible.  Fabel's observation is
+that this is stronger than needed in the present two-core model.  It is enough
+that the feasible supporting halfspaces already determine the acceptance
+region.
+
+Call an acceptance region $A$ \emph{nice} if it is closed, convex,
+coordinatewise lower, and satisfies $P_0(A)=1-\alpha$.  Let
+\[
+\mathcal F
+:=
+\{a\in\mathbf R^3:a\ge0,\ a_3\le\max\{a_1,a_2\}\}
+\]
+and define
+\[
+F_A:=\{a\in\mathcal F\setminus\{0\}:h_A(a)<\infty\}~.
+\]
+We say that $A$ is \emph{feasibly supported} if
+\begin{equation}\label{eq:feasibly-supported}
+A
+=
+\bigcap_{a\in F_A}\{x:a'x\le h_A(a)\}~.
+\end{equation}
+For a polyhedral region, this means that its essential facet normals can all
+be chosen feasible.
+
+\begin{proposition}[Feasible support suffices]
+\label{prop:feasible-support}
+Every feasibly supported nice test is $\alpha$-admissible against all
+level-$\alpha$ tests, including randomized competitors.
+\end{proposition}
+
+\begin{proof}
+Let $\phi_A:=I\{X\notin A\}$, suppose that a randomized level-$\alpha$
+test $\psi$ weakly dominates $\phi_A$, and put $h:=\psi-\phi_A$.  Since
+$0\in\Lambda_0$, level control gives $E_0\psi\le\alpha=E_0\phi_A$.
+Dominance along $t e_1\in\Lambda_1$ and continuity as $t\downarrow0$ give
+the reverse inequality, so
+\begin{equation}\label{eq:nice-zero-mass}
+E_0h=0~.
+\end{equation}
+
+Fix $a\in F_A$.  Since $a$ is nonzero and feasible, $a\in\Lambda_1$.
+Dominance along the ray $ta$, together with the Gaussian likelihood ratio,
+gives
+\begin{equation}\label{eq:feasible-tilt}
+E_0[e^{t a'X}h(X)]\ge0
+\qquad\text{for every }t>0~.
+\end{equation}
+Write $h=h^+-h^-$.  The sign restrictions imposed by $\phi_A$ give
+$\{h^+>0\}\subseteq A$.  If, for some $\varepsilon>0$,
+\[
+m_{a,\varepsilon}
+:=
+E_0[h^-1\{a'X\ge h_A(a)+\varepsilon\}]>0~,
+\]
+then
+\[
+E_0[e^{t a'X}h(X)]
+\le
+e^{t h_A(a)}E_0h^+
+-
+e^{t\{h_A(a)+\varepsilon\}}m_{a,\varepsilon}<0
+\]
+for all sufficiently large $t$, contradicting~\eqref{eq:feasible-tilt}.
+Taking $\varepsilon=1/n$ shows that $h^-=0$ almost surely on
+$\{a'X>h_A(a)\}$.
+
+By~\eqref{eq:feasibly-supported}, the open set $A^c$ is the union of these
+open halfspaces over $a\in F_A$.  The Lindel\"of property supplies a
+countable subcover, so the preceding conclusion gives $h^-=0$ almost surely
+on $A^c$.  But $\{h^->0\}\subseteq A^c$, hence $h^-=0$ almost surely.
+Equation~\eqref{eq:nice-zero-mass} then forces $h^+=0$ almost surely.
+Mutual absolute continuity of Gaussian shifts rules out a strict power
+improvement at any alternative.
+\end{proof}
+
+The logical relation with the earlier sufficient condition is
+\[
+\left\{a\ge0:h_A(a)<\infty\right\}\subseteq\mathcal F
+\quad\Longrightarrow\quad
+\text{$A$ is feasibly supported}
+\quad\Longrightarrow\quad
+\text{$\phi_A$ is admissible}~.
+\]
+The first implication is not reversible.  The old condition controls every
+finite-support direction, whereas Proposition~\ref{prop:feasible-support}
+uses only the supporting halfspaces needed to reconstruct $A$.
+
+\begin{remark}[The symmetric gate is admissible]
+The four facet normals of $A_b^{\mathrm g}$ in~\eqref{eq:symmetric-gate} are
+$e_1$, $e_2$, $(1,0,1)$, and $(0,1,1)$, all feasible.  Hence the symmetric
+gate is admissible by Proposition~\ref{prop:feasible-support}.  Its bad
+finite-support direction $(1,1,2)$ is a sum of facet normals and is not needed
+to define the region.  Thus the symmetric gate and the rectangle are both
+admissible, while the numerical calculation in Section~2 shows that the
+symmetric gate does not dominate the rectangle.
+\end{remark}
+
+\section{Admissibility of the rectangular max test}
+
+The failure of the feasible-normal condition does not imply inadmissibility in
+the present model.  In fact, the equal-cutoff max test is admissible.  The
+argument does not use equality of the cutoffs and therefore applies to every
+finite exact-size rectangle.
+
+For finite $c_1,c_2,c_3$, define
+\begin{equation}\label{eq:general-rectangle}
+A_c
+:=
+\{x_1\le c_1,\ x_2\le c_2,\ x_3\le c_3\},
+\qquad
+\phi_c:=I\{X\notin A_c\}~.
+\end{equation}
+
+\begin{proposition}[Admissibility of finite rectangles]
+\label{prop:rectangle-admissibility}
+Suppose that $P_0(A_c)=1-\alpha$.  Then $\phi_c$ is
+$\alpha$-admissible against all level-$\alpha$ tests, including randomized
+competitors.  In particular, the equal-cutoff max test in
+\eqref{eq:rectangle} is $\alpha$-admissible.  More strongly, any
+level-$\alpha$ test that weakly dominates $\phi_c$ coincides with it almost
+surely under every $P_\mu$.
+\end{proposition}
+
+\begin{proof}
+Suppose that a randomized level-$\alpha$ test $\psi$ weakly dominates
+$\phi_c$ on $\Lambda_1$.  Define
+\[
+h(x):=\psi(x)-\phi_c(x)~.
+\]
+Because $\mu=0$ belongs to the null, level control gives
+$E_0\psi\le\alpha=E_0\phi_c$.  On the other hand, $t e_1\in\Lambda_1$ for
+every $t>0$.  Dominance along this ray and continuity as $t\downarrow0$ give
+$E_0\psi\ge E_0\phi_c$.  Consequently,
+\begin{equation}\label{eq:zero-mass}
+E_0h=0~.
+\end{equation}
+
+We first show the first-moment identities $E_0[X_jh(X)]=0$, $j=1,2,3$.  Let
+\[
+q:=E_0[Xh(X)]\in\mathbf R^3~.
+\]
+The set $\Lambda_1$ is a cone, so $td\in\Lambda_1$ whenever
+$d\in\Lambda_1$ and $t>0$.  Dominance and the Gaussian likelihood ratio
+therefore imply
+\[
+0\le E_{td}h(X)
+=
+\exp\{-t^2\|d\|^2/2\}
+E_0\!\left[h(X)\exp\{t d'X\}\right]~.
+\]
+The expression equals zero at $t=0$ by~\eqref{eq:zero-mass}.
+Because $|h|\le1$ and the Gaussian moment-generating function is finite
+everywhere, differentiation under the expectation is justified in a
+neighborhood of zero.  Differentiating from the right at zero therefore gives
+\begin{equation}\label{eq:directional-moment}
+d'q\ge0
+\qquad\text{for every }d\in\Lambda_1~.
+\end{equation}
+For every $s\in\mathbf R$, both $(1,s,0)$ and $(s,1,0)$ belong to
+$\Lambda_1$.  Hence~\eqref{eq:directional-moment} gives
+\[
+q_1+s q_2\ge0,
+\qquad
+s q_1+q_2\ge0
+\qquad\text{for every }s\in\mathbf R~,
+\]
+which forces $q_1=q_2=0$.  Moreover, $(1,0,r)\in\Lambda_1$ for every
+$r\le1$.  Applying~\eqref{eq:directional-moment} with $r=1$ and $r=-1$
+then gives $q_3=0$.  We have shown that
+\begin{equation}\label{eq:zero-first-moments}
+E_0[X_jh(X)]=0,
+\qquad j=1,2,3~.
+\end{equation}
+
+It remains to use the sign restrictions imposed by the rectangular test.
+Write $h=h^+-h^-$ for the positive and negative parts of $h$.  Since
+$\phi_c=0$ on $A_c$ and $\phi_c=1$ outside $A_c$,
+\begin{equation}\label{eq:sign-support}
+\{h^+>0\}\subseteq A_c,
+\qquad
+\{h^->0\}\subseteq A_c^c~,
+\end{equation}
+pointwise.  Along the alternative ray $t e_j$, for $j=1,2$, dominance
+gives
+\begin{equation}\label{eq:laplace-nonnegative}
+E_0\!\left[e^{tX_j}h(X)\right]\ge0
+\qquad\text{for every }t>0~.
+\end{equation}
+We claim that
+\begin{equation}\label{eq:no-core-loss}
+h^-=0\ \text{a.s. on }\{X_j>c_j\},
+\qquad j=1,2~.
+\end{equation}
+To see this, suppose for some $\varepsilon>0$ that
+\[
+m_{j,\varepsilon}
+:=
+E_0\!\left[h^-1\{X_j\ge c_j+\varepsilon\}\right]>0~.
+\]
+Let $M^+:=E_0h^+$.  The first inclusion in~\eqref{eq:sign-support} and
+the preceding display imply
+\[
+E_0\!\left[e^{tX_j}h(X)\right]
+\le
+e^{tc_j}M^+
+-e^{t(c_j+\varepsilon)}m_{j,\varepsilon}~,
+\]
+which is negative for all sufficiently large $t$.  This contradicts
+\eqref{eq:laplace-nonnegative}.  Applying the argument with
+$\varepsilon=1/n$, for $n\ge1$, proves~\eqref{eq:no-core-loss}.
+
+By~\eqref{eq:sign-support} and~\eqref{eq:no-core-loss}, any negative part of
+$h$ must be supported on
+\[
+\{X_1\le c_1,\ X_2\le c_2,\ X_3>c_3\}~,
+\]
+whereas the positive part is supported on $\{X_3\le c_3\}$.  Equation
+\eqref{eq:zero-mass} gives $E_0h^+=E_0h^-=:M$.  If $M>0$, these support
+restrictions imply
+\[
+E_0[X_3h^+]\le c_3M,
+\qquad
+E_0[X_3h^-]>c_3M~.
+\]
+The second inequality is strict because $X_3>c_3$ on $\{h^->0\}$ and
+$E_0h^-=M>0$.  Consequently, $E_0[X_3h]<0$.
+This contradicts~\eqref{eq:zero-first-moments}.  Thus $M=0$ and $h=0$
+$P_0$-almost surely.  All Gaussian shifts are mutually absolutely continuous,
+so $\psi$ and $\phi_c$ coincide almost surely under every $P_\mu$.  A strict
+power improvement is therefore impossible.
+\end{proof}
+
+\begin{remark}[Why the same proof fails with one core]
+In the two-dimensional model with one core and one redundant coordinate, the
+alternative directions can be normalized as $(1,s)$ with $s\le1$.  If
+$q=E_0[Xh(X)]$, the local dominance condition becomes
+\[
+q_1+s q_2\ge0
+\qquad\text{for every }s\le1~,
+\]
+which is equivalent to
+\[
+q_2\le0,
+\qquad
+q_1+q_2\ge0~.
+\]
+Thus local dominance does not force $q=0$.  The core ray still rules out
+negative comparison mass above the core cutoff.  Any remaining negative mass
+lies above the redundant cutoff, which yields $q_2<0$.  This is consistent
+with the preceding inequalities and is precisely the direction used by the
+gated dominator.  In the three-dimensional model, the second unrestricted
+core supplies both $(1,s,0)$ and $(s,1,0)$ for every real $s$.  These
+directions collapse the permissible first-moment cone to $\{0\}$, converting
+the same tail comparison into a contradiction.
+\end{remark}
+
+\section{One additional supporting halfspace}
+
+The rectangle proof has a broader form.  The zero-mass and first-moment
+arguments in that proof use only the two-core model and exact size, not the
+shape of the acceptance region.  Thus, for any nice $A$ and any weak
+dominator $\psi$, with $h:=\psi-\phi_A$,
+\begin{equation}\label{eq:model-wide-balance}
+E_0h=0,
+\qquad
+E_0[Xh(X)]=0~.
+\end{equation}
+The first identity follows by approaching the origin along $t e_1$.  For the
+second, differentiation along $(1,s,0)$ and $(s,1,0)$ for every
+$s\in\mathbf R$, followed by $(1,0,1)$ and $(1,0,-1)$, forces all three
+components to vanish.
+
+\begin{proposition}[Feasible support plus one halfspace]
+\label{prop:one-extra-halfspace}
+Let
+\[
+A
+=
+A_g\cap\{x:u'x\le c\}
+\]
+be nice, where $u\ne0$ is arbitrary and $A_g$ is an intersection of
+halfspaces with feasible normals.  Then $\phi_A$ is $\alpha$-admissible.
+\end{proposition}
+
+\begin{proof}
+Let $\psi$ weakly dominate $\phi_A$ and define $h:=\psi-\phi_A$.
+For every feasible halfspace defining $A_g$, the exponential-tilt argument
+in Proposition~\ref{prop:feasible-support} eliminates $h^-$ beyond that
+halfspace.  A countable-subcover argument therefore gives
+\[
+h^-=0\quad\text{almost surely on }A_g^c~.
+\]
+Since $h^-$ is supported on $A^c$, any remaining negative part is supported
+on $A_g\cap\{u'X>c\}$, while $h^+$ is supported on
+$A\subseteq\{u'X\le c\}$.  By~\eqref{eq:model-wide-balance},
+$E_0h^+=E_0h^-=:M$ and $E_0[u'Xh]=0$.  If $M>0$, then
+\[
+E_0[u'Xh^+]\le cM,
+\qquad
+E_0[u'Xh^-]>cM~,
+\]
+so $E_0[u'Xh]<0$, a contradiction.  Hence $M=0$, and mutual absolute
+continuity finishes the proof.
+\end{proof}
+
+Proposition~\ref{prop:one-extra-halfspace} contains the rectangle result as
+a special case: take
+\[
+A_g=\{x_1\le c_1,\ x_2\le c_2\},
+\qquad
+u=e_3~.
+\]
+It also covers a halfspace using only the redundant coordinate by taking
+$A_g=\mathbf R^3$.
+
+The qualification ``one halfspace'' is substantive.  The proposition does
+not show that a rectangle with an additional bad cut is admissible: the
+rectangle already uses the bad normal $e_3$, so the additional bad cut would
+create two bad facets.  More generally, any inadmissible nice polyhedral test
+must require at least two nonproportional bad facets and cannot be rewritten
+using feasible halfspaces plus a single additional halfspace.
+
+A minimal unresolved family is
+\begin{equation}\label{eq:two-bad-facet-family}
+A(\lambda)
+:=
+\{x_1\le\kappa,\ x_2\le\kappa,\
+x_1+\lambda x_3\le b,\ x_2+\lambda x_3\le b\},
+\qquad \lambda>1~,
+\end{equation}
+with $(\kappa,b)$ calibrated to exact size.  Its two gated-face normals
+$(1,0,\lambda)$ and $(0,1,\lambda)$ are bad and nonproportional.  Neither
+Proposition~\ref{prop:feasible-support} nor
+Proposition~\ref{prop:one-extra-halfspace} determines its admissibility.
+At $\lambda=1$ the family is the admissible symmetric gate, while after
+appropriate rescaling it approaches a rectangle as $\lambda\to\infty$.
+Whether some intermediate member is inadmissible remains open.  Thus the
+conjecture that every nice test is admissible is plausible, but is not a
+consequence of the results above.
+
+\section{A redundant-only test and an inadmissible example}
+
+Proposition~\ref{prop:one-extra-halfspace} immediately handles the halfspace
+that uses only the redundant coordinate.  We record this special case
+explicitly.  Its admissibility does not imply that every exact-size test is
+admissible in the present model.
+
+Let $z_\alpha:=\Phi^{-1}(1-\alpha)$ and define
+\begin{equation}\label{eq:x3-only-test}
+\phi_3(x):=I\{x_3>z_\alpha\}~.
+\end{equation}
+Since every null mean satisfies $\mu_3\le0$, this test has level $\alpha$,
+with size attained at the origin.
+
+\begin{proposition}[Redundant-only halfspace]
+\label{prop:x3-only-admissible}
+Suppose $0<\alpha<1$.  The test $\phi_3$ in~\eqref{eq:x3-only-test} is
+$\alpha$-admissible against all level-$\alpha$ tests, including randomized
+competitors.
+\end{proposition}
+
+\begin{proof}
+Apply Proposition~\ref{prop:one-extra-halfspace} with
+$A_g=\mathbf R^3$, $u=e_3$, and $c=z_\alpha$.
+\end{proof}
+
+The exact calibration in~\eqref{eq:x3-only-test} matters.  If the cutoff is
+larger than $z_\alpha$, the resulting conservative test is dominated by
+$\phi_3$; if it is smaller, the test is not level $\alpha$.
+
+There are nonetheless inadmissible exact-size tests.  The following example
+uses all three coordinates but allocates rejection probability to evidence
+that the three means are equal.
+
+Define
+\begin{equation}\label{eq:contrast-vector}
+Y
+:=
+\begin{pmatrix}
+X_3-X_1\\
+X_3-X_2
+\end{pmatrix},
+\qquad
+V
+:=
+\begin{pmatrix}
+2&1\\
+1&2
+\end{pmatrix}~.
+\end{equation}
+Under $P_0$, $Y\sim N_2(0,V)$.  Let $r_\alpha$ denote the lower
+$\alpha$-quantile of a $\chi^2_2$ distribution and consider
+\begin{equation}\label{eq:bad-contrast-test}
+\phi_{\mathrm{eq}}(x)
+:=
+I\{Y'V^{-1}Y\le r_\alpha\}~.
+\end{equation}
+
+\begin{proposition}[An inadmissible exact-size test]
+\label{prop:inadmissible-contrast-test}
+The test $\phi_{\mathrm{eq}}$ is a nonrandomized level-$\alpha$ test with
+size attained at the origin, but it is inadmissible against randomized
+competitors.
+\end{proposition}
+
+\begin{proof}
+At a general mean, let
+\[
+\delta
+:=
+\begin{pmatrix}
+\mu_3-\mu_1\\
+\mu_3-\mu_2
+\end{pmatrix}~.
+\]
+Then $Y'V^{-1}Y$ has a noncentral $\chi^2_2$ distribution with noncentrality
+parameter $\delta'V^{-1}\delta$.  Its probability of falling below the fixed
+positive threshold $r_\alpha$ is at most its probability under zero
+noncentrality.  Consequently,
+\[
+E_\mu\phi_{\mathrm{eq}}\le\alpha
+\qquad\text{for every }\mu\in\mathbf R^3~,
+\]
+with equality when $\delta=0$ and strict inequality when $\delta\ne0$.
+The constant randomized test $\psi(x)\equiv\alpha$ is level $\alpha$ and
+has power $\alpha$ at every mean.  It therefore weakly dominates
+$\phi_{\mathrm{eq}}$, with strict inequality, for example, at
+$\mu=(1,0,0)\in\Lambda_1$.
+\end{proof}
+
+The test in~\eqref{eq:bad-contrast-test} is deliberately outside the natural
+class considered earlier: it is not coordinatewise monotone, and its
+acceptance region is not convex.  We do not currently have an inadmissible
+example among exact-size tests with closed, convex, coordinatewise-lower
+acceptance regions in the two-core model.  The results above establish
+admissibility for nonnegative halfspaces, finite rectangles, feasibly
+supported regions, and regions obtained from feasible support by one
+additional halfspace.  The two-bad-facet family in
+\eqref{eq:two-bad-facet-family} remains unresolved.
+
+\section{One core and two redundant moments}
+
+Consider now the alternative partition
+\[
+\mathcal C=\{1\},
+\qquad
+\mathcal R=\{2,3\}~.
+\]
+The maintained mean space becomes
+\begin{equation}\label{eq:one-core-space}
+\Lambda^{1\mid23}
+:=
+\{\mu\in\mathbf R^3:\mu_2\le\mu_1,\ \mu_3\le\mu_1\}~.
+\end{equation}
+Its null and alternative are
+\[
+\Lambda^{1\mid23}_0
+:=
+\Lambda^{1\mid23}\cap(-\infty,0]^3,
+\qquad
+\Lambda^{1\mid23}_1
+:=
+\{\mu\in\Lambda^{1\mid23}:\mu_1>0\}~.
+\]
+Unlike the two-core model, the same core coordinate is positive and dominates
+both redundant means at every alternative.  This is exactly the condition
+needed by the bivariate gated transfer.
+
+Return to the finite rectangle $A_c$ in~\eqref{eq:general-rectangle}, with
+$P_0(A_c)=1-\alpha$.  Fix $r\in\{2,3\}$, and let $s$ denote the other
+redundant coordinate.  Choose the unique finite $b_r$ satisfying
+\begin{equation}\label{eq:one-core-gate-calibration}
+P_0\{X_1\le c_1,\ X_1+X_r\le b_r\}
+=
+\Phi(c_1)\Phi(c_r)~.
+\end{equation}
+Existence and uniqueness follow because the left side is continuous and
+strictly increasing in $b_r$, from $0$ to $\Phi(c_1)$, while the right side
+lies strictly between these limits.
+Define the gated acceptance region
+\begin{equation}\label{eq:one-core-gated-rectangle}
+A_c^{(r)}
+:=
+\{x_1\le c_1,\ x_1+x_r\le b_r,\ x_s\le c_s\}~.
+\end{equation}
+
+\begin{proposition}[Rectangles are inadmissible with one core]
+\label{prop:one-core-rectangle-dominated}
+For either $r\in\{2,3\}$, the test with acceptance region $A_c^{(r)}$ has
+exact size $\alpha$ and strictly dominates the rectangular test with
+acceptance region $A_c$ over $\Lambda^{1\mid23}_1$.  Hence every finite
+exact-size rectangle, including the equal-cutoff max test, is inadmissible.
+\end{proposition}
+
+\begin{proof}
+Independence and~\eqref{eq:one-core-gate-calibration} give
+$P_0(A_c^{(r)})=P_0(A_c)=1-\alpha$.  Coordinatewise lowerness then gives
+level $\alpha$ over $\Lambda^{1\mid23}_0$.
+
+In the $(1,r)$ coordinates, the points newly rejected by the gated test form
+\[
+G_r
+:=
+\{x_1\le c_1,\ x_r\le c_r,\ x_1+x_r>b_r\}~,
+\]
+whereas the points newly accepted form
+\[
+D_r
+:=
+\{x_1\le c_1,\ x_r>c_r,\ x_1+x_r\le b_r\}~.
+\]
+Calibration gives $P_0(G_r)=P_0(D_r)$.  This common probability is positive.
+Indeed, calibration forces $b_r<c_1+c_r$: otherwise the original bivariate
+rectangle would be strictly contained, up to a positive-probability set, in
+the gated region, contradicting~\eqref{eq:one-core-gate-calibration}.  For
+every $g\in G_r$ and
+$d\in D_r$,
+\[
+g_1+g_r>d_1+d_r,
+\qquad
+-g_r>-d_r~.
+\]
+At any $\mu\in\Lambda^{1\mid23}_1$, write
+\[
+u:=\mu_1>0,
+\qquad
+v:=\mu_1-\mu_r\ge0~.
+\]
+The likelihood ratio in the selected coordinates is proportional to
+\[
+\exp\{u(x_1+x_r)+v(-x_r)\}~.
+\]
+For a direct strict comparison, set
+\[
+\ell(x):=u(x_1+x_r)-v x_r,
+\qquad
+L:=u b_r-v c_r~.
+\]
+Then $\ell(g)>L$ for every $g\in G_r$, whereas $\ell(d)\le L$ for every
+$d\in D_r$.  Consequently,
+\[
+\int_{G_r}e^{\ell(x)}\,dP_0(x)
+>
+e^L P_0(G_r)
+=
+e^L P_0(D_r)
+\ge
+\int_{D_r}e^{\ell(x)}\,dP_0(x)~.
+\]
+The common likelihood-ratio normalizing factor therefore gives
+$P_\mu(G_r)>P_\mu(D_r)$.  The remaining constraint $X_s\le c_s$ is
+independent and common to both tests, so multiplying by
+$\Phi(c_s-\mu_s)>0$ proves strict power domination.
+\end{proof}
+
+Only one redundant face needs to be gated to establish inadmissibility.  The
+test in~\eqref{eq:one-core-gated-rectangle} still uses all three moments: the
+other redundant coordinate remains through its original rectangular face.
+The same construction works with either redundant coordinate.
+
+\enlargethispage{4\baselineskip}
+
+It is also easy to construct admissible tests that gate both redundant
+moments.  For finite $a,b_2,b_3$, consider
+\begin{equation}\label{eq:double-gated-region}
+A^{\mathrm{gg}}_{a,b_2,b_3}
+:=
+\{x_1\le a,\ x_1+x_2\le b_2,\ x_1+x_3\le b_3\}~.
+\end{equation}
+The feasible-normal cone for~\eqref{eq:one-core-space} is
+\[
+\mathcal F^{1\mid23}
+=
+\{a\ge0:a_2\le a_1,\ a_3\le a_1\}~.
+\]
+Every finite normal of~\eqref{eq:double-gated-region} is a nonnegative
+combination of
+\[
+e_1,
+\qquad
+(1,1,0),
+\qquad
+(1,0,1)~,
+\]
+and therefore belongs to $\mathcal F^{1\mid23}$.  Once the three cutoffs are
+calibrated to give $P_0(A^{\mathrm{gg}}_{a,b_2,b_3})=1-\alpha$, the
+feasible-normal sufficient condition establishes admissibility.
+
+The pairwise transfer proof does not show that a jointly calibrated
+double-gated test dominates the original rectangle.  After the first gate is
+introduced, the remaining constraints no longer factor into an independent
+bivariate problem.  A randomized mixture of the two single-gate dominators
+does dominate the rectangle, but deterministic domination by a double-gated
+test remains unresolved.
+
+\end{document}

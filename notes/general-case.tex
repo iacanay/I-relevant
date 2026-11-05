@@ -1,0 +1,689 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb,amsthm,bm,mathtools}
+\usepackage[margin=1in]{geometry}
+\usepackage[skip=0.6em]{parskip}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{conjecture}[theorem]{Conjecture}
+
+\newcommand{\E}{\mathrm E}
+\newcommand{\Pp}{\mathrm P}
+\newcommand{\R}{\mathbf R}
+\newcommand{\cC}{\mathcal C}
+\newcommand{\cR}{\mathcal R}
+\newcommand{\cF}{\mathcal F}
+\newcommand{\cB}{\mathcal B}
+\newcommand{\1}{\mathbf 1}
+
+\begin{document}
+
+\begin{center}
+{\Large The general core--redundant Gaussian experiment}\\[4pt]
+{\large Feasible support, first-moment rigidity, and gated domination}\\[4pt]
+{\small Ivan A. Canay :: August 28, 2026}
+\end{center}
+
+\medskip
+
+This note studies admissibility in a Gaussian experiment with an arbitrary
+number of core and redundant moments and an unrestricted positive-definite
+correlation matrix.  The main distinction is between models with one core
+moment and models with at least two.  With one core moment, dominance can
+produce a nonzero first-moment transfer and calibrated gates can improve some
+tests.  With at least two core moments, every weak dominator of an exact-size
+test must match its full first-moment vector at the origin.  This identity
+implies that feasible support plus one arbitrary supporting halfspace is
+sufficient for admissibility.
+
+The results below are self-contained.  They do not provide a full
+characterization when there are at least two core moments.  The first open
+case is a region requiring two essential infeasible supporting halfspaces.
+
+\section{The experiment and the decision problem}
+
+Let
+\[
+X\sim N_d(\mu,\Omega),
+\]
+where $\Omega$ is a positive-definite correlation matrix.  Partition the
+indices into two nonempty sets: the core indices $\cC$ and the redundant
+indices $\cR$.  The maintained mean space is
+\begin{equation}\label{eq:Lambda}
+\Lambda
+:=
+\left\{\mu\in\R^d:
+\mu_r\le \max_{c\in\cC}\mu_c
+\text{ for every }r\in\cR
+\right\}.
+\end{equation}
+The null and alternative are
+\begin{align}
+\Lambda_0
+&:=\Lambda\cap(-\infty,0]^d,\label{eq:null}\\
+\Lambda_1
+&:=\Lambda\setminus\Lambda_0
+=\left\{\mu\in\Lambda:
+\max_{c\in\cC}\mu_c>0\right\}.\label{eq:alternative}
+\end{align}
+Thus a redundant coordinate can be positive only if some core coordinate is
+positive.  The restriction is imposed on standardized local means; it is not
+implied by the corresponding ordering of unstandardized drifts unless their
+standard deviations agree.
+
+For a Borel acceptance region $A$, write
+\[
+\phi_A(x):=\1\{x\notin A\}.
+\]
+A possibly randomized test is a Borel function $\psi:\R^d\to[0,1]$.  It is
+level $\alpha$ if
+\[
+\sup_{\mu\in\Lambda_0}\E_\mu\psi(X)\le\alpha.
+\]
+It weakly dominates $\phi_A$ if
+\[
+\E_\mu\psi(X)\ge\E_\mu\phi_A(X)
+\qquad\text{for every }\mu\in\Lambda_1,
+\]
+and it strictly dominates $\phi_A$ if the inequality is strict for at least
+one alternative.  The test $\phi_A$ is $\alpha$-admissible if it is level
+$\alpha$ and has no strict dominator.
+
+We call $A$ \emph{nice} if it is closed, convex, coordinatewise lower, and
+\begin{equation}\label{eq:exact-size}
+\Pp_0(X\in A)=1-\alpha.
+\end{equation}
+Coordinatewise lowerness and $\Lambda_0\subseteq(-\infty,0]^d$ imply that
+$\phi_A$ is level $\alpha$, with size attained at the origin.
+
+\section{The dual-cone dichotomy}
+
+For a cone $K\subseteq\R^d$, define
+\[
+K^*:=\{v\in\R^d:\mu'v\ge0\text{ for every }\mu\in K\}.
+\]
+The following calculation explains the difference between the singleton-core
+and multiple-core models.
+
+\begin{lemma}[Dual-cone dichotomy]\label{lem:dual}
+Suppose that $\cC$ and $\cR$ are nonempty.
+\begin{enumerate}
+\item If $\cC=\{1\}$, then
+\begin{equation}\label{eq:dual-one-core}
+\Lambda_1^*
+=
+\left\{v\in\R^d:
+v_r\le0\ (r\in\cR),\quad
+v_1+\sum_{r\in\cR}v_r\ge0
+\right\}
+=
+\operatorname{cone}\{e_1,e_1-e_r:r\in\cR\}.
+\end{equation}
+\item If $|\cC|\ge2$, then
+\begin{equation}\label{eq:dual-many-core}
+\Lambda_1^*=\{0\}.
+\end{equation}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Suppose first that $\cC=\{1\}$.  Every $\mu\in\Lambda_1$ has
+$\mu_1>0$, so conicity allows us to normalize $\mu_1=1$.  The inequality
+\[
+v_1+\sum_{r\in\cR}\mu_rv_r\ge0
+\qquad\text{for every }(\mu_r)_{r\in\cR}\le1
+\]
+forces $v_r\le0$ by sending one $\mu_r$ to $-\infty$.  Given these sign
+restrictions, the left side is minimized by setting every $\mu_r=1$, which
+gives $v_1+\sum_rv_r\ge0$.  The two conditions are also sufficient.  The
+generator representation follows from
+\[
+v
+=
+\left(v_1+\sum_rv_r\right)e_1
++\sum_r(-v_r)(e_1-e_r).
+\]
+
+Now suppose that $|\cC|\ge2$ and $v\in\Lambda_1^*$.  Fix a core index
+$j$ and choose another core index $c\ne j$.  For every $s\in\R$, the mean
+$e_c+se_j$ belongs to $\Lambda_1$.  Hence
+\[
+v_c+sv_j\ge0\qquad\text{for every }s\in\R,
+\]
+which forces $v_j=0$.  Thus all core components of $v$ vanish.  For a
+redundant index $r$, fix a core index $c$ and consider
+\[
+\mu=e_c+se_r,
+\qquad s\le1.
+\]
+This mean belongs to $\Lambda_1$, so $sv_r\ge0$ for every $s\le1$.
+Taking $s=1$ and $s=-1$ gives $v_r=0$.  This holds for every redundant
+index, proving~\eqref{eq:dual-many-core}.
+\end{proof}
+
+Lemma~\ref{lem:dual} does not say that a dominator exists whenever
+$\Lambda_1^*$ is nontrivial.  It identifies the first-order imbalances that
+are compatible with dominance.  In the singleton-core model, calibrated
+gated dominators exploit such imbalances for particular tests.  In the
+multiple-core model, the dual cone is trivial and dominance instead forces a
+first-moment identity.  This is the sense in which the dual cone organizes
+the results below.
+
+\section{Feasible support}
+
+For a closed convex set $A$, let
+\[
+h_A(a):=\sup_{x\in A}a'x
+\]
+denote its support function.  If $A$ is nonempty and coordinatewise lower,
+then $h_A(a)<\infty$ for a nonzero $a$ only if $a\ge0$.
+
+Relative to $P_0=N_d(0,\Omega)$, the Gaussian likelihood ratio is
+\begin{equation}\label{eq:lr}
+\frac{dP_\mu}{dP_0}(x)
+=
+\exp\left\{\mu'\Omega^{-1}x
+-\frac12\mu'\Omega^{-1}\mu\right\}.
+\end{equation}
+A sample-space normal $a$ generates the natural-parameter ray $ta$ and the
+mean ray $t\Omega a$.  Define the feasible-normal set
+\begin{equation}\label{eq:feasible}
+\cF(\Omega,\Lambda)
+:=
+\{a\in\R^d:a\ge0,\ \Omega a\in\Lambda\}.
+\end{equation}
+
+\begin{lemma}\label{lem:feasible-alternative}
+If $a\in\cF(\Omega,\Lambda)$ and $a\ne0$, then
+$\Omega a\in\Lambda_1$.
+\end{lemma}
+
+\begin{proof}
+Suppose instead that every core component of $\Omega a$ is nonpositive.
+Because $\Omega a\in\Lambda$, every redundant component is then also
+nonpositive.  Since $a\ge0$, this would imply
+$a'\Omega a\le0$, contradicting positive definiteness.
+\end{proof}
+
+\begin{definition}[Feasible support]\label{def:feasible-support}
+For a nice region $A$, let
+\[
+F_A
+:=
+\{a\in\cF(\Omega,\Lambda):a\ne0,\ h_A(a)<\infty\}.
+\]
+We say that $A$ is \emph{feasibly supported} if
+\begin{equation}\label{eq:feasible-support}
+A
+=
+\bigcap_{a\in F_A}\{x:a'x\le h_A(a)\}.
+\end{equation}
+For a full-dimensional polyhedron, this is equivalent to feasibility of
+every essential facet normal.
+\end{definition}
+
+\begin{proposition}[Feasible support suffices]\label{prop:feasible-support}
+If a nice region $A$ is feasibly supported, then $\phi_A$ is
+$\alpha$-admissible against all level-$\alpha$ tests, including randomized
+competitors.
+\end{proposition}
+
+\begin{proof}
+Suppose that a level-$\alpha$ test $\psi$ weakly dominates $\phi_A$ and
+set $h:=\psi-\phi_A$.  Since $0\in\Lambda_0$,
+$\E_0\psi\le\alpha=\E_0\phi_A$.  For any $c\in\cC$, the ray
+$te_c$ belongs to $\Lambda_1$ for $t>0$.  Dominance on this ray and
+continuity as $t\downarrow0$ give the reverse inequality.  Therefore
+\begin{equation}\label{eq:zero-mass-support}
+\E_0h=0.
+\end{equation}
+Moreover,
+\begin{equation}\label{eq:signs}
+\{h>0\}\subseteq A,
+\qquad
+\{h<0\}\subseteq A^c.
+\end{equation}
+
+Fix $a\in F_A$.  Lemma~\ref{lem:feasible-alternative} and conicity imply
+$t\Omega a\in\Lambda_1$ for every $t>0$.  Dominance and
+\eqref{eq:lr} give
+\begin{equation}\label{eq:tilt-positive}
+\E_0[e^{ta'X}h(X)]\ge0
+\qquad\text{for every }t>0.
+\end{equation}
+Write $h=h^+-h^-$.  Since $h^+$ is supported on
+$A\subseteq\{a'X\le h_A(a)\}$, for every $\varepsilon>0$,
+\begin{align*}
+\E_0[e^{ta'X}h(X)]
+&\le
+e^{t h_A(a)}\E_0h^+\\
+&\quad-
+e^{t\{h_A(a)+\varepsilon\}}
+\E_0\left[h^-\1\{a'X\ge h_A(a)+\varepsilon\}\right].
+\end{align*}
+If the last expectation were positive, the right side would be negative for
+all sufficiently large $t$, contradicting~\eqref{eq:tilt-positive}.
+Taking $\varepsilon=1/n$ shows that $h^-=0$ almost surely on
+$\{a'X>h_A(a)\}$.
+
+By~\eqref{eq:feasible-support}, the open set $A^c$ is the union of these
+open halfspaces over $a\in F_A$.  A countable subfamily covers $A^c$.
+Consequently $h^-=0$ almost surely on $A^c$, and~\eqref{eq:signs} gives
+$h^-=0$ almost surely everywhere.  Equation~\eqref{eq:zero-mass-support}
+then forces $h^+=0$ almost surely.  Gaussian shifts are mutually absolutely
+continuous, so a strict power improvement at another mean is impossible.
+\end{proof}
+
+The condition in Proposition~\ref{prop:feasible-support} is weaker than
+requiring every finite-support direction to be feasible.  The distinction
+disappears when there is one core moment.
+
+\begin{proposition}[Relation with the finite-normal condition]
+\label{prop:relation}
+Let
+\[
+\cB(A):=\{b\in\R^d:b\ne0,\ h_A(b)<\infty\}.
+\]
+Then $\cB(A)\subseteq\cF(\Omega,\Lambda)$ implies feasible support.  If
+$|\cC|=1$, the converse also holds.
+\end{proposition}
+
+\begin{proof}
+The first implication follows from the standard supporting-halfspace
+representation of a closed convex set.  Suppose now that $|\cC|=1$.
+Then $\Lambda$ is defined by linear inequalities, so
+$\cF(\Omega,\Lambda)$ is a closed convex cone.  Assume that $A$ is
+feasibly supported and let $b\in\cB(A)$.  If
+$b\notin\cF(\Omega,\Lambda)$, separation from this closed convex cone
+provides $v\in\R^d$ such that
+\[
+a'v\le0\quad\text{for all }a\in\cF(\Omega,\Lambda),
+\qquad b'v>0.
+\]
+For any $x\in A$ and $t\ge0$, every halfspace in
+\eqref{eq:feasible-support} contains $x+tv$.  Feasible support therefore
+implies $x+tv\in A$.  But then $h_A(b)=\infty$, a contradiction.
+Thus $b$ is feasible.
+\end{proof}
+
+When $|\cC|\ge2$, the first implication can be strict.  For example, take
+$d=3$, $\Omega=I_3$, $\cC=\{1,2\}$, and $\cR=\{3\}$.  The region
+\begin{equation}\label{eq:symmetric-gate-example}
+A_g
+=
+\{x_1\le\kappa,\ x_2\le\kappa,\ x_1+x_3\le b,\ x_2+x_3\le b\}
+\end{equation}
+has feasible facet normals $e_1$, $e_2$, $e_1+e_3$, and $e_2+e_3$.
+It is therefore feasibly supported.  Yet $(1,1,2)$ has finite support on
+$A_g$ and is infeasible because $2>\max\{1,1\}$.  Proposition
+\ref{prop:feasible-support} covers this region after $(\kappa,b)$ are
+calibrated to exact size, whereas the finite-normal condition does not.
+
+\section{First-moment rigidity with multiple cores}
+
+The next lemma imposes no shape restriction on the test being dominated.
+
+\begin{lemma}[First-order restriction on a dominator]\label{lem:first-order}
+Let $\phi$ be a level-$\alpha$ test satisfying $\E_0\phi=\alpha$, let
+$\psi$ be another level-$\alpha$ test, and suppose that
+$\E_\mu\psi\ge\E_\mu\phi$ for every $\mu\in\Lambda_1$.  Define
+\[
+h:=\psi-\phi,
+\qquad
+q:=\E_0[Xh(X)].
+\]
+Then
+\begin{equation}\label{eq:first-order-conclusion}
+\E_0h=0,
+\qquad
+\Omega^{-1}q\in\Lambda_1^*.
+\end{equation}
+In particular, if $|\cC|\ge2$, then $q=0$.
+\end{lemma}
+
+\begin{proof}
+Level control gives $\E_0h\le0$.  Dominance along $te_c\in\Lambda_1$
+and continuity at zero give $\E_0h\ge0$, proving the first identity.
+
+Fix $\mu^*\in\Lambda_1$.  Since $\Lambda_1$ is a cone,
+$t\mu^*\in\Lambda_1$ for every $t>0$.  Hence
+\[
+f(t):=\E_{t\mu^*}h(X)\ge0
+\qquad(t>0),
+\qquad f(0)=0.
+\]
+The Gaussian moment-generating function and $|h|\le1$ justify
+differentiation from the right at zero.  Equation~\eqref{eq:lr} gives
+\[
+0\le f'(0+)
+=\mu^{*\prime}\Omega^{-1}q.
+\]
+Thus $\Omega^{-1}q\in\Lambda_1^*$.  When $|\cC|\ge2$,
+Lemma~\ref{lem:dual} gives $\Omega^{-1}q=0$, and nonsingularity of
+$\Omega$ gives $q=0$.
+\end{proof}
+
+First-moment rigidity allows one supporting halfspace to be arbitrary.
+
+\begin{proposition}[Feasible support plus one halfspace]
+\label{prop:one-extra}
+Suppose that $|\cC|\ge2$ and that a nice region can be written as
+\begin{equation}\label{eq:one-extra-representation}
+A=A_f\cap\{x:u'x\le\kappa\},
+\qquad u\ne0,
+\end{equation}
+where
+\[
+A_f
+=
+\bigcap_{a\in G}\{x:a'x\le\kappa_a\}
+\]
+for some $G\subseteq\cF(\Omega,\Lambda)\setminus\{0\}$.  Then
+$\phi_A$ is $\alpha$-admissible against all level-$\alpha$ tests,
+including randomized competitors.
+\end{proposition}
+
+\begin{proof}
+Suppose that $\psi$ weakly dominates $\phi_A$ and put
+$h:=\psi-\phi_A$.  Lemma~\ref{lem:first-order} gives
+\begin{equation}\label{eq:mass-moment-balance}
+\E_0h=0,
+\qquad
+\E_0[Xh(X)]=0.
+\end{equation}
+For every $a\in G$, the exponential-tilt argument in the proof of
+Proposition~\ref{prop:feasible-support}, with $\kappa_a$ in place of
+$h_A(a)$, eliminates $h^-$ on $\{a'X>\kappa_a\}$.  A countable-subcover
+argument gives
+\[
+h^-=0\quad\text{almost surely on }A_f^c.
+\]
+Since $h^-$ is supported on $A^c$, any remaining negative part is supported
+on $A_f\cap\{u'X>\kappa\}$, whereas $h^+$ is supported on
+$A\subseteq\{u'X\le\kappa\}$.
+
+Let $M:=\E_0h^+=\E_0h^-$, where equality follows from
+\eqref{eq:mass-moment-balance}.  If $M>0$, then
+\[
+\E_0[u'Xh^+]\le\kappa M,
+\qquad
+\E_0[u'Xh^-]>\kappa M.
+\]
+The second inequality is strict because $u'X>\kappa$ on the support of
+$h^-$ and $u'X$ has no atom at $\kappa$.  It follows that
+$u'\E_0[Xh]<0$, contradicting~\eqref{eq:mass-moment-balance}.  Therefore
+$M=0$, so $h=0$ almost surely under $P_0$.  Mutual absolute continuity
+again rules out strict improvement at another mean.
+\end{proof}
+
+\section{Consequences when there are at least two cores}
+
+The first corollary removes the feasible-normal requirement from every
+one-sided test.
+
+\begin{corollary}[Every nonnegative halfspace is admissible]
+\label{cor:any-halfspace}
+Suppose that $|\cC|\ge2$.  Let $a\ge0$, $a\ne0$, and define
+\begin{equation}\label{eq:one-sided-test}
+\phi_a(x)
+:=
+\1\left\{a'x>
+z_{1-\alpha}\sqrt{a'\Omega a}\right\},
+\qquad
+z_{1-\alpha}:=\Phi^{-1}(1-\alpha).
+\end{equation}
+Then $\phi_a$ is $\alpha$-admissible.  The conclusion includes weight
+vectors concentrated entirely on redundant coordinates.
+\end{corollary}
+
+\begin{proof}
+The acceptance halfspace is nice.  Apply Proposition~\ref{prop:one-extra}
+with $A_f=\R^d$ and $u=a$.
+\end{proof}
+
+Thus feasibility is not necessary for admissibility when $|\cC|\ge2$.
+For example, if $r\in\cR$, then $e_r$ is never feasible because
+\[
+(\Omega e_r)_r=1>max_{c\in\cC}\Omega_{cr},
+\]
+where strict inequality follows from positive definiteness and unit
+diagonal.  Nevertheless, the test that rejects for a sufficiently large
+$X_r$ is admissible by Corollary~\ref{cor:any-halfspace}.
+
+The second corollary applies Proposition~\ref{prop:one-extra} to a familiar
+multiple-testing region.
+
+\begin{corollary}[Rectangles with one redundant moment]
+\label{cor:rectangles}
+Suppose that $|\cC|\ge2$, $|\cR|=1$, and $\Omega$ is any
+positive-definite correlation matrix.  Let
+\begin{equation}\label{eq:rectangle}
+A_{\bm\kappa}
+:=
+\bigcap_{j=1}^d\{x_j\le\kappa_j\},
+\qquad \kappa_j\in\R,
+\end{equation}
+and suppose that $\Pp_0(A_{\bm\kappa})=1-\alpha$.  Then the associated
+test is $\alpha$-admissible.
+\end{corollary}
+
+\begin{proof}
+Write $\cR=\{r\}$.  Every core face has a feasible normal.  Indeed, for
+$c\in\cC$,
+\[
+(\Omega e_c)_r=\Omega_{rc}<1=(\Omega e_c)_c
+\le\max_{c'\in\cC}(\Omega e_c)_{c'}.
+\]
+The redundant face is the one arbitrary halfspace.  Apply
+Proposition~\ref{prop:one-extra}.
+\end{proof}
+
+In particular, the equal-cutoff max test is admissible whenever there are at
+least two core moments and exactly one redundant moment.  This conclusion is
+valid in arbitrary dimension and for every positive-definite correlation
+matrix.
+
+\section{The singleton-core regime}
+
+When $\cC=\{1\}$, the first-order restriction in
+Lemma~\ref{lem:first-order} becomes
+\begin{equation}\label{eq:one-core-q}
+(\Omega^{-1}q)_r\le0,
+\qquad
+(\Omega^{-1}q)_1+
+\sum_{r\in\cR}(\Omega^{-1}q)_r\ge0.
+\end{equation}
+These inequalities allow a nonzero first-moment signature.  They do not, by
+themselves, construct a dominator or imply that a particular test is
+inadmissible.
+
+Feasible halfspaces remain admissible.  In particular, one can always build
+an admissible halfspace that assigns positive weight to every redundant
+moment.  Fix $b\in\R^d$ with $b_1=0$ and $b_r>0$ for every
+$r\in\cR$, and set
+\begin{equation}\label{eq:epsilon-normal}
+a_\varepsilon=e_1+\varepsilon b.
+\end{equation}
+At $\varepsilon=0$,
+\[
+(\Omega e_1)_1=1,
+\qquad
+(\Omega e_1)_r=\Omega_{r1}<1.
+\]
+Continuity and finiteness of $\cR$ imply that
+$\Omega a_\varepsilon\in\Lambda$ for all sufficiently small
+$\varepsilon>0$.  Proposition~\ref{prop:feasible-support} therefore gives
+the following result.
+
+\begin{corollary}[An admissible augmented halfspace]
+\label{cor:epsilon}
+Suppose that $\cC=\{1\}$.  For every positive-definite correlation matrix
+$\Omega$, there is an $\varepsilon>0$ such that the exact-size test based on
+$a_\varepsilon'X$ is $\alpha$-admissible and places strictly positive
+weight on every redundant coordinate.
+\end{corollary}
+
+The nontrivial cone in~\eqref{eq:dual-one-core} also permits strict
+domination.  The next result gives a general identity-covariance example.
+
+\begin{proposition}[Pairwise gated domination of a rectangle]
+\label{prop:gated-rectangle}
+Suppose that $\Omega=I_d$, $\cC=\{1\}$, and
+$\cR=\{2,\ldots,d\}$.  Let $A_{\bm\kappa}$ be the finite rectangle in
+\eqref{eq:rectangle}, calibrated so that
+\[
+\prod_{j=1}^d\Phi(\kappa_j)=1-\alpha.
+\]
+Fix $r\in\cR$, and choose the unique finite $b_r$ satisfying
+\begin{equation}\label{eq:gate-calibration-general}
+\Pp_0\{X_1\le\kappa_1,\ X_1+X_r\le b_r\}
+=
+\Phi(\kappa_1)\Phi(\kappa_r).
+\end{equation}
+Define
+\begin{equation}\label{eq:gated-rectangle-general}
+A_{\bm\kappa}^{(r)}
+:=
+\{x_1\le\kappa_1,\ x_1+x_r\le b_r\}
+\cap
+\bigcap_{j\notin\{1,r\}}\{x_j\le\kappa_j\}.
+\end{equation}
+Then the test with acceptance region $A_{\bm\kappa}^{(r)}$ has exact size
+$\alpha$ and strictly dominates the rectangular test at every
+$\mu\in\Lambda_1$.  Hence every finite rectangle is inadmissible in this
+model.
+\end{proposition}
+
+\begin{proof}
+Independence and~\eqref{eq:gate-calibration-general} give
+$\Pp_0(A_{\bm\kappa}^{(r)})=\Pp_0(A_{\bm\kappa})=1-\alpha$.
+The gated region is coordinatewise lower, so its test is level $\alpha$.
+
+In the $(1,r)$ coordinates, the newly rejected and newly accepted sets are
+\begin{align*}
+G_r
+&:=\{x_1\le\kappa_1,\ x_r\le\kappa_r,\ x_1+x_r>b_r\},\\
+D_r
+&:=\{x_1\le\kappa_1,\ x_r>\kappa_r,\ x_1+x_r\le b_r\}.
+\end{align*}
+Calibration gives $\Pp_0(G_r)=\Pp_0(D_r)>0$.  Every $g\in G_r$ and
+$d\in D_r$ satisfy
+\[
+g_1+g_r>d_1+d_r,
+\qquad
+-g_r>-d_r.
+\]
+For $\mu\in\Lambda_1$, write
+\[
+u:=\mu_1>0,
+\qquad
+v:=\mu_1-\mu_r\ge0.
+\]
+The likelihood ratio in these two coordinates is proportional to
+\[
+\exp\{u(x_1+x_r)+v(-x_r)\}.
+\]
+It is therefore strictly larger at every point of $G_r$ than at every point
+of $D_r$.  Equal positive null mass gives
+$\Pp_\mu(G_r)>\Pp_\mu(D_r)$.  The remaining independent rectangular
+constraints contribute the common positive factor
+\[
+\prod_{j\notin\{1,r\}}\Phi(\kappa_j-\mu_j),
+\]
+which proves strict domination.
+\end{proof}
+
+The contrast is sharp for the configurations covered by the two rectangle
+results.  Under identity covariance, a finite rectangle is strictly dominated
+when there is one core moment and any positive number of redundant moments.
+With at least two core moments and one redundant moment, the same class of
+tests is admissible for every positive-definite correlation matrix.  The
+mechanism is the change from the nontrivial cone in
+\eqref{eq:dual-one-core} to the first-moment identity implied by
+\eqref{eq:dual-many-core}.
+
+\section{Maintained submodels}
+
+The preceding first-moment argument uses conicity of $\Lambda_1$.  If the
+maintained alternative is replaced by a smaller set
+$\widetilde\Lambda_1$, the same argument applies directly when that set is
+a cone, or is star-shaped at the origin along all of its directions.  For an
+arbitrary maintained submodel, the relevant object is instead its cone of
+local directions at the origin.  For example, define
+\[
+T_0(\widetilde\Lambda_1)
+:=
+\left\{v:\text{there exist }t_n\downarrow0\text{ and }v_n\to v
+\text{ with }t_nv_n\in\widetilde\Lambda_1\right\}.
+\]
+The expansion used in Lemma~\ref{lem:first-order} then gives
+\[
+\Omega^{-1}q\in T_0(\widetilde\Lambda_1)^*.
+\]
+Thus a global dual cone should not be used mechanically for a maintained set
+that contains no local rays.
+
+Restrictions such as the existence of a fixed core coordinate $c^*$ with
+\[
+\mu_{c^*}\ge0,
+\qquad
+\mu_r\le\mu_{c^*}
+\]
+over the maintained alternative ensure nonnegative likelihood-ratio
+coefficients for a pairwise gate.  They can therefore support a global gated
+domination argument even when the maintained set is not conic.  Such a
+condition exhibits useful transfer directions and makes the corresponding
+global dual nontrivial.  It is sufficient, but not necessary, for that
+nontriviality.
+
+\section{What remains open}
+
+The results establish two general sufficient conditions for nice tests:
+feasible support for every nonempty core set, and feasible support plus one
+arbitrary halfspace when $|\cC|\ge2$.  They do not establish that every nice
+test is admissible in the multiple-core model.
+
+For a nice polyhedron with $|\cC|\ge2$, any inadmissible example must require
+at least two essential infeasible facets.  Two natural candidates are:
+\begin{enumerate}
+\item a finite rectangle with at least two redundant coordinates; and
+\item in the identity-covariance model with
+$\cC=\{1,2\}$ and $\cR=\{3\}$, the family
+\begin{equation}\label{eq:two-bad-family}
+A(\lambda)
+:=
+\{x_1\le\kappa,\ x_2\le\kappa,
+x_1+\lambda x_3\le b,
+x_2+\lambda x_3\le b\},
+\qquad \lambda>1,
+\end{equation}
+with $(\kappa,b)$ calibrated to exact size.
+\end{enumerate}
+The last family has two nonproportional infeasible facet normals.  At
+$\lambda=1$ it reduces to the feasibly supported symmetric gate.  Neither
+Proposition~\ref{prop:feasible-support} nor
+Proposition~\ref{prop:one-extra} determines its admissibility for
+$\lambda>1$.
+
+\begin{conjecture}[Multiple-core admissibility]
+If $|\cC|\ge2$, every nice test is $\alpha$-admissible.
+\end{conjecture}
+
+The conjecture is consistent with the trivial dual cone and with all results
+proved here, but those facts do not prove it.  The two-infeasible-facet
+families are the first useful hostile checks.
+
+Finally, the feasible-normal condition is known to be necessary within the
+maintained class only in the bivariate model with one core and one redundant
+moment, including every bivariate correlation matrix.  No necessity claim is
+made here for a singleton core with several redundant moments or for an
+arbitrary maintained submodel.
+
+\end{document}
