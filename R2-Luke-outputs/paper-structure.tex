@@ -3,7 +3,7 @@
 \usepackage{lmodern,microtype,amsmath}
 \usepackage[margin=.94in,top=.83in,bottom=.86in]{geometry}
 \usepackage{fancyhdr}
-\usepackage[hidelinks,pdftitle={Paper structure: redundant moment inequalities}]{hyperref}
+\usepackage[hidelinks,pdftitle={Paper structure: Should We Drop Redundant Moment Inequalities?}]{hyperref}
 \pagestyle{fancy}\fancyhf{}\renewcommand{\headrulewidth}{0pt}
 \fancyfoot[L]{\small Agreed outline by Luke and R2-D2 \quad$\cdot$\quad November 5, 2026}
 \fancyfoot[R]{\small\thepage}
@@ -13,12 +13,13 @@
 \newcommand{\file}[1]{\textsf{#1}}
 \begin{document}
 {\LARGE\bfseries Paper structure}\\[3pt]
-{\large On the irrelevance of irrelevant moment conditions}
+{\large Should We Drop Redundant Moment Inequalities?}\\[1pt]
+{\small Alternative title: \emph{Testing with Redundant Moment Inequalities}.}
 
 \sect{1. Introduction}
-When a subset of moment inequalities determines the identified set, should a researcher use the remaining inequalities for inference? Introduce the computational reason for seeking a core determining class. Credit Chesher and Rosen (2020, pp.~104--105) for observing that an omitted moment may be estimated more precisely. Pose two questions. When can a test that retains a redundant inequality be uniformly improved? How much power might be lost by keeping or dropping it? Reserve any claim that retention typically costs little for what Section~4 establishes.
+When a subset of moment inequalities determines the identified set, should a researcher use the remaining inequalities for inference? Introduce the computational reason for seeking a core determining class. Credit Chesher and Rosen (2020, pp.~104--105), Chernozhukov, Chetverikov, and Kato (2019), and Molinari (2020) for observing that an omitted moment may be estimated more precisely, and Ponomarev and Semenova (2025) for a worked example. Lead with admissibility: when can a test that retains a redundant inequality be uniformly improved? The answer turns on the number of core inequalities (Section~2), and the three-coordinate reversal is its sharpest illustration. Then ask how much power is at stake. Credit Ponomarev (2022, \S2.3.3, Figure~2.10) for comparing the local power of the two-core and all-three max tests, in signs and magnitudes. Our local-power contribution is narrower: the largest cost of keeping and of dropping at fixed core signals, and how it changes with the precision of a separately observed third moment. Reserve any claim that retention typically costs little for what Section~4 establishes.
 
-\textit{Sources.} \file{core-determining-classes.pdf}, pp.~1--2, gives citation targets, including Galichon--Henry (2011), Pakes--Porter (2024), and Luo--Ponomarev--Wang (2026, p.~25). Verify the design behind Luo--Wang's (2018) reported gain before comparing it with ours.
+\textit{Sources.} \file{core-determining-classes.pdf}, pp.~1--2, gives citation targets, including Galichon--Henry (2011), Pakes--Porter (2024), and Luo--Ponomarev--Wang (2026, p.~25). \file{literature-review.md} records the passages to cite. Cite Luo--Wang (2018) narrowly, as in Section~4.1.
 
 \sect{2. Admissibility in the normal model}
 \sub{2.1\quad The experiment.} Observe $X\sim N_d(\mu,\Omega)$ with known positive-definite correlation matrix. Partition the coordinates into core and redundant sets and impose $\mu_r\leq\max_{c\in\mathcal C}\mu_c$ for every redundant $r$. The core inequalities alone characterize the null $\mu\leq0$. Define admissibility against all level-$\alpha$ tests, including randomized competitors. Introduce exact-size tests with closed, convex, lower acceptance regions. A contrast test outside this class is strictly dominated by constant randomization (\file{three-dimensional-case}, Proposition 5). Use \file{general-case-lessons} for exposition and \file{general-case}, equations (1)--(4), for the formal setup.
@@ -27,9 +28,11 @@ When a subset of moment inequalities determines the identified set, should a res
 
 \sub{2.3\quad Two moments.} State the exact characterization as a theorem. For one core and one redundant moment, at every $-1<\rho<1$, an exact-size closed, convex, lower acceptance region yields an admissible test if and only if every nonzero normal with finite support value satisfies $0\leq a_2\leq a_1$. Use \file{necessity-feasible-normal-general-omega}, Theorem 1, p.~2. For sufficiency, the ray criterion was checked against Lehmann--Romano, Theorem and Corollary 6.7.1, pp.~234--235.
 
+\newpage
 \sub{2.4\quad Three moments.} Hold the all-three max test and independence fixed and change the allocation. With two cores the rectangle is admissible. With one core a calibrated gate strictly improves it at every alternative. End with these two cases. Section~4 will attach magnitudes to them. Use \file{three-dimensional-case}, Propositions 2 and 6.
 
-\newpage
+Anticipate the objection that the reversal is unsurprising: the one-core model is nested in the two-core model, and shrinking the model makes domination easier. Corollary~9 covers this case and, more generally, two or more cores with one redundant coordinate under the stated standardized ordering. Further restrictions on the mean can change the answer. Pair the dual-cone result, which says what kind of improvement is possible, with an argument showing where the gate loses. The gate pairing coordinates 1 and 3 keeps level $\alpha$ on the two-core null, since its rejection rule is increasing and has exact size at the origin. Let $c_j$ be the rectangle's cutoff on coordinate $j$. At $\mu=(\mu_1,t,t)$ with $t>0$ and $\mu_1\to-\infty$, allowed with two cores and excluded with one, its power tends to $1-\Phi(c_2-t)$, below the rectangle's $1-\Phi(c_2-t)\Phi(c_3-t)$. For a related comparison with a different gate, \file{three-dimensional-case}, Section~2, finds that the symmetric gate also loses to the rectangle at $\mu=(0.1,-5,0.1)$. Source: \file{debate-structure-lit-2026-11-05.md}.
+
 \sect{3. From population inequalities to the normal experiment}
 Use the nested bounds in \file{Addition.pdf}, (3.1). The third bound is redundant if it exceeds or equals the smaller of the first two. For standardized drift $h_j$ and moment standard deviation $\sigma_j$, raw redundancy gives
 \[
@@ -41,14 +44,17 @@ Positive rescaling preserves signs but can reverse the ordering of violations. E
 
 \sub{Where scale matters.} Under the raw order $\mu_2\leq\mu_1$, take variances $(1,5)$ and covariance $2$. In standardized units $\sigma=(1,\sqrt5)$, $\rho=2/\sqrt5$, and $\sqrt5 h_2\leq h_1$. For every $\varepsilon>0$ the core-only test strictly dominates the upper-tail test on $X_1+\varepsilon X_2$ in raw units. The null $(0,-1)$ and alternative $(1,1)$ establish admissibility of the core-only test by Neyman--Pearson, although its face normal is infeasible at the origin. See \file{unit-diagonal-check-2026-11-05.md} for both arguments.
 
+\newpage
 \sect{4. Local power under the two core allocations}
-\sub{4.1\quad Two cores and one redundant inequality.} Compare the two-core and all-three max tests (L1 and L2 in \file{Addition.pdf}). At $\alpha=.10$, start with independent coordinates and equal variances. For each pair of core signals, show side by side the largest loss from keeping the third inequality and the largest loss from dropping it, in percentage points on a common scale. Highlight core pairs with intermediate short-test power. \textit{To compute.} Use Theorem 3.1 and the exact powers in \file{review-r2d2-first-read-2026-11-05.md}.
+\sub{4.1\quad Two cores and one redundant inequality.} Compare the two-core and all-three max tests (L1 and L2 in \file{Addition.pdf}). Ponomarev (2022, Figure~2.10) plots contours of this power difference when the third statistic is a weighted sum of the two core statistics. In that limit both tests are admissible by the classical unrestricted-mean result; the third inequality adds a face but no sampling variation of its own. At $\alpha=.10$, start with independent coordinates and equal variances. For each pair of core signals, show side by side the largest loss from keeping the third inequality and the largest loss from dropping it, in percentage points on a common scale. Highlight core pairs with intermediate short-test power. \textit{To compute.} Use Theorem 3.1 and the exact powers in \file{review-r2d2-first-read-2026-11-05.md}.
 
-For the precision comparison, hold the standardized core signals and their scales fixed. The largest cost of keeping is approached as the finite third drift decreases without bound, with all three coordinates retained for calibration. The largest cost of dropping occurs at the upper endpoint allowed by raw redundancy, which depends on $\sigma_3$. These are worst losses over the third drift. Any frequency statement also needs explicit weights over alternatives.
+The precision comparison is a main exhibit. Hold the core signals, their marginal scales, and their joint distribution fixed as the precision of the separately observed third moment varies; Ponomarev's design cannot make this comparison. The largest cost of keeping is approached as the finite third drift decreases without bound, with all three coordinates retained for calibration. The largest cost of dropping occurs at the upper endpoint allowed by raw redundancy, which depends on $\sigma_3$. These are worst losses over the third drift. Any frequency statement also needs explicit weights over alternatives.
+
+Cite Luo--Wang (2018, \S5.3, Table~3) narrowly. At nominal 5\% and $t=0$, the full/core rejection rates are 0.0\%/0.1\% for $S_1$ and 0.5\%/1.4\% for $S_3$. Report these rates and leave open how much of the later power gap calibration explains. Our two Gaussian tests have the same rejection probability at the origin.
 
 \sub{4.2\quad One core.} Begin with one redundant inequality. In \file{Addition.pdf}, Theorem 2.3 gives gains and losses from retaining it. Under the assumptions of Theorem 2.4, fixing the core drift yields a single crossover as the redundant signal increases. Use Figure 2 to show the sign of the difference and Table 2 (printed p.~21) for its simulated magnitude. Confirm the statistic and level for Table 2, check the crossover assumptions for the chosen statistic, and mark the rows that preserve redundancy.
 
 Then add a second redundant inequality. Compare core-only, the all-three rectangle, and the calibrated gate at a few common alternatives under independence. Proposition 6 of \file{three-dimensional-case} establishes the gate's ranking against the rectangle. The magnitudes and the comparison with core-only require new calculations.
 
-\sub{Appendix.} Collect the Gaussian proofs from \file{notes/} and the local limits from \file{paper/Addition.pdf}, Lemmas A.1--A.3. Check their extension to three coordinates. The review memos are in \file{R2-Luke-outputs/}.
+\sub{Appendix.} Collect the Gaussian proofs from \file{notes/} and the local limits from \file{supporting/Addition.pdf}, Lemmas A.1--A.3. Check their extension to three coordinates. The review memos are in \file{R2-Luke-outputs/}.
 \end{document}

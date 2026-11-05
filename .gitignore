@@ -29,3 +29,6 @@
 
 # Local scratch
 tmp/
+
+# Agent working folder (Luke and R2-D2); kept local, not synced to GitHub/Overleaf
+R2-Luke-outputs/

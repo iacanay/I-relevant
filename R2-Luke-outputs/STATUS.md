@@ -1,7 +1,7 @@
 # i-relevant: shared status (Luke and R2-D2)
 
-**Next step:** Ivan reads the agreed two-page `paper-structure.pdf`. Luke’s three conditions for sign-off are met. The Section 4 exhibits remain proposed.
-**Last updated:** 2026-11-05, by R2-D2.
+**Next step:** Ivan reads `paper-structure.pdf` (agreed by Luke and R2-D2). Manuscript workflow recorded under Decisions.
+**Last updated:** 2026-11-05 16:40 Chicago, by Luke.
 
 ## How this file works
 
@@ -33,7 +33,19 @@ in moment inequality models when some inequalities are identification-redundant.
   cases), quantifying how often a test wins or loses, beyond admissibility.
 - 2026-11-05. Before substantive work: setup and kickoff only, then bring R2-D2 in.
 - 2026-11-05. GO for the revised reorganization. `Addition-2.pdf` archived; old memos filed by authorship;
-  `master-structure` kept through the reads. Location of the `Addition.pdf` source still open.
+  `master-structure` kept through the reads. Source of `Addition.pdf`: Federico's folder in the shared Overleaf project
+  (`Notes-Fede/paper/`); no local copy needed.
+- 2026-11-05. Manuscript workflow, in two phases.
+  Phase 1: Ivan writes the first full draft alone, locally, in this folder (`main.tex` and bibliography at the root of
+  i-relevant), tracked in the existing GitHub repo (iacanay/I-relevant). The repo is not linked to Overleaf. Luke and
+  R2-D2 read the draft there and do not edit it.
+  Handover: when the draft moves to Overleaf, Ivan uploads it; the local `main.tex` is renamed into `archive/` with the
+  date (e.g. `main-before-overleaf-YYYY-MM-DD.tex`); this file records that Overleaf is the live copy from that date.
+  Phase 2: Ivan, Federico, and Denis edit in Overleaf. Luke and R2-D2 read the Dropbox-synced copy of that one Overleaf
+  project (`Dropbox/Apps/Overleaf/<project>`, access requested when needed) and never write there; anything written there
+  reaches Overleaf. All agent outputs stay in `R2-Luke-outputs/`. Ivan does not work in the Dropbox-synced Overleaf folders.
+- 2026-11-05. No GitHub link to Overleaf. Agent .md files and research notes live in Dropbox; they gain little from git.
+- 2026-11-05. Title undecided: *Should We Drop Redundant Moment Inequalities?* or *Testing with Redundant Moment Inequalities*.
 
 ## Workstreams
 
@@ -41,14 +53,31 @@ in moment inequality models when some inequalities are identification-redundant.
 |---|---|---|---|
 | 1 | Folder reorganization | implemented; README written | Ivan (git commit) |
 | 2 | Story | R2-D2 first read saved | compare after Luke’s independent assessment is saved |
-| 3 | Literature | Prior readings consolidated in `literature-review.md`, including the Gaussian benchmarks | Next open read is the design behind Luo and Wang’s (2018) local-power claim |
+| 3 | Literature | Expanded search and full-text Luo–Wang power check recorded in `literature-review.md` | Cite Ponomarev (2022) and Luo–Wang (2018) in Section 4. Check Tamer’s published appendix when available |
 | 4 | Paper structure | checked and ready | Ivan reads the agreed outline |
 
 ## Open questions for Ivan
 
-- Where is the live LaTeX source of `Addition.pdf`, and should a copy live in `paper/`?
+- `.gitignore` now lists `R2-Luke-outputs/` (added by Luke), so already-committed files there stay tracked and new ones do not.
+  Either remove the line, or keep it and run `git rm -r --cached R2-Luke-outputs`. Ivan's call.
+
 
 ## Log (newest first)
+
+- 2026-11-05, Luke. At Ivan's request: moved `paper/Addition.pdf` to `supporting/Addition.pdf` (snapshot of Fede's draft as of
+  Nov 5; live source in Overleaf `Notes-Fede/paper/`) and removed the empty `paper/` folder. Updated README and the
+  appendix pointer in `paper-structure` (recompiled). Dated records keep their original paths.
+- 2026-11-05, Luke. At Ivan's request: created `main.tex` (Hellinger-iOS preamble and title-page format; title, three
+  authors, agreed section headings with labels, empty text) and `redundant.bib` (35 entries copied from Ivan's Bib folder,
+  plus a commented list of references still to add) at the root of i-relevant. Compiles; ecta.bst not checked here.
+- 2026-11-05, Luke. Recorded Ivan's two-phase manuscript workflow (local draft in the repo, then Overleaf with a read-only
+  Dropbox-synced copy for the agents), the no-GitHub-link decision, and the title candidates.
+- 2026-11-05, R2-D2. Signed off on Luke’s post-literature revision. Distinguished the one-gate argument from the symmetric-gate numerical illustration, clarified the theorem scope and cutoff notation, and verified the three-page PDF.
+
+- 2026-11-05, Luke. At Ivan's request: recorded the structure and literature debate; revised `paper-structure` (intro
+  credits and narrowed local-power novelty, referee answer with the gate argument in 2.4, Ponomarev and precision
+  exhibit in 4.1, Luo–Wang narrow citation, title candidates). Now 3 pages. R2-D2 to check.
+- 2026-11-05, R2-D2. Traced the Handbook references, author bibliographies, and forward citations. Ponomarev’s 2022 dissertation compares two vs. three max statistics with a dependent third coordinate. Verified Luo–Wang’s 2018 bootstrap and local ray from Ivan’s PDF. Recorded Cox–Shi’s representation invariance and the precision discussions by CCK and Molinari.
 
 - 2026-11-05, R2-D2. Incorporated the earlier core-class readings and the separate Romano–Shaikh–Wolf Gaussian benchmark into the running review, with source locators. The 2018 Luo–Wang power finding is marked abstract-only.
 

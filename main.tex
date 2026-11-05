@@ -1,0 +1,170 @@
+\documentclass[11pt]{article}
+\synctex=1
+
+\usepackage{amsmath,amssymb,amsfonts,amsthm,latexsym}
+\usepackage{graphicx,booktabs,multirow}
+\usepackage{enumerate,setspace,geometry,changepage,lipsum,xr}
+\usepackage[toc,title,titletoc,header]{appendix}
+\usepackage{titletoc}
+\usepackage{etoc}
+\usepackage[bottom]{footmisc}
+\usepackage[authoryear]{natbib}
+\bibliographystyle{ecta}
+\usepackage{xstring} % in preamble
+
+\geometry{letterpaper,left=1in,right=1in,top=1in,bottom=1in}
+\setstretch{1.20}
+\parskip=1.5ex plus0.5ex minus0.2ex
+
+\numberwithin{equation}{section}
+
+\usepackage[pdfborder={0 0 0},colorlinks=true,linkcolor=magenta,citecolor=blue,filecolor=magenta]{hyperref}
+\newcommand{\myref}[2]{\hyperref[#1]{#2}}
+
+\usepackage{lineno,etoolbox}
+\setpagewiselinenumbers
+% \modulolinenumbers[5]
+% \linenumbers
+
+\allowdisplaybreaks
+
+\def\qed{\rule{2mm}{2mm}}
+\def\independent{\perp\!\!\!\perp}
+
+\newcommand\undermat[2]{%
+  \makebox[0pt][l]{$\smash{\underbrace{\phantom{%
+    \begin{matrix}#2\end{matrix}}}_{\text{$#1$}}}$}#2}
+
+\DeclareMathOperator*{\var}{var}
+\DeclareMathOperator*{\supp}{supp}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{assumption}{Assumption}
+\newtheorem{summary}{Summary}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+\newtheorem{remark}{Remark}
+\newtheorem{proposition}{Proposition}
+\newtheorem{comment}{Comment}
+\newtheorem{conjecture}{Conjecture}
+
+\newcounter{assumptionM}
+\newcounter{assumptionA}
+\def\theassumptionM{M.\arabic{assumptionM}}
+\def\theassumptionA{A.\arabic{assumptionA}}
+\setcounter{assumptionM}{0}
+\setcounter{assumptionA}{0}
+
+\newenvironment{assumptionA}[1][]{%
+  \refstepcounter{assumptionA}\medskip\noindent\textbf{Assumption \theassumptionA. #1}%
+}{\medskip}
+
+\newenvironment{assumptionM}[1][]{%
+  \refstepcounter{assumptionM}\medskip\noindent\textbf{Assumption \theassumptionM. #1}%
+}{\medskip}
+
+\AtEndEnvironment{remark}{~\qed}%
+\AtEndEnvironment{example}{~\qed}%
+
+% \usepackage{xr,nameref}
+% \externaldocument{supp-app}
+
+% -------------------------------------------------------------------------------------------------
+\begin{document}
+\author{
+Federico A. Bugni \\
+Department of Economics\\
+Northwestern University \\
+\url{federico.bugni@northwestern.edu}
+\and
+Ivan A.\ Canay \\
+Department of Economics\\
+Northwestern University\\
+\url{iacanay@northwestern.edu}
+\and
+Denis Chetverikov \\
+Department of Economics\\
+University of California, Los Angeles\\
+\url{chetverikov@econ.ucla.edu} % TODO: confirm affiliation and email
+}
+
+\title{Should We Drop Redundant Moment Inequalities?\footnote{}}
+% Alternative title: Testing with Redundant Moment Inequalities
+
+\maketitle
+
+\vspace{-1cm}
+\begin{spacing}{1.1}
+    \begin{abstract}
+    \end{abstract}
+\end{spacing}
+
+\noindent KEYWORDS: 
+
+\noindent JEL classification codes: C12, C14.
+
+\thispagestyle{empty}
+
+\newpage 
+
+%%%%%%%%% -------------------------------------------------------------------
+\section{Introduction}\label{sec:intro}
+%%%%%%%%% -------------------------------------------------------------------
+
+
+%%%%%%%%% -------------------------------------------------------------------
+\section{Admissibility in the Normal Model}\label{sec:normal}
+%%%%%%%%% -------------------------------------------------------------------
+
+\subsection{The Experiment}\label{sec:experiment}
+
+
+\subsection{What the Number of Core Moments Changes}\label{sec:core-count}
+
+
+\subsection{Two Moments}\label{sec:two-moments}
+
+
+\subsection{Three Moments}\label{sec:three-moments}
+
+
+%%%%%%%%% -------------------------------------------------------------------
+\section{From Population Inequalities to the Normal Experiment}\label{sec:population}
+%%%%%%%%% -------------------------------------------------------------------
+
+
+%%%%%%%%% -------------------------------------------------------------------
+\section{Local Power}\label{sec:power}
+%%%%%%%%% -------------------------------------------------------------------
+
+\subsection{Two Cores and One Redundant Inequality}\label{sec:power-two-cores}
+
+
+\subsection{One Core}\label{sec:power-one-core}
+
+
+%%%%%%%%% -------------------------------------------------------------------
+\section{Concluding Remarks}\label{sec:conclusions}
+%%%%%%%%% -------------------------------------------------------------------
+
+
+%%%%%%%%% -------------------------------------------------------------------
+\appendices
+%%%%%%%%% -------------------------------------------------------------------
+
+\renewcommand{\theequation}{\Alph{section}-\arabic{equation}}
+\setcounter{equation}{0}
+
+\section{Proofs for Section \ref{sec:normal}}\label{app:proofs-normal}
+
+
+\section{Local Limits}\label{app:local-limits}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bibliography{redundant.bib}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}
