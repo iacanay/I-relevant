@@ -17,6 +17,7 @@ Reorganized 2026-11-05 (plan: `R2-Luke-outputs/reorg-plan-2026-11-05.md`). Nothi
 | `references/` | Literature (Lehmann–Romano Ch. 6 so far). |
 | `archive/` | Superseded material: the former `obsolete/` folder, `Addition-2.pdf` (August snapshot of the draft), a Dropbox conflicted-copy log, and two emptied folders that can be deleted. |
 | `R2-Luke-outputs/` | Every .md produced by Luke (Claude) or R2-D2 (Codex). Start with `STATUS.md`. Earlier R2-D2 output is in its `archive/`. |
+| `R-codes/` | Section 4 numerical production in R. Start with `R-codes/README.md` for the source map and coding assignment; source, tests, results, figures, and run logs live together. |
 | `tmp/` | Render cache; gitignored. |
 
 **Research map.** `notes/master-structure.pdf` (Aug 28) records which results supersede which, and why. Its file

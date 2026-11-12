@@ -1,0 +1,10 @@
+c1 1.281551565545; c3 1.818280767463; b 2.343258881274
+Core worst regret 22.9281270508 pp at s=d2=d3=1.5462962191
+Gate worst regret 21.1581315248 pp at s=1.5499161665, both redundant means -> -Inf
+Gate-minus-rectangle sup 10.1167949066 pp at s=1.6713813894, d3=1.2518698358, d2 -> -Inf
+Rectangle worst regret 21.1581315248 pp
+Independent integration-order check max error 3.33e-16
+s>=8 regret bound 9.18e-12; H for d3<=-8 bound 7.64e-18
+Interior scalar maxima found: 1 
+H global upper bound from grid + Lipschitz + tails: 18.0805296405 pp < 21.1581315248 pp
+Core regret numerical lower 22.9281270508 pp; grid/curvature upper 22.9281780997 pp (quadrature tolerance 1e-11)

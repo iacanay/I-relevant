@@ -1,7 +1,7 @@
 # i-relevant: shared status (Luke and R2-D2)
 
-**Next step:** Ivan reads `paper-structure.pdf` (agreed by Luke and R2-D2). Manuscript workflow recorded under Decisions.
-**Last updated:** 2026-11-05 16:40 Chicago, by Luke.
+**Next step:** Ivan reviews the standalone seven-page enlarged-alternative note, `enlarged-alternative-admissibility-r2d2-2026-11-12.pdf`, before deciding whether to change the paper. Main.pdf remains 38 pages; the agreed small pass in blue also awaits his review before printing with Federico (see `handoff-r2d2-final-blue-pass-2026-11-12.md`). Full figure-production refresh remains separate. The original-conjecture numerical work remains paused; no manuscript changes were made for the new note.
+**Last updated:** 2026-11-12, by R2-D2 (standalone enlarged-alternative result).
 
 ## How this file works
 
@@ -19,6 +19,17 @@ in moment inequality models when some inequalities are identification-redundant.
 (origin github.com/iacanay/I-relevant).
 
 ## Decisions by Ivan
+
+- 2026-11-12. Authorized a separate document developing the most useful admissibility results in the enlarged-alternative model under dependence, with complete proofs and pros/cons for the paper. Independence alone is not an adequate main result. Ivan will review before making manuscript decisions; no manuscript edit authorized by this task.
+- 2026-11-12. On the full-read exchange, Ivan sides with R2-D2: brief enlargement fix (no long explanation); a short clarification that means adding up does not imply singular Omega; keep the regret ranking but call the difference modest; Appendix C stays in the appendix; RSW qualification stays. Ivan edits the manuscript himself.
+- 2026-11-10. Current project team is Ivan Canay and Federico Bugni only; Denis is busy and is not participating for the moment. This supersedes the earlier three-coauthor working description, without making a permanent authorship decision. Ivan has not yet read the simulation plan and will review it later; do not treat the proposed simulation design as approved.
+
+- 2026-11-10. Production numerical code will be in R, organized under `R-codes/` for Ivan to inspect and run. A separate terminal-enabled coding agent is to implement, test, and complete feasible local computations; Quest is available if measured runtime warrants it. Python pilots remain verification references.
+
+- 2026-11-10. R2-D2 to read all of `supporting/Addition.pdf` and prepare a separate Section 4 architecture and computation plan, centered on three inequalities and the two core allocations. Luke should draft from this curated handoff rather than from Addition. This task does not authorize edits to `main.tex`.
+
+- 2026-11-10. Section 2 opening now says the normal model is "motivated by the Gaussian limits of studentized moments under local alternatives" (R2-D2's wording). Cite the published 2026 version of Canay, Illanes, and Velez.
+- November 5 evening. Ivan authorized Luke to write Section 2 directly in the manuscript. R2-D2 gives feedback on the mathematics and whether the prose reads naturally. Other sections wait until Ivan settles Section 2.
 
 - 2026-11-05. This folder is the repository. Every .md file produced by Luke or R2-D2 goes in `R2-Luke-outputs/`.
 - 2026-11-05. Focus files: `general-case-lessons`, `master-structure`, `general-case`, `three-dimensional-case`,
@@ -46,6 +57,8 @@ in moment inequality models when some inequalities are identification-redundant.
   reaches Overleaf. All agent outputs stay in `R2-Luke-outputs/`. Ivan does not work in the Dropbox-synced Overleaf folders.
 - 2026-11-05. No GitHub link to Overleaf. Agent .md files and research notes live in Dropbox; they gain little from git.
 - 2026-11-05. Title undecided: *Should We Drop Redundant Moment Inequalities?* or *Testing with Redundant Moment Inequalities*.
+- 2026-11-09. Multiple-core conjecture (every nice test admissible when |C| >= 2): keep as a formal conjecture in Section 2 for
+  now; later it will likely move to an in-line mention in the closing discussion (Concluding Remarks).
 
 ## Workstreams
 
@@ -53,8 +66,14 @@ in moment inequality models when some inequalities are identification-redundant.
 |---|---|---|---|
 | 1 | Folder reorganization | implemented; README written | Ivan (git commit) |
 | 2 | Story | R2-D2 first read saved | compare after Luke’s independent assessment is saved |
-| 3 | Literature | Expanded search and full-text Luo–Wang power check recorded in `literature-review.md` | Cite Ponomarev (2022) and Luo–Wang (2018) in Section 4. Check Tamer’s published appendix when available |
+| 3 | Literature | Reading evidence in `literature-review.md`; living placement and bibliography-status guide in `citation-plan.md` | R2-D2 maintains tracker as references are reviewed; manuscript citation pass awaits Ivan. Section 4 precedents already cited; Tamer check remains open |
 | 4 | Paper structure | checked and ready | Ivan reads the agreed outline |
+| 5 | Section 2 manuscript draft | Third review complete: no substantive corrections outstanding; Appendix A.11 proof in place and checked | Ivan |
+| 6 | Section 3 manuscript draft | revised after the scale discussion; R2-D2's review corrections applied; compiled | Ivan reads |
+| 7 | Section 4 architecture and computations | proposed; standalone 13-page plan, four checked deterministic prototypes, coding brief and configuration saved | Ivan reviews, then assigns production computations; Luke drafts from the confirmed outputs |
+| 8 | Section 4 manuscript draft | first draft reviewed by R2-D2; corrections applied; compiled; figures provisional | Ivan edits |
+| 8 | Section 4 manuscript review | first review complete; numerical claims checked; targeted prose/attribution corrections requested | Luke, then Ivan |
+| 9 | Enlarged-alternative admissibility under dependence | proposed; standalone seven-page note with complete proofs, mixed-sign examples, and a one-core counterexample | Ivan reviews; general two-core all-nice case still open, original LP not rerun |
 
 ## Open questions for Ivan
 
@@ -63,6 +82,135 @@ in moment inequality models when some inequalities are identification-redundant.
 
 
 ## Log (newest first)
+
+- 2026-11-12, R2-D2. At Ivan's request prepared `enlarged-alternative-admissibility-r2d2-2026-11-12.tex/pdf`: original null unchanged; all nice tests admissible if a nonnegative core average has nonnegative covariance with every statistic; rectangles admissible if each redundant coordinate has a nonnegative core correlation, with one exception allowed for two or more cores. Complete proofs include equivalence of the covariance certificate and the all-normal directional condition, plus the exact one-core sign boundary and an explicit dominating halfspace when it fails. Seven pages compiled and visually inspected; example matrices checked. Pros/cons and scope stated; no necessity claim for two or more cores. Manuscript/bibliography untouched; no LP rerun or second-agent review.
+- 2026-11-12, R2-D2. Implemented Ivan/Luke/R2 agreed small pass in blue. Verified .10 symmetric-gate recalibration by independent integrations; corrected chapter bibliography metadata and aligned figure labels. Source/PDF checked,38pagesclean. Saved handoff and reproducible Rcheck; no structuralchange.
+
+- 2026-11-12, Luke. Recorded Ivan's decisions on the full-read exchange; no manuscript edits by agents.
+- 2026-11-12, Luke. Replied to R2-D2's assessment (`reply-luke-full-read-2026-11-12.md`): conceded on sums (mean identity vs sample-level sum), regret tie wording, Appendix C placement, RSW; agreed scope for a small pre-print pass. Awaiting Ivan's go.
+- 2026-11-12, R2-D2. Assessed Luke’s full read against current source and saved RSW text; response in `assessment-r2d2-luke-full-read-2026-11-12.md`. Accept cleanup; qualify exact-moment versus mean-sum claim, retain design-specific regret findings and Appendix C. No manuscript edits.
+
+- 2026-11-12, Luke. Fresh read of the full draft at Ivan's request: `review-luke-full-read-2026-11-12.md`. Must-fix: dangling enlarged-alternative reference in 2.1, delta reused in the Theorem 2 proof, alpha 0.05 vs 0.10. Big picture: drift toward a 'keep' verdict, sum redundancy outside the order and positive-definite Omega, role of Appendix C.
+- 2026-11-12, R2-D2. Completed authorized Appendix C rewrite and related equation relocation into B. Recompiled/rendered affected pages. Then reviewed Appendix B as requested: no mathematical error found in stated extensions/counterexamples; saved exposition recommendations without further edits.
+
+- 2026-11-12, R2-D2. At Ivan’s request moved the precision analysis from Section 4.3 to Appendix C, retaining its equations/figure and label alias. Added a short blue closing pointer in Section 4; adjusted appendix opening and page breaks. Recompiled and checked the closing main-text page and Appendix C. Backup: /tmp/main-before-appendix-c.tex.
+
+- 2026-11-12, R2-D2. At Ivan’s request added Section 4.2 regret discussion/table, after computing full-alternative maximum regrets in base R. Rectangle and gate tie despite strict dominance. Saved reproducible code, checks, and derivations; compiled and inspected PDF. No other manuscript text changed.
+
+- 2026-11-12, R2-D2. At Ivan’s request added the Luo–Ponomarev–Wang sentence/citation in Section 4.1 and forthcoming REStud bibliography entry; removed his red note. PDF 35 pages, clean, affected pages checked.
+
+- 2026-11-12, R2-D2. Added the authorized minimax-regret interpretation only in Section 4.1; all other manuscript text unchanged. Recompiled and checked page 17. Confirmed the relevance of Luo–Ponomarev–Wang Section 4.3.1 to Ivan’s red citation question; saved answer and citation plan. Ivan excludes randomized tests from practical reporting.
+
+- 2026-11-12, R2-D2. Restructured Section4 at Ivan's request for one pedagogical argument continuing Section2. Put one-core gate comparison immediately after two cores; end4.2 with its failure on return to two cores; precision moved to4.3. New wording blue, existing calculations and figures retained (gate nowFigure2, precisionFigure3). All outside source unchanged. Compiled34pages and visually checked15–21. Handoff `handoff-r2d2-section4-flow-2026-11-12.md`; Ivan's voice approval pending.
+
+- 2026-11-12, R2-D2. At Ivan's request, removed the raw-order layer from 3.1 and3.2; introduced it with the precision comparison in4.1. Dissolved old3.3, preserving its local example in Appendix B.2 and pointing4.1 directly to the covariance extension. New prose blue;34page PDF clean and affected pages visually checked. Section2 and AppendixA unchanged. Handoff: `handoff-r2d2-single-order-2026-11-12.md`.
+
+- 2026-11-12, Luke. At Ivan's request, a hunch on Conjecture 1, recorded in `conjecture1-findings-luke-2026-11-12.md` with scripts in `conjecture1-lp/`. Ran the discretized dominance program proposed in the August notes: zero for the proven-admissible control; for the four-coordinate max test with two cores and two redundant coordinates (independence, alpha 0.10) it returns a candidate level-alpha test with gains up to 7.5 points and no violation found. Numerical evidence that the conjecture fails with two redundant coordinates; not a proof, not independently reproduced. Ivan stopped the work here. Also recorded his idea of leaving the alternative unrestricted. No manuscript change.
+
+- 2026-11-12, R2-D2. At Ivan's explicit request, added the ordering rationale, admissibility-preservation argument and contrasting behavior of inadmissibility in blue in Sections 2.1 and 2.5; shortened the connection in 3.1 in blue. Preserved Ivan's new precision example; repaired the old dangling ex:bounds reference by defining its moments inline in blue. Compiled PDF and visually checked affected pages. Saved `enlarging-the-mean-space.md` for future supplement/referee work, distinguishing identification invariance, signal ranking, nested hypothesis enlargement, the maximal sign-implication model, and nonnested weighted-order extensions. No new theorem added and no Section 3.3 reorganization performed.
+
+- 2026-11-11, R2-D2. Reviewed Luke's core-framing assessment. `reply-r2d2-core-framing-2026-11-11.md` verifies his independence benchmark and strengthens it to every nice region in the maximal sign-implication mean space, with a complete continuity/tilting proof and explicit smaller-model qualification. Recommends dissolving 3.3, moving the extension bridge to 4.1, and adding a standard-deviation-units clause in 2.1. Decisions pending Ivan; no manuscript edits or communication to Luke.
+
+- 2026-11-11, Luke. At Ivan's request, independent assessment of the core framing and of Section 3.3, saved as `assessment-luke-core-framing-2026-11-11.md` (source 3f9c329a1bf9; no manuscript edits). The framing fits; Section 2.1 should say the means are in standard-deviation units; proposed benchmark under identification redundancy alone, for R2-D2 to check; recommends dissolving 3.3. Error found: `ex:bounds` is commented out, so the example in 3.3 prints "Example ??".
+
+- 2026-11-11, R2-D2. Ivan requests empirically motivated examples instead of the artificial scalar-bounds illustration. Saved `empirical-example-candidates-2026-11-11.md`: preferred schooling candidate from Manski–Pepper; alternatives Lee's Job Corps bounds and Ponomarev–Semenova's binary-outcome illustration. Source checks and remaining local-experiment qualifications recorded; `citation-plan.md` updated. Ivan chooses the example; manuscript and bibliography untouched.
+
+- 2026-11-11, R2-D2. Created `citation-plan.md` at Ivan’s request: living claim/source/placement guide covering all papers in the terminology note, precision/power precedents, current citations, and optional references. Checked bibliography and manuscript insertion status; recorded standing instruction to update when new reference work becomes available. Ivan continues editing; no manuscript or bibliography edits.
+
+- 2026-11-11, R2-D2. Revised the entire Section 3 at Ivan’s request, incorporating his clarification that the conceptual discussion belongs immediately in 3.1. Identification sufficiency, invariant tests, and the additional standardized-order assumption now organize that subsection. Retained technical limits and the precision extension. All outside Section 3 unchanged; 35-page PDF clean and affected pages visually checked. Handoff saved; file returned to Ivan.
+
+- 2026-11-11, R2-D2. Ivan authorized direct implementation of the agreed Section 2 exposition changes. Changed only the opening and experiment prose: conceptual question first, two implications of max ordering, brief forward pointer instead of early studentization discussion. Saved pre-edit source under /tmp; compiled main.pdf (35 pp., no undefined references or overfull lines) and visually checked affected pages 2–3. Section 3 and all subsequent material unchanged. File returned to Ivan.
+
+- 2026-11-11, R2-D2. Checked Ivan’s newly added published Pakes–Porter PDF and Mbakop working paper. Updated the existing two-page terminology note and literature-review.md with published Pakes locators and Mbakop’s explicit Farkas-based redundancy elimination (Section 2.4.1, p. 28). Two pages recompiled and visually checked; main paper unchanged.
+
+- 2026-11-11, R2-D2. Reread the definitions in Galichon–Henry, Chesher–Rosen, Luo–Wang and Luo–Ponomarev–Wang, plus Pakes–Porter’s implication example. Saved and visually checked `core-language-and-framing-2026-11-11.tex/pdf`, exactly two pages. Page 1 compares language/notation; page 2 frames the question using an identification-sufficient core and an additional standardized-order assumption. Core-determining does not generally mean minimum cardinality. Pakes–Porter checked in the accessible September 2021 author version because the publisher PDF is blocked. No manuscript edits or communication with Luke.
+
+- 2026-11-10, Luke. Noted Ivan's project update (team is Federico and Ivan for now; already under Decisions, recorded by R2-D2). `main.tex` has changed since my last edit (now ebc2ff6962b8) and its title page already has Denis commented out; I re-read the file before any further work.
+
+- 2026-11-10, Luke. Applied R2-D2's Section 4 follow-up: `luo/wang:18` author corrected to Ye Luo (my error); the literature paragraph now says "in the original units" for Ponomarev's sum restriction. Recompiled cleanly, 35 pp. Section 4 is with Ivan.
+
+- 2026-11-10, R2-D2. Checked revised Section 4 (source 21fb68fd5cba, PDF 3dfe3f88ddd6) and accepted all six substantive corrections. Verified new bibliography entries against primary sources: Luo is Ye, not Yao; Hai Wang and Kirill Ponomarev are correct. Saved `followup-r2d2-section4-2026-11-10.md`, also requesting the words “in the original units” for Ponomarev’s sum restriction. Ready for Ivan’s edit after these small corrections; float placement can wait for production figures. No manuscript edits.
+
+- 2026-11-10, Luke. Applied R2-D2's six Section 4 corrections: moment-selection condition (ratio below −1, not threshold-rate divergence); opening distinguishes the gate's uniform improvement; first lesson of 4.2 no longer requires both redundant signals near the core; rounded extrema and thresholds stated as approximations (9.04, 17.63, 1.37, 0.68); Figure 1 paragraph; literature paragraph citing Ponomarev (2022) and Luo and Wang (2018). Added those two entries to `redundant.bib`. Recompiled cleanly, 35 pp. Reply: `reply-luke-section4-2026-11-10.md`.
+
+- 2026-11-10, R2-D2. Reviewed Section 4 at source 11479822403c / PDF 8f0ce7524a2e, inspected pp.16–21, and independently reproduced the numerical values in R. Saved `review-r2d2-section4-2026-11-10.md` and matching review-checks R/text files. Supports the architecture and global two-core extrema after analytical reductions. Requests precise GMS-rate wording, narrowing universal comparison language, correcting the one-core gain-region description, explicit approximate thresholds, tighter envelope interpretation, and literature credit. No manuscript edits; production simulations remain separate.
+
+- 2026-11-10, Luke. Per Ivan: drafted Section 4 in main.tex from R2-D2's `section4-plan` (opening; 4.1 two cores with the costs of keeping and dropping and the precision comparison; 4.2 one core with core-only, rectangle and fixed gate), about 5.3 pages with three figures and one table. Figures are R2-D2's prototypes copied to `figures/sec4-pilot-*.pdf`, provisional. All plan numbers reproduced with separate code; a few additional numbers are flagged in the handoff. No finite-sample text; simulations not run. Sections 2–3 unchanged. Handoff: `handoff-luke-section4-2026-11-10.md`.
+
+- 2026-11-10, R2-D2. Created `R-codes/README.md`: source map, staged production assignment, code organization, tests, complete local-run requirements, reproducibility and conditional Quest handoff. Checked R 4.4.2 and installed numerical/plotting/test packages; saved `R-codes/logs/environment-at-handoff.txt`. Created the source/output directory skeleton and linked the assignment from the earlier implementation brief and root README. This is preparation for the coding agent, not a production implementation or simulation run.
+
+- 2026-11-10, R2-D2. Read all 32 pages of Addition and reconstructed the useful power analysis in `section4-plan.tex/pdf` (13 pages). Proposed three main figures: conditional costs of keeping/dropping with two cores; precision; one-core rectangle/core-only/gate comparison. Added an exact known-scale GMS diagnostic, finite-sample design, source audit, `section4-implementation-brief.md`, runnable prototypes and `section4-design.json` in `section4-plan-assets/`. Quadrature, null calibration, envelope/crossover identities and one-core dominance checked; all PDF pages inspected. No Monte Carlo simulations or manuscript edits. Proposal has not been reviewed by Luke or approved by Ivan.
+
+- 2026-11-10, Luke. Per Ivan ("make the edit"): Section 2.1 now points to Section 3.3 with R2-D2's sentence, replacing "An ordering of the population moments delivers (2.1) only under conditions that we discuss there." Recompiled cleanly, 30 pp. All items in R2-D2's scale review are now applied.
+
+- 2026-11-10, Luke. Applied R2-D2's review of the scale-focused Section 3 (3.3 only): g > 0 and normal P_n in Example 2; sharper wording on standardization; 'geometric arguments ... Proposition 4(a)'; explicit statement that both max tests stay admissible under independence and the raw order for any standard deviations, covering the Section 4 precision comparison. Reproduced R2-D2's powers 0.4577 and 0.4833. Section 2.1 pointer sentence left for Ivan. Recompiled cleanly, 30 pp. Reply: `reply-luke-section3-scale-2026-11-10.md`.
+
+- 2026-11-10, R2-D2. Reviewed Luke’s scale-focused revision (source 97d8f950b5e2, PDF 4ee885448e0f). Local example, marginal-test comparison, invariance, and standardized-order implication verified. Saved `review-r2d2-section3-scale-2026-11-10.md`; recommends small wording corrections and an explicit independent raw-order connection to Section 4 while keeping the covariance proposition in the appendix. Updated the discussion record.
+
+- 2026-11-10, Luke. Per Ivan: revised Section 3 following the closing brief in `scale-moments-discussion.md` (invariance before (3.3); redundancy for identification versus the order of violations; local Example 2; standardized order (3.9) as the maintained assumption; closing link to power) and added the fixed-partition paragraph in Section 2.1. Propositions 3–4 and the scale counterexample moved to Appendix B on R2-D2's recommendation. Recompiled cleanly, 30 pp. Handoff: `handoff-luke-section3-scale-2026-11-10.md`.
+
+- 2026-11-10, R2-D2. At Ivan’s request, saved the introduction’s central message in `introduction-central-message-2026-11-10.md` and added a concrete rewrite brief to `scale-moments-discussion.md`. Ready for Ivan’s handoff to Luke. Moving both formal propositions to the appendix is labeled R2’s editorial recommendation; fixed-partition clarification is explicitly agreed.
+
+- 2026-11-10, R2-D2. Opened `scale-moments-discussion.md` at Ivan’s request to record his proposed reframing of Section 3.3 and the ensuing discussion. He likes the exposition and wants a stronger positive motivation from scale-invariant inference. R2 distinguishes identification redundancy from standardized signal ordering; discussion remains open. Confirmed the current source has corrected h to delta in (3.7).
+
+- 2026-11-10, Luke. Per Ivan: edited Section 2 opening (line 121); CIV bib entry now year 2026 only, DOI without the doi.org/ prefix. Recompiled cleanly.
+- 2026-11-10, Luke. Fixed the missed h-to-delta replacement in (3.7) per R2-D2's follow-up; recompiled cleanly (source 1789eb934e8a, PDF 5687ec2beded). Section 3 ready for Ivan.
+- 2026-11-09 Chicago evening (November 10 UTC), R2-D2. Follow-up on Luke’s November 10 reply completed after BB-8’s second Go. All five substantive revisions accepted. Found residual h_r/h_c in equation (3.7), confirmed in PDF p. 13; these must be delta_r/delta_c. Saved `followup-r2d2-section3-2026-11-09.md`. Section 3 is ready for Ivan after that correction and recompile; Section 2 opening consistency and CIV bibliography year remain for Ivan.
+
+- 2026-11-10, Luke. Revised Section 3 per R2-D2's review: Gaussian-limit wording and attainable-means qualification, scale of the order, GMS scope (diverging threshold; non-drifting tuning parameters), closing paragraph, ε range, explanation moved before Prop. 4, drift renamed δ, redundancy scope in 3.1, Appendix B retitled, Section 2 double period fixed. Reply: `reply-luke-section3-2026-11-10.md`.
+- 2026-11-09, R2-D2. Reviewed Luke’s Section 3 and Appendix B after BB-8 relayed Ivan’s Go. Propositions 3–4 and both covariance examples checked. Saved `review-r2d2-section3-2026-11-09.md`, requesting precise Gaussian-limit/attainability scope, invariance under changes of variables, diverging-threshold GMS scope, independence for the gate, and the epsilon range after Example 2. The review also resolves the handoff’s technical questions and flags duplicate CIV year fields. Manuscript editing remains with Ivan/Luke; no consensus claimed.
+
+- 2026-11-09, Luke. Drafted Section 3 in main.tex in Canay–Shaikh notation (model, population redundancy as order, local limit Prop. 3, GMS limit, units of measurement with Prop. 4 and two examples) and Appendix B proofs. Recompiled cleanly. Handoff with R2-D2 checklist and eight points for Ivan: `handoff-luke-section3-2026-11-09.md`.
+- 2026-11-09, R2-D2. Recorded Ivan’s handoff. Luke is drafting Section 3. Ivan will ask BB-8 to give R2-D2 the Go when it is complete. Review comments must be saved as Markdown in this folder for Luke.
+
+- 2026-11-09, Luke. 2.5 opening now says 'no, in the sense that admissibility does not require us to discard redundant
+  inequalities' (R2-D2's concern, Ivan's 'no' kept); removed the repeated 'not only whether ... but also how' sentence. Recompiled.
+- 2026-11-09, Luke. Section 2.5 now opens with the admissibility answer to the title question (dropping is always safe, never
+  required; every improvement we construct still uses the redundant coordinates). Recompiled.
+- 2026-11-09, Luke. Section 2.5 Main Lessons: added R2-D2's two paragraphs (unrestricted benchmark via Lehmann-Romano; source of
+  the violation), with two small edits, before Ivan's power paragraph (already moved there from 2.4); 'case (a)' now points
+  to Section 2.4. Recompiled.
+- 2026-11-09, Luke. At Ivan's request ('which core supplies the violation'): clause after the Lemma 2 example, clause in the
+  one-core opening, R2-D2's closing sentences for the 2.4 gate passage. (Ivan wrote the new opening of 2.2.) Recompiled.
+- 2026-11-09, Luke. At Ivan's request (with R2-D2's suggestion): support function, finite normals and feasible normals are
+  now Definition 2 [Finite and feasible normals], followed by the finite-vs-feasible distinction, two examples, and the
+  pointer to Lemma 3; feasible support is now Definition 3. Recompiled.
+- 2026-11-09, Luke. At Ivan's request (R2-D2's hierarchy): 'feasible support plus one halfspace' and 'a gate improves on
+  the rectangle' are now Theorems 1 and 2 (labels thm:one-extra, thm:gate); the two-moment characterization is Theorem 3.
+  All references and appendix headings updated; recompiled, 20 pp., no undefined references.
+- 2026-11-06, Luke. Applied R2-D2's three adjustments: Proposition 4 lead-in no longer implies an impossibility; 'stronger'
+  instead of 'easier to check' before Proposition 2; second 'Lemma 2 returns' removed. Recompiled.
+- 2026-11-06, Luke. At Ivan's request, a pass over Section 2 on R2-D2's mechanism-vs-scope principle: Proposition 2 lead-in
+  now states its purpose; scope paragraph after Proposition 3 (the redundant cutoff is the one free halfspace); lead-in to
+  Proposition 4 ties to Lemma 2; scope paragraph after Theorem 1 (sufficient becomes exact); necessity description
+  shortened, with the open multi-redundant case noted. Recompiled, 20 pp.
+- 2026-11-06, Luke. At Ivan's request: cleaned up the Proposition 1 block in main.tex after a paste (duplicate
+  proposition and placeholder removed); it now reads: Proposition 1, Ivan's intuition paragraph, the new paragraph on why
+  feasible support is restrictive, then Proposition 2. Recompiled, 19 pp.
+- 2026-11-06, Luke. Housekeeping after R2-D2's third review: removed the stale 'not ported yet' comment in main.tex
+  (Appendix A header) and updated the Section 2 workstream row. No visible change to the manuscript.
+- 2026-11-06, Luke. At Ivan's request (a common thread, used sparingly): three short connective passages in 2.2 that
+  return to the X3 question (Proposition 1's limit for the max test; after Corollary 1; after Corollary 3) and one
+  duplicate removed after Corollary 2. Recompiled, 19 pp.
+- 2026-11-06, Luke. Applied R2-D2's second Section 2 review (q direction, dual-cone wording, gate qualifier and
+  decomposition moved to A.10, 'several familiar tests', repeated transition removed) and ported the Theorem 1 proof into
+  Appendix A.11. main.pdf now 19 pp.
+- 2026-11-06, R2-D2. Re-read Section 2, the included proofs and the bivariate source proof. Saved the second review. The literal q = e₁ − e₃ example needs a direction-only interpretation, and the gate comparison needs the other coordinates held fixed. Earlier corrections remain implemented. Numerical illustration reproduced and current PDF inspected. Manuscript unchanged.
+
+- 2026-11-06, Luke. At Ivan's request: after Proposition 2, the converse counterexample is replaced by a pointer to the
+  symmetric gate in 2.4; 2.4 now states its feasible facet normals and the infeasible finite normal (1,1,2); the
+  back-reference after Conjecture 1 points to 2.4. (Display split and Proposition 1 paragraph were already in Ivan's edits.)
+- 2026-11-05, Luke. At Ivan's request: replaced the Section 2 opening with Ivan's paragraph (goal, two questions,
+  why the normal model, roadmap); 2.1 now opens with "Suppose we observe"; three-observation example moved into 2.1
+  after the hypotheses; 2.4 back-reference updated. Recompiled.
+- 2026-11-05, R2-D2. Verified Luke’s 20:04 corrections in the manuscript and PDF text. Review points resolved. Section 2 is ready for Ivan’s edit, with Appendix A.11 still awaiting the bivariate proof. Verification recorded in the review addendum.
+
+- 2026-11-05, Luke. Applied R2-D2's Section 2 review (three corrections plus smaller fixes) to `main.tex`; recompiled.
+- 2026-11-05, R2-D2. Checked Section 2 and the included proofs against the technical notes and reproduced the symmetric-gate illustration. Saved the independent review for Ivan.
+
+- 2026-11-05, Luke. At Ivan's request: drafted Section 2 (2.1–2.4) in `main.tex` and ported the short proofs into
+  Appendix A (Theorem 1 proof pending). Compiled `main.pdf` (13 pp., plainnat in place of ecta). Handoff for R2-D2 saved.
+- 2026-11-05, R2-D2. Saved Ivan’s cross-device handoff for the Section 2 review in project memory.
 
 - 2026-11-05, Luke. At Ivan's request: moved `paper/Addition.pdf` to `supporting/Addition.pdf` (snapshot of Fede's draft as of
   Nov 5; live source in Overleaf `Notes-Fede/paper/`) and removed the empty `paper/` folder. Updated README and the
