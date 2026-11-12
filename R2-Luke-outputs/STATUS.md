@@ -1,7 +1,7 @@
 # i-relevant: shared status (Luke and R2-D2)
 
-**Next step:** Ivan reviews the standalone seven-page enlarged-alternative note, `enlarged-alternative-admissibility-r2d2-2026-11-12.pdf`, before deciding whether to change the paper. Main.pdf remains 38 pages; the agreed small pass in blue also awaits his review before printing with Federico (see `handoff-r2d2-final-blue-pass-2026-11-12.md`). Full figure-production refresh remains separate. The original-conjecture numerical work remains paused; no manuscript changes were made for the new note.
-**Last updated:** 2026-11-12, by R2-D2 (standalone enlarged-alternative result).
+**Next step:** Ivan reads the blue revision: Section 2.5 (pages 12–13) and Appendix A.12 (pages 32–35). The modified experiment and its results are integrated; `main.pdf` is 42 pages and compiles cleanly. Handoff: `handoff-r2d2-modified-experiment-2026-11-12.md`. Section 4 remains the original ordered experiment; its calculations and Appendices B–C are unchanged. Production figures remain separate. Original-conjecture numerical work remains paused.
+**Last updated:** 2026-11-12, by R2-D2 (modified experiment implemented in blue).
 
 ## How this file works
 
@@ -20,6 +20,9 @@ in moment inequality models when some inequalities are identification-redundant.
 
 ## Decisions by Ivan
 
+- 2026-11-12. Authorized direct manuscript implementation in blue of the agreed two-experiment story: demanding ordered benchmark, its lessons and multi-core open questions, classical benchmark, then broader admissibility results in the modified experiment under covariance restrictions. The one-core reversal illustrates that progression rather than organizing it. Keep one main theorem, related results/proofs in the appendix, and the existing power analysis in the original experiment.
+
+- 2026-11-12. After reading the enlarged-alternative note, Ivan proposed repurposing Section 2.5 as “A modified experiment”: shorter lessons, explicit open questions, motivation and definition of the enlargement, one main formal result, related results in the appendix, and targeted edits elsewhere. Asked R2-D2 to save the plan for a separate chat, without implementing now. Working recommendation: all-nice theorem in the main text; stronger rectangle result in the appendix. Handoff: `section-2-5-modified-experiment-plan-2026-11-12.md`.
 - 2026-11-12. Authorized a separate document developing the most useful admissibility results in the enlarged-alternative model under dependence, with complete proofs and pros/cons for the paper. Independence alone is not an adequate main result. Ivan will review before making manuscript decisions; no manuscript edit authorized by this task.
 - 2026-11-12. On the full-read exchange, Ivan sides with R2-D2: brief enlargement fix (no long explanation); a short clarification that means adding up does not imply singular Omega; keep the regret ranking but call the difference modest; Appendix C stays in the appendix; RSW qualification stays. Ivan edits the manuscript himself.
 - 2026-11-10. Current project team is Ivan Canay and Federico Bugni only; Denis is busy and is not participating for the moment. This supersedes the earlier three-coauthor working description, without making a permanent authorship decision. Ivan has not yet read the simulation plan and will review it later; do not treat the proposed simulation design as approved.
@@ -68,12 +71,12 @@ in moment inequality models when some inequalities are identification-redundant.
 | 2 | Story | R2-D2 first read saved | compare after Luke’s independent assessment is saved |
 | 3 | Literature | Reading evidence in `literature-review.md`; living placement and bibliography-status guide in `citation-plan.md` | R2-D2 maintains tracker as references are reviewed; manuscript citation pass awaits Ivan. Section 4 precedents already cited; Tamer check remains open |
 | 4 | Paper structure | checked and ready | Ivan reads the agreed outline |
-| 5 | Section 2 manuscript draft | Third review complete: no substantive corrections outstanding; Appendix A.11 proof in place and checked | Ivan |
+| 5 | Section 2 manuscript draft | Section 2.5 revised in blue; Theorem 4 and Appendix A.12 added; compiled and checked | Ivan reads the revision |
 | 6 | Section 3 manuscript draft | revised after the scale discussion; R2-D2's review corrections applied; compiled | Ivan reads |
 | 7 | Section 4 architecture and computations | proposed; standalone 13-page plan, four checked deterministic prototypes, coding brief and configuration saved | Ivan reviews, then assigns production computations; Luke drafts from the confirmed outputs |
 | 8 | Section 4 manuscript draft | first draft reviewed by R2-D2; corrections applied; compiled; figures provisional | Ivan edits |
 | 8 | Section 4 manuscript review | first review complete; numerical claims checked; targeted prose/attribution corrections requested | Luke, then Ivan |
-| 9 | Enlarged-alternative admissibility under dependence | proposed; standalone seven-page note with complete proofs, mixed-sign examples, and a one-core counterexample | Ivan reviews; general two-core all-nice case still open, original LP not rerun |
+| 9 | Enlarged-alternative admissibility under dependence | implemented in blue in Section 2.5 and Appendix A.12; 42-page PDF clean | Ivan reads; original LP remains paused |
 
 ## Open questions for Ivan
 
@@ -83,6 +86,13 @@ in moment inequality models when some inequalities are identification-redundant.
 
 ## Log (newest first)
 
+- 2026-11-12, Luke. Addendum to `assessment-luke-section25-modified-experiment-2026-11-12.md` after Ivan's reactions: independence is not the benchmark and the restriction on Omega is the finding of 2.5 ("almost the classical result"); the modified experiment keeps the null Lambda_0. Withdrew the plain-condition advice; recorded why Omega enters (supporting rays into the region redundancy excludes), the case for the one-core counterexample in the main text, and an observation to check: nonnegative combinations of core moments satisfy (2.7) automatically.
+
+- 2026-11-12, Luke. At Ivan's request, read the full draft (source 471e6b6abe9d) with attention to Section 2.5 and Appendix A.12; assessment in `assessment-luke-section25-modified-experiment-2026-11-12.md`. A.12 checked step by step: correct. Section 2.5: state that admissibility passes from the ordered to the modified experiment and not back; present the modified experiment as identification redundancy alone (the results hold with the null {mu <= 0}); move the correlation detail to the appendix; add the one-line power counterpart. Two errors: duplicated closing paragraph; the necessity-of-correlation sentence is shown only with one core. No manuscript edits.
+
+- 2026-11-12, R2-D2. Implemented Ivan's agreed modified-experiment progression in blue. Section 2.5 states Theorem 4 under the core-average covariance condition; Appendix A.12 provides complete proofs, rectangle Proposition 3 and one-core Proposition 4. Original formal conjecture replaced by neutral open questions, with short scope edits in Sections 2.1, 3 and 4 and the introductory placeholder. The null remains exactly unchanged. PDF 42 pages, no warnings/unresolved references or box problems; changed pages visually inspected. Section 4 calculations and Appendices B–C source unchanged. Handoff `handoff-r2d2-modified-experiment-2026-11-12.md`. No numerical conjecture work or external communication.
+
+- 2026-11-12, R2-D2. Saved `section-2-5-modified-experiment-plan-2026-11-12.md` at Ivan's request: self-contained story, subsection sequence, exact hypotheses and covariance condition, one main theorem, appendix allocation, file/label map, targeted edits, and verification steps. Supersedes the note's tentative two-main-theorem placement. No manuscript or standalone-proof-note edits.
 - 2026-11-12, R2-D2. At Ivan's request prepared `enlarged-alternative-admissibility-r2d2-2026-11-12.tex/pdf`: original null unchanged; all nice tests admissible if a nonnegative core average has nonnegative covariance with every statistic; rectangles admissible if each redundant coordinate has a nonnegative core correlation, with one exception allowed for two or more cores. Complete proofs include equivalence of the covariance certificate and the all-normal directional condition, plus the exact one-core sign boundary and an explicit dominating halfspace when it fails. Seven pages compiled and visually inspected; example matrices checked. Pros/cons and scope stated; no necessity claim for two or more cores. Manuscript/bibliography untouched; no LP rerun or second-agent review.
 - 2026-11-12, R2-D2. Implemented Ivan/Luke/R2 agreed small pass in blue. Verified .10 symmetric-gate recalibration by independent integrations; corrected chapter bibliography metadata and aligned figure labels. Source/PDF checked,38pagesclean. Saved handoff and reproducible Rcheck; no structuralchange.
 

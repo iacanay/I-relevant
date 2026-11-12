@@ -113,7 +113,7 @@ Northwestern University\\
 %%%%%%%%% -------------------------------------------------------------------
 \section{Introduction}\label{sec:intro}
 %%%%%%%%% -------------------------------------------------------------------
-The introduction is yet to be written and Conjecture 1 will be removed as a formal conjecture and will be made part of the main text before that conjecture. It is there for Fede to visibly see it. 
+{\color{blue}The introduction is yet to be written. }
 
 {\color{blue}
 \noindent\textbf{Papers we should cite:}
@@ -205,7 +205,7 @@ H_0:\mu\in\Lambda_0:=\Lambda\cap(-\infty,0]^d
 \qquad\text{versus}\qquad
 H_1:\mu\in\Lambda_1:=\Big\{\mu\in\Lambda:\max_{c\in\mathcal C}\mu_c>0\Big\}~.
 \end{equation}
-The restriction in \eqref{eq:Lambda} has two implications. First, $\mu\le0$ if and only if $\mu_c\le0$ for every $c\in\mathcal C$, so the core inequalities characterize the null hypothesis on their own. This is the sense in which the remaining inequalities are redundant, corresponding to inequalities that do not affect the identified set in the moment inequality model discussed below. Second, it bounds each redundant mean by the largest core mean, including under the alternative. This ordering is stronger than redundancy alone: it also prevents a redundant coordinate from having a stronger signal than every core coordinate. We impose it to rule out an immediate reason for retaining redundant moments, namely that a moment unnecessary for describing the null may provide the strongest signal against it. The tests we establish as admissible remain so when we add these alternatives, holding the null and covariance matrix fixed.
+The restriction in \eqref{eq:Lambda} has two implications. First, $\mu\le0$ if and only if $\mu_c\le0$ for every $c\in\mathcal C$, so the core inequalities characterize the null hypothesis on their own. This is the sense in which the remaining inequalities are redundant, corresponding to inequalities that do not affect the identified set in the moment inequality model discussed below. Second, it bounds each redundant mean by the largest core mean, including under the alternative. This ordering is stronger than redundancy alone: it also prevents a redundant coordinate from having a stronger signal than every core coordinate. We impose it to rule out an immediate reason for retaining redundant moments, namely that a moment unnecessary for describing the null may provide the strongest signal against it. Section~\ref{sec:modified-experiment} considers a more permissive experiment that removes this ordering under the alternative while retaining the same null.
 
 The partition into $\mathcal C$ and $\mathcal R$ is part of the maintained model. It is known, and it is the same for every $\mu\in\Lambda$. What varies with $\mu$ is which core coordinate has the largest mean and, as we will see, which tests have the most power. Assigning a different partition to each alternative would define a different testing problem.
 
@@ -344,11 +344,7 @@ Suppose that $|\mathcal C|\ge2$ and $|\mathcal R|=1$, and let $\Omega$ be any po
 
 In particular, the max test that uses every coordinate is admissible whenever there are at least two core coordinates and one redundant coordinate. In the example of Section~\ref{sec:experiment}, a test may therefore use $X_3$ or ignore it: by Corollaries~\ref{cor:core-only} and~\ref{cor:rectangles}, neither the max test that keeps $X_3$ nor the one that drops it can be improved upon uniformly.
 
-The results above leave open regions that need two or more infeasible facets, such as rectangles with two redundant coordinates, or the region $\{x_1\le\kappa,\ x_2\le\kappa,\ x_1+\lambda x_3\le b,\ x_2+\lambda x_3\le b\}$ with $\lambda>1$, which reduces to the symmetric gate of Section~\ref{sec:three-moments} when $\lambda=1$. We conjecture that these regions are admissible as well.
-
-\begin{conjecture}\label{conj:multiple-core}
-If $|\mathcal C|\ge2$, then $\phi_A$ is $\alpha$-admissible for every nice region $A$.
-\end{conjecture}
+The results above leave open regions that need two or more infeasible facets, including rectangles with several redundant coordinates. Section~\ref{sec:modified-experiment} returns to this question and compares the conclusions with those in a more permissive experiment.
 
 \subsubsection*{One core coordinate}
 
@@ -425,23 +421,59 @@ respectively, and the second is strictly larger. The gate relies on coordinate 1
 
 Pairing the redundant coordinate with both core coordinates does not produce a dominating test either. The symmetric region $\{x_1\le\kappa,\ x_2\le\kappa,\ x_1+x_3\le b,\ x_2+x_3\le b\}$, with $\kappa$ the cutoff of the max test and $b$ chosen for exact size, has the feasible facet normals $e_1$, $e_2$, $e_1+e_3$, and $e_2+e_3$. It is therefore feasibly supported and admissible in (a) by Proposition~\ref{prop:feasible-support}, even though the sum of the two gate normals, $(1,1,2)$, is a finite normal that is not feasible. It does not dominate the max test, however. With $\alpha=0.10$, the cutoffs are $\kappa\approx1.818$ and $b\approx2.646$, and at $\mu=(0.1,-5,0.1)$ the max test rejects with probability $0.0839$, while the symmetric gate rejects with probability $0.0685$.
 
-\subsection{Main Lessons}\label{sec:main-lessons}
 
-Admissibility does not require us to discard redundant inequalities. The core-only rectangle is admissible whatever the number of core coordinates (Corollary~\ref{cor:core-only}), but tests that retain redundant coordinates can be admissible as well: the rectangle with one redundant coordinate when there are two or more core coordinates (Corollary~\ref{cor:rectangles}), and tests that use them through feasible directions when there is one (Corollary~\ref{cor:epsilon} and Theorem~\ref{thm:two-moments}). And whenever we show that a test using the redundant coordinates can be improved upon, the improvement still uses them. What goes wrong is how they enter the test, not that they enter it. 
-%By excluding alternatives at which a redundant coordinate has the strongest signal, our ordering makes admissibility harder to establish.
+\subsection{A Modified Experiment}\label{sec:main-lessons}\label{sec:modified-experiment}
 
-The unrestricted normal model provides a useful benchmark. If $\Lambda=\mathbf R^d$, the null is $\mu\le0$ and the alternative is its complement. Every nice region then gives an $\alpha$-admissible test. To see this, note that every finite normal of a nice region is nonnegative, and positive definiteness implies that $\Omega a$ has a positive component whenever $a\ge0$ and $a\ne0$. Thus every such normal generates a ray of alternatives, and admissibility follows from the classical criterion of \citet[Theorem~6.7.1 and Corollary~6.7.1]{lehmann/romano:05}. Under \eqref{eq:Lambda}, some of these rays are excluded. The classical argument therefore no longer establishes admissibility for every nice region.
+The ordering in \eqref{eq:Lambda} provides a demanding benchmark for retaining redundant inequalities. It prevents a redundant mean from exceeding the largest core mean, under both the null and the alternative. Even under this restriction, admissibility does not require us to discard the redundant inequalities. Core-only rectangles are admissible, but so are several tests that retain redundant coordinates. With one core coordinate, how those coordinates enter the test matters: under independence, a gate improves uniformly on a rectangle while continuing to use them.
 
-The results show how knowledge about the source of a violation affects this conclusion. With one core coordinate, the model identifies a mean that is positive at every alternative and bounds all the redundant means. This knowledge makes it possible to improve uniformly on a rectangle under independence, while other tests that use the redundant coordinates remain admissible. With two or more core coordinates, the core coordinate with the largest mean can vary across alternatives. Together with feasible support, the resulting first-moment restriction rules out a uniform improvement for the classes established above, including rectangles with one redundant coordinate. Whether every nice test is admissible in this case remains open.
+With two or more core coordinates, two questions remain open. Is every nice test admissible? More specifically, are rectangles with several redundant coordinates admissible? These questions are natural in light of the unrestricted normal experiment. If the mean space is $\mathbf R^d$, with null $\mu\le0$ and alternative its complement, every nice test is admissible. Every finite normal $a$ of a nice region is nonnegative, and positive definiteness implies that $\Omega a$ has a positive component whenever $a\ne0$. Each normal therefore generates a ray of alternatives, and the classical admissibility criterion applies \citep[Theorem~6.7.1 and Corollary~6.7.1]{lehmann/romano:05}. The ordering in \eqref{eq:Lambda} excludes some of these rays, so the same argument does not settle either question.
 
-Admissibility separates the tests that can be improved upon from those that cannot. It does not tell us how much power is at stake when we keep or drop a redundant coordinate. In case (a) of Section~\ref{sec:three-moments}, the max test that ignores $X_3$ and the max test that uses it are both admissible, by Corollaries~\ref{cor:core-only} and~\ref{cor:rectangles}. Any test that weakly dominates either of them coincides with it almost surely (see the proofs of Proposition~\ref{prop:feasible-support} and Theorem~\ref{thm:one-extra}), and the two tests differ, so each one is more powerful than the other at some alternatives. Section~\ref{sec:power} measures how much.
+
+We now consider a more permissive experiment. We keep the null $\Lambda_0$, the partition into $\mathcal C$ and $\mathcal R$, and the correlation matrix $\Omega$, but remove the ordering under the alternative. The hypotheses become
+\begin{equation}\label{eq:modified-hypotheses}
+H_0:\mu\in\Lambda_0
+\qquad\text{versus}\qquad
+H_1:\mu\in\widetilde\Lambda_1
+:=\Big\{\mu\in\mathbf R^d:\max_{c\in\mathcal C}\mu_c>0\Big\}~,
+\end{equation}
+with maintained mean space $\widetilde\Lambda:=\Lambda_0\cup\widetilde\Lambda_1$. The core inequalities still characterize the null, but redundant means can now exceed every core mean by an arbitrary amount under the alternative.
+
+In this experiment, a condition on the correlation matrix suffices for every nice test to be admissible. The condition asks whether some nonnegative weighted average of the core components has nonnegative covariance with every component of $X$. Formally, there exists $w\in\mathbf R^{|\mathcal C|}$ such that
+\begin{equation}\label{eq:core-average}
+  w_c\ge0\quad(c\in\mathcal C)~,
+  \qquad
+  \sum_{c\in\mathcal C}w_c=1~,
+  \qquad
+  \sum_{c\in\mathcal C}\Omega_{jc}w_c\ge0
+  \quad\text{for every }j=1,\dots,d~.
+\end{equation}
+The weights describe a property of $\Omega$; they need not be used by the test. Independence satisfies this condition, as does any correlation matrix with nonnegative correlations between core and redundant coordinates. The condition also allows some of these correlations to be negative.
+
+
+\begin{theorem}[Admissibility in the modified experiment]\label{thm:modified-nice}
+Suppose that \eqref{eq:core-average} holds. In the experiment \eqref{eq:modified-hypotheses}, $\phi_A$ is $\alpha$-admissible for every nice region $A$, for any number of core and redundant coordinates.
+\end{theorem}
+
+The added alternatives allow the supporting-halfspace argument to apply to every face of a nice region. Under \eqref{eq:core-average}, each nonnegative normal $a\ne0$ has a core component of $\Omega a$ that is nonnegative. Its ray of means therefore lies in the enlarged alternative or can be approached by alternatives. This is enough to rule out a uniform improvement, by the same argument that underlies Proposition~\ref{prop:feasible-support}. The proof is in Appendix~\ref{app:modified-experiment}.
+
+
+Theorem~\ref{thm:modified-nice} changes the answer for the one-core rectangle under independence. In the original experiment, Theorem~\ref{thm:gate} supplies a gate that strictly improves on it at every alternative. In the modified experiment, the rectangle is admissible. The gate remains level $\alpha$, since the null has not changed, but it loses to the rectangle at some of the added alternatives. The ordering provides information about the alternative that makes a uniform improvement possible. Removing that information requires the test to perform well over a larger set of alternatives.
+
+For rectangles, the correlation condition can be weakened. It is enough that each redundant component have nonnegative correlation with at least one core component; the core component need not be the same for all redundant components. Under this condition, every rectangle with finite cutoffs and exact size is admissible in the modified experiment. With two or more cores, the conclusion holds even if one redundant component is negatively correlated with every core component. Appendix~\ref{app:modified-experiment} establishes these results.
+
+Some restriction on correlation is nevertheless needed to conclude that every nice test is admissible. With one core, if a redundant component is negatively correlated with the core component, the test that rejects for large values of that redundant component alone can be improved upon uniformly. The appendix gives the improving test.
+
+Admissibility does not tell us how much power is at stake when we keep or drop redundant inequalities. Consider again the original experiment with two core components and one redundant component. The max test using only the core components and the max test using all three components are both admissible, and each is more powerful than the other at some alternatives.\footnote{The proofs of Proposition~\ref{prop:feasible-support} and Theorem~\ref{thm:one-extra} show that any weak dominator of either test coincides with it almost surely. Since the two tests differ, neither can weakly dominate the other.} The remaining question is how large these gains and losses can be. Section~\ref{sec:power} quantifies them.
+
+Admissibility does not measure the power consequences of retaining or discarding redundant inequalities. Returning to the original experiment, the two max tests in case (a) of Section~\ref{sec:three-moments} are both admissible. The proofs of Proposition~\ref{prop:feasible-support} and Theorem~\ref{thm:one-extra} show that any weak dominator of either test coincides with it almost surely. Since the tests differ, each is more powerful at some alternatives. Section~\ref{sec:power} measures how much.
+
 
 
 %%%%%%%%% -------------------------------------------------------------------
 \section{From Population Inequalities to the Normal Experiment}\label{sec:population}
 %%%%%%%%% -------------------------------------------------------------------
 
-We now consider a moment inequality model in which a collection of inequalities has been shown to characterize the identified set. The question is whether a test should use only that collection. We first distinguish what the identification argument establishes from the additional ordering imposed in Section~\ref{sec:normal}. This distinction matters because inference compares violations relative to their sampling variability. We then connect the tests to the normal experiment.
+We now consider a moment inequality model in which a collection of inequalities has been shown to characterize the identified set. The question is whether a test should use only that collection. We first distinguish what the identification argument establishes from the additional ordering imposed in Section~\ref{sec:experiment}. This distinction matters because inference compares violations relative to their sampling variability. We then connect the tests to the original ordered experiment. Identification redundancy alone implies neither its ordering nor the unrestricted alternative in Section~\ref{sec:modified-experiment}.
 
 \subsection{The Moment Inequality Model}\label{sec:model}
 
@@ -498,7 +530,7 @@ Identification redundancy therefore leaves open whether a redundant moment has t
 \end{equation}
 This uses the same fixed partition as \eqref{eq:id-redundancy}, but asks for more: no redundant moment has a larger standardized mean than every core moment. It does not directly follow from identification redundancy. It is a maintained restriction on the signals, expressed on the scale used for inference. It is unchanged by positive rescaling of the moment functions.
 
-The next subsection shows how \eqref{eq:standardized-order} leads to the maintained mean space in the normal experiment of Section~\ref{sec:normal}.
+The next subsection shows how \eqref{eq:standardized-order} leads to the ordered mean space $\Lambda$ in \eqref{eq:Lambda}.
 
 \subsection{Local Alternatives}\label{sec:local}
 
@@ -518,7 +550,7 @@ X_n:=\hat D_n^{-1}(\theta_n)\sqrt n\,\bar m_n(\theta_n)\ \stackrel{d}{\to}\ X\si
 \end{equation}
 Proposition~\ref{prop:local-limit} in Appendix~\ref{app:local-limits} states this result formally. Null sequences have $\delta\le0$, while $\max_{c\in\mathcal C}\delta_c>0$ implies that $\theta_n$ lies outside the identified set for all sufficiently large $n$. Under the standardized order in \eqref{eq:standardized-order}, the limiting mean satisfies $\delta\in\Lambda$. Thus $\delta$ plays the role of $\mu$ in Section~\ref{sec:normal}, and the limit has the same correlation matrix $\Omega$.
 
-The underlying moment model may impose additional restrictions on the attainable local means and their covariance matrix. In particular, a test that is admissible in our Gaussian experiment may be improvable on the smaller family of distributions allowed by additional restrictions from the economic model. We abstract away from such additional restrictions and take the Gaussian experiment in Section~\ref{sec:normal} as the relevant limit experiment.
+The underlying moment model may impose additional restrictions on the attainable local means and their covariance matrix. In particular, a test that is admissible in our Gaussian experiment may be improvable on the smaller family of distributions allowed by additional restrictions from the economic model. We abstract away from such additional restrictions and take the ordered Gaussian experiment in Section~\ref{sec:experiment} as the relevant limit experiment.
 
 To see why redundant inequalities remain relevant in the limit, consider the tests in \eqref{eq:Tn} using generalized moment selection with a diverging threshold \citep{andrews/soares:10,Bugni:10,canay:10a}. Let $\kappa_n\to\infty$ with $\kappa_n/\sqrt n\to0$, and let $\hat s_n(\theta)$ have $j$th component equal to $0$ if $\sqrt n\,\bar m_{n,j}(\theta)/\hat\sigma_{n,j}(\theta)>-\kappa_n$ and to $-\infty$ otherwise. The critical value $\hat c_n(1-\alpha,\theta)$ is the $1-\alpha$ quantile of $T(Z+\hat s_n(\theta),\hat\Omega_n(\theta))$, where $Z\sim N_d(0,\hat\Omega_n(\theta))$, or a bootstrap approximation to it, under conditions that make the bootstrap consistent. Along \eqref{eq:local}, $X_n/\kappa_n\to0$ in probability, so every inequality is selected with probability approaching one. If the distribution of $T(Z,\Omega)$ with $Z\sim N_d(0,\Omega)$ is continuous and strictly increasing at its $1-\alpha$ quantile $c_{1-\alpha}$, the critical value converges in probability to $c_{1-\alpha}$, and the limiting rejection probability is $P\{T(Z+\delta,\Omega)>c_{1-\alpha}\}$. This is the power of the test $\phi_A$ of Section~\ref{sec:normal} with acceptance region
 \[
@@ -536,7 +568,7 @@ Moment selection removes an inequality only outside the finite-drift regime of \
 % Figures 1-3 are R2-D2's deterministic prototypes, copied unchanged into figures/ as sec4-pilot-*.pdf;
 % they are provisional and should be replaced by production versions.
 
-We return to the three-inequality model of Section~\ref{sec:three-moments} to measure the power at stake when we keep or drop redundant inequalities. With two core inequalities, the max tests that keep and drop the redundant inequality are both admissible, and we measure the losses from either choice. We then impose the one-core restriction, under which a gate improves on the same three-coordinate max test. The calculations show how much this improvement is worth, how the gate compares with dropping the redundant inequalities, and why its dominance fails when we return to two cores.
+We return to the original ordered experiment, using the three-inequality model of Section~\ref{sec:three-moments} to measure the power at stake when we keep or drop redundant inequalities. With two core inequalities, the max tests that keep and drop the redundant inequality are both admissible, and we measure the losses from either choice. We then impose the one-core restriction, under which a gate improves on the same three-coordinate max test. The calculations show how much this improvement is worth, how the gate compares with dropping the redundant inequalities, and why its dominance fails when we return to two cores.
 
 Let $X\sim N_3(\delta,I_3)$, where $\delta$ is the vector of standardized local violations in \eqref{eq:local}, and set $\alpha=0.10$. For a set of coordinates $J\subseteq\{1,2,3\}$, the max test on $J$ rejects when $\max_{j\in J}X_j>c_{|J|}$, where $c_k:=\Phi^{-1}\big((1-\alpha)^{1/k}\big)$ is the critical value of the max statistic on $k$ independent coordinates. Its power is
 \begin{equation}\label{eq:max-power}
@@ -579,7 +611,7 @@ Comparisons of this kind have precedents. \citet[Section~2.3.3]{ponomarev:22} co
 
 \subsection{One Core}\label{sec:power-one-core}
 
-Now impose $\delta_2,\delta_3\le\delta_1$, so that $\mathcal C=\{1\}$ and $\mathcal R=\{2,3\}$. At every alternative, $\delta_1>0$, and we know which core mean bounds the redundant ones. Theorem~\ref{thm:gate} uses this knowledge to improve uniformly on the three-coordinate max test that was admissible in Section~\ref{sec:power-two-cores}. We compare the size of this improvement with the gains and losses from dropping the redundant inequalities. {\color{blue}There are three tests.} The first uses only the core inequality and rejects when $X_1>c_1$; it is admissible by Corollary~\ref{cor:core-only}. The second is the max test on $\{1,2,3\}$, the rectangle of Section~\ref{sec:three-moments}. The third is the gate of Theorem~\ref{thm:gate} on coordinates 1 and 3, with acceptance region
+Now impose $\delta_2,\delta_3\le\delta_1$, so that $\mathcal C=\{1\}$ and $\mathcal R=\{2,3\}$. At every alternative, $\delta_1>0$, and we know which core mean bounds the redundant ones. Theorem~\ref{thm:gate} uses this knowledge to improve uniformly on the three-coordinate max test that was admissible in Section~\ref{sec:power-two-cores}. We compare the size of this improvement with the gains and losses from dropping the redundant inequalities. There are three tests. The first uses only the core inequality and rejects when $X_1>c_1$; it is admissible by Corollary~\ref{cor:core-only}. The second is the max test on $\{1,2,3\}$, the rectangle of Section~\ref{sec:three-moments}. The third is the gate of Theorem~\ref{thm:gate} on coordinates 1 and 3, with acceptance region
 \[
 \{x\in\mathbf R^3:\ x_1\le c_3,\ x_2\le c_3,\ x_1+x_3\le b\}~,
 \]
@@ -1002,6 +1034,125 @@ which is positive for every $\mu\in\Lambda_1$ by Lemmas~\ref{lem:bv-gain-loss} a
 \end{proof}
 
 When $\rho=0$, the score $T_{2,0}(x)=-x_2$, so the separation $g_2<d_2$ gives the required ordering directly, and every lower set is $q_0$-lower. For $\rho<0$, neither fact holds: $T_{2,\rho}$ contains a negative multiple of $T_{1,\rho}$, and subtracting $q_\rho$ raises the second coordinate. Lemma~\ref{lem:bv-rearrangement} handles the regions that are not $q_\rho$-lower, and the slope bound \eqref{eq:bv-slope} handles those that are.
+
+
+{\color{blue}
+\subsection{The modified experiment}\label{app:modified-experiment}
+
+Throughout this subsection, the null is $\Lambda_0$ and the alternative is $\widetilde\Lambda_1$ in \eqref{eq:modified-hypotheses}. Every nice test remains level $\alpha$, since the null is unchanged. The proofs extend the supporting-halfspace argument to directions whose rays can be approached by alternatives. We first establish that extension, then use the correlation condition to cover every finite normal. Rectangles require only their coordinate normals, which permits a weaker condition.
+
+\subsubsection*{Supporting directions in the modified experiment}
+
+The directions that can be used in the supporting-halfspace argument are
+\begin{equation}\label{eq:modified-directions}
+\mathcal D:=\Big\{a\in\mathbf R^d:\ a\ge0,\ a\ne0,\ \max_{c\in\mathcal C}(\Omega a)_c\ge0\Big\}~.
+\end{equation}
+The weak inequality matters: if the largest core component is zero, $t\Omega a$ may be outside the maintained mean space, but it is a limit of alternatives.
+
+\begin{samepage}
+\begin{lemma}\label{lem:modified-support}
+Let $A$ be nice and let $\psi$ be a level-$\alpha$ test that weakly dominates $\phi_A$ in \eqref{eq:modified-hypotheses}. Set $h:=\psi-\phi_A$. Then $E_0[h(X)]=0$. If $a\in\mathcal D$ and $A\subseteq\{x:a'x\le b\}$ for a finite $b$, then $h^-=0$ almost surely on $\{x:a'x>b\}$. Consequently, if
+\[
+A=\bigcap_{a\in G}\{x:a'x\le b_a\}~,
+\qquad G\subseteq\mathcal D~,
+\qquad b_a\in\mathbf R~,
+\]
+then $\psi=\phi_A$ almost surely under every Gaussian shift.
+\end{lemma}
+\end{samepage}
+
+\begin{proof}
+Write $F(\mu):=E_\mu[h(X)]$. This function is continuous on $\mathbf R^d$. Indeed, on a compact set of means the likelihood ratios in \eqref{eq:lr} are bounded by $\exp\{K\|X\|+K\}$ for a finite $K$, which is integrable under $P_0$. Since $|h|\le1$, dominated convergence applies. Level at the origin gives $F(0)\le0$, while dominance at $te_c\in\widetilde\Lambda_1$, for $c\in\mathcal C$ and $t>0$, gives $F(te_c)\ge0$. Letting $t\downarrow0$ shows that $F(0)=0$.
+
+Fix $a\in\mathcal D$ and choose $c\in\mathcal C$ with $(\Omega a)_c\ge0$. For every $t>0$ and $\varepsilon>0$, the mean $t\Omega a+\varepsilon e_c$ belongs to $\widetilde\Lambda_1$. Dominance there and continuity as $\varepsilon\downarrow0$ give $F(t\Omega a)\ge0$. The likelihood ratio therefore yields
+\begin{equation}\label{eq:modified-tilt}
+E_0[e^{ta'X}h(X)]\ge0\qquad\text{for every }t>0~.
+\end{equation}
+This step uses only limits of power at valid alternatives; it does not add the boundary mean to the maintained space.
+
+As in \eqref{eq:signs}, $h^+$ is supported on $A$ and $h^-$ on $A^c$. Since $a'x\le b$ on $A$, for every $\eta>0$,
+\[
+E_0[e^{ta'X}h(X)]
+\le e^{tb}E_0[h^+(X)]
+-e^{t(b+\eta)}E_0[h^-(X)I\{a'X\ge b+\eta\}]~.
+\]
+If the last expectation were positive, the right side would be negative for sufficiently large $t$, contradicting \eqref{eq:modified-tilt}. Taking $\eta=1/n$ proves that $h^-=0$ almost surely on $\{x:a'x>b\}$.
+
+Under the stated representation of $A$, the open halfspaces $\{x:a'x>b_a\}$ cover $A^c$ and have a countable subcover. Applying the preceding conclusion to that subcover gives $h^-=0$ almost surely. Since $E_0h=0$, also $h^+=0$ almost surely. All nonsingular Gaussian shifts are mutually absolutely continuous, so the equality holds under every $P_\mu$.
+\end{proof}
+
+\subsubsection*{Proof of Theorem~\ref{thm:modified-nice}}
+
+The correlation condition ensures that every finite normal of a nice region belongs to $\mathcal D$. To see this, we first show that \eqref{eq:core-average} is equivalent to
+\begin{equation}\label{eq:modified-direction-condition}
+\max_{c\in\mathcal C}(\Omega a)_c\ge0\qquad\text{for every }a\ge0~.
+\end{equation}
+Write $B:=\Omega_{\mathcal C\cdot}$. If \eqref{eq:core-average} holds, then $w'Ba=a'\Omega_{\cdot\mathcal C}w\ge0$ for every $a\ge0$. Since $w\ge0$ and its entries sum to one, the components of $Ba$ cannot all be negative, proving \eqref{eq:modified-direction-condition}.
+
+Conversely, under \eqref{eq:modified-direction-condition}, the convex cone $K:=\{Ba:a\ge0\}$ and the open convex cone $O:=\{v:v_c<0\text{ for every }c\in\mathcal C\}$ are disjoint. Separation gives $w\ne0$ and $\gamma\in\mathbf R$ such that
+\[
+w'k\ge\gamma\ge w'o\qquad\text{for all }k\in K\text{ and }o\in O~.
+\]
+Since $0\in K$ and $O$ contains points converging to zero, $\gamma=0$. If $w_c<0$ for some $c$, sending $o_c$ to $-\infty$ with the other coordinates fixed contradicts $w'o\le0$. Hence $w\ge0$. Taking $k=Be_j$ for each $j$ gives $B'w\ge0$, and normalizing $w$ to sum to one proves \eqref{eq:core-average}.
+
+A nice region is nonempty, proper, closed and convex, so it is the intersection of its supporting halfspaces with finite normals. Because it is lower, all these normals are nonnegative. Under \eqref{eq:modified-direction-condition}, they belong to $\mathcal D$, and Lemma~\ref{lem:modified-support} applies. Thus every level-$\alpha$ weak dominator coincides with $\phi_A$ almost surely under every Gaussian shift. In particular, $\phi_A$ is $\alpha$-admissible. \qed
+
+To verify the sufficient sign condition stated in the main text, suppose that $\Omega_{cr}\ge0$ for every $c\in\mathcal C$ and $r\in\mathcal R$. For $a\ge0$ with $a_{\mathcal C}=0$, we have $(\Omega a)_{\mathcal C}=\Omega_{\mathcal C\mathcal R}a_{\mathcal R}\ge0$. If $a_{\mathcal C}\ne0$, positive definiteness gives
+\[
+a_{\mathcal C}'(\Omega a)_{\mathcal C}
+=a_{\mathcal C}'\Omega_{\mathcal C\mathcal C}a_{\mathcal C}
++a_{\mathcal C}'\Omega_{\mathcal C\mathcal R}a_{\mathcal R}>0~,
+\]
+so some core component of $\Omega a$ is positive. Hence \eqref{eq:modified-direction-condition} holds. Correlations within either group need not be nonnegative.
+
+Condition~\eqref{eq:core-average} also permits negative correlations between the groups. For example, with $\mathcal C=\{1,2\}$ and $\mathcal R=\{3,4\}$, take
+\[
+\Omega=\begin{pmatrix}I_2&B\\B'&I_2\end{pmatrix}~,
+\qquad B=\begin{pmatrix}2/5&-2/5\\-2/5&2/5\end{pmatrix}~.
+\]
+This matrix has eigenvalues $1/5,1,1,9/5$, and $w=(1/2,1/2)'$ gives $\Omega_{\cdot\mathcal C}w=(1/2,1/2,0,0)'\ge0$. Neither core coordinate alone has nonnegative covariance with every coordinate, but their average does.
+
+\subsubsection*{Rectangles under a weaker correlation condition}
+
+A rectangle only needs its coordinate faces to satisfy the supporting-direction condition. Define
+\begin{equation}\label{eq:modified-bad-coordinates}
+\mathcal B(\Omega):=\Big\{r\in\mathcal R:\max_{c\in\mathcal C}\Omega_{cr}<0\Big\}~.
+\end{equation}
+These are the redundant coordinates negatively correlated with every core coordinate. Zero correlation with one core is enough to exclude a coordinate from $\mathcal B(\Omega)$.
+
+\begin{proposition}[Rectangles in the modified experiment]\label{prop:modified-rectangles}
+Let $A_\kappa:=\bigcap_{j=1}^d\{x:x_j\le\kappa_j\}$, with finite cutoffs and $P_0\{X\in A_\kappa\}=1-\alpha$. In \eqref{eq:modified-hypotheses}, $\phi_{A_\kappa}$ is $\alpha$-admissible if $\mathcal B(\Omega)=\varnothing$, or if $|\mathcal C|\ge2$ and $|\mathcal B(\Omega)|\le1$.
+\end{proposition}
+
+\begin{proof}
+Every core normal $e_c$ belongs to $\mathcal D$, since $(\Omega e_c)_c=1$. A redundant normal $e_r$ belongs to $\mathcal D$ exactly when $r\notin\mathcal B(\Omega)$. If $\mathcal B(\Omega)=\varnothing$, Lemma~\ref{lem:modified-support} therefore covers every face of the rectangle and establishes admissibility.
+
+Suppose instead that $|\mathcal C|\ge2$ and $\mathcal B(\Omega)=\{r\}$. Let $\psi$ weakly dominate $\phi_{A_\kappa}$ in the modified experiment and write $h:=\psi-\phi_{A_\kappa}$. Since the null is unchanged and $\Lambda_1\subseteq\widetilde\Lambda_1$, $\psi$ is also a level-$\alpha$ weak dominator in the original experiment. Lemma~\ref{lem:first-order} gives $E_0h=0$ and $E_0[Xh(X)]=0$.
+
+Lemma~\ref{lem:modified-support} rules out losses of rejections beyond every face except $x_r=\kappa_r$. Thus $h^-$ can be positive only where $x_r>\kappa_r$, while $h^+$ can be positive only where $x_r\le\kappa_r$. Put $M:=E_0h^+=E_0h^-$. If $M>0$, then
+\[
+E_0[X_rh^+(X)]\le\kappa_r M
+<E_0[X_rh^-(X)]~,
+\]
+contradicting $E_0[X_rh(X)]=0$. Hence $M=0$, and mutual absolute continuity gives $\psi=\phi_{A_\kappa}$ almost surely under every Gaussian shift.
+\end{proof}
+
+\subsubsection*{The role of negative correlation with one core}
+
+With one core, the correlation restriction for an all-nice result is necessary as well as sufficient. The failure has a simple form: negative correlation allows the core coordinate to raise the mean of a redundant-only statistic at every alternative without raising its variance.
+
+\begin{proposition}\label{prop:modified-one-core}
+Suppose that $\mathcal C=\{1\}$. Every nice test is $\alpha$-admissible in \eqref{eq:modified-hypotheses} if and only if $\Omega_{1r}\ge0$ for every $r\in\mathcal R$.
+\end{proposition}
+
+\begin{proof}
+Sufficiency follows from Theorem~\ref{thm:modified-nice}. For necessity, suppose that $\rho:=\Omega_{1r}<0$ for some $r\in\mathcal R$. Consider the nice test $\phi(x):=I\{x_r>z_{1-\alpha}\}$ and the competitor
+\[
+\psi(x):=I\{x_r-2\rho x_1>z_{1-\alpha}\}~.
+\]
+The statistic $Y:=X_r-2\rho X_1$ has mean $\mu_r-2\rho\mu_1$ and variance $1+4\rho^2-4\rho^2=1$. Under $\Lambda_0$, both $\mu_r$ and $\mu_1$ are nonpositive and $-2\rho>0$, so $E_\mu Y\le0$. Thus $\psi$ has level $\alpha$, attained at the origin. At every $\mu\in\widetilde\Lambda_1$, $\mu_1>0$ and hence $E_\mu Y>\mu_r$. It follows that $\psi$ has strictly higher power than $\phi$ at every alternative.
+\end{proof}
+}
 
 
 \section{Supporting Results for Section \ref{sec:population}}\label{app:local-limits}
