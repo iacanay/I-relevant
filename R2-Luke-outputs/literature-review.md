@@ -4,6 +4,30 @@
 
 The question of whether retention can change local power already has concrete answers. I would frame our contribution around admissibility under maintained mean restrictions and the size of the gains and losses when the redundant coordinate has sampling variation of its own. The sources checked here leave open how those answers change with the number of core inequalities. They do not establish a priority claim over the entire order-restricted testing literature.
 
+## Verified quotations on precision for paragraph 3
+
+Checked November 20, 2026. Line counts refer to the printed lines within the passage identified in each linked version.
+
+**Chesher and Rosen (2020).** Section 9.1, pp. 104–105. The sentence begins at the bottom of p. 104 and refers to inequalities obtained from sets outside a core-determining collection. The excerpt is on p. 105, lines 1–2 of the body text. [Published chapter, p. 105](../references/Chesher-Rosen.pdf#page=105)
+
+> could be estimated more precisely in  
+> finite samples, so that these are nonetheless useful for conducting inference.
+
+**Chernozhukov, Chetverikov, and Kato (2019).** Authors’ manuscript, p. 2, footnote 1, second paragraph, lines 6–7. The authors explicitly connect precision to including an inequality beyond those needed for sharp identification. [Authors’ PDF, p. 2](https://denischetverikov.wordpress.com/wp-content/uploads/2018/09/moment_ineq_v27.pdf#page=2)
+
+> if a redundant inequality can be estimated with  
+> high precision, it may be beneficial to use it for inference
+
+**Molinari (2020).** Author’s manuscript, printed p. 110 (PDF p. 111), lines 4–5 of the paragraph beginning “A related but separate question”. The sentence goes on to discuss the finite-sample properties of confidence sets and tests. [Author’s PDF, printed p. 110](https://arxiv.org/pdf/2004.11751#page=111)
+
+> inequalities that are redundant from the perspective of identification analysis  
+> might nonetheless be estimated with high precision
+
+**Ponomarev and Semenova (2025).** September 2025 revision, Remark 2, p. 13, first two lines below equation (3.22). The worked example compares upper confidence bounds constructed separately from a looser and a tighter population bound. [September 2025 PDF, p. 13](https://arxiv.org/pdf/2410.07443v3#page=13)
+
+> As a result, a UCB based on a non-sharp bound first-order dominates  
+> its sharp counterpart in terms of the average length.
+
 ## Ponomarev and Semenova (2025)
 
 **Cite in the introduction.** Kirill Ponomarev and Vira Semenova, *On the Lower Confidence Band for the Optimal Welfare in Policy Learning*, arXiv:2410.07443, September 2025 revision of the October 2024 paper. [Version reviewed](https://arxiv.org/abs/2410.07443v3).

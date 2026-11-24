@@ -10,7 +10,7 @@ The scientific question is how much power can be gained or lost by keeping ident
 
 **R is the production language.** Python prototypes are independent reference calculations, not a production dependency. Federico may independently check selected results in Matlab; no Matlab implementation is requested here. The intended manuscript section is 5–6 pages including three main figures. This folder supplies computations, not manuscript prose.
 
-**Current status:** folder and assignment created; R installation checked. No production R functions, tests, or simulations have yet been written or run. The existing Python diagnostics are complete. Do not confuse those two statuses.
+**Current status (November 13, 2026):** production R code, validation tests, exact Gaussian results, figures, smoke tests, benchmark and the full local finite-sample production run are complete. See **[How to run (verified)](#how-to-run-verified)** below and the research handoff [`../R2-Luke-outputs/handoff-section4-R-production.md`](../R2-Luke-outputs/handoff-section4-R-production.md). The original assignment text follows unchanged except for this paragraph, the file-layout note, and the appended run instructions.
 
 ## Source map and reading order
 
@@ -62,7 +62,7 @@ R-codes/
   cluster/                    # Quest instructions/scripts only if useful
 ```
 
-These filenames are requested deliverables, not commands that exist yet. At completion, replace this qualification with the exact verified commands. Provide commands runnable from the project root and explain interactive use in R/RStudio. Resolve paths without hard-coding Ivan's home directory. Do not require a particular working directory without checking it and explaining it.
+All of these files now exist (plus `R/00-setup.R`, which loads the configuration and functions). The verified commands are in [How to run (verified)](#how-to-run-verified). Provide commands runnable from the project root and explain interactive use in R/RStudio. Resolve paths without hard-coding Ivan's home directory. Do not require a particular working directory without checking it and explaining it.
 
 Prefer explicit arguments and short functions with comments explaining assumptions, inputs, returned fields, and the associated P-equation or theorem. Distinguish raw local drift `lambda`, standard deviations `sigma`, standardized drift `delta`, and finite-sample means `lambda/sqrt(n)`. Avoid clever metaprogramming, hidden global state, and an unnecessary package/framework. Base R plus a few established packages is sufficient. Record package versions and dependency setup; do not upgrade global packages unnecessarily.
 
@@ -114,3 +114,52 @@ Quest uses Slurm. Consult the current [official Quest overview](https://www.it.n
 - A final handoff distinguishing completed results, findings, scientific limitations, and any genuinely cluster-dependent remainder. State which files Luke should use and which figures remain provisional.
 
 Do not edit `main.tex`, bibliography, coauthor notes, or the independent prototype assets. Do not make unsupported claims that retaining is typically cheap, that the gate itself is admissible, that Gaussian dominance automatically holds in finite samples, or that grid maxima are global extrema. No average over alternatives without a specified substantive weighting. No new admissibility-conjecture work.
+
+## How to run (verified)
+
+Verified on November 13, 2026 with R 4.6.1, ggplot2 4.0.3 and mvtnorm 1.4.2 (Apple M2 Max). Only `ggplot2` and `mvtnorm` are required; if missing, `install.packages(c("ggplot2", "mvtnorm"))`. Run from the **project root** (the folder containing `R-codes/`); the scripts also work when started from inside `R-codes/`. Times are measured wall times.
+
+```bash
+Rscript R-codes/scripts/00-check-environment.R
+```
+```bash
+Rscript R-codes/scripts/01-validate.R
+```
+```bash
+Rscript R-codes/scripts/02-run-exact.R exact-v1
+```
+```bash
+Rscript R-codes/scripts/05-make-figures.R exact-v1 exact-v1
+```
+```bash
+Rscript R-codes/scripts/03-run-smoke.R smoke-v1 2
+```
+```bash
+Rscript R-codes/scripts/04-run-simulations.R mc-v1 2
+```
+```bash
+Rscript R-codes/scripts/06-summarize.R mc-v1 mc-v1
+```
+
+| Step | Time | Output |
+|---|---|---|
+| 00 environment | 1 s | `logs/environment/environment.txt` |
+| 01 validation (all `tests/`) | 6 s | `logs/validation/validation-log.txt`, `validation-checks.csv`; exit status 1 on any failure |
+| 02 exact Gaussian results (no random numbers) | 25 s | `results/exact-v1/*.csv(.gz)`, `manifest.txt`, `checksums.csv` |
+| 05 figures from saved results | 15 s | `figures/exact-v1/*.pdf|png` |
+| 03 smoke (1,000 reps x 108 cells, known-scale check, benchmark) | 40 s | `results/smoke-v1/` incl. `benchmark.csv`, `projection.csv` |
+| 04 production Monte Carlo (adaptive 20,000-200,000 reps) | see `results/mc-v1/manifest.txt` | `results/mc-v1/rejection-rates.csv`, `paired-differences.csv`, `cell-manifest.csv`, `diagnostics.csv` |
+| 06 tables and MC figure | 5 s | `results/mc-v1/table-*.csv`, `summary.txt`, `figures/mc-v1/supp-mc-differences.*` |
+
+**Resuming an interrupted simulation:** rerun exactly the same `04-run-simulations.R` command. Finished 5,000-replication chunks in `results/mc-v1/chunks/cell-XXX/` are reused; a chunk produced by a different configuration or source version stops the run with an error instead of being pooled. A subset of cells can be run with a third argument, e.g. `Rscript R-codes/scripts/04-run-simulations.R mc-v1 2 1-36`; a later run without the subset re-pools all cells into the tables. Use a new run id after changing `config/section4.R` or `R/03-05`.
+
+**Interactive use (R/RStudio):** set the working directory to the project root, then
+```r
+source("R-codes/R/00-setup.R"); s4_setup("R-codes")
+max_power(c(1, 1, 0.9), alpha = 0.10)          # P1
+g <- gate_calibrate(0.10); gate_power(c(1, 1, 1), g)   # P5-P6
+two_core_envelopes(1, 1, 0.10)                  # K, L, h*, B
+gms_power_known(c(0, 0, 0), sqrt(log(250)), 0.10)      # P8
+```
+
+**Code-reading order:** `config/section4.R` → `R/01-designs.R` → `R/02-gaussian-max.R` → `R/03-gates.R` → `R/04-gms.R` → `R/05-monte-carlo.R` → `R/06-plots.R`; then `tests/test-0*.R` and `scripts/0*.R`. The earlier one-off checks in `checks/` (regret and symmetric-gate calculations) predate this production code and are left untouched.
